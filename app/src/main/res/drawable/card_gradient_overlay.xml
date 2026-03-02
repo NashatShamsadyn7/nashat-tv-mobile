@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    
+    <!-- Subtle gradient overlay for visual depth -->
+    <gradient
+        android:startColor="@color/emerald_green"
+        android:centerColor="@android:color/transparent"
+        android:endColor="@color/gentle_gold"
+        android:angle="135"
+        android:type="linear" />
+    
+    <!-- Rounded corners to match card -->
+    <corners android:radius="16dp" />
+    
+</shape>

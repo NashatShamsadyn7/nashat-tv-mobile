@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_focused="true"
+        android:animation="@animator/scale_up_set" />
+    <item
+        android:animation="@animator/scale_reset_set" />
+</selector>

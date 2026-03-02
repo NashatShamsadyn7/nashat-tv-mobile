@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    
+    <!-- Elegant circular background for logos -->
+    <gradient
+        android:startColor="@color/gentle_gold_light"
+        android:centerColor="@color/creamy_white"
+        android:endColor="@color/gentle_gold_light"
+        android:angle="45"
+        android:type="radial"
+        android:gradientRadius="40dp" />
+    
+    <!-- Subtle golden border -->
+    <stroke
+        android:width="2dp"
+        android:color="@color/gentle_gold" />
+    
+</shape>

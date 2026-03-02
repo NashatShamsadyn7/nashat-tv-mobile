@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "775486339076",
+    "firebase_url": "https://nashat-tv-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "nashat-tv",
+    "storage_bucket": "nashat-tv.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:775486339076:android:2323f4f5ca6d4c44bc9d51",
+        "android_client_info": {
+          "package_name": "com.nashat.tv"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfFvtnk1vZ3So0YkYuo-7fw1f3c-sJKiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

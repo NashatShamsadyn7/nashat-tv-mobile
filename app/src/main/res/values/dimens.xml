@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default screen margins -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    
+    <!-- Card dimensions -->
+    <dimen name="card_corner_radius">16dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="card_margin">8dp</dimen>
+    <dimen name="card_padding">16dp</dimen>
+    
+    <!-- Channel item dimensions -->
+    <dimen name="channel_item_height">120dp</dimen>
+    <dimen name="channel_logo_size">60dp</dimen>
+    <dimen name="channel_card_width">160dp</dimen>
+    <dimen name="channel_card_height">200dp</dimen>
+    
+    <!-- Recommended section -->
+    <dimen name="recommended_row_height">180dp</dimen>
+    <dimen name="recommended_card_width">140dp</dimen>
+    <dimen name="recommended_card_height">160dp</dimen>
+    
+    <!-- Text sizes -->
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_medium">14sp</dimen>
+    <dimen name="text_size_large">16sp</dimen>
+    <dimen name="text_size_xlarge">20sp</dimen>
+    <dimen name="text_size_xxlarge">24sp</dimen>
+    <dimen name="text_size_headline">32sp</dimen>
+    
+    <!-- Spacing -->
+    <dimen name="spacing_tiny">4dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+    <dimen name="spacing_xxlarge">48dp</dimen>
+    
+    <!-- Button dimensions -->
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="button_min_width">88dp</dimen>
+    <dimen name="button_corner_radius">24dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    
+    <!-- Icon sizes -->
+    <dimen name="icon_size_small">18dp</dimen>
+    <dimen name="icon_size_medium">24dp</dimen>
+    <dimen name="icon_size_large">32dp</dimen>
+    <dimen name="icon_size_xlarge">48dp</dimen>
+    
+    <!-- Search bar -->
+    <dimen name="search_bar_height">56dp</dimen>
+    <dimen name="search_bar_corner_radius">28dp</dimen>
+    <dimen name="search_bar_elevation">8dp</dimen>
+    
+    <!-- Chip dimensions -->
+    <dimen name="chip_height">40dp</dimen>
+    <dimen name="chip_corner_radius">20dp</dimen>
+    <dimen name="chip_spacing">8dp</dimen>
+    
+    <!-- Bottom navigation -->
+    <dimen name="bottom_nav_height">56dp</dimen>
+    <dimen name="bottom_nav_icon_size">24dp</dimen>
+    
+    <!-- Progress indicators -->
+    <dimen name="progress_bar_height">4dp</dimen>
+    <dimen name="circular_progress_size">48dp</dimen>
+    
+    <!-- Divider -->
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="divider_margin">16dp</dimen>
+    
+    <!-- Animation -->
+    <dimen name="animation_offset_y">50dp</dimen>
+    <dimen name="animation_offset_x">30dp</dimen>
+</resources>

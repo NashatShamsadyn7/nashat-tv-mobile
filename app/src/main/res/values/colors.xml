@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Kurdish-Inspired Color Palette -->
+    <color name="emerald_green">#2E7D6A</color>        <!-- الأخضر الزمردي الهادئ -->
+    <color name="warm_gray">#E6E6E6</color>            <!-- الرمادي الفاتح الدافئ -->
+    <color name="gentle_gold">#F4C542</color>          <!-- الأصفر الذهبي اللطيف -->
+    <color name="calm_navy">#3A506B</color>            <!-- الأزرق النيلي الهادئ -->
+    <color name="creamy_white">#FAF9F6</color>         <!-- الأبيض الكريمي -->
+    
+    <!-- Variations for better UI -->
+    <color name="emerald_green_light">#4A9B87</color>  <!-- أخضر زمردي فاتح -->
+    <color name="emerald_green_dark">#1F5A4F</color>   <!-- أخضر زمردي غامق -->
+    <color name="gentle_gold_light">#F7D76B</color>    <!-- ذهبي فاتح -->
+    <color name="warm_gray_light">#F0F0F0</color>      <!-- رمادي فاتح جداً -->
+    <color name="calm_navy_light">#5A6F8A</color>      <!-- أزرق نيلي فاتح -->
+    
+    <!-- Standard colors -->
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    
+    <!-- Legacy Colors -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    
+    <!-- New Gradient Colors -->
+    <color name="gradient_start_1">#667eea</color>
+    <color name="gradient_end_1">#764ba2</color>
+    <color name="gradient_start_2">#f093fb</color>
+    <color name="gradient_end_2">#f5576c</color>
+    
+    <!-- Accent Colors -->
+    <color name="purple_50">#F3E5F5</color>
+    <color name="purple_100">#E1BEE7</color>
+    <color name="purple_300">#BA68C8</color>
+    <color name="purple_400">#AB47BC</color>
+    <color name="purple_600">#8E24AA</color>
+    <color name="purple_800">#6A1B9A</color>
+    <color name="purple_900">#4A148C</color>
+    
+    <!-- Additional Colors -->
+    <color name="pink_200">#F48FB1</color>
+    <color name="pink_500">#E91E63</color>
+    <color name="indigo_200">#9FA8DA</color>
+    <color name="indigo_500">#3F51B5</color>
+    <color name="blue_200">#90CAF9</color>
+    <color name="blue_500">#2196F3</color>
+    <color name="cyan_200">#80DEEA</color>
+    <color name="cyan_500">#00BCD4</color>
+    <color name="teal_500">#009688</color>
+    <color name="green_200">#A5D6A7</color>
+    <color name="green_500">#4CAF50</color>
+    <color name="lime_200">#E6EE9C</color>
+    <color name="lime_500">#CDDC39</color>
+    <color name="yellow_200">#FFF59D</color>
+    <color name="yellow_500">#FFEB3B</color>
+    <color name="amber_200">#FFE082</color>
+    <color name="amber_500">#FFC107</color>
+    <color name="orange_200">#FFCC80</color>
+    <color name="orange_500">#FF9800</color>
+    <color name="deep_orange_200">#FFAB91</color>
+    <color name="deep_orange_500">#FF5722</color>
+    
+    <!-- Surface Colors -->
+    <color name="surface_light">#FAFAFA</color>
+    <color name="surface_dark">#121212</color>
+    <color name="surface_variant">#F5F5F5</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_disabled">#BDBDBD</color>
+    
+    <!-- Transparent Colors -->
+    <color name="transparent">#00000000</color>
+    <color name="semi_transparent_white">#80FFFFFF</color>
+    <color name="semi_transparent_black">#80000000</color>
+    
+    <!-- Category Colors -->
+    <color name="category_news">#FF5252</color>
+    <color name="category_sports">#4CAF50</color>
+    <color name="category_entertainment">#FF9800</color>
+    <color name="category_kids">#9C27B0</color>
+    <color name="category_documentary">#2196F3</color>
+    <color name="category_music">#E91E63</color>
+    <color name="category_movies">#795548</color>
+    <color name="category_general">#607D8B</color>
+
+    <color name="kd_primary">#6750A4</color>
+    <color name="kd_on_primary">#FFFFFF</color>
+    <color name="kd_primary_container">#EADDFF</color>
+    <color name="kd_on_primary_container">#21005D</color>
+    <color name="kd_secondary">#625B71</color>
+    <color name="kd_on_secondary">#FFFFFF</color>
+    <color name="kd_secondary_container">#E8DEF8</color>
+    <color name="kd_on_secondary_container">#1D192B</color>
+    <color name="kd_tertiary">#7D5260</color>
+    <color name="kd_on_tertiary">#FFFFFF</color>
+    <color name="kd_tertiary_container">#FFD8E4</color>
+    <color name="kd_on_tertiary_container">#31111D</color>
+    <color name="kd_background">#FFFBFE</color>
+    <color name="kd_on_background">#1C1B1F</color>
+    <color name="kd_surface">#FFFBFE</color>
+    <color name="kd_on_surface">#1C1B1F</color>
+    <color name="kd_surface_variant">#E7E0EC</color>
+    <color name="kd_on_surface_variant">#49454E</color>
+    <color name="kd_outline">#79747E</color>
+
+    <!-- About Screen Premium Dark Theme -->
+    <color name="about_bg_dark">#0D1B2A</color>
+    <color name="about_toolbar_bg">#0F2035</color>
+    <color name="about_card_bg">#162940</color>
+    <color name="about_card_border">#1E3A54</color>
+    <color name="about_text_secondary">#B0BEC5</color>
+    <color name="about_text_tertiary">#78909C</color>
+
+    <!-- Social Media Brand Colors -->
+    <color name="instagram_pink">#E1306C</color>
+    <color name="facebook_blue">#1877F2</color>
+</resources>

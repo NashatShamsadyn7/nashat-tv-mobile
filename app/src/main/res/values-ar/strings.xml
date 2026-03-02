@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nashat TV</string>
+    <string name="title_channels">القنوات</string>
+    <string name="hint_search">ابحث عن القنوات والبرامج...</string>
+    <string name="grid_view">شبكة</string>
+    <string name="list_view">قائمة</string>
+    <string name="settings">الإعدادات</string>
+    <string name="label_favorites_only">المفضلة فقط</string>
+    <string name="recommended_channels">مقترح لك</string>
+    <string name="see_all">عرض الكل</string>
+    <string name="all_channels">كل القنوات</string>
+
+    <string name="menu_favorites">المفضلة</string>
+    <string name="menu_language">اللغة</string>
+    <string name="menu_about">حول</string>
+    <string name="menu_sort_curated">الفرز: مختار</string>
+
+    <string name="choose_language">اختر اللغة</string>
+    <string name="lang_ckb">کوردی (سۆرانی)</string>
+    <string name="lang_ar">العربية</string>
+    <string name="lang_en">الإنجليزية</string>
+
+    <string name="section_general">عام</string>
+    <string name="appearance">المظهر</string>
+    <string name="dark_mode">الوضع الداكن</string>
+    <string name="light_mode">الوضع الفاتح</string>
+    <string name="system_default">النظام الافتراضي</string>
+    <string name="contact_us">اتصل بنا</string>
+    <string name="rate_app">قيّم التطبيق</string>
+
+    <string name="action_watch">مشاهدة</string>
+    <string name="loading">جارٍ التحميل...</string>
+    <string name="error_loading">حدث خطأ أثناء تحميل المحتوى</string>
+    <string name="no_channels">لا توجد قنوات متاحة</string>
+    <string name="no_favorites">لا توجد قنوات مفضلة</string>
+    <string name="retry">إعادة المحاولة</string>
+</resources>

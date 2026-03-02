@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nashat TV</string>
+
+    <string name="title_channels">کانالەکان</string>
+    <string name="hint_search">گەڕان بۆ کانال و بەرنامەکان...</string>
+
+    <string name="grid_view">تۆڕ</string>
+    <string name="list_view">لیست</string>
+    <string name="settings">ڕێکخستنەکان</string>
+    <string name="label_favorites_only">تەنیا دڵخوازەکان</string>
+
+    <string name="recommended_channels">پێشنیارکراو بۆ تۆ</string>
+    <string name="see_all">نیشاندانی هەموو</string>
+    <string name="all_channels">هەموو کانالەکان</string>
+
+    <string name="menu_favorites">دڵخوازەکان</string>
+    <string name="menu_language">زمان</string>
+    <string name="menu_about">دەربارە</string>
+    <string name="menu_sort_curated">جۆربەندی: هەڵبژێردراو</string>
+
+    <string name="choose_language">زمان هەڵبژێرە</string>
+    <string name="lang_ckb">کوردی (سۆرانی)</string>
+    <string name="lang_ar">عەرەبی</string>
+    <string name="lang_en">ئینگلیزی</string>
+
+    <string name="section_general">گشتی</string>
+    <string name="appearance">دەرکەوتن</string>
+    <string name="dark_mode">دۆخی تاریک</string>
+    <string name="light_mode">دۆخی ڕووناک</string>
+    <string name="system_default">بنەڕەتی سیستەم</string>
+    <string name="contact_us">پەیوەندی بکە</string>
+    <string name="rate_app">هەڵسەنگاندنی ئەپ</string>
+
+    <string name="action_watch">بینین</string>
+    <string name="loading">لە بارکردندان...</string>
+    <string name="error_loading">هەڵە ڕوویدا لە کاتی بارکردن</string>
+    <string name="no_channels">هیچ کانالێک بەردەست نیە</string>
+    <string name="no_favorites">هیچ کانالی دڵخواز نیە</string>
+    <string name="retry">دووبارە هەوڵبدە</string>
+</resources>

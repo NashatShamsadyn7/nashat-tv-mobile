@@ -1,0 +1,126 @@
+﻿[
+  {
+    "name": "Afarin Baxcha (1080p)",
+    "stream_url": "https://5dcabf026b188.streamlock.net/afarinTV/livestream/playlist.m3u8"
+  },
+  {
+    "name": "Afarin TV (720p) [Not 24/7]",
+    "stream_url": "https://65f16f0fdfc51.streamlock.net/afarinTV/livestream/playlist.m3u8"
+  },
+  {
+    "name": "Aryen TV (1080p) [Not 24/7]",
+    "stream_url": "https://aryen.tv/live/tv/playlist.m3u8"
+  },
+  {
+    "name": "Atrak",
+    "stream_url": "https://ncdn.telewebion.com/atrak/live/playlist.m3u8"
+  },
+  {
+    "name": "Avar TV (1080p)",
+    "stream_url": "https://avr.host247.net/live/AvarTv/playlist.m3u8"
+  },
+  {
+    "name": "Azerbaijan Gharbi",
+    "stream_url": "https://lenz.splus.ir/PLTV/88888888/224/3221226800/index.m3u8"
+  },
+  {
+    "name": "Channel 8 Kurdish (720p)",
+    "stream_url": "https://live.channel8.com/Channel8-Kurdish/index.fmp4.m3u8"
+  },
+  {
+    "name": "Cira TV",
+    "stream_url": "https://cira-tv.akamaized.net/hls/stream_0.m3u8"
+  },
+  {
+    "name": "EmanTv (1080p)",
+    "stream_url": "https://avr.host247.net/live/emantv/playlist.m3u8"
+  },
+  {
+    "name": "FarmodaTV (1080p)",
+    "stream_url": "https://avr.host247.net/live/FarmodaTV/playlist.m3u8"
+  },
+  {
+    "name": "Jin TV",
+    "stream_url": "https://live.jintv.org/medialive/jintv.m3u8"
+  },
+  {
+    "name": "Komala TV (1080p)",
+    "stream_url": "https://live.tvkomala.com/live/komala/playlist.m3u8"
+  },
+  {
+    "name": "Kurdistan 24 (720p)",
+    "stream_url": "https://d1x82nydcxndze.cloudfront.net/live/index.m3u8"
+  },
+  {
+    "name": "Kurdistan TV (720p) [Not 24/7]",
+    "stream_url": "https://5a3ed7a72ed4b.streamlock.net/live/SMIL:myStream.smil/playlist.m3u8"
+  },
+  {
+    "name": "KurdMax Music (720p)",
+    "stream_url": "https://6476e46b58f91.streamlock.net/music/livestream/playlist.m3u8"
+  },
+  {
+    "name": "KurdMax Show (720p)",
+    "stream_url": "https://6476e46b58f91.streamlock.net/liveTrans/SHOW1/playlist.m3u8"
+  },
+  {
+    "name": "Kurdsat (1080p)",
+    "stream_url": "https://iko-live.akamaized.net/KurdsatTV/master.m3u8"
+  },
+  {
+    "name": "Kurdsat News (1080p)",
+    "stream_url": "https://iko-streamline-live1.akamaized.net/KurdsatNews/master.m3u8"
+  },
+  {
+    "name": "Med Muzik (1080p)",
+    "stream_url": "http://54.36.110.140/live3/live3.m3u8"
+  },
+  {
+    "name": "Mixkurdy (1080p)",
+    "stream_url": "https://avr.host247.net/live/Mix-kurdy/playlist.m3u8"
+  },
+  {
+    "name": "NRT TV (720p) [Not 24/7]",
+    "stream_url": "https://media.streambrothers.com:1936/8226/8226/playlist.m3u8"
+  },
+  {
+    "name": "NUBAR Plus TV (720p)",
+    "stream_url": "http://stream.nubar.tv:1935/private/NUBARPlus/playlist.m3u8"
+  },
+  {
+    "name": "Payam TV (720p) [Not 24/7]",
+    "stream_url": "https://media2.streambrothers.com:1936/8218/8218/playlist.m3u8"
+  },
+  {
+    "name": "Persiana 4Kurd",
+    "stream_url": "https://4kuhls.persiana.live/hls/stream.m3u8"
+  },
+  {
+    "name": "Rojava TV (1080p)",
+    "stream_url": "https://iko-streamline-live1.akamaized.net/RojavaTV/master.m3u8"
+  },
+  {
+    "name": "Ronahi TV (1080p)",
+    "stream_url": "https://iko-streamline-live1.akamaized.net/RonahiTV/master.m3u8"
+  },
+  {
+    "name": "Rudaw TV (1080p)",
+    "stream_url": "https://svs.itworkscdn.net/rudawlive/rudawlive.smil/playlist.m3u8"
+  },
+  {
+    "name": "Sterk TV",
+    "stream_url": "https://trn09.bozztv.com/gin-sterk/index.m3u8"
+  },
+  {
+    "name": "Waar TV",
+    "stream_url": "https://ca-rt.onetv.app/Waar/index-0.m3u8"
+  },
+  {
+    "name": "Zarok TV (720p)",
+    "stream_url": "https://zindikurmanci.zaroktv.com.tr/hls/stream.m3u8"
+  },
+  {
+    "name": "Zoom TV Kurdish (720p)",
+    "stream_url": "https://live.zoomnews.info/live/Zoom_playlist.m3u8"
+  }
+]

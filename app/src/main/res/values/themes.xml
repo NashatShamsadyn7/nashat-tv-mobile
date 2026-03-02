@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.Theme.NashatTV" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/kd_primary</item>
+        <item name="colorOnPrimary">@color/kd_on_primary</item>
+        <item name="colorPrimaryContainer">@color/kd_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/kd_on_primary_container</item>
+        <item name="colorSecondary">@color/kd_secondary</item>
+        <item name="colorOnSecondary">@color/kd_on_secondary</item>
+        <item name="colorSecondaryContainer">@color/kd_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/kd_on_secondary_container</item>
+        <item name="colorTertiary">@color/kd_tertiary</item>
+        <item name="colorOnTertiary">@color/kd_on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/kd_tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/kd_on_tertiary_container</item>
+        <item name="android:colorBackground">@color/kd_background</item>
+        <item name="colorOnBackground">@color/kd_on_background</item>
+        <item name="colorSurface">@color/kd_surface</item>
+        <item name="colorOnSurface">@color/kd_on_surface</item>
+        <item name="colorSurfaceVariant">@color/kd_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/kd_on_surface_variant</item>
+        <item name="colorOutline">@color/kd_outline</item>
+
+        <!-- Global component styles -->
+        <item name="toolbarStyle">@style/Widget.NashatTV.Toolbar</item>
+        <item name="materialCardViewStyle">@style/Widget.NashatTV.Card</item>
+        <item name="textInputStyle">@style/Widget.NashatTV.TextInputLayout</item>
+        <item name="chipStyle">@style/Widget.NashatTV.Chip</item>
+
+        <!-- Status & Nav Bar -->
+        <item name="android:navigationBarColor">?attr/colorSurface</item>
+        <item name="android:statusBarColor">?attr/colorSurface</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Font -->
+        <item name="fontFamily">@font/noto_naskh</item>
+        <item name="android:fontFamily">@font/noto_naskh</item>
+    </style>
+
+    <style name="Theme.NashatTV" parent="Base.Theme.NashatTV" />
+</resources>
