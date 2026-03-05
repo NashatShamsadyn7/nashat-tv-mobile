@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/about_bg_dark"
+    android:fitsSystemWindows="true"
     tools:context=".AboutActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -20,9 +21,9 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/about_toolbar_bg"
             app:title="@string/about_title"
-            app:titleTextColor="@color/gentle_gold"
+            app:titleTextColor="@color/accent_primary"
             app:navigationIcon="@drawable/ic_arrow_back_24"
-            app:navigationIconTint="@color/gentle_gold" />
+            app:navigationIconTint="@color/accent_primary" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -45,17 +46,16 @@
                 app:cardCornerRadius="60dp"
                 app:cardElevation="8dp"
                 app:strokeWidth="2dp"
-                app:strokeColor="@color/gentle_gold"
+                app:strokeColor="@color/accent_primary"
                 app:cardBackgroundColor="@color/about_card_bg"
                 android:layout_marginBottom="20dp">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@drawable/nashat_logo"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="centerCrop"
-                    android:padding="8dp" />
+                    android:scaleType="centerCrop" />
             </com.google.android.material.card.MaterialCardView>
 
             <!-- App Name -->
@@ -66,7 +66,7 @@
                 android:text="@string/app_name"
                 android:textAppearance="?attr/textAppearanceHeadlineMedium"
                 android:textStyle="bold"
-                android:textColor="@color/gentle_gold"
+                android:textColor="@color/accent_primary"
                 android:layout_gravity="center"
                 android:layout_marginBottom="4dp" />
 
@@ -109,13 +109,23 @@
                     android:padding="20dp"
                     android:gravity="center_horizontal">
 
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/nashat_profile"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearanceOverlay="@style/CircleImageView"
+                        android:layout_marginBottom="12dp"
+                        app:strokeWidth="2dp"
+                        app:strokeColor="@color/accent_primary"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/developer"
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="@color/emerald_green_light"
-                        android:layout_marginBottom="8dp" />
+                        android:text="@string/created_by"
+                        android:textAppearance="?attr/textAppearanceLabelSmall"
+                        android:textColor="@color/about_text_tertiary"
+                        android:layout_marginBottom="4dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -123,163 +133,88 @@
                         android:text="@string/developer_name"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textStyle="bold"
-                        android:textColor="@color/gentle_gold" />
-
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Contact & Social Links Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/about_card_border"
-                app:cardBackgroundColor="@color/about_card_bg"
-                android:layout_marginBottom="16dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
+                        android:gravity="center"
+                        android:textColor="@color/accent_primary" />
+                        
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/contact_and_social"
-                        android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="@color/emerald_green_light"
+                        android:text="@string/developer"
+                        android:textAppearance="?attr/textAppearanceLabelSmall"
+                        android:textColor="@color/about_text_tertiary"
                         android:layout_marginBottom="16dp" />
 
-                    <!-- Email -->
+                    <!-- Social Icons Row -->
                     <LinearLayout
-                        android:id="@+id/emailRow"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:padding="12dp"
-                        android:background="@drawable/social_row_background"
-                        android:layout_marginBottom="8dp"
-                        android:clickable="true"
-                        android:focusable="true">
+                        android:gravity="center">
+                        
+                        <!-- WhatsApp -->
+                        <FrameLayout
+                            android:id="@+id/btnWhatsapp"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_marginEnd="12dp"
+                            android:clickable="true"
+                            android:focusable="true">
+                            <ImageView
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_whatsapp_real" />
+                        </FrameLayout>
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_contact_24"
-                            android:contentDescription="Email"
-                            app:tint="@color/gentle_gold"
-                            android:layout_marginEnd="16dp" />
+                        <!-- Telegram -->
+                        <FrameLayout
+                            android:id="@+id/btnTelegram"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_marginEnd="12dp"
+                            android:clickable="true"
+                            android:focusable="true">
+                            <ImageView
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_telegram_real" />
+                        </FrameLayout>
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                        <!-- Facebook -->
+                        <FrameLayout
+                            android:id="@+id/btnFacebook"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:layout_marginEnd="12dp"
+                            android:clickable="true"
+                            android:focusable="true">
+                            <ImageView
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_facebook_real" />
+                        </FrameLayout>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/email_label"
-                                android:textAppearance="?attr/textAppearanceLabelSmall"
-                                android:textColor="@color/about_text_tertiary" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/contact_email"
-                                android:textAppearance="?attr/textAppearanceBodyMedium"
-                                android:textColor="@color/white" />
-                        </LinearLayout>
+                        <!-- Instagram -->
+                        <FrameLayout
+                            android:id="@+id/btnInstagram"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true">
+                            <ImageView
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_instagram_real" />
+                        </FrameLayout>
                     </LinearLayout>
 
-                    <!-- Instagram -->
-                    <LinearLayout
-                        android:id="@+id/instagramRow"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:padding="12dp"
-                        android:background="@drawable/social_row_background"
-                        android:layout_marginBottom="8dp"
-                        android:clickable="true"
-                        android:focusable="true">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_instagram"
-                            android:contentDescription="Instagram"
-                            app:tint="@color/instagram_pink"
-                            android:layout_marginEnd="16dp" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/instagram_label"
-                                android:textAppearance="?attr/textAppearanceLabelSmall"
-                                android:textColor="@color/about_text_tertiary" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/instagram_handle"
-                                android:textAppearance="?attr/textAppearanceBodyMedium"
-                                android:textColor="@color/white" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <!-- Facebook -->
-                    <LinearLayout
-                        android:id="@+id/facebookRow"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:padding="12dp"
-                        android:background="@drawable/social_row_background"
-                        android:clickable="true"
-                        android:focusable="true">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_facebook"
-                            android:contentDescription="Facebook"
-                            app:tint="@color/facebook_blue"
-                            android:layout_marginEnd="16dp" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/facebook_label"
-                                android:textAppearance="?attr/textAppearanceLabelSmall"
-                                android:textColor="@color/about_text_tertiary" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/facebook_page"
-                                android:textAppearance="?attr/textAppearanceBodyMedium"
-                                android:textColor="@color/white" />
-                        </LinearLayout>
-                    </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -305,7 +240,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/about_title"
                         android:textAppearance="?attr/textAppearanceLabelLarge"
-                        android:textColor="@color/emerald_green_light"
+                        android:textColor="@color/accent_success"
                         android:layout_marginBottom="8dp" />
 
                     <TextView
@@ -327,9 +262,9 @@
                 android:text="@string/rate_app"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:backgroundTint="@color/emerald_green"
+                android:backgroundTint="@color/accent_success"
                 app:icon="@drawable/ic_rate_24"
-                app:iconTint="@color/gentle_gold"
+                app:iconTint="@color/accent_primary"
                 app:cornerRadius="16dp"
                 android:layout_marginBottom="32dp" />
 

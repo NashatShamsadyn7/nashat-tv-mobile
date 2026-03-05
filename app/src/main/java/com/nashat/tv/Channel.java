@@ -20,6 +20,9 @@ public class Channel {
     @SerializedName("description")
     private String description;
 
+    @SerializedName("country") // Added country field
+    private String country;
+
     public Channel() {
     }
 
@@ -50,6 +53,9 @@ public class Channel {
     public String getDescription() {
         return description != null ? description : "";
     }
+    public String getCountry() {
+        return country != null ? country : "";
+    }
     
     // Setters added for Firebase deserialization
     public void setName(String name) { this.name = name; }
@@ -57,6 +63,7 @@ public class Channel {
     public void setCategory(String category) { this.category = category; }
     public void setUrl(String url) { this.url = url; }
     public void setDescription(String description) { this.description = description; }
+    public void setCountry(String country) { this.country = country; }
 
     public boolean hasStream() {
         return url != null && !url.trim().isEmpty();

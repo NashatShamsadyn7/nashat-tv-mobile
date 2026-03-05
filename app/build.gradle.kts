@@ -62,6 +62,11 @@ dependencies {
     // Media
     implementation(libs.exoplayer)
     implementation(libs.exoplayer.ui)
+    implementation(libs.exoplayer.cast)
+
+    // Chromecast / Google Cast
+    implementation(libs.mediarouter)
+    implementation(libs.cast.framework)
 
     // JSON
     implementation(libs.gson)

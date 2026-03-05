@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Base.Theme.NashatTV" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/kd_primary</item>
-        <item name="colorOnPrimary">@color/kd_on_primary</item>
+        <item name="colorPrimary">@color/accent_purple</item>
+        <item name="colorOnPrimary">@color/white</item>
         <item name="colorPrimaryContainer">@color/kd_primary_container</item>
         <item name="colorOnPrimaryContainer">@color/kd_on_primary_container</item>
         <item name="colorSecondary">@color/kd_secondary</item>
@@ -13,24 +13,23 @@
         <item name="colorOnTertiary">@color/kd_on_tertiary</item>
         <item name="colorTertiaryContainer">@color/kd_tertiary_container</item>
         <item name="colorOnTertiaryContainer">@color/kd_on_tertiary_container</item>
-        <item name="android:colorBackground">@color/kd_background</item>
-        <item name="colorOnBackground">@color/kd_on_background</item>
-        <item name="colorSurface">@color/kd_surface</item>
-        <item name="colorOnSurface">@color/kd_on_surface</item>
-        <item name="colorSurfaceVariant">@color/kd_surface_variant</item>
-        <item name="colorOnSurfaceVariant">@color/kd_on_surface_variant</item>
-        <item name="colorOutline">@color/kd_outline</item>
+        <item name="android:colorBackground">@color/bg_primary</item>
+        <item name="colorOnBackground">@color/text_primary</item>
+        <item name="colorSurface">@color/bg_secondary</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorSurfaceVariant">@color/bg_card</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+        <item name="colorOutline">@color/border_subtle</item>
 
-        <!-- Global component styles -->
+        <!-- Component styles -->
         <item name="toolbarStyle">@style/Widget.NashatTV.Toolbar</item>
         <item name="materialCardViewStyle">@style/Widget.NashatTV.Card</item>
         <item name="textInputStyle">@style/Widget.NashatTV.TextInputLayout</item>
         <item name="chipStyle">@style/Widget.NashatTV.Chip</item>
 
         <!-- Status & Nav Bar -->
-        <item name="android:navigationBarColor">?attr/colorSurface</item>
-        <item name="android:statusBarColor">?attr/colorSurface</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/bg_primary</item>
+        <item name="android:statusBarColor">@color/bg_primary</item>
 
         <!-- Font -->
         <item name="fontFamily">@font/noto_naskh</item>
@@ -38,4 +37,90 @@
     </style>
 
     <style name="Theme.NashatTV" parent="Base.Theme.NashatTV" />
+    
+    <style name="Theme.NashatTV.Nashat" parent="Base.Theme.NashatTV">
+        <item name="android:windowBackground">@drawable/bg_gradient_nashat</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="colorSurface">@android:color/transparent</item>
+        <item name="colorSurfaceVariant">@android:color/transparent</item>
+        <item name="android:textColorPrimary">#F7F8F0</item>
+        <item name="android:textColorSecondary">#F5E7C6</item>
+        
+        <item name="colorPrimary">#F5E7C6</item>
+        <item name="colorOnPrimary">#355872</item>
+        <item name="colorSecondary">#F26076</item>
+        
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        
+        <!-- Make cards transparent to see the gradient -->
+        <item name="materialCardViewStyle">@style/Widget.NashatTV.Card.Nashat</item>
+    </style>
+
+    <!-- Mode 1: Cinematic Deep Space -->
+    <style name="Theme.NashatTV.Cinematic" parent="Base.Theme.NashatTV">
+        <item name="android:windowBackground">@drawable/bg_gradient_cinematic</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="colorSurface">@android:color/transparent</item>
+        <item name="colorSurfaceVariant">@color/cinematic_card_bg</item>
+        <item name="android:textColorPrimary">@color/cinematic_text_primary</item>
+        <item name="android:textColorSecondary">@color/cinematic_text_secondary</item>
+        
+        <item name="colorPrimary">@color/cinematic_text_primary</item>
+        <item name="colorOnPrimary">@color/cinematic_gradient_start</item>
+        
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="materialCardViewStyle">@style/Widget.NashatTV.Card.Nashat</item>
+    </style>
+
+    <!-- Mode 2: Ambient Soft Room -->
+    <style name="Theme.NashatTV.Ambient" parent="Base.Theme.NashatTV">
+        <item name="android:windowBackground">@drawable/bg_gradient_ambient</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="colorSurface">@android:color/transparent</item>
+        <item name="colorSurfaceVariant">@color/ambient_card_bg</item>
+        <item name="android:textColorPrimary">@color/ambient_text_primary</item>
+        <item name="android:textColorSecondary">@color/ambient_text_secondary</item>
+        
+        <item name="colorPrimary">@color/ambient_text_primary</item>
+        <item name="colorOnPrimary">@color/ambient_gradient_start</item>
+        
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="materialCardViewStyle">@style/Widget.NashatTV.Card.Nashat</item>
+    </style>
+
+    <!-- Mode 3: Vibrant Aurora -->
+    <style name="Theme.NashatTV.Aurora" parent="Base.Theme.NashatTV">
+        <item name="android:windowBackground">@drawable/bg_gradient_aurora</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="colorSurface">@android:color/transparent</item>
+        <item name="colorSurfaceVariant">@color/aurora_card_bg</item>
+        <item name="android:textColorPrimary">@color/aurora_text_primary</item>
+        <item name="android:textColorSecondary">@color/aurora_text_secondary</item>
+        
+        <item name="colorPrimary">@color/aurora_text_primary</item>
+        <item name="colorOnPrimary">@color/aurora_gradient_start</item>
+        
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="materialCardViewStyle">@style/Widget.NashatTV.Card.Nashat</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="RoundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
 </resources>

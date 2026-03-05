@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Advanced Filters"
+            android:textColor="@color/text_primary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"/>
+
+        <ImageView
+            android:id="@+id/btnCloseFilter"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_close"
+            app:tint="@color/text_secondary"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="4dp" />
+            
+        <TextView
+            android:id="@+id/btnResetFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset"
+            android:textColor="@color/accent_primary"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:focusable="true"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categories:"
+        android:textColor="@color/text_primary"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp"/>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupGenres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:singleSelection="true"
+        android:layout_marginBottom="24dp">
+    </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rating"
+        android:textColor="@color/text_primary"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+        
+    <TextView
+        android:id="@+id/txtRatingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Any"
+        android:textColor="@color/accent_gold"
+        android:textStyle="bold"
+        android:layout_gravity="end"
+        android:layout_marginTop="-24dp"
+        android:layout_marginBottom="8dp"/>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/sliderRating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:valueFrom="0.0"
+        android:valueTo="10.0"
+        android:stepSize="1.0"
+        android:value="0.0"
+        app:labelBehavior="gone"
+        app:thumbColor="@color/accent_gold"
+        app:trackColorActive="@color/accent_gold"
+        app:trackColorInactive="@color/chip_bg"
+        android:layout_marginBottom="24dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Year"
+        android:textColor="@color/text_primary"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+        
+    <TextView
+        android:id="@+id/txtYearLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1990 - 2026"
+        android:textColor="@color/accent_primary"
+        android:textStyle="bold"
+        android:layout_gravity="end"
+        android:layout_marginTop="-24dp"
+        android:layout_marginBottom="8dp"/>
+
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/sliderYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:valueFrom="1990.0"
+        android:valueTo="2026.0"
+        android:stepSize="1.0"
+        app:labelBehavior="gone"
+        app:thumbColor="@color/accent_primary"
+        app:trackColorActive="@color/accent_primary"
+        app:trackColorInactive="@color/chip_bg"
+        android:layout_marginBottom="32dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnApplyFilters"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="APPLY"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="28dp"
+        app:backgroundTint="@color/accent_primary"/>
+
+</LinearLayout>

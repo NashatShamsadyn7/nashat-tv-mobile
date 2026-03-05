@@ -34,21 +34,39 @@ public class AboutActivity extends BaseActivity {
             e.printStackTrace();
         }
 
-        // Email row click
-        findViewById(R.id.emailRow).setOnClickListener(v -> {
+        // WhatsApp click
+        findViewById(R.id.btnWhatsapp).setOnClickListener(v -> {
             try {
-                Intent email = new Intent(Intent.ACTION_SENDTO);
-                email.setData(Uri.parse("mailto:"));
-                email.putExtra(Intent.EXTRA_EMAIL, new String[]{getString(R.string.contact_email)});
-                email.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name) + " - Bug Report / Feedback");
-                startActivity(Intent.createChooser(email, getString(R.string.contact_us)));
+                String url = "https://api.whatsapp.com/send?phone=9647510462910";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
             } catch (Exception e) {
-                Toast.makeText(this, "No email app found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "WhatsApp not installed", Toast.LENGTH_SHORT).show();
             }
         });
 
-        // Instagram row click
-        findViewById(R.id.instagramRow).setOnClickListener(v -> {
+        // Telegram click
+        findViewById(R.id.btnTelegram).setOnClickListener(v -> {
+            try {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/iosbb"));
+                startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(this, "Could not open Telegram", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Facebook click
+        findViewById(R.id.btnFacebook).setOnClickListener(v -> {
+            try {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(getString(R.string.facebook_url))));
+            } catch (Exception e) {
+                Toast.makeText(this, "Could not open Facebook", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Instagram click
+        findViewById(R.id.btnInstagram).setOnClickListener(v -> {
             try {
                 // Try opening Instagram app first
                 Intent intent = new Intent(Intent.ACTION_VIEW,
@@ -59,16 +77,6 @@ public class AboutActivity extends BaseActivity {
                 // Fallback to browser
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(getString(R.string.instagram_url))));
-            }
-        });
-
-        // Facebook row click
-        findViewById(R.id.facebookRow).setOnClickListener(v -> {
-            try {
-                startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse(getString(R.string.facebook_url))));
-            } catch (Exception e) {
-                Toast.makeText(this, "Could not open Facebook", Toast.LENGTH_SHORT).show();
             }
         });
 

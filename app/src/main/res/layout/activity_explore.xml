@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_main_gradient"
+    android:fitsSystemWindows="true"
+    tools:context=".ExploreActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        android:elevation="0dp"
+        app:title="Explore"
+        app:titleTextColor="@color/accent_primary"
+        app:navigationIcon="@drawable/ic_arrow_back_24"
+        app:navigationIconTint="@color/accent_primary" />
+
+    <!-- Custom URL Import -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCustomUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="#1A1A24"
+        android:text="🔗 Import Custom M3U Playlist URL"
+        android:textColor="@color/accent_primary"
+        android:textSize="14sp"
+        app:cornerRadius="16dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="#33D4A853"
+        app:icon="@drawable/ic_search_24"
+        app:iconTint="@color/accent_primary"
+        app:rippleColor="@color/accent_primary" />
+
+    <!-- Loading -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/accent_primary"
+        android:visibility="gone" />
+
+    <!-- Categories List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerCategories"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp" />
+
+</LinearLayout>

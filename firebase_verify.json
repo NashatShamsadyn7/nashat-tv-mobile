@@ -1,0 +1,1314 @@
+﻿{
+    "value":  [
+                  {
+                      "category":  "General",
+                      "description":  "for importan sport live",
+                      "logo":  "https://m.media-amazon.com/images/I/518Xpp2BtqL.png",
+                      "name":  "12 by Nashat",
+                      "url":  "https://fram.sport4all.online/albaplayer/ssc-1/?serv=1"
+                  },
+                  {
+                      "category":  "Music",
+                      "description":  "Kurdish music and entertainment.",
+                      "logo":  "https://i.imgur.com/xy7W0wD.png",
+                      "name":  "4 Kurd TV",
+                      "url":  "https://4kuhls.persiana.live/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Kids content from Afarin TV.",
+                      "logo":  "https://afarin.tv/images/baxcha.png",
+                      "name":  "Afarin Baxcha",
+                      "url":  "https://5dcabf026b188.streamlock.net/afarinTV/livestream/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Entertainment for children. May not be 24/7.",
+                      "logo":  "https://i.imgur.com/6MnXD7g.png",
+                      "name":  "Afarin TV",
+                      "url":  "https://65f16f0fdfc51.streamlock.net/afarinTV/livestream/playlist.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "General Television",
+                      "logo":  "https://i.imgur.com/JazFBkW.jpeg",
+                      "name":  "Avar TV",
+                      "url":  "https://avr.host247.net/live/AvarTv/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious and cultural programming.",
+                      "logo":  "https://i.imgur.com/YFnmSLW.png",
+                      "name":  "Cira TV",
+                      "url":  "https://cira-tv.akamaized.net/hls/stream_0.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious programming",
+                      "logo":  "https://i.imgur.com/x4KCQlH.png",
+                      "name":  "FarmodaTV",
+                      "url":  "https://avr.host247.net/live/FarmodaTV/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Culture",
+                      "description":  "Cultural and women-focused programming.",
+                      "logo":  "https://i.imgur.com/37ajg2j.png",
+                      "name":  "Jin TV",
+                      "url":  "https://live.jintv.org/medialive/jintv.m3u8"
+                  },
+                  {
+                      "category":  "Culture",
+                      "description":  "Cultural and political programs.",
+                      "logo":  "https://i.imgur.com/D6KBLB8.png",
+                      "name":  "Komala TV",
+                      "url":  "https://live.tvkomala.com/live/komala/playlist.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "24-hour news coverage from Kurdistan.",
+                      "logo":  "https://i.imgur.com/9QWs2ms.png",
+                      "name":  "Kurdistan 24 (K24)",
+                      "url":  "https://d1x82nydcxndze.cloudfront.net/live/index.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Official channel of the Kurdistan Region. May not be 24/7.",
+                      "logo":  "https://i.imgur.com/mjQptpc.png",
+                      "name":  "Kurdistan TV",
+                      "url":  "https://5a3ed7a72ed4b.streamlock.net/live/SMIL:myStream.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Entertainment",
+                      "description":  "General entertainment from Kurdsat.",
+                      "logo":  "https://i.imgur.com/UAbSwYA.png",
+                      "name":  "Kurdsat",
+                      "url":  "https://iko-live.akamaized.net/KurdsatTV/master.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "News and current events from Kurdsat News.",
+                      "logo":  "https://i.imgur.com/F3XRwkt.png",
+                      "name":  "Kurdsat News",
+                      "url":  "https://iko-streamline-live1.akamaized.net/KurdsatNews/master.m3u8"
+                  },
+                  {
+                      "category":  "Music",
+                      "description":  "Kurdish and international music.",
+                      "logo":  "https://i.imgur.com/gtUFmCD.png",
+                      "name":  "Med Muzik",
+                      "url":  "http://54.36.110.140/live3/live3.m3u8"
+                  },
+                  {
+                      "category":  "Entertainment",
+                      "description":  "Family entertainment.",
+                      "logo":  "https://i.imgur.com/WHeH5i7.png",
+                      "name":  "Mixkurdy",
+                      "url":  "https://avr.host247.net/live/Mix-kurdy/playlist.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "News and analysis. May not be 24/7.",
+                      "logo":  "https://i.imgur.com/qySEibb.png",
+                      "name":  "Payam TV",
+                      "url":  "https://media2.streambrothers.com:1936/8218/8218/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Music",
+                      "description":  "Kurdish music from Persiana.",
+                      "logo":  "https://i.imgur.com/xy7W0wD.png",
+                      "name":  "Persiana 4Kurd",
+                      "url":  "https://4kuhls.persiana.live/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Broadcasting from Rojava (Northeastern Syria).",
+                      "logo":  "https://i.imgur.com/42noysO.png",
+                      "name":  "Rojava TV",
+                      "url":  "https://iko-streamline-live1.akamaized.net/RojavaTV/master.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Voice of Rojava.",
+                      "logo":  "https://i.imgur.com/JSvJpD8.png",
+                      "name":  "Ronahi TV",
+                      "url":  "https://iko-streamline-live1.akamaized.net/RonahiTV/master.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "Leading news source from the Kurdistan Region.",
+                      "logo":  "https://i.imgur.com/Zo3IWOn.png",
+                      "name":  "Rudaw TV",
+                      "url":  "https://svs.itworkscdn.net/rudawlive/rudawlive.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "The first Kurdish-language children\u0027s channel.",
+                      "logo":  "https://i.imgur.com/o0eevnb.png",
+                      "name":  "Zarok TV",
+                      "url":  "https://zindikurmanci.zaroktv.com.tr/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "News and current events.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Zoom_TV_logo.svg/512px-Zoom_TV_logo.svg.png",
+                      "name":  "Zoom TV Kurdish",
+                      "url":  "https://live.zoomnews.info/live/Zoom_playlist.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "Kurdish-language news.",
+                      "logo":  "https://www.semakurd.net/sites/default/files/imagecache/400xY/shemis-tv.jpg",
+                      "name":  "Shams TV",
+                      "url":  "https://stream.shams.tv/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish general channel from Erbil/Sulaymaniyah.",
+                      "logo":  "https://i.imgur.com/9Mspf32.png",
+                      "name":  "Zagros TV",
+                      "url":  "https://5a3ed7a72ed4b.streamlock.net/zagrostv/SMIL:myStream.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Iraqi general channel popular in Kurdistan.",
+                      "logo":  "https://i.imgur.com/9qFHjnu.png",
+                      "name":  "UTV Iraq (Erbil/Duhok feed)",
+                      "url":  "https://mn-nl.mncdn.com/utviraqi2/64c80359/index.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "General Iraqi channel watched across Kurdistan.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Al_Sharqiya_logo.svg/512px-Al_Sharqiya_logo.svg.png",
+                      "name":  "Al Sharqiya",
+                      "url":  "https://5d94523502c2d.streamlock.net/home/mystream/playlist.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "Iraqi news channel.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Al_Sharqiya_News_logo.svg/512px-Al_Sharqiya_News_logo.svg.png",
+                      "name":  "Al Sharqiya News",
+                      "url":  "https://5d94523502c2d.streamlock.net/alsharqiyalive/mystream/playlist.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Iraqi national TV.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Al_Iraqiya_TV_logo.svg/512px-Al_Iraqiya_TV_logo.svg.png",
+                      "name":  "Al Iraqia",
+                      "url":  "https://cdn.catiacast.video/abr/8d2ffb0aba244e8d9101a9488a7daa05/playlist.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "Iraqi news channel.",
+                      "logo":  "https://i.imgur.com/kyzH3G5.png",
+                      "name":  "Dijlah TV",
+                      "url":  "https://ghaasiflu.online/Dijlah/index.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "Iraqi news.",
+                      "logo":  "https://i.imgur.com/9lOuzHQ.png",
+                      "name":  "iNEWS TV",
+                      "url":  "https://live.i-news.tv/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Family",
+                      "description":  "Family channel popular among Kurdish viewers.",
+                      "logo":  "https://www.lyngsat.com/logo/tv/aa/ava-family-iq.png",
+                      "name":  "AVA Family",
+                      "url":  "https://familyhls.avatv.live/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious channel.",
+                      "logo":  "https://i.imgur.com/lqVwrAF.png",
+                      "name":  "Alquran (Kurdistan)",
+                      "url":  "https://ktvlive.online/stream/hls/ch1.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious programming. May not be 24/7.",
+                      "logo":  "https://i.imgur.com/pDdUvz7.png",
+                      "name":  "Imam Hussein TV 1",
+                      "url":  "https://live.imamhossaintv.com/live/ih1.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious programming. May not be 24/7.",
+                      "logo":  "https://i.imgur.com/IXVSPdJ.png",
+                      "name":  "Imam Hussein TV 2",
+                      "url":  "https://live.imamhossaintv.com/live/ih2.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious programming. May not be 24/7.",
+                      "logo":  "https://i.imgur.com/emQRHQZ.png",
+                      "name":  "Imam Hussein TV 3",
+                      "url":  "https://live.imamhossaintv.com/live/ih3.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious programming. May not be 24/7.",
+                      "logo":  "https://i.imgur.com/0UYcylY.png",
+                      "name":  "Imam Hussein TV 4",
+                      "url":  "https://live.imamhossaintv.com/live/ih4.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Popular general channel in Iraq/Kurdistan.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/MBC_Iraq_logo.svg/512px-MBC_Iraq_logo.svg.png",
+                      "name":  "MBC Iraq",
+                      "url":  "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-iraq/e38c44b1b43474e1c39cb5b90203691e/index.m3u8"
+                  },
+                  {
+                      "category":  "Music",
+                      "description":  "Music channel.",
+                      "logo":  "https://i.imgur.com/nLtiXNf.png",
+                      "name":  "Wanasah",
+                      "url":  "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-wanasah/13e82ea6232fa647c43b26e8a41f173d/index.m3u8"
+                  },
+                  {
+                      "category":  "Music",
+                      "description":  "Persian music; widely watched.",
+                      "logo":  "https://www.lyngsat.com/logo/tv/pp/pmc-royale-ch.png",
+                      "name":  "PMC Royale",
+                      "url":  "https://pmcrohls.wns.live/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Sports",
+                      "description":  "Premium sports channel with Champions League.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/BeIN_Sports_1_logo.svg/512px-BeIN_Sports_1_logo.svg.png",
+                      "name":  "beIN Sports 1 HD",
+                      "url":  "https://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index_5.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Islamic children\u0027s entertainment channel.",
+                      "logo":  "https://i.imgur.com/NoorKids.png",
+                      "name":  "Noor Kids",
+                      "url":  "https://noor-kids.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Kurdish",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Channel8corp.png/480px-Channel8corp.png",
+                      "name":  "Channel 8 Kurdish (720p)",
+                      "url":  "https://live.channel8.com/Channel8-Kurdish/index.fmp4.m3u8"
+                  },
+                  {
+                      "category":  "Kurdish",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/hIhzT7t.png",
+                      "name":  "Aryen TV (1080p) [Not 24/7]",
+                      "url":  "https://aryen.tv/live/tv/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Kurdish",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/JSvJpD8.png",
+                      "name":  "Ronahi TV (1080p)",
+                      "url":  "https://hlspackager.akamaized.net/live/DB/RONAHI_TV/HLS/RONAHI_TV.m3u8"
+                  },
+                  {
+                      "category":  "Kurdish",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/otnIdEu.png",
+                      "name":  "KurdMax Music (720p)",
+                      "url":  "https://6476e46b58f91.streamlock.net/music/MUSIC2402/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Kurdish",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/XTmyGmL.png",
+                      "name":  "KurdMax Show (720p)",
+                      "url":  "https://6476e46b58f91.streamlock.net/liveTrans/SHOWS123/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Kurdish",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/42noysO.png",
+                      "name":  "Rojava TV (1080p)",
+                      "url":  "https://hlspackager.akamaized.net/live/DB/ROJAVA_HD/HLS/ROJAVA_HD.m3u8"
+                  },
+                  {
+                      "category":  "Kurdish",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/F3XRwkt.png",
+                      "name":  "Kurdsat News (1080p)",
+                      "url":  "https://hlspackager.akamaized.net/live/DB/KURDSAT_NEWS/HLS/KURDSAT_NEWS.m3u8"
+                  },
+                  {
+                      "category":  "Kurdish",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/TRT_Kurd%C3%AE_logo.svg/512px-TRT_Kurd%C3%AE_logo.svg.png",
+                      "name":  "TRT Kurdî (720p)",
+                      "url":  "https://tv-trtkurdi.medya.trt.com.tr/master.m3u8"
+                  },
+                  {
+                      "category":  "Kurdish",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/rK0y02d.png",
+                      "name":  "Waar TV (1080p)",
+                      "url":  "https://live.kwikmotion.com/waarmedialive/waarmedia.smil/waarmediapublish/waarmedia_source/chunks.m3u8"
+                  },
+                  {
+                      "category":  "Iraq",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.ibb.co/cCmjqtQ/logo-2.png",
+                      "name":  "Abalfadhl TV",
+                      "url":  "https://t.northtelecom.org/ABALFADHLTV.m3u8"
+                  },
+                  {
+                      "category":  "Iraq",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/tiQp2sR.png",
+                      "name":  "Alhurra (720p)",
+                      "url":  "https://mbn-ingest-worldsafe.akamaized.net/hls/live/2038900/MBN_Alhurra_Worldsafe_HLS/master.m3u8"
+                  },
+                  {
+                      "category":  "Iraq",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/fsgQDcN.png",
+                      "name":  "Alhurra Iraq (720p)",
+                      "url":  "https://mbn-ingest-worldsafe.akamaized.net/hls/live/2038899/MBN_Iraq_Worldsafe_HLS/master.m3u8"
+                  },
+                  {
+                      "category":  "Iraq",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/WhPlJzh.jpeg",
+                      "name":  "ABNsat (720p)",
+                      "url":  "https://mediaserver.abnvideos.com/streams/abnsat.m3u8"
+                  },
+                  {
+                      "category":  "Iraq",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/Eo3UYCK.png",
+                      "name":  "Al-Jawadain TV (1080p) [Not 24/7]",
+                      "url":  "https://live.aljawadain.org/live/aljawadaintv/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Iraq",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Channel8corp.png/480px-Channel8corp.png",
+                      "name":  "Channel 8 Kurdish (720p)",
+                      "url":  "https://live.channel8.com/Channel8-Kurdish/index.fmp4.m3u8"
+                  },
+                  {
+                      "category":  "Iraq",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/s8PfUQy.png",
+                      "name":  "BeitolAbbas TV Channel (720p)",
+                      "url":  "https://live.beitolabbas.tv/live/beitolabbastv.m3u8"
+                  },
+                  {
+                      "category":  "Iraq",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/otnIdEu.png",
+                      "name":  "KurdMax Music (720p)",
+                      "url":  "https://6476e46b58f91.streamlock.net/music/MUSIC2402/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Iraq",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/Z7woTe5.png",
+                      "name":  "Iraq Future",
+                      "url":  "https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_040/Stream/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Iraq",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/F3XRwkt.png",
+                      "name":  "Kurdsat News (1080p)",
+                      "url":  "https://hlspackager.akamaized.net/live/DB/KURDSAT_NEWS/HLS/KURDSAT_NEWS.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/Z2rfrQ8.png",
+                      "name":  "Al Aqsa Channel (416p) [Not 24/7]",
+                      "url":  "http://167.172.161.13/hls/feedspare/6udfi7v8a3eof6nlps6e9ovfrs65c7l7.m3u8"
+                  },
+                  {
+                      "category":  "Iraq",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/rK0y02d.png",
+                      "name":  "Waar TV (1080p)",
+                      "url":  "https://live.kwikmotion.com/waarmedialive/waarmedia.smil/waarmediapublish/waarmedia_source/chunks.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/o6HSfNg.png",
+                      "name":  "Aghani Aghani TV (720p)",
+                      "url":  "http://77.42.253.43:9090/stream5/AGHANITV.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/5FrE3Nv.png",
+                      "name":  "Al Alamiya 2",
+                      "url":  "http://82.212.74.98:8000/live/7815.m3u8"
+                  },
+                  {
+                      "category":  "Iraq",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/XTmyGmL.png",
+                      "name":  "KurdMax Show (720p)",
+                      "url":  "https://6476e46b58f91.streamlock.net/liveTrans/SHOWS123/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Iraq",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/JkK8HG8.png",
+                      "name":  "KurdMax Sorani (1080p)",
+                      "url":  "https://6476e46b58f91.streamlock.net/liveTrans/KURDS2211/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/MvpntzA.png",
+                      "name":  "2M Monde +1 (1080p)",
+                      "url":  "https://d2qh3gh0k5vp3v.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-n6pess5lwbghr/2M_ES.m3u8"
+                  },
+                  {
+                      "category":  "Iraq",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/Dvf61Jp.png",
+                      "name":  "Marjaeyat TV English (1080p)",
+                      "url":  "https://livefa.marjaeyattv.com/mtv_en/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/cTLj7Yt.png",
+                      "name":  "Aflam (1080p)",
+                      "url":  "https://shls-live-enc.edgenextcdn.net/out/v1/0044dd4b001a466c941ad77b04a574a2/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://assets.mbcmood.com/channels/1720184087Abdullah%20Majeed%20Abdullah%20banner.png",
+                      "name":  "Abdulmajeed Abdullah (1080p)",
+                      "url":  "https://d2hng5r56zpsbw.cloudfront.net/out/v1/9c4c990f44bb4767bb46271f326dd574/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/WhPlJzh.jpeg",
+                      "name":  "ABNsat (720p)",
+                      "url":  "https://mediaserver.abnvideos.com/streams/abnsat.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/r8MmFRX.png",
+                      "name":  "Afghanistan International (720p)",
+                      "url":  "https://hls.afintl.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/i6Y7beR.jpg",
+                      "name":  "Ajyal TV (720p)",
+                      "url":  "http://htvmada.mada.ps:8888/ajyal/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/8ariztD.png",
+                      "name":  "Aghapy Kids (1080p)",
+                      "url":  "https://5b622f07944df.streamlock.net/aghapykids.tv/aghapykids2/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/en/e/eb/AghapyTV.jpg",
+                      "name":  "Aghapy TV (1080p) [Not 24/7]",
+                      "url":  "https://5b622f07944df.streamlock.net/aghapy.tv/aghapy.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/eEV4r6J.jpg",
+                      "name":  "Al Arabiya Business (1080p)",
+                      "url":  "https://live.alarabiya.net/alarabiapublish/aswaaq.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/Hoc3cfO.png",
+                      "name":  "Al Arabiya Programs (1280p)",
+                      "url":  "https://live.alarabiya.net/alarabiapublish/aaprograms.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/NXFkYFj.png",
+                      "name":  "Al Arabiya (1080p)",
+                      "url":  "https://live.alarabiya.net/alarabiapublish/alarabiya.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Iraq",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/LsYYkUI.png",
+                      "name":  "Marjaeyat TV Arabic (1080p)",
+                      "url":  "https://livefa.marjaeyattv.com/mtv_ar/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/Zdi31dy.png",
+                      "name":  "Al Alam (360p)",
+                      "url":  "https://live2.alalam.ir/alalam.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/hVNIwgE.png",
+                      "name":  "Ajman TV (1080p)",
+                      "url":  "https://cdn1.logichost.in/ajmantv/live/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/Gp5mNea.png",
+                      "name":  "Al Araby TV 2 (1080p)",
+                      "url":  "https://live.kwikmotion.com/alaraby2live/alaraby2.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/YMqWEe4.png",
+                      "name":  "Al Araby TV (1080p)",
+                      "url":  "https://live.kwikmotion.com/alaraby1live/alaraby_abr/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/QMUjPXx.png",
+                      "name":  "Al Ittihad (552p) [Not 24/7]",
+                      "url":  "http://185.105.4.151:8080/_defapp_/ittihad/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/CfxR8o3.png",
+                      "name":  "Al Jadeed (1080p)",
+                      "url":  "http://185.9.2.18/chid_391/mono.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/WcRlHQm.png",
+                      "name":  "Al Ekhbariya (1080p)",
+                      "url":  "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-al-ekhbaria/297b3ef1cd0633ad9cfba7473a686a06/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/De4SEWE.png",
+                      "name":  "Al Hadath (1080p)",
+                      "url":  "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-hadath/2ff87ec4c2f3ede35295a20637d9f8fd/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/ga6NXb9.png",
+                      "name":  "Al Ghad TV (1080p)",
+                      "url":  "https://eazyvwqssi.erbvr.com/alghadtv/alghadtv.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/EK75DMJ.png",
+                      "name":  "Al Horreya TV (1080p)",
+                      "url":  "http://media.smc-host.com:1935/alhorreya.tv/mp4:alhorreya3/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/7bRVpnu.png",
+                      "name":  "Al Jazeera (1080p)",
+                      "url":  "https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/X80DQvF.png",
+                      "name":  "Al Jazeera Mubasher (1080p)",
+                      "url":  "https://live-hls-apps-ajm-fa.getaj.net/AJM/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/QFnztgo.png",
+                      "name":  "Al Maaref TV (1080p)",
+                      "url":  "https://bucharest.zeuscdn724.com/lb0/CH-AL-MA/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/LMCcIZ2.png",
+                      "name":  "Al Jazeera Mubasher 24 (1080p)",
+                      "url":  "https://live-hls-apps-ajm24-fa.getaj.net/AJM24/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/5dNJlLo.png",
+                      "name":  "Al Jazeera Documentary (1080p) [Geo-blocked]",
+                      "url":  "https://live-hls-apps-ajd-fa.getaj.net/AJD/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/nJmi6G6.png",
+                      "name":  "Al Jazeera Mubasher Broadcast 2 (1080p)",
+                      "url":  "https://live-hls-apps-ajm2-fa.getaj.net/AJM2/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/NVOeM3P.png",
+                      "name":  "Al Madina (720p)",
+                      "url":  "https://streaming.zaytonatube.com:8081/AlMadinatv/almadina21/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/UeTseMV.png",
+                      "name":  "Al Mamlaka TV (1080p)",
+                      "url":  "https://bcovlive-a.akamaihd.net/4109c7ba30fd4a44ad9afe917c67a8c8/eu-central-1/6415809151001/playlist_dvr.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/V055t5e.png",
+                      "name":  "Al Masirah (720p) [Not 24/7]",
+                      "url":  "https://live.cdnbridge.tv/Almasirah/Almasirah_all/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://play-lh.googleusercontent.com/FHPrsr391mPFqKfTq6ZdvWPZNVfsZeTAVQ8rjQF-NosnRdNipUy5xa43RWkiF4tGcQU",
+                      "name":  "Al Masar TV (576p)",
+                      "url":  "https://starmenajo.com/hls/almasar/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/sOQLV7L.png",
+                      "name":  "Al Manar (576p) [Not 24/7]",
+                      "url":  "https://edge.fastpublish.me/live/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/M8ZuzeB.png",
+                      "name":  "Al Hayat TV (720p)",
+                      "url":  "https://cdn3.wowza.com/5/OE5HREpIcEkySlNT/alhayat-live/ngrp:livestream_all/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/0xHb3XM.jpg",
+                      "name":  "Al Masirah Mubacher (642p) [Not 24/7]",
+                      "url":  "https://live2.cdnbridge.tv/AlmasirahMubasher/Mubasher_All/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/GtQOKeW.png",
+                      "name":  "Al Mayadeen (576p)",
+                      "url":  "https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/A2fJysM.png",
+                      "name":  "Al Quran Al Kareem TV (360p)",
+                      "url":  "https://cdn-globecast.akamaized.net/live/eds/saudi_quran/hls_roku/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/c2bwn4G.png",
+                      "name":  "Al Najah News (720p)",
+                      "url":  "https://streaming.najah.edu:8443/hls/AlNajah.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/zkBT0C8.png",
+                      "name":  "Al Qamar TV (1080p)",
+                      "url":  "https://streamer3.premio.link/alqamar/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/sEOjApe.png",
+                      "name":  "Al Saudiya Alaan (1080p)",
+                      "url":  "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-ksa-now/71ed3aa814c643306c0a8bc4fcc7d17f/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/8PH1Lak.png",
+                      "name":  "Al Riyadh Radio (1080p)",
+                      "url":  "https://live.kwikmotion.com/sbrksariyadhradiolive/srpksariyadhradio/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/iYibJxK.png",
+                      "name":  "Alerth Alnabawi Channel (576p)",
+                      "url":  "http://82.212.74.2:8000/live/7307.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/S6LcTJv.png",
+                      "name":  "Al Sunnah Al Nabawiyah TV (360p)",
+                      "url":  "https://cdn-globecast.akamaized.net/live/eds/saudi_sunnah/hls_roku/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/GRQTndk.png",
+                      "name":  "Al Saudiya (1080p)",
+                      "url":  "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-saudi-tv/2ad66056b51fd8c1b624854623112e43/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/7o4HgrP.png",
+                      "name":  "Al Resalah (1080p) [Geo-blocked]",
+                      "url":  "https://rotana.hibridcdn.net/rotananet/risala_net-7Y83PP5adWixDF93/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/Ts3RjTV.png",
+                      "name":  "Al Rayyan (1080p)",
+                      "url":  "https://alrayyancdn.vidgyor.com/pub-noalrayy3pwz0l/liveabr/playlist_dvr.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/otAHLRo.png",
+                      "name":  "Al Shallal TV (1080p)",
+                      "url":  "https://amg01480-alshallalfze-alshallal-ono-q0hfg.amagi.tv/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/4qB5iN0.png",
+                      "name":  "Al Rayyan Al Qadeem (1080p)",
+                      "url":  "https://alrayyancdn.vidgyor.com/pub-nooldraybinbdh/liveabr/playlist_dvr.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/zgMqQPQ.png",
+                      "name":  "Al Wousta TV (1080p)",
+                      "url":  "https://svs.itworkscdn.net/alwoustalive/alwoustatv.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/fsgQDcN.png",
+                      "name":  "Alhurra Iraq (720p)",
+                      "url":  "https://mbn-ingest-worldsafe.akamaized.net/hls/live/2038899/MBN_Iraq_Worldsafe_HLS/master.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/tiQp2sR.png",
+                      "name":  "Alhurra (720p)",
+                      "url":  "https://mbn-ingest-worldsafe.akamaized.net/hls/live/2038900/MBN_Alhurra_Worldsafe_HLS/master.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/OI1HQv5.png",
+                      "name":  "Al Wilayah (720p)",
+                      "url":  "https://nl.livekadeh.com/hls2/alwilayah_tv.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/m4qheI4.png",
+                      "name":  "Al Sharqiya Min Kabla (1080p)",
+                      "url":  "https://svs.itworkscdn.net/kablatvlive/kabtv1.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/Eo3UYCK.png",
+                      "name":  "Al-Jawadain TV (1080p) [Not 24/7]",
+                      "url":  "https://live.aljawadain.org/live/aljawadaintv/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/rBixF3P.png",
+                      "name":  "Al Yaum TV (1080p)",
+                      "url":  "https://hlspackager.akamaized.net/live/DB/ALYAUM_TV/HLS/ALYAUM_TV.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/4WKQppG.png",
+                      "name":  "Aliman TV (240p) [Not 24/7]",
+                      "url":  "https://svs.itworkscdn.net/alimanlive/imantv.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://www.lyngsat.com/logo/tv/aa/alhaqeqa-aldawlia-jo.png",
+                      "name":  "Alhaqeqa Aldawlia (1080p) [Not 24/7]",
+                      "url":  "https://ghaasiflu.online/alhqeqa/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/UjOxwdd.png",
+                      "name":  "Alhiwar TV (1080p) [Not 24/7]",
+                      "url":  "https://mn-nl.mncdn.com/alhiwar_live/smil:alhiwar.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/WQKYPKD.png",
+                      "name":  "Alalam News Channel Syria (1080p)",
+                      "url":  "https://live2.alalam.ir/live/Alalam/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/7L0l0iY.png",
+                      "name":  "Al-Fady TV (1080p) [Not 24/7]",
+                      "url":  "https://5d658d7e9f562.streamlock.net/alfadytv.tv/alfadytv.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/2FPtYZr.png",
+                      "name":  "Alistiqama TV (576p)",
+                      "url":  "https://jmc-live.ercdn.net/alistiqama/alistiqama.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/pnm60bq.png",
+                      "name":  "Alkarma TV North America \u0026 Canada (1080p) [Not 24/7]",
+                      "url":  "https://5aafcc5de91f1.streamlock.net/alkarmatv.com/alkarmana1.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/6OmNw5A.png",
+                      "name":  "Alkarma TV Middle East (1080p) [Not 24/7]",
+                      "url":  "https://58cc65c534c67.streamlock.net/alkarmatv.com/alkarmame1.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/yUEuQA2.png",
+                      "name":  "Alkarma TV Family (1080p) [Not 24/7]",
+                      "url":  "https://58cc65c534c67.streamlock.net/alkarmatv.com/alkarmaNA2.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/bJLKkou.png",
+                      "name":  "Alkarma TV Praise (720p) [Not 24/7]",
+                      "url":  "https://58cc65c534c67.streamlock.net/alkarmatv.com/alkarmapa.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/90ykspa.png",
+                      "name":  "Alkarma TV Australia (1080p)",
+                      "url":  "https://5a8308add0b31.streamlock.net/alkarmatv.com/alkarmaau.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/GgEeTNr.png",
+                      "name":  "Almahriah TV (576p)",
+                      "url":  "https://starmenajo.com/hls/almahriah/index.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://shoof.alkass.net/assets/images/shoof.png",
+                      "name":  "Alkass SHOOF (1080p)",
+                      "url":  "https://liveeu-gcp.alkassdigital.net/shooflive/main.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "",
+                      "name":  "Althania (1080p)",
+                      "url":  "https://live.kwikmotion.com/syriatv02live/syriatv02.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/6RGNGsM.png",
+                      "name":  "Alkass Five (1080p)",
+                      "url":  "https://liveeu-gcp.alkassdigital.net/alkass5-p/main.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/CrPSPSC.png",
+                      "name":  "Alkass Six (1080p)",
+                      "url":  "https://liveeu-gcp.alkassdigital.net/alkass6-p/main.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/3eyHP3S.png",
+                      "name":  "Alkass Seven (1080p)",
+                      "url":  "https://liveeu-gcp.alkassdigital.net/alkass7-p/main.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/10mmlha.png",
+                      "name":  "Alkass One (1080p)",
+                      "url":  "https://liveeu-gcp.alkassdigital.net/alkass1-p/main.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/d57BdFh.png",
+                      "name":  "Alkass Three (1080p)",
+                      "url":  "https://liveeu-gcp.alkassdigital.net/alkass3-p/main.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/8w61kFX.png",
+                      "name":  "Alkass Two (1080p)",
+                      "url":  "https://liveeu-gcp.alkassdigital.net/alkass2-p/main.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/aObcudw.png",
+                      "name":  "ABC News Albania Ⓣ",
+                      "url":  "https://www.twitch.tv/abcnewsal"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/kpuO8m7.png",
+                      "name":  "Alkarma TV Youth \u0026 English (1080p) [Not 24/7]",
+                      "url":  "https://5aafcc5de91f1.streamlock.net/alkarmatv.com/alkarmaus.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/iDL65Wu.png",
+                      "name":  "Alkass Four (1080p)",
+                      "url":  "https://liveeu-gcp.alkassdigital.net/alkass4-p/main.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://shoof.alkass.net/assets/images/shoof2.png",
+                      "name":  "Alkass SHOOF 2 (1080p)",
+                      "url":  "https://liveeu-gcp.alkassdigital.net/shooflive2/main.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/YTyCBvB.png",
+                      "name":  "Altaghier TV (1080p)",
+                      "url":  "https://jmc-live.ercdn.net/altaghier/altaghier.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/3pUik3b.png",
+                      "name":  "Almagd TV North America (1080p)",
+                      "url":  "https://5aafcc5de91f1.streamlock.net/almagd.tv/almagd.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/JdKxscs.png",
+                      "name":  "AlbKanale Music TV Ⓢ",
+                      "url":  "https://albportal.net/albkanalemusic.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/News_24_%28Albania%29.svg/1024px-News_24_%28Albania%29.svg.png",
+                      "name":  "News 24 Ⓢ",
+                      "url":  "https://tv.balkanweb.com/news24/livestream/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/Skf6vdi.png",
+                      "name":  "Euronews Albania Ⓨ",
+                      "url":  "https://www.youtube.com/@EuronewsAlbania/live"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/X3ukD5t.png",
+                      "name":  "CNA",
+                      "url":  "https://live1.mediadesk.al/cnatvlive.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/ILZY5bJ.png",
+                      "name":  "Ora News",
+                      "url":  "https://live1.mediadesk.al/oranews.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/3pUik3b.png",
+                      "name":  "Almagd TV Middle East (1080p) [Not 24/7]",
+                      "url":  "https://597f64b67707a.streamlock.net/almagd.tv/almagd.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Arabic",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/t2ZkRbr.png",
+                      "name":  "Alkarma TV Talmaza (Discipleship) (1080p) [Not 24/7]",
+                      "url":  "https://58cc65c534c67.streamlock.net/alkarmatv.com/alkarmame2.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/tBAXkOW.png",
+                      "name":  "Top News Ⓣ",
+                      "url":  "https://www.twitch.tv/topnewsal"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/D3hNOVS.png",
+                      "name":  "Tropoja",
+                      "url":  "https://live.prostream.al/al/smil:tropojatv.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/IyP2UIx.png",
+                      "name":  "Encuentro Ⓨ Ⓖ",
+                      "url":  "https://www.youtube.com/user/encuentro/live"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/Q4zaCuM.png",
+                      "name":  "Pakapaka Ⓨ Ⓖ",
+                      "url":  "https://www.youtube.com/user/CanalPakapaka/live"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/TN_todo_noticias_logo.svg/200px-TN_todo_noticias_logo.svg.png",
+                      "name":  "TN Todo Noticias Ⓨ",
+                      "url":  "https://www.youtube.com/c/todonoticias/live"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/k2Ku8Ib.png",
+                      "name":  "Crónica TV Ⓨ",
+                      "url":  "https://www.youtube.com/c/cronicatv/live"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://photos.live-tv-channels.org/tv-logo/ar-ip-noticias-6980-300x225.jpg",
+                      "name":  "IP Noticias Ⓨ",
+                      "url":  "https://www.youtube.com/watch?v=IxQ2-6Y4y9w"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/vJYzGt1.png",
+                      "name":  "LN+ Ⓨ",
+                      "url":  "https://www.youtube.com/c/LaNacionMas/live"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/4hYYpiu.png",
+                      "name":  "Televisión Pública Ⓨ",
+                      "url":  "https://www.youtube.com/user/TVPublicaArgentina/live"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/xDjOUuz.png",
+                      "name":  "Canal 26 Ⓨ",
+                      "url":  "https://www.youtube.com/c/canal26/live"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/E3pamA5.png",
+                      "name":  "C5N Ⓨ",
+                      "url":  "https://www.youtube.com/c/c5n/live"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://yt3.ggpht.com/a-/AAuE7mAuXDwiY8UPwtAHrGXTXkAxBjdRqws2MJIN2A=s900-mo-c-c0xffffffff-rj-k-no",
+                      "name":  "El Destape Ⓨ",
+                      "url":  "https://www.youtube.com/watch?v=JuskTxbUqmY"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.ibb.co/y4pkxH3/Qtc8-M2-PG-400x400.jpg",
+                      "name":  "Canal E",
+                      "url":  "https://unlimited1-us.dps.live/perfiltv/perfiltv.smil/perfiltv/livestream2/chunks.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/EWmshtx.png",
+                      "name":  "Net TV",
+                      "url":  "https://unlimited1-us.dps.live/nettv/nettv.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/tvLHiAT.png",
+                      "name":  "TV Universidad",
+                      "url":  "https://stratus.stream.cespi.unlp.edu.ar/hls/tvunlp.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/OdhF7ym.png",
+                      "name":  "A24 Ⓨ",
+                      "url":  "https://www.youtube.com/c/A24com/live"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/Jt7dOQm.png",
+                      "name":  "América Ⓨ",
+                      "url":  "https://www.youtube.com/c/americaenvivo/live"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/5CVl5EF.png",
+                      "name":  "ABC",
+                      "url":  "https://c.mjh.nz/101002210221/"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/gBh54wY.png",
+                      "name":  "ABC Me",
+                      "url":  "https://c.mjh.nz/101002210224/"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/oD7GQxT.png",
+                      "name":  "RTV",
+                      "url":  "http://iptv.rtv-ooe.at/stream.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/PGb4wYw.png",
+                      "name":  "W24",
+                      "url":  "https://ms01.w24.at/W24/smil:liveevent.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/2fxVYsL.jpg",
+                      "name":  "R9",
+                      "url":  "https://ms01.w24.at/R9/smil:liveeventR9.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/zDWhSxq.png",
+                      "name":  "Servus TV Ⓖ",
+                      "url":  "https://rbmn-live.akamaized.net/hls/live/2002825/geoSTVATweb/master.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/di3XX5L.png",
+                      "name":  "AzStarTV",
+                      "url":  "http://live.azstartv.com/azstar/smil:azstar.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Belarus_1_logo.svg/742px-Belarus_1_logo.svg.png",
+                      "name":  "Беларусь 1",
+                      "url":  "https://ngtrk.dc.beltelecom.by/ngtrk/smil:belarus1.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Belarus_3_logo.svg/742px-Belarus_3_logo.svg.png",
+                      "name":  "Беларусь 3",
+                      "url":  "https://ngtrk.dc.beltelecom.by/ngtrk/smil:belarus3.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Belarus_2_logo.svg/742px-Belarus_2_logo.svg.png",
+                      "name":  "Беларусь 2",
+                      "url":  "https://ngtrk.dc.beltelecom.by/ngtrk/smil:belarus2.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/PozF9MT.png",
+                      "name":  "1Mus",
+                      "url":  "http://hz1.teleport.cc/HLS/HD.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Belarus_5_logo.svg/742px-Belarus_5_logo.svg.png",
+                      "name":  "Беларусь 5",
+                      "url":  "https://ngtrk.dc.beltelecom.by/ngtrk/smil:belarus5.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://i.imgur.com/rzPQ9Iz.png",
+                      "name":  "Беларусь 5 Интернет",
+                      "url":  "https://ngtrk.dc.beltelecom.by/ngtrk/smil:belarus5int.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Belarus_24_logo.svg/742px-Belarus_24_logo.svg.png",
+                      "name":  "Беларусь 24",
+                      "url":  "https://ngtrk.dc.beltelecom.by/ngtrk/smil:belarus24.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Global",
+                      "description":  "Discovered from Explore section",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_%D0%B1%D0%B5%D0%BB%D0%BE%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D1%82%D0%B5%D0%BB%D0%B5%D0%BA%D0%B0%D0%BD%D0%B0%D0%BB%D0%B0_%C2%AB%D0%A1%D0%A2%D0%92%C2%BB.svg/640px-%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_%D0%B1%D0%B5%D0%BB%D0%BE%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D1%82%D0%B5%D0%BB%D0%B5%D0%BA%D0%B0%D0%BD%D0%B0%D0%BB%D0%B0_%C2%AB%D0%A1%D0%A2%D0%92%C2%BB.svg.png",
+                      "name":  "СТВ",
+                      "url":  "https://ctv.dc.beltelecom.by/ctv/ctv.stream/playlist.m3u8"
+                  }
+              ],
+    "Count":  187
+}

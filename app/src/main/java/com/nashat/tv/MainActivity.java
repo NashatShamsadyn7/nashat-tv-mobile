@@ -50,19 +50,16 @@ public class MainActivity extends BaseActivity implements ChannelAdapter.Listene
     private static final int REQ_VOICE = 1001;
     private static final int REQ_RECORD_AUDIO = 2001;
 
-    private MaterialToolbar toolbar;
     private EditText editSearch;
     private MaterialSwitch switchFavorites;
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView recycler;
-    private RecyclerView recyclerRecommended;
-    private MaterialButton fabSettings;
+    private View fabSettings;
     private MaterialButton btnViewMode;
-    private MaterialButton btnSeeAllRecommended;
     private MaterialButton btnVoiceSearch;
+    private String activeCategory = "All";
 
     private ChannelAdapter adapter;
-    private RecommendedAdapter recommendedAdapter;
     private FavoritesStore favoritesStore;
     private ChannelRepository repository;
 
@@ -77,9 +74,9 @@ public class MainActivity extends BaseActivity implements ChannelAdapter.Listene
     private boolean isGridView = true;
     private static final List<String> CURATED_ORDER = Arrays.asList(
             "Rudaw TV", "Kurdistan 24", "Kurdsat News", "Kurdsat", "Kurdistan TV",
-            "NRT TV", "Waar TV", "TRT Kurdi", "KurdMax Show", "KurdMax Music",
-            "Rojava TV", "Ronahi TV", "Sterk TV", "Channel 8 Kurdish", "Mixkurdy",
-            "Zarok TV", "Payam TV", "4 Kurd TV"
+            "Ava Media TV", "Rojava TV", "Ronahi TV", "Channel 8 Kurdish", "Mixkurdy",
+            "Zarok TV", "Payam TV", "4 Kurd TV", "Zoom TV Kurdish", "Zagros TV",
+            "MBC Iraq", "Al Sharqiya", "beIN Sports 1 HD", "Jin TV", "Komala TV"
     );
 
     @Override
@@ -93,44 +90,100 @@ public class MainActivity extends BaseActivity implements ChannelAdapter.Listene
         setupListeners();
 
         loadChannels(false);
+        AppUpdater.checkForUpdates(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = getSharedPreferences("LastWatched", MODE_PRIVATE);
+        String savedTmdbId = prefs.getString("tmdbId", "");
+        View layContinueWatching = findViewById(R.id.layContinueWatching);
+        if (layContinueWatching != null) {
+            if (!savedTmdbId.isEmpty()) {
+                layContinueWatching.setVisibility(View.VISIBLE);
+                android.widget.TextView txtContinueWatching = findViewById(R.id.txtContinueWatching);
+                String title = prefs.getString("title", "Unknown Title");
+                txtContinueWatching.setText("Continue: " + title);
+                
+                boolean isTv = prefs.getBoolean("isTvSeries", false);
+                int season = prefs.getInt("season", 1);
+                int episode = prefs.getInt("episode", 1);
+                
+                layContinueWatching.setOnClickListener(v -> {
+                    Intent intent = new Intent(this, WebPlayerActivity.class);
+                    intent.putExtra("tmdbId", savedTmdbId);
+                    intent.putExtra("isTvSeries", isTv);
+                    if (isTv) {
+                        intent.putExtra("season", season);
+                        intent.putExtra("episode", episode);
+                    }
+                    startActivity(intent);
+                });
+            } else {
+                layContinueWatching.setVisibility(View.GONE);
+            }
+        }
     }
 
     private void initializeViews() {
-        toolbar = findViewById(R.id.toolbar);
         editSearch = findViewById(R.id.editSearch);
         btnVoiceSearch = findViewById(R.id.btnVoiceSearch);
         switchFavorites = findViewById(R.id.switchFavorites);
         swipeRefresh = findViewById(R.id.swipeRefresh);
         recycler = findViewById(R.id.recyclerChannels);
-        recyclerRecommended = findViewById(R.id.recyclerRecommended);
         fabSettings = findViewById(R.id.fabSettings);
         btnViewMode = findViewById(R.id.btnViewMode);
-        btnSeeAllRecommended = findViewById(R.id.btnSeeAllRecommended);
 
         favoritesStore = new FavoritesStore(this);
-        // Firebase is used as the sole data source; JSON repository disabled
-        // repository = new ChannelRepository(this);
     }
 
     private void setupToolbar() {
-        toolbar.setOnMenuItemClickListener(this::onMenuItemClick);
+        // No toolbar in new design
     }
 
     private void setupCategoryChips() {
-        // Category chips removed - no longer needed
+        View chipAll = findViewById(R.id.chipAll);
+        View chipNews = findViewById(R.id.chipNews);
+        View chipEntertainment = findViewById(R.id.chipEntertainment);
+        View chipSports = findViewById(R.id.chipSports);
+        View chipKids = findViewById(R.id.chipKids);
+        View chipMusic = findViewById(R.id.chipMusic);
+
+        View.OnClickListener chipListener = v -> {
+            // Reset all chips
+            chipAll.setBackgroundResource(R.drawable.chip_bg);
+            chipNews.setBackgroundResource(R.drawable.chip_bg);
+            chipEntertainment.setBackgroundResource(R.drawable.chip_bg);
+            chipSports.setBackgroundResource(R.drawable.chip_bg);
+            chipKids.setBackgroundResource(R.drawable.chip_bg);
+            chipMusic.setBackgroundResource(R.drawable.chip_bg);
+
+            // Activate clicked
+            v.setBackgroundResource(R.drawable.chip_bg_active);
+
+            int id = v.getId();
+            if (id == R.id.chipAll) activeCategory = "All";
+            else if (id == R.id.chipNews) activeCategory = "News";
+            else if (id == R.id.chipEntertainment) activeCategory = "Entertainment";
+            else if (id == R.id.chipSports) activeCategory = "Sports";
+            else if (id == R.id.chipKids) activeCategory = "Kids";
+            else if (id == R.id.chipMusic) activeCategory = "Music";
+            applyFilters();
+        };
+
+        chipAll.setOnClickListener(chipListener);
+        chipNews.setOnClickListener(chipListener);
+        chipEntertainment.setOnClickListener(chipListener);
+        chipSports.setOnClickListener(chipListener);
+        chipKids.setOnClickListener(chipListener);
+        chipMusic.setOnClickListener(chipListener);
     }
 
     private void setupRecyclerViews() {
         adapter = new ChannelAdapter(favoritesStore, this);
         updateLayoutManager();
         recycler.setAdapter(adapter);
-
-        recommendedAdapter = new RecommendedAdapter(this);
-        LinearLayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerRecommended.setLayoutManager(lm);
-        recyclerRecommended.setAdapter(recommendedAdapter);
-        
-        findViewById(R.id.recommendedSection).setVisibility(View.VISIBLE);
     }
 
     private void setupListeners() {
@@ -143,16 +196,44 @@ public class MainActivity extends BaseActivity implements ChannelAdapter.Listene
 
         switchFavorites.setOnCheckedChangeListener((buttonView, isChecked) -> applyFilters());
         swipeRefresh.setOnRefreshListener(() -> loadChannels(true));
+
+        // Bottom nav - Settings
         fabSettings.setOnClickListener(v -> {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
 
+        // Bottom nav - Movies
+        View navMovies = findViewById(R.id.navMovies);
+        if (navMovies != null) {
+            navMovies.setOnClickListener(v -> {
+                Intent intent = new Intent(this, MoviesActivity.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            });
+        }
+
+        // Bottom nav - Series
+        View navSeries = findViewById(R.id.navSeries);
+        if (navSeries != null) {
+            navSeries.setOnClickListener(v -> {
+                Intent intent = new Intent(this, SeriesActivity.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            });
+        }
+
+        // Bottom nav - Favorites
+        View navFavorites = findViewById(R.id.navFavorites);
+        if (navFavorites != null) {
+            navFavorites.setOnClickListener(v -> {
+                switchFavorites.setChecked(!switchFavorites.isChecked());
+            });
+        }
+
         btnViewMode.setOnClickListener(v -> toggleViewMode());
-        btnSeeAllRecommended.setOnClickListener(v -> {
-            switchFavorites.setChecked(true);
-        });
+        setupCategoryChips();
     }
 
     private void toggleViewMode() {
@@ -171,10 +252,8 @@ public class MainActivity extends BaseActivity implements ChannelAdapter.Listene
 
     private void updateViewModeButton() {
         if (isGridView) {
-            btnViewMode.setText(R.string.list_view);
             btnViewMode.setIcon(getDrawable(R.drawable.ic_list_24));
         } else {
-            btnViewMode.setText(R.string.grid_view);
             btnViewMode.setIcon(getDrawable(R.drawable.ic_grid_view_24));
         }
     }
@@ -209,10 +288,13 @@ public class MainActivity extends BaseActivity implements ChannelAdapter.Listene
             channelsRef = null;
         }
 
-        // Attach a single realtime listener to the /channels node
+        // First, load local Kurdish channels from asset (always available, instant)
+        final List<Channel> localChannels = loadLocalAssetChannels();
+
+        // Attach a single realtime listener to the root (channels are at DB root, keys: 0,1,2...)
         channelsRef = com.google.firebase.database.FirebaseDatabase
                 .getInstance("https://nashat-tv-default-rtdb.asia-southeast1.firebasedatabase.app")
-                .getReference("channels");
+                .getReference();
 
         channelsListener = new com.google.firebase.database.ValueEventListener() {
             @Override
@@ -220,17 +302,9 @@ public class MainActivity extends BaseActivity implements ChannelAdapter.Listene
                 allChannels.clear();
                 int count = 0;
 
-                // Decide source node: /channels if present, else use root
-                com.google.firebase.database.DataSnapshot source = snapshot;
-                if (snapshot.hasChild("channels")) {
-                    source = snapshot.child("channels");
-                    Log.d("FirebaseMain", "Using /channels node");
-                } else {
-                    Log.d("FirebaseMain", "Using DB root as source");
-                }
-
-                // Collect channels from either flat list or grouped by category
-                for (com.google.firebase.database.DataSnapshot node : source.getChildren()) {
+                // Data is at root as numbered keys (0, 1, 2...) each containing channel objects
+                for (com.google.firebase.database.DataSnapshot node : snapshot.getChildren()) {
+                    // Try direct channel parsing
                     boolean looksLikeChannel = node.hasChild("name") || node.hasChild("url") || node.hasChild("logo");
 
                     if (looksLikeChannel) {
@@ -238,7 +312,6 @@ public class MainActivity extends BaseActivity implements ChannelAdapter.Listene
                         if (c != null) {
                             allChannels.add(c);
                             count++;
-                            Log.d("FirebaseMain", "Loaded channel: " + c.getName());
                         }
                         continue;
                     }
@@ -250,18 +323,19 @@ public class MainActivity extends BaseActivity implements ChannelAdapter.Listene
                             if (c2 != null) {
                                 allChannels.add(c2);
                                 count++;
-                                Log.d("FirebaseMain", "Loaded channel (grouped): " + c2.getName());
                             }
                         }
                     }
                 }
 
+                // Merge local asset channels, avoiding duplicates
+                mergeChannels(localChannels);
+
                 applyFilters();
                 swipeRefresh.setRefreshing(false);
-                Log.d("FirebaseMain", "Total channels loaded: " + count);
+                Log.d("FirebaseMain", "Total channels loaded: " + allChannels.size());
 
-                if (count == 0) {
-                    // Help diagnose by printing top-level keys
+                if (allChannels.isEmpty()) {
                     StringBuilder keys = new StringBuilder();
                     int i = 0;
                     for (com.google.firebase.database.DataSnapshot n : snapshot.getChildren()) {
@@ -275,13 +349,51 @@ public class MainActivity extends BaseActivity implements ChannelAdapter.Listene
 
             @Override
             public void onCancelled(@NonNull com.google.firebase.database.DatabaseError error) {
+                // If Firebase fails, still show local channels
+                allChannels.clear();
+                allChannels.addAll(localChannels);
+                applyFilters();
                 swipeRefresh.setRefreshing(false);
-                Toast.makeText(MainActivity.this, "Firebase error: " + error.getMessage(), Toast.LENGTH_LONG).show();
-                Log.e("FirebaseMain", "Database error", error.toException());
+                Log.e("FirebaseMain", "Database error, showing local channels only", error.toException());
             }
         };
 
         channelsRef.addValueEventListener(channelsListener);
+    }
+
+    /**
+     * Load channels from local asset M3U file (always available, no internet needed).
+     */
+    private List<Channel> loadLocalAssetChannels() {
+        List<Channel> channels = new ArrayList<>();
+        try {
+            java.io.BufferedReader reader = new java.io.BufferedReader(
+                    new java.io.InputStreamReader(getAssets().open("kurdish_channels.m3u"), "UTF-8"));
+            channels = M3UParser.parseM3U(reader);
+            reader.close();
+            Log.d("LocalAsset", "Loaded " + channels.size() + " channels from asset");
+        } catch (Exception e) {
+            Log.e("LocalAsset", "Error loading local channels", e);
+        }
+        return channels;
+    }
+
+    /**
+     * Merge new channels into allChannels, skipping any that share a name with existing entries.
+     */
+    private void mergeChannels(List<Channel> newChannels) {
+        Set<String> existingNames = new LinkedHashSet<>();
+        for (Channel c : allChannels) {
+            existingNames.add(c.getName().toLowerCase(Locale.US).replaceAll("\\s*\\(.*\\)\\s*", "").trim());
+        }
+
+        for (Channel nc : newChannels) {
+            String cleanName = nc.getName().toLowerCase(Locale.US).replaceAll("\\s*\\(.*\\)\\s*", "").trim();
+            if (!existingNames.contains(cleanName)) {
+                allChannels.add(nc);
+                existingNames.add(cleanName);
+            }
+        }
     }
 
     private void applyFilters() {
@@ -299,7 +411,12 @@ public class MainActivity extends BaseActivity implements ChannelAdapter.Listene
 
             boolean matchesFav = !showFavOnly || favoritesStore.isFavorite(c);
 
-            if (matchesQuery && matchesFav) {
+            // Category chip filter
+            boolean matchesCategory = "All".equals(activeCategory)
+                    || c.getCategory().toLowerCase(Locale.US).contains(activeCategory.toLowerCase(Locale.US))
+                    || c.getName().toLowerCase(Locale.US).contains(activeCategory.toLowerCase(Locale.US));
+
+            if (matchesQuery && matchesFav && matchesCategory) {
                 filtered.add(c);
             }
         }
@@ -318,19 +435,57 @@ public class MainActivity extends BaseActivity implements ChannelAdapter.Listene
 
         adapter.submitList(finalList);
 
-        buildRecommended();
-        updateRecommendedVisibility();
+        // Update channel count badge
+        android.widget.TextView tvCount = findViewById(R.id.tvChannelCount);
+        if (tvCount != null) {
+            tvCount.setText(String.valueOf(finalList.size()));
+        }
+
+        updateRecommendations(q, showFavOnly);
     }
 
-    private void updateRecommendedVisibility() {
-        View recommendedSection = findViewById(R.id.recommendedSection);
-        if (recommendedSection != null) {
-            String query = editSearch.getText() != null ? editSearch.getText().toString().trim() : "";
-            boolean shouldShow = !switchFavorites.isChecked() &&
-                               (query.isEmpty() || query.length() < 2);
-            
-            recommendedSection.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
+    private void updateRecommendations(String query, boolean showFavOnly) {
+        View layRecommendations = findViewById(R.id.layRecommendations);
+        RecyclerView recyclerRecommendations = findViewById(R.id.recyclerRecommendations);
+        if (layRecommendations == null || recyclerRecommendations == null) return;
+
+        // Hide if searching, filtering favorites, or inside a specific category (keep it main page only)
+        if (!query.isEmpty() || showFavOnly || !"All".equals(activeCategory)) {
+            layRecommendations.setVisibility(View.GONE);
+            return;
         }
+
+        WatchStatsManager stats = new WatchStatsManager(this);
+        String topCategory = stats.getTopCategory();
+        if ("General".equalsIgnoreCase(topCategory) || topCategory.isEmpty()) {
+            layRecommendations.setVisibility(View.GONE);
+            return;
+        }
+
+        List<Channel> recommended = new ArrayList<>();
+        for (Channel c : allChannels) {
+            // Suggest unseen channels from their favorite category
+            if (c.getCategory().equalsIgnoreCase(topCategory) && !favoritesStore.isFavorite(c)) {
+                recommended.add(c);
+            }
+        }
+
+        if (recommended.isEmpty()) {
+            layRecommendations.setVisibility(View.GONE);
+            return;
+        }
+
+        // Randomize to keep it fresh
+        Collections.shuffle(recommended);
+        if (recommended.size() > 10) {
+            recommended = recommended.subList(0, 10);
+        }
+
+        ChannelAdapter recAdapter = new ChannelAdapter(favoritesStore, this, true);
+        recAdapter.submitList(recommended);
+        recyclerRecommendations.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerRecommendations.setAdapter(recAdapter);
+        layRecommendations.setVisibility(View.VISIBLE);
     }
 
     private void sortList(List<Channel> list) {
@@ -354,35 +509,6 @@ public class MainActivity extends BaseActivity implements ChannelAdapter.Listene
         return idx >= 0 ? idx : Integer.MAX_VALUE / 2;
     }
 
-    private void buildRecommended() {
-        Set<Channel> set = new LinkedHashSet<>();
-
-        for (Channel c : allChannels) {
-            if (favoritesStore.isFavorite(c)) set.add(c);
-            if (set.size() >= 10) break;
-        }
-
-        if (set.size() < 10) {
-            for (String name : CURATED_ORDER) {
-                Channel match = findByName(allChannels, name);
-                if (match != null) {
-                    set.add(match);
-                    if (set.size() >= 12) break;
-                }
-            }
-        }
-
-        recommendedAdapter.submit(new ArrayList<>(set));
-    }
-
-    private Channel findByName(List<Channel> list, String name) {
-        if (name == null) return null;
-        for (Channel c : list) {
-            if (c != null && name.equalsIgnoreCase(c.getName())) return c;
-        }
-        return null;
-    }
-
     @Override
     public void onWatchClicked(Channel channel) {
         if (channel == null || !channel.hasStream()) return;
@@ -390,6 +516,7 @@ public class MainActivity extends BaseActivity implements ChannelAdapter.Listene
         i.putExtra("name", channel.getName());
         i.putExtra("logo", channel.getLogo());
         i.putExtra("url", channel.getUrl());
+        i.putExtra("category", channel.getCategory());
         startActivity(i);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }

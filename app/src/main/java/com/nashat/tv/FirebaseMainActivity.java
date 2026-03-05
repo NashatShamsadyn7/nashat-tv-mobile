@@ -1,13 +1,16 @@
 package com.nashat.tv;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -25,21 +28,30 @@ public class FirebaseMainActivity extends BaseActivity {
     private FirebaseChannelAdapter adapter;
     private final List<Channel> channelList = new ArrayList<>();
     private ProgressBar progress;
-    private TextView emptyView;
+    private LinearLayout emptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_firebase_main);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // Make status bar transparent
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
-        adapter = new FirebaseChannelAdapter(this, channelList);
+        recyclerView = findViewById(R.id.recyclerView);
+        
+        // Movie & Series style vertical list of horizontal rows
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        
+        adapter = new FirebaseChannelAdapter(this);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
         progress = findViewById(R.id.progress);
         emptyView = findViewById(R.id.emptyView);
+
         bindLoading(true);
         showEmpty(false);
 
@@ -61,11 +73,12 @@ public class FirebaseMainActivity extends BaseActivity {
                         Channel channel = snap.getValue(Channel.class);
                         if (channel != null) {
                             channelList.add(channel);
-                            Log.d("Firebase", "Channel: " + channel.getName());
                         }
                     }
                 }
-                adapter.notifyDataSetChanged();
+
+                // Update adapter with grouped data
+                adapter.updateData(channelList);
 
                 bindLoading(false);
                 boolean isEmpty = channelList.isEmpty();
@@ -77,8 +90,9 @@ public class FirebaseMainActivity extends BaseActivity {
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("Firebase", "Error: " + error.getMessage());
                 bindLoading(false);
-                if (emptyView != null) {
-                    emptyView.setText(R.string.error_loading);
+                TextView tvEmpty = findViewById(R.id.tvEmptyText);
+                if (tvEmpty != null) {
+                    tvEmpty.setText(R.string.error_loading);
                 }
                 showEmpty(true);
                 recyclerView.setVisibility(View.INVISIBLE);

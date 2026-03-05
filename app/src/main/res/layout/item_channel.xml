@@ -3,35 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="5dp"
     android:focusable="true"
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground"
     android:stateListAnimator="@animator/focus_scale"
-    app:cardUseCompatPadding="true"
-    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardUseCompatPadding="false"
+    app:cardCornerRadius="18dp"
     app:strokeWidth="1dp"
-    app:strokeColor="?attr/colorOutline"
-    app:cardBackgroundColor="?attr/colorSurface"
-    app:cardElevation="@dimen/card_elevation">
+    app:strokeColor="@color/transparent"
+    app:cardBackgroundColor="@color/transparent"
+    app:cardElevation="0dp"
+    android:background="@drawable/selector_glass_card">
 
-    <!-- Beautiful card with logo and channel name -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="@drawable/channel_card_background">
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp">
 
-        <!-- Logo Container with Fallback Text -->
+        <!-- Logo Circle -->
         <FrameLayout
+            android:id="@+id/logoContainer"
             android:layout_width="@dimen/channel_logo_size"
             android:layout_height="@dimen/channel_logo_size"
-            android:background="@drawable/logo_background"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:background="@drawable/logo_background_dark">
 
-            <!-- Channel Logo -->
             <ImageView
                 android:id="@+id/imgLogo"
                 android:layout_width="match_parent"
@@ -41,51 +39,47 @@
                 android:adjustViewBounds="true"
                 android:padding="8dp" />
 
-            <!-- Fallback Text (shown when logo fails to load) -->
             <TextView
                 android:id="@+id/txtLogoFallback"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/emerald_green"
-                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/accent_primary"
+                android:fontFamily="sans-serif-black"
                 android:visibility="gone"
                 android:background="@drawable/fallback_logo_background" />
-
         </FrameLayout>
 
-        <!-- Channel Name - Beautiful typography -->
+        <!-- Channel Name -->
         <TextView
             android:id="@+id/txtChannelName"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Channel Name"
-            android:textSize="@dimen/text_size_medium"
+            android:layout_marginTop="10dp"
+            android:text="Channel"
+            android:textSize="13sp"
             android:textStyle="bold"
-            android:textColor="@color/calm_navy"
+            android:textColor="@color/text_primary"
             android:gravity="center"
             android:maxLines="2"
             android:ellipsize="end"
             android:fontFamily="sans-serif-medium"
-            app:layout_constraintTop_toBottomOf="@id/imgLogo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:lineSpacingExtra="2dp" />
 
-        <!-- Subtle gradient overlay for visual appeal -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/card_gradient_overlay"
-            android:alpha="0.1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+        <!-- Live indicator -->
+        <TextView
+            android:id="@+id/txtLiveTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="● LIVE"
+            android:textSize="9sp"
+            android:textColor="@color/accent_emerald"
+            android:textStyle="bold"
+            android:letterSpacing="0.1" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="oval">
-    <solid android:color="#80000000" />
-    <stroke
-        android:width="2dp"
-        android:color="@color/kd_primary" />
-</shape>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#40FFFFFF">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/exo_play_solid" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/exo_play_stroke" />
+        </shape>
+    </item>
+</ripple>

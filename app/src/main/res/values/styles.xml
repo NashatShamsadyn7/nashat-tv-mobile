@@ -140,6 +140,15 @@
 
     <style name="Widget.NashatTV.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary"></style>
     <style name="Widget.NashatTV.Card" parent="Widget.Material3.CardView.Elevated"></style>
+    <style name="Widget.NashatTV.Card.Nashat" parent="Widget.NashatTV.Card">
+        <item name="cardBackgroundColor">#33000000</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
     <style name="Widget.NashatTV.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox"></style>
     <style name="Widget.NashatTV.Chip" parent="Widget.Material3.Chip.Filter"></style>
+    
+    <style name="CircleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

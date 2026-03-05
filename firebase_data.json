@@ -1,0 +1,930 @@
+﻿{
+    "value":  [
+                  {
+                      "category":  "General",
+                      "description":  "for importan sport live",
+                      "logo":  "https://m.media-amazon.com/images/I/518Xpp2BtqL.png",
+                      "name":  "12 by Nashat",
+                      "url":  "https://fram.sport4all.online/albaplayer/ssc-1/?serv=1"
+                  },
+                  {
+                      "category":  "Music",
+                      "description":  "Kurdish music and entertainment.",
+                      "logo":  "https://i.imgur.com/xy7W0wD.png",
+                      "name":  "4 Kurd TV",
+                      "url":  "https://4kuhls.persiana.live/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Kids content from Afarin TV.",
+                      "logo":  "https://afarin.tv/images/baxcha.png",
+                      "name":  "Afarin Baxcha",
+                      "url":  "https://5dcabf026b188.streamlock.net/afarinTV/livestream/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Entertainment for children. May not be 24/7.",
+                      "logo":  "https://i.imgur.com/6MnXD7g.png",
+                      "name":  "Afarin TV",
+                      "url":  "https://65f16f0fdfc51.streamlock.net/afarinTV/livestream/playlist.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "General entertainment. May not be 24/7.",
+                      "logo":  "https://i.imgur.com/hIhzT7t.png",
+                      "name":  "Aryen TV",
+                      "url":  "https://aryen.tv/live/tv/playlist.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "General Television",
+                      "logo":  "https://i.imgur.com/JazFBkW.jpeg",
+                      "name":  "Avar TV",
+                      "url":  "https://avr.host247.net/live/AvarTv/playlist.m3u8"
+                  },
+                  null,
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious and cultural programming.",
+                      "logo":  "https://i.imgur.com/YFnmSLW.png",
+                      "name":  "Cira TV",
+                      "url":  "https://cira-tv.akamaized.net/hls/stream_0.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious programming",
+                      "logo":  "https://i.imgur.com/QmgaPSi.png",
+                      "name":  "EmanTv",
+                      "url":  "https://avr.host247.net/live/emantv/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious programming",
+                      "logo":  "https://i.imgur.com/x4KCQlH.png",
+                      "name":  "FarmodaTV",
+                      "url":  "https://avr.host247.net/live/FarmodaTV/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Culture",
+                      "description":  "Cultural and women-focused programming.",
+                      "logo":  "https://i.imgur.com/37ajg2j.png",
+                      "name":  "Jin TV",
+                      "url":  "https://live.jintv.org/medialive/jintv.m3u8"
+                  },
+                  {
+                      "category":  "Culture",
+                      "description":  "Cultural and political programs.",
+                      "logo":  "https://i.imgur.com/D6KBLB8.png",
+                      "name":  "Komala TV",
+                      "url":  "https://live.tvkomala.com/live/komala/playlist.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "24-hour news coverage from Kurdistan.",
+                      "logo":  "https://i.imgur.com/9QWs2ms.png",
+                      "name":  "Kurdistan 24 (K24)",
+                      "url":  "https://d1x82nydcxndze.cloudfront.net/live/index.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Official channel of the Kurdistan Region. May not be 24/7.",
+                      "logo":  "https://i.imgur.com/mjQptpc.png",
+                      "name":  "Kurdistan TV",
+                      "url":  "https://5a3ed7a72ed4b.streamlock.net/live/SMIL:myStream.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Music",
+                      "description":  "Kurdish music videos and programs.",
+                      "logo":  "https://i.imgur.com/otnIdEu.png",
+                      "name":  "KurdMax Music",
+                      "url":  "https://6476e46b58f91.streamlock.net/music/livestream/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Entertainment",
+                      "description":  "Entertainment and talk shows.",
+                      "logo":  "https://i.imgur.com/XTmyGmL.png",
+                      "name":  "KurdMax Show",
+                      "url":  "https://6476e46b58f91.streamlock.net/liveTrans/SHOW1/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Entertainment",
+                      "description":  "Entertainment channel in Sorani Kurdish.",
+                      "logo":  "https://i.imgur.com/JkK8HG8.png",
+                      "name":  "KurdMax Sorani",
+                      "url":  "https://6476e46b58f91.streamlock.net/liveTrans/KurdmaxS0rani!/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Entertainment",
+                      "description":  "General entertainment from Kurdsat.",
+                      "logo":  "https://i.imgur.com/UAbSwYA.png",
+                      "name":  "Kurdsat",
+                      "url":  "https://iko-live.akamaized.net/KurdsatTV/master.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "News and current events from Kurdsat News.",
+                      "logo":  "https://i.imgur.com/F3XRwkt.png",
+                      "name":  "Kurdsat News",
+                      "url":  "https://iko-streamline-live1.akamaized.net/KurdsatNews/master.m3u8"
+                  },
+                  {
+                      "category":  "Music",
+                      "description":  "Kurdish and international music.",
+                      "logo":  "https://i.imgur.com/gtUFmCD.png",
+                      "name":  "Med Muzik",
+                      "url":  "http://54.36.110.140/live3/live3.m3u8"
+                  },
+                  {
+                      "category":  "Entertainment",
+                      "description":  "Family entertainment.",
+                      "logo":  "https://i.imgur.com/WHeH5i7.png",
+                      "name":  "Mixkurdy",
+                      "url":  "https://avr.host247.net/live/Mix-kurdy/playlist.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "Independent news from the Kurdistan Region. May not be 24/7.",
+                      "logo":  "https://i.imgur.com/uGKGtbW.png",
+                      "name":  "NRT TV",
+                      "url":  "https://media.streambrothers.com:1936/8226/8226/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Entertainment",
+                      "description":  "General entertainment.",
+                      "logo":  "https://i.imgur.com/h4LWHr5.png",
+                      "name":  "NUBAR TV",
+                      "url":  "http://stream.nubar.tv:1935/private/NUBARtv/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Entertainment",
+                      "description":  "General Entertainment",
+                      "logo":  "https://i.ibb.co/XpgWb6B/IMG-20230628-140407.jpg",
+                      "name":  "NUBAR Plus TV",
+                      "url":  "http://stream.nubar.tv:1935/private/NUBARPlus/playlist.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "News and analysis. May not be 24/7.",
+                      "logo":  "https://i.imgur.com/qySEibb.png",
+                      "name":  "Payam TV",
+                      "url":  "https://media2.streambrothers.com:1936/8218/8218/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Music",
+                      "description":  "Kurdish music from Persiana.",
+                      "logo":  "https://i.imgur.com/xy7W0wD.png",
+                      "name":  "Persiana 4Kurd",
+                      "url":  "https://4kuhls.persiana.live/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Broadcasting from Rojava (Northeastern Syria).",
+                      "logo":  "https://i.imgur.com/42noysO.png",
+                      "name":  "Rojava TV",
+                      "url":  "https://iko-streamline-live1.akamaized.net/RojavaTV/master.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Voice of Rojava.",
+                      "logo":  "https://i.imgur.com/JSvJpD8.png",
+                      "name":  "Ronahi TV",
+                      "url":  "https://iko-streamline-live1.akamaized.net/RonahiTV/master.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "Leading news source from the Kurdistan Region.",
+                      "logo":  "https://i.imgur.com/Zo3IWOn.png",
+                      "name":  "Rudaw TV",
+                      "url":  "https://svs.itworkscdn.net/rudawlive/rudawlive.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "News and cultural programs.",
+                      "logo":  "https://i.imgur.com/bIheNAI.png",
+                      "name":  "Sterk TV",
+                      "url":  "https://trn09.bozztv.com/gin-sterk/index.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "TRT\u0027s Kurdish channel.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/TRT_Kurd%C3%AE_logo.svg/512px-TRT_Kurd%C3%AE_logo.svg.png",
+                      "name":  "TRT Kurdi",
+                      "url":  "http://185.234.111.229:8000/play/a00j"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "General entertainment from Duhok.",
+                      "logo":  "https://i.imgur.com/rK0y02d.png",
+                      "name":  "Waar TV",
+                      "url":  "https://ca-rt.onetv.app/Waar/index-0.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "The first Kurdish-language children\u0027s channel.",
+                      "logo":  "https://i.imgur.com/o0eevnb.png",
+                      "name":  "Zarok TV",
+                      "url":  "https://zindikurmanci.zaroktv.com.tr/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "News and current events.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Zoom_TV_logo.svg/512px-Zoom_TV_logo.svg.png",
+                      "name":  "Zoom TV Kurdish",
+                      "url":  "https://live.zoomnews.info/live/Zoom_playlist.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "Kurdish-language news.",
+                      "logo":  "https://www.semakurd.net/sites/default/files/imagecache/400xY/shemis-tv.jpg",
+                      "name":  "Shams TV",
+                      "url":  "https://stream.shams.tv/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish general channel from Erbil/Sulaymaniyah.",
+                      "logo":  "https://i.imgur.com/9Mspf32.png",
+                      "name":  "Zagros TV",
+                      "url":  "https://5a3ed7a72ed4b.streamlock.net/zagrostv/SMIL:myStream.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Assyrian/Kurdistan-region channel.",
+                      "logo":  "https://i.imgur.com/qzApokm.png",
+                      "name":  "Ishtar TV",
+                      "url":  "http://ishtar.cdncast.xyz:1935/live/iShtarHD/playlist.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Iraqi general channel popular in Kurdistan.",
+                      "logo":  "https://i.imgur.com/9qFHjnu.png",
+                      "name":  "UTV Iraq (Erbil/Duhok feed)",
+                      "url":  "https://mn-nl.mncdn.com/utviraqi2/64c80359/index.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "General Iraqi channel watched across Kurdistan.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Al_Sharqiya_logo.svg/512px-Al_Sharqiya_logo.svg.png",
+                      "name":  "Al Sharqiya",
+                      "url":  "https://5d94523502c2d.streamlock.net/home/mystream/playlist.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "Iraqi news channel.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Al_Sharqiya_News_logo.svg/512px-Al_Sharqiya_News_logo.svg.png",
+                      "name":  "Al Sharqiya News",
+                      "url":  "https://5d94523502c2d.streamlock.net/alsharqiyalive/mystream/playlist.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Iraqi national TV.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Al_Iraqiya_TV_logo.svg/512px-Al_Iraqiya_TV_logo.svg.png",
+                      "name":  "Al Iraqia",
+                      "url":  "https://cdn.catiacast.video/abr/8d2ffb0aba244e8d9101a9488a7daa05/playlist.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "Iraqi national news.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Al_Iraqiya_News_logo.svg/512px-Al_Iraqiya_News_logo.svg.png",
+                      "name":  "Al Iraqia News",
+                      "url":  "https://cdn.catiacast.video/abr/78054972db7708422595bc96c6e024ac/playlist.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "General Iraqi channel.",
+                      "logo":  "https://i.imgur.com/f6PQzKd.png",
+                      "name":  "Alforat TV",
+                      "url":  "http://95.216.180.111:1935/live/10/playlist.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "General Iraqi channel.",
+                      "logo":  "https://i.imgur.com/3a98qcO.png",
+                      "name":  "Al Rabiaa TV",
+                      "url":  "https://stream.castr.com/65045e4aba85cfe0025e4a60/live_c6c4040053cd11ee95b47153d2861736/index.fmp4.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Iraqi entertainment and news.",
+                      "logo":  "https://i.imgur.com/ltyRjPK.png",
+                      "name":  "Al Rasheed TV",
+                      "url":  "https://media1.livaat.com/static/AL-RASHEED-HD/playlist.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "Iraqi news channel.",
+                      "logo":  "https://i.imgur.com/kyzH3G5.png",
+                      "name":  "Dijlah TV",
+                      "url":  "https://ghaasiflu.online/Dijlah/index.m3u8"
+                  },
+                  {
+                      "category":  "Music",
+                      "description":  "Music/entertainment.",
+                      "logo":  "https://i.imgur.com/UJqDWVB.png",
+                      "name":  "Dijlah Tarab",
+                      "url":  "https://ghaasiflu.online/tarab/index.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "Iraqi news.",
+                      "logo":  "https://i.imgur.com/9lOuzHQ.png",
+                      "name":  "iNEWS TV",
+                      "url":  "https://live.i-news.tv/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Family",
+                      "description":  "Family channel popular among Kurdish viewers.",
+                      "logo":  "https://www.lyngsat.com/logo/tv/aa/ava-family-iq.png",
+                      "name":  "AVA Family",
+                      "url":  "https://familyhls.avatv.live/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious channel.",
+                      "logo":  "https://i.imgur.com/lqVwrAF.png",
+                      "name":  "Alquran (Kurdistan)",
+                      "url":  "https://ktvlive.online/stream/hls/ch1.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious programming.",
+                      "logo":  "https://i.imgur.com/TXzEtF8.png",
+                      "name":  "Hadi TV 1",
+                      "url":  "https://live.ishiacloud.com/haditv.co.uk/haditv1.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious programming.",
+                      "logo":  "https://i.imgur.com/TXzEtF8.png",
+                      "name":  "Hadi TV 3",
+                      "url":  "https://live.ishiacloud.com/haditv.co.uk/haditv3.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious programming.",
+                      "logo":  "https://i.imgur.com/TXzEtF8.png",
+                      "name":  "Hadi TV 4",
+                      "url":  "https://live.ishiacloud.com/haditv.co.uk/haditv4.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious programming.",
+                      "logo":  "https://i.imgur.com/TXzEtF8.png",
+                      "name":  "Hadi TV 5",
+                      "url":  "https://live.ishiacloud.com/haditv.co.uk/haditv5.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious programming.",
+                      "logo":  "https://i.imgur.com/TXzEtF8.png",
+                      "name":  "Hadi TV 6",
+                      "url":  "https://live.ishiacloud.com/haditv.co.uk/haditv6.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious programming. May not be 24/7.",
+                      "logo":  "https://i.imgur.com/pDdUvz7.png",
+                      "name":  "Imam Hussein TV 1",
+                      "url":  "https://live.imamhossaintv.com/live/ih1.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious programming. May not be 24/7.",
+                      "logo":  "https://i.imgur.com/IXVSPdJ.png",
+                      "name":  "Imam Hussein TV 2",
+                      "url":  "https://live.imamhossaintv.com/live/ih2.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious programming. May not be 24/7.",
+                      "logo":  "https://i.imgur.com/emQRHQZ.png",
+                      "name":  "Imam Hussein TV 3",
+                      "url":  "https://live.imamhossaintv.com/live/ih3.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious programming. May not be 24/7.",
+                      "logo":  "https://i.imgur.com/0UYcylY.png",
+                      "name":  "Imam Hussein TV 4",
+                      "url":  "https://live.imamhossaintv.com/live/ih4.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Popular general channel in Iraq/Kurdistan.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/MBC_Iraq_logo.svg/512px-MBC_Iraq_logo.svg.png",
+                      "name":  "MBC Iraq",
+                      "url":  "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-iraq/e38c44b1b43474e1c39cb5b90203691e/index.m3u8"
+                  },
+                  {
+                      "category":  "Music",
+                      "description":  "Music channel.",
+                      "logo":  "https://i.imgur.com/nLtiXNf.png",
+                      "name":  "Wanasah",
+                      "url":  "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-wanasah/13e82ea6232fa647c43b26e8a41f173d/index.m3u8"
+                  },
+                  {
+                      "category":  "Music",
+                      "description":  "Persian music; widely watched.",
+                      "logo":  "https://www.lyngsat.com/logo/tv/pp/pmc-royale-ch.png",
+                      "name":  "PMC Royale",
+                      "url":  "https://pmcrohls.wns.live/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Regional TV from North Khorasan.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/fa/thumb/2/28/Bojnourd_ATRAK_TV.svg/292px-Bojnourd_ATRAK_TV.svg.png",
+                      "name":  "Atrak TV (Bojnourd)",
+                      "url":  "https://ncdn.telewebion.com/atrak/live/playlist.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Regional TV from West Azerbaijan (Kurmanci content at times).",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/fa/thumb/2/21/Urmia_TV.svg/250px-Urmia_TV.svg.png",
+                      "name":  "Azerbaijan Gharbi TV",
+                      "url":  "https://lenz.splus.ir/PLTV/88888888/224/3221226800/index.m3u8"
+                  },
+                  {
+                      "category":  "Sports",
+                      "description":  "Kurdish sports channel with live matches.",
+                      "logo":  "https://avatv.live/wp-content/uploads/2021/01/ava-sport-logo.png",
+                      "name":  "AVA Sport",
+                      "url":  "https://hls.avatv.live/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Sports",
+                      "description":  "NRT Sports channel for live sports coverage.",
+                      "logo":  "https://nrttv.com/wp-content/uploads/2020/12/nrt-sport-logo.png",
+                      "name":  "NRT Sport",
+                      "url":  "https://media.streambrothers.com:1936/8227/8227/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Sports",
+                      "description":  "Premium sports channel with Champions League.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/BeIN_Sports_1_logo.svg/512px-BeIN_Sports_1_logo.svg.png",
+                      "name":  "beIN Sports 1 HD",
+                      "url":  "https://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index_5.m3u8"
+                  },
+                  {
+                      "category":  "Sports",
+                      "description":  "Premium sports channel with live matches.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/BeIN_Sports_2_logo.svg/512px-BeIN_Sports_2_logo.svg.png",
+                      "name":  "beIN Sports 2 HD",
+                      "url":  "https://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index_6.m3u8"
+                  },
+                  {
+                      "category":  "Sports",
+                      "description":  "Saudi Sports Company channel 1.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Saudi_Sports_Company_logo.svg/512px-Saudi_Sports_Company_logo.svg.png",
+                      "name":  "SSC Sports 1",
+                      "url":  "https://ssc-1-on-prem-okla.data.ott.irdeto.com/out/v1/c696e4819b55414b8427463ab1c28bd5/index.m3u8"
+                  },
+                  {
+                      "category":  "Sports",
+                      "description":  "Saudi Sports Company channel 2.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Saudi_Sports_Company_logo.svg/512px-Saudi_Sports_Company_logo.svg.png",
+                      "name":  "SSC Sports 2",
+                      "url":  "https://ssc-2-on-prem-okla.data.ott.irdeto.com/out/v1/a16db2ec338a445a82d9c541cc9293f9/index.m3u8"
+                  },
+                  {
+                      "category":  "Sports",
+                      "description":  "Kurdish sports channel with local and international matches.",
+                      "logo":  "https://reng.tv/wp-content/uploads/2021/03/reng-sport-logo.png",
+                      "name":  "RENG Sport",
+                      "url":  "https://reng-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Sports",
+                      "description":  "Local sports channel from Duhok.",
+                      "logo":  "https://duhok.tv/wp-content/uploads/2020/11/duhok-sport-logo.png",
+                      "name":  "Duhok Sport",
+                      "url":  "https://duhok-live.com/hls/sport.m3u8"
+                  },
+                  {
+                      "category":  "Sports",
+                      "description":  "Kurdish sports channel with live coverage.",
+                      "logo":  "https://astera.tv/wp-content/uploads/2021/02/astera-sport-logo.png",
+                      "name":  "Astera Sport",
+                      "url":  "https://astera-live.com/hls/sport.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish general entertainment channel.",
+                      "logo":  "https://i.imgur.com/NewLine1.png",
+                      "name":  "New Line 1",
+                      "url":  "https://newline.tv/live/nl1/playlist.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish general entertainment channel 2.",
+                      "logo":  "https://i.imgur.com/NewLine2.png",
+                      "name":  "New Line 2",
+                      "url":  "https://newline.tv/live/nl2/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Entertainment",
+                      "description":  "Kurdish entertainment and variety shows.",
+                      "logo":  "https://i.imgur.com/AsteraShow.png",
+                      "name":  "Astera Show",
+                      "url":  "https://astera.tv/live/show/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Family",
+                      "description":  "Kurdish family entertainment channel.",
+                      "logo":  "https://i.imgur.com/AsteraFamily.png",
+                      "name":  "Astera Family",
+                      "url":  "https://astera.tv/live/family/playlist.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Popular Arabic general entertainment channel.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/MBC_1_logo.svg/512px-MBC_1_logo.svg.png",
+                      "name":  "MBC 1",
+                      "url":  "https://d3o3cim6uzorb4.cloudfront.net/out/v1/0965e4d7deae49179172426cbfb3bc5e/index.m3u8"
+                  },
+                  {
+                      "category":  "Movies",
+                      "description":  "Arabic movies and series channel.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/MBC_2_logo.svg/512px-MBC_2_logo.svg.png",
+                      "name":  "MBC 2",
+                      "url":  "https://d3o3cim6uzorb4.cloudfront.net/out/v1/d5bbe570e1514d3d9a142657d33d85e6/index.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Popular Arabic children\u0027s channel.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/MBC_3_logo.svg/512px-MBC_3_logo.svg.png",
+                      "name":  "MBC 3",
+                      "url":  "https://d3o3cim6uzorb4.cloudfront.net/out/v1/d5bbe570e1514d3d9a142657d33d85e6/index.m3u8"
+                  },
+                  {
+                      "category":  "Entertainment",
+                      "description":  "Arabic entertainment and drama channel.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/MBC_4_logo.svg/512px-MBC_4_logo.svg.png",
+                      "name":  "MBC 4",
+                      "url":  "https://d3o3cim6uzorb4.cloudfront.net/out/v1/b0b3a0e6750d4408bb86d703aaad675e/index.m3u8"
+                  },
+                  {
+                      "category":  "Movies",
+                      "description":  "Premium movies channel.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/MBC_Max_logo.svg/512px-MBC_Max_logo.svg.png",
+                      "name":  "MBC Max",
+                      "url":  "https://d3o3cim6uzorb4.cloudfront.net/out/v1/b0b3a0e6750d4408bb86d703aaad675e/index.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Popular Arabic children\u0027s animation channel.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Spacetoon_logo.svg/512px-Spacetoon_logo.svg.png",
+                      "name":  "Spacetoon",
+                      "url":  "https://streams.spacetoon.com/live/stchannel/smil:livesmil.smil/playlist.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Cartoon Network in Arabic language.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Cartoon_Network_2010_logo.svg/512px-Cartoon_Network_2010_logo.svg.png",
+                      "name":  "Cartoon Network Arabic",
+                      "url":  "https://shls-cartoon-net-prod-dub.shahid.net/out/v1/dc4aa90372374325a66be458f29eab0f/index.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Nickelodeon channel in Arabic.",
+                      "logo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Nickelodeon_2009_logo.svg/512px-Nickelodeon_2009_logo.svg.png",
+                      "name":  "Nickelodeon Arabia",
+                      "url":  "https://shls-nick-prod-dub.shahid.net/out/v1/85bf89e2378b4cd9a3b595b515a9bf5c/index.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Disney Channel in Arabic language.",
+                      "logo":  "https://i.imgur.com/DisneyArabic.png",
+                      "name":  "Disney Channel Arabic",
+                      "url":  "https://disney-arabic.live/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Al Jazeera children\u0027s channel.",
+                      "logo":  "https://i.imgur.com/Baraem.png",
+                      "name":  "Baraem",
+                      "url":  "https://baraem-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Arabic children\u0027s educational channel.",
+                      "logo":  "https://i.imgur.com/JeemTV.png",
+                      "name":  "Jeem TV",
+                      "url":  "https://jeem-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Iraqi national television channel.",
+                      "logo":  "https://i.imgur.com/AlIraqiya.png",
+                      "name":  "Al Iraqiya",
+                      "url":  "https://iraqiya-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "Iraqi national news channel.",
+                      "logo":  "https://i.imgur.com/IraqiyaNews.png",
+                      "name":  "Al Iraqiya News",
+                      "url":  "https://iraqiya-news.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Popular Iraqi entertainment channel.",
+                      "logo":  "https://i.imgur.com/AlBaghdadia.png",
+                      "name":  "Al Baghdadia",
+                      "url":  "https://baghdadia-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Iraqi general entertainment channel.",
+                      "logo":  "https://i.imgur.com/AlSharqiya.png",
+                      "name":  "Al Sharqiya",
+                      "url":  "https://sharqiya-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "News",
+                      "description":  "Iraqi news and current affairs.",
+                      "logo":  "https://i.imgur.com/SharqiyaNews.png",
+                      "name":  "Al Sharqiya News",
+                      "url":  "https://sharqiya-news.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Iraqi entertainment and news channel.",
+                      "logo":  "https://i.imgur.com/AlSumaria.png",
+                      "name":  "Al Sumaria",
+                      "url":  "https://sumaria-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Iraqi general television channel.",
+                      "logo":  "https://i.imgur.com/AlForat.png",
+                      "name":  "Al Forat",
+                      "url":  "https://forat-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Iraqi cultural and entertainment channel.",
+                      "logo":  "https://i.imgur.com/AlRasheed.png",
+                      "name":  "Al Rasheed",
+                      "url":  "https://rasheed-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Iraqi entertainment and variety channel.",
+                      "logo":  "https://i.imgur.com/DijlahTV.png",
+                      "name":  "Dijlah TV",
+                      "url":  "https://dijlah-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Local Iraqi channel from Anbar province.",
+                      "logo":  "https://i.imgur.com/AlAnbar.png",
+                      "name":  "Al Anbar",
+                      "url":  "https://anbar-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Iraqi cultural and historical channel.",
+                      "logo":  "https://i.imgur.com/BabylonTV.png",
+                      "name":  "Babylon TV",
+                      "url":  "https://babylon-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Iraqi general entertainment channel.",
+                      "logo":  "https://i.imgur.com/AlMasar.png",
+                      "name":  "Al Masar TV",
+                      "url":  "https://masar-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious channel from Karbala.",
+                      "logo":  "https://i.imgur.com/KarbalaTV.png",
+                      "name":  "Karbala TV",
+                      "url":  "https://karbala-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Religious",
+                      "description":  "Religious channel from Najaf.",
+                      "logo":  "https://i.imgur.com/AlNajaf.png",
+                      "name":  "Al Najaf",
+                      "url":  "https://najaf-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Local channel from Basra province.",
+                      "logo":  "https://i.imgur.com/BasraTV.png",
+                      "name":  "Basra TV",
+                      "url":  "https://basra-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Local channel from Mosul.",
+                      "logo":  "https://i.imgur.com/MosulTV.png",
+                      "name":  "Mosul TV",
+                      "url":  "https://mosul-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Local channel from Kirkuk.",
+                      "logo":  "https://i.imgur.com/KirkukTV.png",
+                      "name":  "Kirkuk TV",
+                      "url":  "https://kirkuk-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish general entertainment channel.",
+                      "logo":  "https://i.imgur.com/GaliKurdistan.png",
+                      "name":  "Gali Kurdistan",
+                      "url":  "https://gali-kurdistan.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish entertainment and cultural channel.",
+                      "logo":  "https://i.imgur.com/SpedaTV.png",
+                      "name":  "Speda TV",
+                      "url":  "https://speda-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish cultural and entertainment channel.",
+                      "logo":  "https://i.imgur.com/NewrozTV.png",
+                      "name":  "Newroz TV",
+                      "url":  "https://newroz-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish general television channel.",
+                      "logo":  "https://i.imgur.com/ZagrosTV.png",
+                      "name":  "Zagros TV",
+                      "url":  "https://zagros-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish channel from Erbil (Hawler).",
+                      "logo":  "https://i.imgur.com/HawlerTV.png",
+                      "name":  "Hawler TV",
+                      "url":  "https://hawler-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish channel from Sulaymaniyah.",
+                      "logo":  "https://i.imgur.com/SlemaniTV.png",
+                      "name":  "Slemani TV",
+                      "url":  "https://slemani-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish general entertainment channel.",
+                      "logo":  "https://i.imgur.com/PayamTV.png",
+                      "name":  "Payam TV",
+                      "url":  "https://payam-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish entertainment and variety channel.",
+                      "logo":  "https://i.imgur.com/WaarTV.png",
+                      "name":  "Waar TV",
+                      "url":  "https://waar-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish entertainment channel.",
+                      "logo":  "https://i.imgur.com/PelistankTV.png",
+                      "name":  "Pelistank TV",
+                      "url":  "https://pelistank-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish general television channel.",
+                      "logo":  "https://i.imgur.com/TishkTV.png",
+                      "name":  "Tishk TV",
+                      "url":  "https://tishk-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish general entertainment channel.",
+                      "logo":  "https://i.imgur.com/RonahiTV.png",
+                      "name":  "Ronahi TV",
+                      "url":  "https://ronahi-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish women\u0027s and family channel.",
+                      "logo":  "https://i.imgur.com/JinTV.png",
+                      "name":  "Jin TV",
+                      "url":  "https://jin-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish general entertainment channel.",
+                      "logo":  "https://i.imgur.com/SterkTV.png",
+                      "name":  "Sterk TV",
+                      "url":  "https://sterk-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Educational",
+                      "description":  "Kurdish educational television channel.",
+                      "logo":  "https://i.imgur.com/AmozhgaryTV.png",
+                      "name":  "Amozhgary TV",
+                      "url":  "https://amozhgary-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Movies",
+                      "description":  "Kurdish movies and entertainment channel.",
+                      "logo":  "https://i.imgur.com/KurdMax.png",
+                      "name":  "Kurd Max",
+                      "url":  "https://kurdmax-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Entertainment",
+                      "description":  "Kurdish variety and entertainment channel.",
+                      "logo":  "https://i.imgur.com/KurdMaxPepule.png",
+                      "name":  "Kurd Max Pepule",
+                      "url":  "https://kurdmax-pepule.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Entertainment",
+                      "description":  "Kurdish shows and entertainment channel.",
+                      "logo":  "https://i.imgur.com/KurdMaxShow.png",
+                      "name":  "Kurd Max Show",
+                      "url":  "https://kurdmax-show.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Music",
+                      "description":  "Kurdish music and video clips channel.",
+                      "logo":  "https://i.imgur.com/KurdMaxMusic.png",
+                      "name":  "Kurd Max Music",
+                      "url":  "https://kurdmax-music.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "General",
+                      "description":  "Kurdish channel in Sorani dialect.",
+                      "logo":  "https://i.imgur.com/KurdMaxSorani.png",
+                      "name":  "Kurd Max Sorani",
+                      "url":  "https://kurdmax-sorani.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Kurdish children\u0027s entertainment channel.",
+                      "logo":  "https://i.imgur.com/KurdMaxKids.png",
+                      "name":  "Kurd Max Kids",
+                      "url":  "https://kurdmax-kids.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Popular Arabic children\u0027s songs channel.",
+                      "logo":  "https://i.imgur.com/ToyorAlJanah.png",
+                      "name":  "Toyor Al Janah",
+                      "url":  "https://toyor-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Arabic channel for babies and toddlers.",
+                      "logo":  "https://i.imgur.com/ToyorBaby.png",
+                      "name":  "Toyor Baby",
+                      "url":  "https://toyor-baby.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "UAE children\u0027s entertainment channel.",
+                      "logo":  "https://i.imgur.com/MajidKids.png",
+                      "name":  "Majid Kids",
+                      "url":  "https://majid-kids.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Arabic children\u0027s educational channel.",
+                      "logo":  "https://i.imgur.com/AjyalTV.png",
+                      "name":  "Ajyal TV",
+                      "url":  "https://ajyal-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Islamic children\u0027s educational channel.",
+                      "logo":  "https://i.imgur.com/TahaTV.png",
+                      "name":  "Taha TV",
+                      "url":  "https://taha-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Popular Arabic children\u0027s entertainment.",
+                      "logo":  "https://i.imgur.com/Karameesh.png",
+                      "name":  "Karameesh",
+                      "url":  "https://karameesh-live.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Al Jazeera children\u0027s educational channel.",
+                      "logo":  "https://i.imgur.com/AJChildren.png",
+                      "name":  "Al Jazeera Children",
+                      "url":  "https://aj-children.com/hls/stream.m3u8"
+                  },
+                  {
+                      "category":  "Kids",
+                      "description":  "Islamic children\u0027s entertainment channel.",
+                      "logo":  "https://i.imgur.com/NoorKids.png",
+                      "name":  "Noor Kids",
+                      "url":  "https://noor-kids.com/hls/stream.m3u8"
+                  }
+              ],
+    "Count":  133
+}

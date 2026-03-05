@@ -1,38 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Nashat TV</string>
+    <string name="app_subtitle">مركز الترفيه المتميز</string>
+
+    <!-- Navigation -->
     <string name="title_channels">القنوات</string>
+    <string name="title_home">الرئيسية</string>
+    <string name="title_favorites">المفضلة</string>
+    <string name="title_categories">الفئات</string>
+
+    <!-- Search -->
     <string name="hint_search">ابحث عن القنوات والبرامج...</string>
+    <string name="voice_search">البحث الصوتي</string>
+
+    <!-- Categories -->
+    <string name="label_category">الفئات</string>
+    <string name="label_favorites_only">المفضلة فقط</string>
+    <string name="category_all">الكل</string>
+    <string name="category_news">أخبار</string>
+    <string name="category_sports">رياضة</string>
+    <string name="category_entertainment">ترفيه</string>
+    <string name="category_kids">أطفال</string>
+    <string name="category_documentary">وثائقي</string>
+    <string name="category_music">موسيقى</string>
+    <string name="category_movies">أفلام</string>
+
+    <!-- Sections -->
+    <string name="recommended_channels">مقترح لك</string>
+    <string name="all_channels">كل القنوات</string>
+    <string name="trending_now">الرائج الآن</string>
+    <string name="recently_watched">المشاهدة مؤخراً</string>
+    <string name="popular_channels">القنوات الشائعة</string>
+
+    <!-- Actions -->
+    <string name="see_all">عرض الكل</string>
+    <string name="view_all">عرض الكل</string>
     <string name="grid_view">شبكة</string>
     <string name="list_view">قائمة</string>
     <string name="settings">الإعدادات</string>
-    <string name="label_favorites_only">المفضلة فقط</string>
-    <string name="recommended_channels">مقترح لك</string>
-    <string name="see_all">عرض الكل</string>
-    <string name="all_channels">كل القنوات</string>
+    <string name="refresh">تحديث</string>
+    <string name="filter">تصفية</string>
+    <string name="sort">ترتيب</string>
+    <string name="action_watch">مشاهدة</string>
 
-    <string name="menu_favorites">المفضلة</string>
-    <string name="menu_language">اللغة</string>
-    <string name="menu_about">حول</string>
-    <string name="menu_sort_curated">الفرز: مختار</string>
+    <!-- Stats -->
+    <string name="total_channels">إجمالي القنوات</string>
+    <string name="favorites">المفضلة</string>
+    <string name="watching_now">يُشاهد الآن</string>
+    <string name="live">مباشر</string>
 
-    <string name="choose_language">اختر اللغة</string>
-    <string name="lang_ckb">کوردی (سۆرانی)</string>
-    <string name="lang_ar">العربية</string>
-    <string name="lang_en">الإنجليزية</string>
+    <!-- Player -->
+    <string name="play">تشغيل</string>
+    <string name="pause">إيقاف مؤقت</string>
+    <string name="stop">إيقاف</string>
+    <string name="next">التالي</string>
+    <string name="previous">السابق</string>
+    <string name="fullscreen">ملء الشاشة</string>
+    <string name="exit_fullscreen">الخروج من ملء الشاشة</string>
+    <string name="quality">الجودة</string>
+    <string name="subtitles">الترجمة</string>
+    <string name="audio_track">المسار الصوتي</string>
+    <string name="player_exit_fullscreen">الخروج من ملء الشاشة</string>
+    <string name="player_fullscreen">ملء الشاشة</string>
+    <string name="player_now_playing">يعمل الآن</string>
+    <string name="player_settings">إعدادات المشغل</string>
 
-    <string name="section_general">عام</string>
-    <string name="appearance">المظهر</string>
+    <!-- Settings -->
+    <string name="settings_general">عام</string>
+    <string name="settings_appearance">المظهر</string>
+    <string name="settings_playback">التشغيل</string>
+    <string name="settings_network">الشبكة</string>
+    <string name="settings_about">حول</string>
+    <string name="settings_storage">التخزين</string>
     <string name="dark_mode">الوضع الداكن</string>
     <string name="light_mode">الوضع الفاتح</string>
-    <string name="system_default">النظام الافتراضي</string>
-    <string name="contact_us">اتصل بنا</string>
-    <string name="rate_app">قيّم التطبيق</string>
+    <string name="system_default">الافتراضي</string>
+    <string name="language">اللغة</string>
+    <string name="notifications">الإشعارات</string>
+    <string name="auto_play">التشغيل التلقائي</string>
+    <string name="picture_in_picture">صورة في صورة</string>
+    <string name="section_general">عام</string>
+    <string name="auto_play_videos">التشغيل التلقائي للفيديو</string>
+    <string name="prefer_hd_quality">تفضيل جودة HD</string>
+    <string name="appearance">المظهر</string>
+    <string name="theme">السمة</string>
+    <string name="theme_preview">معاينة السمة</string>
+    <string name="section_support">الدعم</string>
+    <string name="contact_us">تواصل معنا</string>
+    <string name="clear_cache">مسح ذاكرة التخزين المؤقت</string>
+    <string name="clear_cache_desc">تحرير مساحة بمسح البيانات المؤقتة</string>
+    <string name="clear_cache_confirm">سيتم مسح %s من البيانات المؤقتة بما فيها الصور والملفات المؤقتة. هل تريد المتابعة؟</string>
+    <string name="clear_cache_btn">مسح</string>
+    <string name="cache_cleared">تم مسح ذاكرة التخزين المؤقت بنجاح</string>
+    <string name="share_app">مشاركة التطبيق</string>
+    <string name="share_message">شاهد Nashat TV - قنوات كردية مباشرة!</string>
+    <string name="version_info">الإصدار %s</string>
 
-    <string name="action_watch">مشاهدة</string>
+    <!-- Messages -->
     <string name="loading">جارٍ التحميل...</string>
     <string name="error_loading">حدث خطأ أثناء تحميل المحتوى</string>
     <string name="no_channels">لا توجد قنوات متاحة</string>
     <string name="no_favorites">لا توجد قنوات مفضلة</string>
+    <string name="added_to_favorites">تمت الإضافة للمفضلة</string>
+    <string name="removed_from_favorites">تمت الإزالة من المفضلة</string>
+    <string name="network_error">خطأ في اتصال الشبكة</string>
     <string name="retry">إعادة المحاولة</string>
+    <string name="empty_list">القائمة فارغة</string>
+
+    <!-- Content Description -->
+    <string name="cd_channel_logo">شعار القناة</string>
+    <string name="cd_favorite_button">إضافة للمفضلة</string>
+    <string name="cd_play_button">تشغيل القناة</string>
+
+    <!-- About -->
+    <string name="version">الإصدار</string>
+    <string name="developer">المطوّر</string>
+    <string name="developer_name">نشاط شمس الدين</string>
+    <string name="contact">التواصل</string>
+    <string name="contact_and_social">التواصل والشبكات الاجتماعية</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="terms_of_service">شروط الخدمة</string>
+    <string name="rate_app">⭐ تقييم التطبيق</string>
+    <string name="about_title">حول</string>
+    <string name="about_body">Nashat TV هو تطبيقك المتميز لمشاهدة القنوات الكردية مباشرة. شاهد قنواتك المفضلة في أي وقت ومن أي مكان بجودة عالية. صُنع بـ ❤️ بواسطة نشاط شمس الدين.\n\nللإبلاغ عن الأخطاء أو الملاحظات، تواصل عبر البريد الإلكتروني أو وسائل التواصل الاجتماعي.</string>
+    <string name="contact_value">Nashatkurdi02@gmail.com</string>
+    <string name="email_label">البريد الإلكتروني</string>
+    <string name="instagram_label">إنستغرام</string>
+    <string name="facebook_label">فيسبوك</string>
+
+    <!-- Menu -->
+    <string name="menu_about">حول</string>
+    <string name="menu_favorites">المفضلة</string>
+    <string name="menu_language">اللغة</string>
+    <string name="menu_sort_curated">الترتيب: مختار</string>
+
+    <!-- Language Dialog -->
+    <string name="choose_language">اختر اللغة</string>
+    <string name="lang_ckb">الكردية (سوراني)</string>
+    <string name="lang_ar">العربية</string>
+    <string name="lang_en">الإنجليزية</string>
+
+    <!-- Accessibility -->
+    <string name="acc_settings">الإعدادات</string>
+    <string name="acc_pip">صورة في صورة</string>
+    <string name="acc_rewind">إرجاع</string>
+    <string name="acc_play">تشغيل</string>
+    <string name="acc_pause">إيقاف مؤقت</string>
+    <string name="acc_fast_forward">تقديم سريع</string>
+    <string name="acc_audio_track">المسار الصوتي</string>
+    <string name="acc_subtitles">الترجمة</string>
+    <string name="acc_volume">مستوى الصوت</string>
+
+    <!-- Theme Modes -->
+    <string name="nashat_theme">سمة نشأت</string>
+    <string name="theme_cinematic">سينمائي</string>
+    <string name="theme_ambient">مريح</string>
+    <string name="theme_aurora">أورورا</string>
+    <string name="theme_desc">اختر تجربتك البصرية</string>
+
+    <!-- My Content Section -->
+    <string name="settings_my_content">محتواي</string>
+
+    <!-- Watch Statistics -->
+    <string name="stats_title">إحصائيات المشاهدة</string>
+    <string name="stats_subtitle">تتبع عادات المشاهدة الخاصة بك</string>
+    <string name="stats_total_time">إجمالي وقت المشاهدة</string>
+    <string name="stats_sessions">جلسات</string>
+    <string name="stats_top_category">الفئة الأكثر مشاهدة</string>
+    <string name="stats_this_week">هذا الأسبوع</string>
+    <string name="stats_by_category">حسب الفئة</string>
+    <string name="stats_recent">الجلسات الأخيرة</string>
+    <string name="stats_reset">إعادة تعيين الإحصائيات</string>
+    <string name="stats_reset_confirm">هل أنت متأكد من إعادة تعيين جميع إحصائيات المشاهدة؟ لا يمكن التراجع عن هذا.</string>
+    <string name="stats_reset_done">تم إعادة تعيين الإحصائيات بنجاح</string>
+
+    <!-- Playlists -->
+    <string name="playlists_title">قوائم التشغيل</string>
+    <string name="playlists_subtitle">إنشاء وإدارة قوائم التشغيل</string>
+    <string name="playlists_count">قوائم تشغيل</string>
+    <string name="playlist_create_new">إنشاء قائمة تشغيل جديدة</string>
+    <string name="playlist_create">إنشاء</string>
+    <string name="playlist_created">تم إنشاء قائمة التشغيل!</string>
+    <string name="playlist_name_hint">اسم قائمة التشغيل…</string>
+    <string name="playlist_empty">قائمة التشغيل فارغة. أضف قنوات أو أفلام من صفحات التفاصيل.</string>
+    <string name="playlist_rename">إعادة تسمية</string>
+    <string name="playlist_delete">حذف</string>
+    <string name="playlist_delete_confirm">هل أنت متأكد من حذف قائمة التشغيل هذه؟</string>
+    <string name="playlist_deleted">تم حذف قائمة التشغيل</string>
+    <string name="playlist_add_to">إضافة إلى قائمة التشغيل</string>
+    <string name="playlist_added">تمت الإضافة إلى قائمة التشغيل!</string>
+
+    <!-- Recommendations -->
+    <string name="recommended_for_you">مقترح لك</string>
+    <string name="based_on_watching">بناءً على ما تشاهده</string>
 </resources>

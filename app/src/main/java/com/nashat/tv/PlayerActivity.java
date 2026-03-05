@@ -21,6 +21,11 @@ import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import androidx.mediarouter.app.MediaRouteButton;
+
+import com.google.android.exoplayer2.ext.cast.CastPlayer;
+import com.google.android.gms.cast.framework.CastContext;
+import com.google.android.gms.cast.framework.CastState;
 
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.MediaItem;
@@ -40,6 +45,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import android.util.Log;
 
 public class PlayerActivity extends BaseActivity {
 
@@ -52,6 +58,8 @@ public class PlayerActivity extends BaseActivity {
     private String channelName;
     private String channelUrl;
     private String channelLogo;
+    private String channelCategory;
+    private long playbackStartTime = 0;
     
     private boolean isFullscreen = false;
     private float[] playbackSpeeds = {0.5f, 0.75f, 1.0f, 1.25f, 1.5f, 2.0f};
@@ -67,6 +75,11 @@ public class PlayerActivity extends BaseActivity {
     private ImageButton subtitleButton;
     private ImageButton volumeButton;
     private ImageButton pipButton;
+
+    // Chromecast
+    private CastManager castManager;
+    private MediaRouteButton castButton;
+    private boolean isCastingActive = false;
 
     private static final int REQ_VOICE_CMD = 3001;
     private static final int REQ_RECORD_AUDIO_CMD = 3002;
@@ -106,6 +119,8 @@ public class PlayerActivity extends BaseActivity {
         channelName = getIntent().getStringExtra("name");
         channelUrl = getIntent().getStringExtra("url");
         channelLogo = getIntent().getStringExtra("logo");
+        channelCategory = getIntent().getStringExtra("category");
+        if (channelCategory == null || channelCategory.isEmpty()) channelCategory = "General";
 
         audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
         handler = new Handler(Looper.getMainLooper());
@@ -116,6 +131,7 @@ public class PlayerActivity extends BaseActivity {
 
         initializeCustomControls();
         setupPlayerSettings();
+        initializeCast();
     }
 
     private void initializeCustomControls() {
@@ -126,6 +142,7 @@ public class PlayerActivity extends BaseActivity {
         fullscreenButton = playerView.findViewById(R.id.exo_fullscreen);
         settingsButton = playerView.findViewById(R.id.exo_settings);
         pipButton = playerView.findViewById(R.id.exo_pip);
+        castButton = playerView.findViewById(R.id.exo_cast);
         audioTrackButton = playerView.findViewById(R.id.exo_audio_track);
         subtitleButton = playerView.findViewById(R.id.exo_subtitle);
         volumeButton = playerView.findViewById(R.id.exo_volume);
@@ -199,6 +216,70 @@ public class PlayerActivity extends BaseActivity {
         setupGestureControls();
     }
 
+    // ===================== Chromecast Integration =====================
+
+    private void initializeCast() {
+        castManager = new CastManager(this);
+        castManager.initialize(new CastManager.CastCallback() {
+            @Override
+            public void onCastSessionStarted(CastPlayer castPlayer) {
+                isCastingActive = true;
+                // Pause local player and let Cast take over
+                long currentPos = 0;
+                if (player != null) {
+                    currentPos = player.getCurrentPosition();
+                    player.pause();
+                }
+                // Set the CastPlayer on the PlayerView for controls
+                playerView.setPlayer(castPlayer);
+                Toast.makeText(PlayerActivity.this,
+                        getString(R.string.cast_connecting), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCastSessionEnded() {
+                isCastingActive = false;
+                // Switch back to local ExoPlayer
+                if (player != null) {
+                    playerView.setPlayer(player);
+                    player.play();
+                }
+                Toast.makeText(PlayerActivity.this,
+                        getString(R.string.cast_disconnected), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCastStateChanged(int newState) {
+                // Show/hide cast button based on device availability
+                updateCastButtonVisibility(newState);
+            }
+        });
+
+        // Set up the MediaRouteButton
+        if (castButton != null) {
+            castManager.setupCastButton(castButton);
+        }
+
+        // Set media info so CastManager knows what to cast
+        castManager.setCurrentMedia(channelName, channelUrl, channelLogo);
+
+        // If launched with cast_immediately, open device picker after a short delay
+        boolean castImmediately = getIntent().getBooleanExtra("cast_immediately", false);
+        if (castImmediately && castButton != null) {
+            handler.postDelayed(() -> {
+                if (castManager != null && castManager.areCastDevicesAvailable()) {
+                    castButton.performClick();
+                }
+            }, 1500); // Allow time for Cast SDK to discover devices
+        }
+    }
+
+    private void updateCastButtonVisibility(int castState) {
+        if (castButton == null) return;
+        boolean showButton = castState != CastState.NO_DEVICES_AVAILABLE;
+        castButton.setVisibility(showButton ? View.VISIBLE : View.GONE);
+    }
+
     private void setupPlayerSettings() {
         // Keep screen on during playback
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -212,8 +293,8 @@ public class PlayerActivity extends BaseActivity {
             PictureInPictureParams.Builder builder = new PictureInPictureParams.Builder()
                     .setAspectRatio(aspect);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                // Keep manual control; don't auto-enter unless we request it
-                builder.setAutoEnterEnabled(false);
+                // Seamlessly Auto-enter PiP mode on swipe up / home
+                builder.setAutoEnterEnabled(true);
             }
             enterPictureInPictureMode(builder.build());
         } else {
@@ -224,9 +305,10 @@ public class PlayerActivity extends BaseActivity {
     @Override
     public void onUserLeaveHint() {
         super.onUserLeaveHint();
-        if (player != null && player.isPlaying() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            enterPipMode();
-        }
+        // User requested that the channel must be closed and not continue when leaving
+        // if (player != null && player.isPlaying() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        //     enterPipMode();
+        // }
     }
 
     @Override
@@ -390,6 +472,17 @@ public class PlayerActivity extends BaseActivity {
                 return;
             }
 
+            if (cmd.contains("cast") || cmd.contains("chromecast") || cmd.contains("tv")) {
+                if (castManager != null && castManager.areCastDevicesAvailable()) {
+                    Toast.makeText(this, getString(R.string.cast_to_tv), Toast.LENGTH_SHORT).show();
+                    // Trigger the cast button (opens device chooser)
+                    if (castButton != null) castButton.performClick();
+                } else {
+                    Toast.makeText(this, getString(R.string.cast_not_available), Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
             Toast.makeText(this, "Unknown command: " + original, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(this, "Command error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -455,7 +548,10 @@ public class PlayerActivity extends BaseActivity {
             @Override
             public void onPlaybackStateChanged(int playbackState) {
                 if (playbackState == Player.STATE_READY) {
-                    // Hide loading indicator
+                    // Track when playback actually starts
+                    if (playbackStartTime == 0) {
+                        playbackStartTime = System.currentTimeMillis();
+                    }
                 } else if (playbackState == Player.STATE_BUFFERING) {
                     // Show loading indicator
                 }
@@ -468,18 +564,58 @@ public class PlayerActivity extends BaseActivity {
         });
 
         if (channelUrl != null && !channelUrl.trim().isEmpty()) {
-            MediaItem mediaItem = MediaItem.fromUri(Uri.parse(channelUrl));
-            player.setMediaItem(mediaItem);
-            player.prepare();
-            // Respect Auto-Play setting
-            if (SettingsActivity.isAutoPlayEnabled(PlayerActivity.this)) {
-                player.play();
+            if (channelUrl.contains("karwan.tv")) {
+                Toast.makeText(this, "Resolving channel stream...", Toast.LENGTH_SHORT).show();
+                new com.nashat.tv.util.KarwanScraper().scrapeStreamUrl(this, channelUrl, new com.nashat.tv.util.KarwanScraper.ScrapeCallback() {
+                    @Override
+                    public void onStreamFound(String streamUrl) {
+                        Log.d("PlayerActivity", "Resolved stream URL: " + streamUrl);
+                        MediaItem mediaItem = MediaItem.fromUri(Uri.parse(streamUrl));
+                        player.setMediaItem(mediaItem);
+                        player.prepare();
+                        if (SettingsActivity.isAutoPlayEnabled(PlayerActivity.this)) {
+                            player.play();
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e("PlayerActivity", "Failed to resolve stream: " + error);
+                        Toast.makeText(PlayerActivity.this, "Failed to resolve stream", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                MediaItem mediaItem = MediaItem.fromUri(Uri.parse(channelUrl));
+                player.setMediaItem(mediaItem);
+                player.prepare();
+                // Respect Auto-Play setting
+                if (SettingsActivity.isAutoPlayEnabled(PlayerActivity.this)) {
+                    player.play();
+                }
             }
         }
     }
 
     private void releasePlayer() {
         if (player != null) {
+            // Record watch session stats before releasing
+            if (playbackStartTime > 0) {
+                long watchedMs = System.currentTimeMillis() - playbackStartTime;
+                int watchedMinutes = (int) (watchedMs / 60000);
+                if (watchedMinutes >= 1) { // Only record sessions >= 1 minute
+                    try {
+                        WatchStatsManager stats = new WatchStatsManager(this);
+                        stats.recordSession(
+                                channelName != null ? channelName : "Unknown",
+                                channelCategory != null ? channelCategory : "General",
+                                watchedMinutes
+                        );
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                playbackStartTime = 0;
+            }
             playerView.setPlayer(null);
             player.release();
             player = null;
@@ -876,6 +1012,10 @@ public class PlayerActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (castManager != null) {
+            castManager.release();
+            castManager = null;
+        }
         if (handler != null) {
             handler.removeCallbacksAndMessages(null);
         }

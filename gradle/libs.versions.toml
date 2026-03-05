@@ -13,6 +13,8 @@ gson = "2.11.0"
 glide = "4.16.0"
 swiperefreshlayout = "1.1.0"
 preference = "1.2.1"
+mediarouter = "1.7.0"
+cast-framework = "21.5.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -25,11 +27,14 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 exoplayer = { group = "com.google.android.exoplayer", name = "exoplayer", version.ref = "exoplayer" }
 exoplayer-ui = { group = "com.google.android.exoplayer", name = "exoplayer-ui", version.ref = "exoplayer" }
+exoplayer-cast = { group = "com.google.android.exoplayer", name = "extension-cast", version.ref = "exoplayer" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
 swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
+mediarouter = { group = "androidx.mediarouter", name = "mediarouter", version.ref = "mediarouter" }
+cast-framework = { group = "com.google.android.gms", name = "play-services-cast-framework", version.ref = "cast-framework" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

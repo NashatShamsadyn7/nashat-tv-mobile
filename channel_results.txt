@@ -1,0 +1,50 @@
+﻿Nashat TV Channel Health Check Results
+======================================
+Tested: 31 channels
+
+=== DEAD CHANNELS (9) ===
+  X  KurdMax Show (720p)
+     https://6476e46b58f91.streamlock.net/liveTrans/SHOW1/playlist.m3u8
+  X  KurdMax Music (720p)
+     https://6476e46b58f91.streamlock.net/music/livestream/playlist.m3u8
+  X  Waar TV
+     https://ca-rt.onetv.app/Waar/index-0.m3u8
+  X  Sterk TV
+     https://trn09.bozztv.com/gin-sterk/index.m3u8
+  X  NRT TV (720p)
+     https://media.streambrothers.com:1936/8226/8226/playlist.m3u8
+  X  TRT Kurdi
+     https://tv-trtcurdi.medya.trt.com.tr/master.m3u8
+  X  Aryen TV (1080p)
+     https://aryen.tv/live/tv/playlist.m3u8
+  X  EmanTv (1080p)
+     https://avr.host247.net/live/emantv/playlist.m3u8
+  X  NUBAR Plus TV (720p)
+     http://stream.nubar.tv:1935/private/NUBARPlus/playlist.m3u8
+
+=== WORKING CHANNELS (22) ===
+  OK Ava Media TV
+  OK Cira TV
+  OK Rojava TV (1080p)
+  OK Ronahi TV (1080p)
+  OK Mixkurdy (1080p)
+  OK Persiana 4Kurd
+  OK Jin TV
+  OK Afarin TV (720p)
+  OK Afarin Baxcha (1080p)
+  OK Rudaw TV (1080p)
+  OK Kurdistan 24 (720p)
+  OK Kurdsat News (1080p)
+  OK Kurdsat (1080p)
+  OK Kurdistan TV (720p)
+  OK Payam TV (720p)
+  OK Zoom TV Kurdish (720p)
+  OK Channel 8 Kurdish (720p)
+  OK Zarok TV (720p)
+  OK Komala TV (1080p)
+  OK Med Muzik (1080p)
+  OK FarmodaTV (1080p)
+  OK Avar TV (1080p)
+
+SUMMARY: Working=22 Dead=9 Total=31
+

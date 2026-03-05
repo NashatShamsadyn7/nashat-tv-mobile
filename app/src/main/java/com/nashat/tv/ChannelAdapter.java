@@ -24,10 +24,16 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.VH> {
     private final List<Channel> data = new ArrayList<>();
     private final FavoritesStore favoritesStore;
     private final Listener listener;
+    private final boolean isHorizontal;
 
-    public ChannelAdapter(FavoritesStore favoritesStore, Listener listener) {
+    public ChannelAdapter(FavoritesStore favoritesStore, Listener listener, boolean isHorizontal) {
         this.favoritesStore = favoritesStore;
         this.listener = listener;
+        this.isHorizontal = isHorizontal;
+    }
+
+    public ChannelAdapter(FavoritesStore favoritesStore, Listener listener) {
+        this(favoritesStore, listener, false);
     }
 
     public void submitList(List<Channel> list) {
@@ -43,7 +49,8 @@ public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.VH> {
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_channel, parent, false);
+        int layoutRes = isHorizontal ? R.layout.item_channel_horizontal : R.layout.item_channel;
+        View v = LayoutInflater.from(parent.getContext()).inflate(layoutRes, parent, false);
         return new VH(v);
     }
 

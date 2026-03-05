@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  Nashat TV — DARK MODE (Night)                 -->
+    <!--  Inspired by: Disney+, Netflix, Spotify        -->
+    <!-- ═══════════════════════════════════════════════ -->
+
+    <!-- ★ Backgrounds — deep but warm (Nashat Luxe Dark) ★ -->
+    <color name="bg_primary">#0A0A0F</color>              <!-- Deep Space Black -->
+    <color name="bg_secondary">#12121A</color>            <!-- Deep Grey/Black -->
+    <color name="bg_card">#1A1A24</color>                  <!-- Card surface -->
+    <color name="bg_card_elevated">#22222E</color>
+    <color name="bg_toolbar">#0A0A0F</color>
+    <color name="bg_input">#15151F</color>                <!-- Search bar fill -->
+    <color name="chip_bg">#1A1A24</color>
+
+    <!-- ★ Text — clean white hierarchy ★ -->
+    <color name="text_primary">#F0F0F5</color>            <!-- Clean white -->
+    <color name="text_secondary">#8E8E9A</color>          <!-- Muted grey -->
+    <color name="text_tertiary">#6B6B78</color>           <!-- Disabled-ish -->
+    <color name="text_disabled">#484854</color>
+    <color name="text_on_accent">#000000</color>
+
+    <!-- ★ Borders — subtle dark ★ -->
+    <color name="border_subtle">#2A2A38</color>
+    <color name="border_glow">#D4A853</color>             <!-- Glows with gold -->
+    <color name="divider">#1F1F2A</color>
+
+    <!-- ★ Unified Dark Theme Gradients & Surfaces ★ -->
+    <color name="main_gradient_start">#12121A</color>
+    <color name="main_gradient_end">#0A0A0F</color>
+    
+    <color name="glass_card_solid">#1AFFFFFF</color>
+    <color name="glass_card_stroke">@color/border_subtle</color>
+    <color name="glass_card_focused_solid">#24FFFFFF</color>
+    <color name="glass_card_focused_stroke">@color/accent_primary</color>
+    
+    <color name="overlay_pill_solid">#D90A0A0F</color>
+    <color name="overlay_pill_stroke">#33D4A853</color>
+    
+    <color name="exo_play_solid">#99D4A853</color>
+    <color name="exo_play_stroke">@color/accent_primary</color>
+    
+    <color name="movie_overlay_start">#E60A0A0F</color>
+    <color name="movie_overlay_end">#000A0A0F</color>
+    <color name="player_gradient_dark">#E6000000</color>
+    <color name="player_gradient_clear">#00000000</color>
+
+    <!-- Home aliases -->
+    <color name="home_bg_dark">@color/bg_primary</color>
+    <color name="home_toolbar_bg">@color/bg_toolbar</color>
+    <color name="home_card_bg">@color/bg_card</color>
+    <color name="home_card_border">@color/border_subtle</color>
+    <color name="home_text_secondary">@color/text_secondary</color>
+    <color name="home_text_tertiary">@color/text_tertiary</color>
+
+    <!-- About aliases -->
+    <color name="about_bg_dark">@color/bg_primary</color>
+    <color name="about_toolbar_bg">@color/bg_toolbar</color>
+    <color name="about_card_bg">@color/bg_card</color>
+    <color name="about_card_border">@color/border_subtle</color>
+    <color name="about_text_secondary">@color/text_secondary</color>
+    <color name="about_text_tertiary">@color/text_tertiary</color>
+
+    <color name="surface_dark">@color/bg_primary</color>
+    <color name="surface_light">@color/bg_secondary</color>
+    <color name="surface_variant">@color/bg_card</color>
+
+    <!-- MD3 Dark overrides -->
+    <color name="kd_background">@color/bg_primary</color>
+    <color name="kd_on_background">@color/text_primary</color>
+    <color name="kd_surface">@color/bg_secondary</color>
+    <color name="kd_on_surface">@color/text_primary</color>
+    <color name="kd_surface_variant">@color/bg_card</color>
+    <color name="kd_on_surface_variant">@color/text_secondary</color>
+    <color name="kd_outline">@color/border_subtle</color>
+    <color name="kd_primary_container">#00325A</color>
+    <color name="kd_on_primary_container">#D6EEFF</color>
+</resources>

@@ -1,0 +1,49 @@
+﻿[OK] KurdMax Sorani (new) (Status:200, Size:140B, ValidM3U8:False)
+     URL: 
+https://6476e46b58f91.streamlock.net/liveTrans/KURDS2211/playlist.m3u8
+
+[FAIL] KurdMax Sorani (old)
+     URL: 
+https://6476e46b58f91.streamlock.net/liveTrans/KurdmaxS0rani!/playlist.m3u8
+     Error: The remote server returned an error: (404) Not Found.
+
+[OK] KurdMax Show (new) (Status:200, Size:139B, ValidM3U8:False)
+     URL: 
+https://6476e46b58f91.streamlock.net/liveTrans/SHOWS123/playlist.m3u8
+
+[FAIL] KurdMax Show (old)
+     URL: https://6476e46b58f91.streamlock.net/liveTrans/SHOW1/playlist.m3u8
+     Error: The remote server returned an error: (404) Not Found.
+
+[OK] KurdMax Music (new) (Status:200, Size:139B, ValidM3U8:False)
+     URL: https://6476e46b58f91.streamlock.net/music/MUSIC2402/playlist.m3u8
+
+[FAIL] KurdMax Music (old)
+     URL: 
+https://6476e46b58f91.streamlock.net/music/livestream/playlist.m3u8
+     Error: The remote server returned an error: (404) Not Found.
+
+[FAIL] KurdMax Pepule/Badini
+     URL: http://31.14.40.139:1935/liveTrans/Kurmanci/chunklist.m3u8
+     Error: The remote server returned an error: (404) Not Found.
+
+[FAIL] KurdMax Pepule/Badini (alt)
+     URL: 
+https://6476e46b58f91.streamlock.net/liveTrans/Kurmanci/playlist.m3u8
+     Error: The remote server returned an error: (404) Not Found.
+
+[FAIL] KurdMax Badini test1
+     URL: 
+https://6476e46b58f91.streamlock.net/liveTrans/KurdmaxBadini/playlist.m3u8
+     Error: The remote server returned an error: (404) Not Found.
+
+[FAIL] KurdMax Badini test2
+     URL: 
+https://6476e46b58f91.streamlock.net/liveTrans/BADINI/playlist.m3u8
+     Error: The remote server returned an error: (404) Not Found.
+
+[FAIL] KurdMax Pepule test
+     URL: 
+https://6476e46b58f91.streamlock.net/liveTrans/PEPULE/playlist.m3u8
+     Error: The remote server returned an error: (404) Not Found.
+

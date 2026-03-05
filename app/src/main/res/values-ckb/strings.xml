@@ -1,41 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Nashat TV</string>
+    <string name="app_subtitle">ناوەندی ئێوەیە بۆ چاودێری</string>
 
+    <!-- Navigation -->
     <string name="title_channels">کانالەکان</string>
-    <string name="hint_search">گەڕان بۆ کانال و بەرنامەکان...</string>
+    <string name="title_home">ماڵەوە</string>
+    <string name="title_favorites">دڵخوازەکان</string>
+    <string name="title_categories">پۆلەکان</string>
 
+    <!-- Search -->
+    <string name="hint_search">گەڕان بۆ کانال و بەرنامەکان...</string>
+    <string name="voice_search">گەڕانی دەنگی</string>
+
+    <!-- Categories -->
+    <string name="label_category">پۆلەکان</string>
+    <string name="label_favorites_only">تەنیا دڵخوازەکان</string>
+    <string name="category_all">هەموو</string>
+    <string name="category_news">هەواڵ</string>
+    <string name="category_sports">وەرزش</string>
+    <string name="category_entertainment">ئیتەرتەینمێنت</string>
+    <string name="category_kids">منداڵان</string>
+    <string name="category_documentary">دۆکیومێنتاری</string>
+    <string name="category_music">مۆسیقا</string>
+    <string name="category_movies">فیلم</string>
+
+    <!-- Sections -->
+    <string name="recommended_channels">پێشنیارکراو بۆ تۆ</string>
+    <string name="all_channels">هەموو کانالەکان</string>
+    <string name="trending_now">بابەتی ئێستا</string>
+    <string name="recently_watched">دواین بینراو</string>
+    <string name="popular_channels">کانالە بەناوبانگەکان</string>
+
+    <!-- Actions -->
+    <string name="see_all">نیشاندانی هەموو</string>
+    <string name="view_all">نیشاندانی هەموو</string>
     <string name="grid_view">تۆڕ</string>
     <string name="list_view">لیست</string>
     <string name="settings">ڕێکخستنەکان</string>
-    <string name="label_favorites_only">تەنیا دڵخوازەکان</string>
+    <string name="refresh">نوێکردنەوە</string>
+    <string name="filter">فلتەر</string>
+    <string name="sort">ڕیزبەندی</string>
+    <string name="action_watch">بینین</string>
 
-    <string name="recommended_channels">پێشنیارکراو بۆ تۆ</string>
-    <string name="see_all">نیشاندانی هەموو</string>
-    <string name="all_channels">هەموو کانالەکان</string>
+    <!-- Stats -->
+    <string name="total_channels">کۆی کانالەکان</string>
+    <string name="favorites">دڵخوازەکان</string>
+    <string name="watching_now">ئێستا دەبینرێت</string>
+    <string name="live">ڕاستەوخۆ</string>
 
+    <!-- Player -->
+    <string name="play">لێدان</string>
+    <string name="pause">وەستان</string>
+    <string name="stop">ڕاگرتن</string>
+    <string name="next">دوای</string>
+    <string name="previous">پێشوو</string>
+    <string name="fullscreen">شاشەی تەواو</string>
+    <string name="exit_fullscreen">دەرچوون لە شاشەی تەواو</string>
+    <string name="quality">کوالیتی</string>
+    <string name="subtitles">ژێرنووس</string>
+    <string name="audio_track">دەنگ</string>
+    <string name="player_exit_fullscreen">دەرچوون لە شاشەی تەواو</string>
+    <string name="player_fullscreen">شاشەی تەواو</string>
+    <string name="player_now_playing">ئێستا لێدەدرێت</string>
+    <string name="player_settings">ڕێکخستنی لێدەر</string>
+
+    <!-- Settings -->
+    <string name="settings_general">گشتی</string>
+    <string name="settings_appearance">دەرکەوتن</string>
+    <string name="settings_playback">لێدان</string>
+    <string name="settings_network">تۆڕ</string>
+    <string name="settings_about">دەربارە</string>
+    <string name="settings_storage">کۆگا</string>
+    <string name="dark_mode">دۆخی تاریک</string>
+    <string name="light_mode">دۆخی ڕووناک</string>
+    <string name="system_default">بنەڕەتی سیستەم</string>
+    <string name="language">زمان</string>
+    <string name="notifications">ئاگاداری</string>
+    <string name="auto_play">خۆکار لێدان</string>
+    <string name="picture_in_picture">وێنە لە وێنە</string>
+    <string name="section_general">گشتی</string>
+    <string name="auto_play_videos">خۆکار لێدانی ڤیدیۆ</string>
+    <string name="prefer_hd_quality">هەڵبژاردنی کوالیتی HD</string>
+    <string name="appearance">دەرکەوتن</string>
+    <string name="theme">ڕووکار</string>
+    <string name="theme_preview">پێشبینینی ڕووکار</string>
+    <string name="section_support">پشتگیری</string>
+    <string name="contact_us">پەیوەندی بکە</string>
+    <string name="clear_cache">پاککردنەوەی کاش</string>
+    <string name="clear_cache_desc">بۆشایی دروست بکە بە پاککردنەوەی داتای کاش</string>
+    <string name="clear_cache_confirm">ئەمە %s لە داتای کاش پاک دەکاتەوە، لەگەڵ وێنە و فایلی کاتی. بەردەوام بیت؟</string>
+    <string name="clear_cache_btn">پاککردنەوە</string>
+    <string name="cache_cleared">کاش بە سەرکەوتوویی پاک کرایەوە</string>
+    <string name="share_app">هاوبەشکردنی ئەپ</string>
+    <string name="share_message">سەیری Nashat TV بکە - کانالی کوردی ڕاستەوخۆ ببینە!</string>
+    <string name="version_info">وەشان %s</string>
+
+    <!-- Messages -->
+    <string name="loading">لە بارکردندا...</string>
+    <string name="error_loading">هەڵە ڕوویدا لە کاتی بارکردن</string>
+    <string name="no_channels">هیچ کانالێک بەردەست نیە</string>
+    <string name="no_favorites">هیچ کانالی دڵخواز نیە</string>
+    <string name="added_to_favorites">زیادکرا بۆ دڵخوازەکان</string>
+    <string name="removed_from_favorites">لابرا لە دڵخوازەکان</string>
+    <string name="network_error">هەڵەی پەیوەندی تۆڕ</string>
+    <string name="retry">دووبارە هەوڵبدە</string>
+    <string name="empty_list">لیستی بەتاڵ</string>
+
+    <!-- Content Description -->
+    <string name="cd_channel_logo">لۆگۆی کانال</string>
+    <string name="cd_favorite_button">زیادکردن بۆ دڵخوازەکان</string>
+    <string name="cd_play_button">لێدانی کانال</string>
+
+    <!-- About -->
+    <string name="version">وەشان</string>
+    <string name="developer">گەشەپێدەر</string>
+    <string name="developer_name">نەشات شەمسەدین</string>
+    <string name="contact">پەیوەندی</string>
+    <string name="contact_and_social">پەیوەندی و تۆڕی کۆمەڵایەتی</string>
+    <string name="privacy_policy">سیاسەتی تایبەتمەندی</string>
+    <string name="terms_of_service">مەرجەکانی خزمەتگوزاری</string>
+    <string name="rate_app">⭐ هەڵسەنگاندنی ئەپ</string>
+    <string name="about_title">دەربارە</string>
+    <string name="about_body">Nashat TV ئەپی پریمیۆم بۆ تەماشاکردنی کانالە کوردییەکان بە ڕاستەوخۆ. کانالی دڵخوازت لە هەر کات و شوێنێکەوە تەماشا بکە بە کوالیتییەکی بەرز. دروستکراوە بە ❤️ لەلایەن نەشات شەمسەدین.\n\nبۆ ڕاپۆرتکردنی هەڵە یان بۆچوون، پەیوەندی بکە لە ڕێگەی ئیمەیڵ یان تۆڕی کۆمەڵایەتی.</string>
+    <string name="contact_value">Nashatkurdi02@gmail.com</string>
+    <string name="email_label">ئیمەیڵ</string>
+    <string name="instagram_label">ئینستاگرام</string>
+    <string name="facebook_label">فەیسبووک</string>
+
+    <!-- Menu -->
+    <string name="menu_about">دەربارە</string>
     <string name="menu_favorites">دڵخوازەکان</string>
     <string name="menu_language">زمان</string>
-    <string name="menu_about">دەربارە</string>
     <string name="menu_sort_curated">جۆربەندی: هەڵبژێردراو</string>
 
+    <!-- Language Dialog -->
     <string name="choose_language">زمان هەڵبژێرە</string>
     <string name="lang_ckb">کوردی (سۆرانی)</string>
     <string name="lang_ar">عەرەبی</string>
     <string name="lang_en">ئینگلیزی</string>
 
-    <string name="section_general">گشتی</string>
-    <string name="appearance">دەرکەوتن</string>
-    <string name="dark_mode">دۆخی تاریک</string>
-    <string name="light_mode">دۆخی ڕووناک</string>
-    <string name="system_default">بنەڕەتی سیستەم</string>
-    <string name="contact_us">پەیوەندی بکە</string>
-    <string name="rate_app">هەڵسەنگاندنی ئەپ</string>
+    <!-- Accessibility -->
+    <string name="acc_settings">ڕێکخستنەکان</string>
+    <string name="acc_pip">وێنە لە وێنە</string>
+    <string name="acc_rewind">گەڕاندنەوە</string>
+    <string name="acc_play">لێدان</string>
+    <string name="acc_pause">وەستان</string>
+    <string name="acc_fast_forward">خێراکردن</string>
+    <string name="acc_audio_track">دەنگ</string>
+    <string name="acc_subtitles">ژێرنووس</string>
+    <string name="acc_volume">ئاستی دەنگ</string>
 
-    <string name="action_watch">بینین</string>
-    <string name="loading">لە بارکردندان...</string>
-    <string name="error_loading">هەڵە ڕوویدا لە کاتی بارکردن</string>
-    <string name="no_channels">هیچ کانالێک بەردەست نیە</string>
-    <string name="no_favorites">هیچ کانالی دڵخواز نیە</string>
-    <string name="retry">دووبارە هەوڵبدە</string>
+    <!-- Theme Modes -->
+    <string name="nashat_theme">ڕووکاری نشأت</string>
+    <string name="theme_cinematic">سینەمایی</string>
+    <string name="theme_ambient">ئارام</string>
+    <string name="theme_aurora">ئۆڕۆرا</string>
+    <string name="theme_desc">ئەزموونی بینینی خۆت هەڵبژێرە</string>
+
+    <!-- My Content Section -->
+    <string name="settings_my_content">ناوەڕۆکەکانم</string>
+
+    <!-- Watch Statistics -->
+    <string name="stats_title">ئامارەکانی سەیرکردن</string>
+    <string name="stats_subtitle">بەدواداچوون بۆ ئامارەکانی سەیرکردنت</string>
+    <string name="stats_total_time">کۆی کاتی سەیرکردن</string>
+    <string name="stats_sessions">دانیشتن</string>
+    <string name="stats_top_category">بەشی سەرەکی</string>
+    <string name="stats_this_week">ئەم هەفتەیە</string>
+    <string name="stats_by_category">بە پێی بەش</string>
+    <string name="stats_recent">دانیشتنە نوێیەکان</string>
+    <string name="stats_reset">ڕیسێتکردنەوەی ئامارەکان</string>
+    <string name="stats_reset_confirm">ئایا دڵنیایت لە ڕیسێتکردنەوەی هەموو ئامارەکانی سەیرکردن؟ ئەمە ناگەڕێتەوە.</string>
+    <string name="stats_reset_done">ئامارەکان بە سەرکەوتوویی ڕیسێت کرانەوە</string>
+
+    <!-- Playlists -->
+    <string name="playlists_title">لیستەکانی لێدان</string>
+    <string name="playlists_subtitle">دروستکردن و بەڕێوەبردنی لیستەکان</string>
+    <string name="playlists_count">لیستی لێدان</string>
+    <string name="playlist_create_new">لیستی لێدانی نوێ دروستبکە</string>
+    <string name="playlist_create">دروستکردن</string>
+    <string name="playlist_created">لیستی لێدان دروستکرا!</string>
+    <string name="playlist_name_hint">ناوی لیستی لێدان…</string>
+    <string name="playlist_empty">ئەم لیستە بەتاڵە. کەناڵ یان فیلم لە ڕوپەڵەکانی وردەکاری زیادبکە.</string>
+    <string name="playlist_rename">ناوگۆڕین</string>
+    <string name="playlist_delete">سڕینەوە</string>
+    <string name="playlist_delete_confirm">ئایا دڵنیایت لە سڕینەوەی ئەم لیستی لێدانە؟</string>
+    <string name="playlist_deleted">لیستی لێدان سڕایەوە</string>
+    <string name="playlist_add_to">زیادکردن بۆ لیستی لێدان</string>
+    <string name="playlist_added">زیادکرا بۆ لیستی لێدان!</string>
+
+    <!-- Recommendations -->
+    <string name="recommended_for_you">پێشنیارکراو بۆ تۆ</string>
+    <string name="based_on_watching">لەسەر ئەوەی تەماشات دەکات</string>
 </resources>
