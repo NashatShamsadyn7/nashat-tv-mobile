@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    The film / episode player.
+
+    Two playback surfaces stacked in one screen:
+
+      webView          — the embed, as the desktop client plays it
+      nativePlayerView — ExoPlayer, used when StreamSniffer manages to lift the
+                         stream URL out of the embed. Ad-free when it works,
+                         and the WebView is still there when it does not.
+
+    Controls sit above both, so switching surface does not change what the user
+    is looking at.
+-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -10,253 +23,206 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!-- ===================== Top Controls Bar ===================== -->
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/nativePlayerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:controller_layout_id="@layout/custom_exo_controller"
+        app:resize_mode="fit"
+        app:show_timeout="4000"
+        app:use_controller="true" />
+
+    <!-- ═══ Top bar ═══ -->
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:background="@drawable/player_top_gradient"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/space_200"
+        android:paddingVertical="@dimen/space_150">
 
         <ImageButton
             android:id="@+id/btnBack"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_arrow_back_24"
             android:contentDescription="@string/cd_back_button"
-            app:tint="@color/accent_primary" />
+            android:src="@drawable/ic_arrow_back_24"
+            app:tint="@color/white" />
 
-        <TextView
-            android:id="@+id/txtTitle"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_200"
             android:layout_weight="1"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            android:maxLines="1"
-            android:ellipsize="end" />
+            android:orientation="vertical">
 
-        <!-- Chromecast button -->
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.Nashat.Label.Large"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txtEpisodeLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.Nashat.Label.Small"
+                android:textColor="#B3FFFFFF"
+                android:visibility="gone" />
+        </LinearLayout>
+
         <androidx.mediarouter.app.MediaRouteButton
             android:id="@+id/webCastButton"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
             android:mediaRouteTypes="user"
             android:visibility="gone"
             app:mediaRouteButtonTint="@color/white" />
 
         <ImageButton
             android:id="@+id/btnPip"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_pip_24"
             android:contentDescription="@string/acc_pip"
-            app:tint="@color/white" />
-
-        <ImageButton
-            android:id="@+id/btnFullscreen"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_fullscreen_24"
-            android:contentDescription="@string/player_fullscreen"
+            android:src="@drawable/ic_pip_24"
             app:tint="@color/white" />
     </LinearLayout>
 
-    <!-- ===================== Bottom Controls Bar ===================== -->
+    <!-- ═══ Bottom bar ═══ -->
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@drawable/player_bottom_gradient"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingStart="14dp"
-        android:paddingEnd="14dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="12dp">
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/space_200"
+        android:paddingVertical="@dimen/space_150">
 
-        <ImageButton
-            android:id="@+id/btnReload"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_settings_24"
-            android:contentDescription="@string/refresh"
-            app:tint="@color/white" />
-
-        <!-- Server Switch button -->
-        <ImageButton
-            android:id="@+id/btnServerSwitch"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_settings_24"
-            android:contentDescription="Switch Server"
-            app:tint="@color/accent_primary" />
-
-        <!-- Server name label -->
-        <TextView
-            android:id="@+id/txtServerName"
+        <!-- Source picker. Labelled, not an icon: "which server am I on and can
+             I change it" is the single most-used control on this screen, and an
+             unlabelled cog does not answer either half of that. -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnServer"
+            style="@style/Widget.Material3.Button.TextButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:textColor="@color/accent_primary"
-            android:textSize="11sp"
-            android:text="Server 1" />
+            android:minHeight="@dimen/touch_target_min"
+            android:textColor="@color/white"
+            app:icon="@drawable/ic_settings_24"
+            app:iconTint="@color/white" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1" />
 
-        <!-- Episode controls (only visible for series) -->
-        <LinearLayout
-            android:id="@+id/episodeControls"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <ImageButton
-                android:id="@+id/btnPrevEpisode"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Previous Episode"
-                android:rotation="180"
-                android:src="@drawable/ic_chevron_right_24"
-                app:tint="@color/white" />
-
-            <TextView
-                android:id="@+id/txtEpisodeLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:text="S1·E1"
-                android:textColor="@color/white"
-                android:textSize="13sp" />
-
-            <ImageButton
-                android:id="@+id/btnNextEpisode"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Next Episode"
-                android:src="@drawable/ic_chevron_right_24"
-                app:tint="@color/accent_primary" />
-        </LinearLayout>
-
-        <!-- Lock/Unlock controls toggle -->
         <ImageButton
-            android:id="@+id/btnLockControls"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_marginEnd="8dp"
+            android:id="@+id/btnPrevEpisode"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_fullscreen_24"
-            android:contentDescription="Lock Controls"
-            app:tint="@color/accent_primary" />
+            android:contentDescription="@string/player_previous_episode"
+            android:rotation="180"
+            android:src="@drawable/ic_chevron_right_24"
+            android:visibility="gone"
+            app:tint="@color/white" />
 
+        <ImageButton
+            android:id="@+id/btnNextEpisode"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/player_next_episode"
+            android:src="@drawable/ic_chevron_right_24"
+            android:visibility="gone"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/btnReload"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/refresh"
+            android:src="@drawable/ic_refresh_24"
+            app:tint="@color/white" />
     </LinearLayout>
 
-    <!-- Loading indicator (small spinner) -->
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="center"
-        android:indeterminateTint="@color/accent_primary" />
-
-    <!-- ============ Persistent Floating Server Button (always visible) ============ -->
-    <LinearLayout
-        android:id="@+id/floatingServerBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="12dp"
-        android:background="@drawable/chip_bg_active"
-        android:clickable="true"
-        android:focusable="true"
-        android:elevation="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="8dp">
-
-        <ImageView
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:src="@drawable/ic_settings_24"
-            app:tint="@color/white"
-            android:contentDescription="Server" />
-
-        <TextView
-            android:id="@+id/floatingServerLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:text="Server"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <!-- ============ Custom Loading Overlay (covers WebView errors) ============ -->
+    <!-- ═══ Loading / failure overlay ═══ -->
     <FrameLayout
         android:id="@+id/loadingOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#000000"
         android:clickable="true"
-        android:focusable="true"
-        android:visibility="visible">
+        android:focusable="true">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="vertical"
-            android:gravity="center">
+            android:paddingHorizontal="@dimen/space_600">
 
             <ProgressBar
                 android:id="@+id/loadingSpinner"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:indeterminateTint="@color/accent_primary" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:indeterminateTint="@color/accent_fill" />
 
             <TextView
                 android:id="@+id/loadingTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/loading_please_wait"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="@dimen/space_400"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.Nashat.Title.Medium"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/loadingSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_200"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.Nashat.Body.Medium"
+                android:textColor="#B3FFFFFF" />
+
+            <!-- Shown only once every source has failed. -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnWatchTrailer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/loading_preparing_movie"
-                android:textColor="#B3FFFFFF"
-                android:textSize="14sp" />
+                android:layout_marginTop="@dimen/space_500"
+                android:minHeight="@dimen/touch_target_min"
+                android:text="@string/player_watch_trailer"
+                android:visibility="gone"
+                app:icon="@drawable/ic_play_arrow_24" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPickServer"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_200"
+                android:minHeight="@dimen/touch_target_min"
+                android:text="@string/player_choose_source"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:strokeColor="#66FFFFFF" />
         </LinearLayout>
     </FrameLayout>
 

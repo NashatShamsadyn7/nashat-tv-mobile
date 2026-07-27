@@ -43,18 +43,25 @@
             android:exported="false" />
 
         <activity
-            android:name=".MovieDetailsActivity" />
-            
-        <activity
             android:name=".SeriesActivity"
             android:exported="false" />
 
+        <!-- One details screen now serves films and series. It replaces
+             MovieDetailsActivity and SeriesDetailsActivity, which shared most
+             of their code and had drifted apart in the rest. -->
         <activity
-            android:name=".SeriesDetailsActivity" />
-            
+            android:name=".DetailsActivity"
+            android:exported="false" />
+
+        <!-- Landscape-locked and PiP-capable. configChanges keeps the WebView
+             and its playback alive across a rotation or a PiP transition;
+             without it the Activity is recreated and the film restarts. -->
         <activity
             android:name=".WebPlayerActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboardHidden"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:supportsPictureInPicture="true" />
 
         <activity
             android:name=".ActorDetailsActivity"

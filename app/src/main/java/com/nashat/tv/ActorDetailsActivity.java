@@ -76,14 +76,19 @@ public class ActorDetailsActivity extends BaseActivity {
 
         recyclerKnownFor.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         knownForAdapter = new HorizontalMovieAdapter(knownForList, movie -> {
-            boolean isSeries = movie.getCategory() != null && movie.getCategory().contains("Series");
-            Class<?> targetClass = isSeries ? SeriesDetailsActivity.class : MovieDetailsActivity.class;
-            Intent intent = new Intent(this, targetClass);
-            if (isSeries) {
-                intent.putExtra("series", movie);
-            } else {
-                intent.putExtra("movie", movie);
+            // Movie.url carries the TMDB id — that is how this app's stores have
+            // always identified a title, and DetailsActivity re-fetches from it.
+            int id;
+            try {
+                id = Integer.parseInt(movie.getUrl());
+            } catch (NumberFormatException e) {
+                return;
             }
+            boolean isSeries = movie.getCategory() != null
+                    && movie.getCategory().toLowerCase(java.util.Locale.US).contains("series");
+            Intent intent = new Intent(this, DetailsActivity.class);
+            intent.putExtra(DetailsActivity.EXTRA_TMDB_ID, id);
+            intent.putExtra(DetailsActivity.EXTRA_KIND, isSeries ? "tv" : "movie");
             startActivity(intent);
         });
         recyclerKnownFor.setAdapter(knownForAdapter);

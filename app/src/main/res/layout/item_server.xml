@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    One source in the picker.
+
+    Layout order is deliberate: status, then name, then speed, then the vote
+    controls. The user is scanning for "which of these works", so the health
+    marker leads and everything else follows it.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/touch_target_min"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/space_400"
+    android:paddingVertical="@dimen/space_200">
+
+    <ImageView
+        android:id="@+id/statusIcon"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:importantForAccessibility="no" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_300"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/serverName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.Nashat.Label.Large"
+            android:textColor="@color/content_primary" />
+
+        <TextView
+            android:id="@+id/serverStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.Nashat.Label.Small"
+            android:textColor="@color/content_tertiary" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/activeMark"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="@dimen/space_200"
+        android:contentDescription="@string/player_current_source"
+        android:src="@drawable/ic_check"
+        android:visibility="invisible"
+        app:tint="@color/accent_text" />
+
+    <ImageButton
+        android:id="@+id/btnVoteUp"
+        android:layout_width="@dimen/touch_target_min"
+        android:layout_height="@dimen/touch_target_min"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/player_vote_up"
+        android:src="@drawable/ic_thumb_up_24"
+        app:tint="@color/content_tertiary" />
+
+    <ImageButton
+        android:id="@+id/btnVoteDown"
+        android:layout_width="@dimen/touch_target_min"
+        android:layout_height="@dimen/touch_target_min"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/player_vote_down"
+        android:src="@drawable/ic_thumb_down_24"
+        app:tint="@color/content_tertiary" />
+
+</LinearLayout>

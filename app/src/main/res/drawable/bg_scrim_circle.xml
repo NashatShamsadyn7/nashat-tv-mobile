@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Backing disc for a control that floats over artwork.
+
+    Fixed dark with a white icon on top, in both themes: this sits on a
+    photograph whose colours are unknown, so a themed surface would be
+    invisible against roughly half of them.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#99000000" />
+</shape>

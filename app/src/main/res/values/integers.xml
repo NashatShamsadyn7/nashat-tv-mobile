@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Columns in a poster grid.
+
+        Three on a phone: a 2:3 poster at four-up on a 360dp screen is 80dp
+        wide, at which point the artwork is unreadable and the titles wrap to
+        four lines. Overridden for tablets and TV in the size-qualified
+        variants of this file.
+    -->
+    <integer name="poster_grid_columns">3</integer>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Six across on a TV. Fewer, larger posters would be the ten-foot
+        instinct, but the D-pad has to travel through every column to reach
+        the end of a row, so oversized cards make the grid slow to cross.
+    -->
+    <integer name="poster_grid_columns">6</integer>
+</resources>

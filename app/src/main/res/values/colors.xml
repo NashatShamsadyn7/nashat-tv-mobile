@@ -105,6 +105,18 @@
     <color name="status_warning">#B26A00</color>
     <color name="status_danger">@color/brand_coral_deep</color>
 
+    <!-- Rating star. Deliberately NOT the brand lime: a lime star reads as a
+         selection state, and the audience already knows what a gold star on a
+         poster means. This is the one place a non-brand hue earns its place. -->
+    <color name="rating_star">#F2B705</color>
+    <!-- Scrim behind the rating chip, so it stays legible over any artwork. -->
+    <color name="rating_chip_scrim">#B3000000</color>
+
+    <!-- Server health, used by the source picker. -->
+    <color name="server_ok">#2E7D32</color>
+    <color name="server_fail">@color/brand_coral_deep</color>
+    <color name="server_checking">@color/content_tertiary</color>
+
     <!-- ── Focus (Android TV / D-pad) ───────────────────────────── -->
     <!-- On a TV the focused item is the ONLY affordance the user has.
          It gets the full-strength brand lime plus a ring, in both modes. -->

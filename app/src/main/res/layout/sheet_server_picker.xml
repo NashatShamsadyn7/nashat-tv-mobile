@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Source picker.
+
+    A bottom sheet rather than an alert dialog: the list can run to a dozen
+    entries with two lines each, which an alert would either clip or turn into
+    a scrolling box inside a scrolling screen.
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/surface_raised"
+    android:paddingBottom="@dimen/space_400">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/space_400"
+            android:paddingTop="@dimen/space_400"
+            android:text="@string/player_choose_source"
+            android:textAppearance="@style/TextAppearance.Nashat.Title.Medium"
+            android:textColor="@color/content_primary" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/space_400"
+            android:paddingTop="@dimen/space_100"
+            android:paddingBottom="@dimen/space_300"
+            android:text="@string/player_choose_source_hint"
+            android:textAppearance="@style/TextAppearance.Nashat.Body.Small"
+            android:textColor="@color/content_tertiary" />
+
+        <LinearLayout
+            android:id="@+id/serverList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

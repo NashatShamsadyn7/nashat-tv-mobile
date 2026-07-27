@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Films / Series catalogue.
+
+    One layout serves both, because they differ only in which TMDB endpoints
+    fill the rows. Two near-identical layouts were how the old screens drifted
+    apart.
+
+    Structure mirrors the desktop client: a search field above curated rows,
+    with search results replacing the rows entirely rather than appearing below
+    them — a half-scrolled page of rows under a result grid gives the user no
+    idea whether they are looking at their search or at the catalogue.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_base"
+    android:orientation="vertical">
+
+    <!-- ═══ Top bar ═══ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/screen_gutter"
+        android:paddingTop="@dimen/space_400"
+        android:paddingBottom="@dimen/space_200">
+
+        <TextView
+            android:id="@+id/screenTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="@style/TextAppearance.Nashat.Headline"
+            android:textColor="@color/content_primary" />
+    </LinearLayout>
+
+    <!-- ═══ Search ═══ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/screen_gutter"
+        android:layout_marginBottom="@dimen/space_300"
+        android:background="@drawable/bg_search_field"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/touch_target_min"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/space_300">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_search_24"
+            app:tint="@color/content_tertiary" />
+
+        <EditText
+            android:id="@+id/searchInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_200"
+            android:layout_weight="1"
+            android:background="@null"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.Nashat.Body.Medium"
+            android:textColor="@color/content_primary"
+            android:textColorHint="@color/content_tertiary"
+            android:autofillHints="" />
+
+        <ProgressBar
+            android:id="@+id/searchSpinner"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:indeterminateTint="@color/content_tertiary"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/searchClear"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/action_clear_search"
+            android:src="@drawable/ic_close_24"
+            android:visibility="gone"
+            app:tint="@color/content_secondary" />
+    </LinearLayout>
+
+    <!-- ═══ Content ═══ -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- Curated rows. Each row hides itself if its request fails, so one
+             dead endpoint costs a row rather than the whole screen. -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/rowsScroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/space_400">
+
+            <LinearLayout
+                android:id="@+id/rowsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- Search results -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/resultsGrid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/screen_gutter"
+            android:paddingBottom="@dimen/space_400"
+            android:visibility="gone" />
+
+        <!-- Empty / error state, shared by both modes -->
+        <LinearLayout
+            android:id="@+id/emptyState"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/space_600"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/emptyTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.Nashat.Title.Medium"
+                android:textColor="@color/content_primary" />
+
+            <TextView
+                android:id="@+id/emptyBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_200"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.Nashat.Body.Medium"
+                android:textColor="@color/content_secondary" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/emptyAction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_400"
+                android:text="@string/action_retry"
+                android:visibility="gone" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <include layout="@layout/view_bottom_nav" />
+
+</LinearLayout>

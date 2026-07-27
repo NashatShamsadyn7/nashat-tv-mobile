@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tablets have the width for five without shrinking the artwork. -->
+    <integer name="poster_grid_columns">5</integer>
+</resources>
