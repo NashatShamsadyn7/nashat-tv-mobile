@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Live TV screen background.
+
+  A flat surface. This file previously stacked two large radial "glow" ovals —
+  a 260dp one bleeding off the top corner and a 320dp one off the bottom — over
+  a vertical gradient. Three reasons all of that is gone:
+
+  1. The glows were tinted with the old crimson brand colour, so on the warm
+     beige surface they read as a dirty pink smear behind the channel grid.
+     Recolouring them to lime only changed which colour the smear was.
+
+  2. A screen whose entire job is to present ~40 pieces of artwork must not
+     compete with them. Every broadcaster logo here is a different hue; the
+     only background that lets them all read correctly is a neutral one.
+
+  3. Two full-screen radial gradients are overdrawn on every frame of a scroll.
+     On the low-end hardware this app targets that is a measurable cost for
+     decoration the user never notices.
+
+  Depth on this screen now comes from the cards themselves — surface_raised
+  against surface_base, plus a hairline outline — which is the same mechanism
+  used on every other screen and works identically in light and dark.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/surface_base" />
+</shape>

@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.Gravity;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -32,14 +34,11 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
+import com.nashat.tv.util.AppConstants;
+import com.nashat.tv.util.HttpClient;
 
 public class MoviesActivity extends BaseActivity {
 
@@ -53,8 +52,7 @@ public class MoviesActivity extends BaseActivity {
     private String currentQuery = "";
     private String currentGenreId = "";
 
-    // Public test TMDB API Key from github projects (Read-only)
-    private static final String TMDB_API_KEY = "4e44d9029b1270a757cddc766a1bcb63";
+    private static final String TMDB_API_KEY = AppConstants.TMDB_API_KEY;
 
     private FavoritesMoviesManager favManager;
     private boolean showFavoritesOnly = false;
@@ -74,12 +72,31 @@ public class MoviesActivity extends BaseActivity {
     private ContinueWatchingManager continueWatchingManager;
     private RecyclerView recyclerContinueWatching;
 
+    // Hero banner
+    private View heroBannerContainer;
+    private ImageView ivHeroBackdrop;
+    private TextView tvHeroTitle;
+    private TextView tvHeroMeta;
+    private LinearLayout heroIndicators;
+    private final Handler heroHandler = new Handler(Looper.getMainLooper());
+    private final List<Movie> heroMovies = new ArrayList<>();
+    private int heroIndex = 0;
+    private final Runnable heroRotator = new Runnable() {
+        @Override
+        public void run() {
+            if (heroMovies.isEmpty()) return;
+            heroIndex = (heroIndex + 1) % heroMovies.size();
+            bindHeroAt(heroIndex);
+            heroHandler.postDelayed(this, 5000);
+        }
+    };
+
     // Home Categories
     private View layoutHomeCategories;
-    private RecyclerView recyclerNowPlaying, recyclerTrending, recyclerTopRated, recyclerAnime;
+    private RecyclerView recyclerNowPlaying, recyclerTrending, recyclerTopRated, recyclerPopular, recyclerAnime;
     private List<Movie> listNowPlaying = new ArrayList<>(), listTrending = new ArrayList<>(),
-            listTopRated = new ArrayList<>(), listAnime = new ArrayList<>();
-    private HorizontalMovieAdapter adapterNowPlaying, adapterTrending, adapterTopRated, adapterAnime;
+            listTopRated = new ArrayList<>(), listPopular = new ArrayList<>(), listAnime = new ArrayList<>();
+    private HorizontalMovieAdapter adapterNowPlaying, adapterTrending, adapterTopRated, adapterPopular, adapterAnime;
     private boolean homeFetched = false;
 
     @Override
@@ -97,7 +114,21 @@ public class MoviesActivity extends BaseActivity {
         recyclerNowPlaying = findViewById(R.id.recyclerNowPlaying);
         recyclerTrending = findViewById(R.id.recyclerTrending);
         recyclerTopRated = findViewById(R.id.recyclerTopRated);
+        recyclerPopular = findViewById(R.id.recyclerPopular);
         recyclerAnime = findViewById(R.id.recyclerAnime);
+
+        heroBannerContainer = findViewById(R.id.heroBannerContainer);
+        ivHeroBackdrop = findViewById(R.id.ivHeroBackdrop);
+        tvHeroTitle = findViewById(R.id.tvHeroTitle);
+        tvHeroMeta = findViewById(R.id.tvHeroMeta);
+        heroIndicators = findViewById(R.id.heroIndicators);
+        if (heroBannerContainer != null) {
+            heroBannerContainer.setOnClickListener(v -> {
+                if (!heroMovies.isEmpty() && heroIndex < heroMovies.size()) {
+                    openMovieDetails(heroMovies.get(heroIndex));
+                }
+            });
+        }
 
         // Setup horizontal adapters
         HorizontalMovieAdapter.OnMovieClickListener homeClickListener = this::openMovieDetails;
@@ -113,6 +144,10 @@ public class MoviesActivity extends BaseActivity {
         adapterTopRated = new HorizontalMovieAdapter(listTopRated, homeClickListener);
         recyclerTopRated.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerTopRated.setAdapter(adapterTopRated);
+
+        adapterPopular = new HorizontalMovieAdapter(listPopular, homeClickListener);
+        recyclerPopular.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerPopular.setAdapter(adapterPopular);
 
         adapterAnime = new HorizontalMovieAdapter(listAnime, homeClickListener);
         recyclerAnime.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -274,6 +309,20 @@ public class MoviesActivity extends BaseActivity {
         // Setup Search History RecyclerView
         setupSearchHistory();
 
+        // ═══ Wire Bottom Navigation ═══
+        View navLiveTv = findViewById(R.id.navLiveTv);
+        if (navLiveTv != null) {
+            navLiveTv.setOnClickListener(v -> navigateToTab(LiveTvActivity.class));
+        }
+        View navSeries = findViewById(R.id.navSeries);
+        if (navSeries != null) {
+            navSeries.setOnClickListener(v -> navigateToTab(SeriesActivity.class));
+        }
+        View navSettings = findViewById(R.id.fabSettings);
+        if (navSettings != null) {
+            navSettings.setOnClickListener(v -> navigateToTab(SettingsActivity.class));
+        }
+
         // Load initial data
         checkViewMode();
         if (recyclerMovies.getVisibility() == View.VISIBLE) {
@@ -296,35 +345,27 @@ public class MoviesActivity extends BaseActivity {
     }
 
     private void fetchCategoryList(String endpoint, List<Movie> targetList, HorizontalMovieAdapter adapter) {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-        executor.execute(() -> {
-            try {
-                URL url = new URL(endpoint);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) response.append(line);
-                reader.close();
-                JSONObject jsonObj = new JSONObject(response.toString());
-                JSONArray results = jsonObj.getJSONArray("results");
-                for (int i = 0; i < results.length(); i++) {
-                    JSONObject obj = results.getJSONObject(i);
-                    String id = String.valueOf(obj.getInt("id"));
-                    String title = obj.getString("title");
-                    String releaseDate = obj.optString("release_date", "");
-                    String year = releaseDate.length() >= 4 ? releaseDate.substring(0, 4) : "";
-                    String posterPath = obj.optString("poster_path", "");
-                    String posterFull = "https://image.tmdb.org/t/p/w500" + posterPath;
-                    double voteAvg = obj.optDouble("vote_average", 0.0);
-                    targetList.add(new Movie(title, posterFull, "⭐️ " + voteAvg, id, obj.optString("overview", ""), year, voteAvg));
-                }
-                handler.post(() -> adapter.notifyDataSetChanged());
-            } catch (Exception e) {
-                e.printStackTrace();
+        HttpClient.getJson(this, endpoint, new HttpClient.Callback2() {
+            @Override
+            public void onSuccess(String body) {
+                try {
+                    JSONArray results = new JSONObject(body).getJSONArray("results");
+                    for (int i = 0; i < results.length(); i++) {
+                        JSONObject obj = results.getJSONObject(i);
+                        String id = String.valueOf(obj.getInt("id"));
+                        String title = obj.optString("title", obj.optString("name", ""));
+                        String releaseDate = obj.optString("release_date", "");
+                        String year = releaseDate.length() >= 4 ? releaseDate.substring(0, 4) : "";
+                        String posterPath = obj.optString("poster_path", "");
+                        String posterFull = AppConstants.TMDB_IMAGE_BASE + posterPath;
+                        double voteAvg = obj.optDouble("vote_average", 0.0);
+                        targetList.add(new Movie(title, posterFull, "⭐️ " + voteAvg, id,
+                                obj.optString("overview", ""), year, voteAvg));
+                    }
+                    adapter.notifyDataSetChanged();
+                } catch (Exception ignored) {}
             }
+            @Override public void onError(String message) { /* silent */ }
         });
     }
 
@@ -334,7 +375,96 @@ public class MoviesActivity extends BaseActivity {
         fetchCategoryList("https://api.themoviedb.org/3/movie/now_playing?api_key=" + TMDB_API_KEY + lang, listNowPlaying, adapterNowPlaying);
         fetchCategoryList("https://api.themoviedb.org/3/trending/movie/week?api_key=" + TMDB_API_KEY + lang, listTrending, adapterTrending);
         fetchCategoryList("https://api.themoviedb.org/3/movie/top_rated?api_key=" + TMDB_API_KEY + lang, listTopRated, adapterTopRated);
+        // Matches the desktop client, which shows trending / popular / top rated.
+        fetchCategoryList("https://api.themoviedb.org/3/movie/popular?api_key=" + TMDB_API_KEY + lang, listPopular, adapterPopular);
         fetchCategoryList("https://api.themoviedb.org/3/discover/movie?api_key=" + TMDB_API_KEY + "&with_genres=16" + lang, listAnime, adapterAnime);
+
+        // Posted on heroHandler, NOT on a fresh anonymous Handler.
+        //
+        // This line used to read `new Handler(Looper.getMainLooper())`, which
+        // created an untracked Handler that onDestroy() had no reference to and
+        // therefore could not cancel. Leaving this screen within 800ms of the
+        // category fetch completing left the callback queued against a dead
+        // Activity; it then reached Glide.with(this) and took the process down
+        // with "You cannot start a load for a destroyed activity".
+        //
+        // heroHandler is cleared in both onPause() and onDestroy(), so routing
+        // the callback through it makes the timer die with the screen.
+        heroHandler.postDelayed(this::populateHero, 800);
+    }
+
+    private void populateHero() {
+        if (heroBannerContainer == null || isFinishing() || isDestroyed()) return;
+        heroMovies.clear();
+        int limit = Math.min(5, listTrending.size());
+        for (int i = 0; i < limit; i++) heroMovies.add(listTrending.get(i));
+        if (heroMovies.isEmpty()) {
+            heroBannerContainer.setVisibility(View.GONE);
+            return;
+        }
+        heroBannerContainer.setVisibility(View.VISIBLE);
+        buildHeroIndicators();
+        heroIndex = 0;
+        bindHeroAt(0);
+        heroHandler.removeCallbacks(heroRotator);
+        heroHandler.postDelayed(heroRotator, 5000);
+    }
+
+    private void buildHeroIndicators() {
+        if (heroIndicators == null) return;
+        heroIndicators.removeAllViews();
+        int dp = (int) (getResources().getDisplayMetrics().density);
+        for (int i = 0; i < heroMovies.size(); i++) {
+            View dot = new View(this);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(7 * dp, 7 * dp);
+            lp.setMarginEnd(5 * dp);
+            dot.setLayoutParams(lp);
+            dot.setBackgroundResource(R.drawable.bg_hero_dot);
+            dot.setAlpha(i == heroIndex ? 1f : 0.4f);
+            heroIndicators.addView(dot);
+        }
+    }
+
+    private void bindHeroAt(int idx) {
+        if (idx < 0 || idx >= heroMovies.size() || ivHeroBackdrop == null) return;
+        // Defence in depth behind the heroHandler fix: Glide throws rather than
+        // no-opping when handed a dead Activity, and this method is reachable
+        // from a timer, so it verifies the host is still alive before loading.
+        if (isFinishing() || isDestroyed()) return;
+
+        Movie m = heroMovies.get(idx);
+        tvHeroTitle.setText(m.getName() != null ? m.getName() : "");
+        StringBuilder meta = new StringBuilder();
+        if (m.getYear() != null && !m.getYear().isEmpty()) meta.append(m.getYear());
+        if (m.getVoteAverage() > 0) {
+            if (meta.length() > 0) meta.append("  ·  ");
+            // The rating is rendered with a star ICON beside this text view, so
+            // the emoji star that used to be concatenated here is redundant —
+            // and it printed at the font's own colour, ignoring the theme.
+            meta.append(String.format(java.util.Locale.US, "%.1f", m.getVoteAverage()));
+        }
+        tvHeroMeta.setText(meta.toString());
+        Glide.with(this)
+                .load(m.getPoster())
+                .centerCrop()
+                .into(ivHeroBackdrop);
+        if (heroIndicators != null) {
+            for (int i = 0; i < heroIndicators.getChildCount(); i++) {
+                heroIndicators.getChildAt(i).setAlpha(i == idx ? 1f : 0.4f);
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        heroHandler.removeCallbacks(heroRotator);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        heroHandler.removeCallbacksAndMessages(null);
     }
 
     @Override
@@ -632,55 +762,35 @@ public class MoviesActivity extends BaseActivity {
             endpoint = baseQuery;
         }
 
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-
-        executor.execute(() -> {
-            try {
-                URL url = new URL(endpoint);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-                reader.close();
-
-                JSONObject jsonObj = new JSONObject(response.toString());
-                JSONArray results = jsonObj.getJSONArray("results");
-                List<Movie> newMovies = new ArrayList<>();
-
-                for (int i = 0; i < results.length(); i++) {
-                    JSONObject obj = results.getJSONObject(i);
-                    String id = String.valueOf(obj.getInt("id"));
-                    String title = obj.getString("title");
-                    String releaseDate = obj.optString("release_date", "");
-                    String year = releaseDate.length() >= 4 ? releaseDate.substring(0, 4) : "";
-                    String posterPath = obj.optString("poster_path", "");
-                    String posterFull = "https://image.tmdb.org/t/p/w500" + posterPath;
-                    double voteAvg = obj.optDouble("vote_average", 0.0);
-                    String vote = String.valueOf(voteAvg);
-
-                    Movie m = new Movie(title, posterFull, "⭐️ " + vote, id, obj.optString("overview", ""), year, voteAvg);
-                    newMovies.add(m);
-                }
-
-                handler.post(() -> {
+        HttpClient.getJson(this, endpoint, new HttpClient.Callback2() {
+            @Override
+            public void onSuccess(String body) {
+                try {
+                    JSONArray results = new JSONObject(body).getJSONArray("results");
+                    List<Movie> newMovies = new ArrayList<>();
+                    for (int i = 0; i < results.length(); i++) {
+                        JSONObject obj = results.getJSONObject(i);
+                        String id = String.valueOf(obj.getInt("id"));
+                        String title = obj.optString("title", obj.optString("name", ""));
+                        String releaseDate = obj.optString("release_date", "");
+                        String year = releaseDate.length() >= 4 ? releaseDate.substring(0, 4) : "";
+                        String posterPath = obj.optString("poster_path", "");
+                        String posterFull = AppConstants.TMDB_IMAGE_BASE + posterPath;
+                        double voteAvg = obj.optDouble("vote_average", 0.0);
+                        newMovies.add(new Movie(title, posterFull, "⭐️ " + voteAvg, id,
+                                obj.optString("overview", ""), year, voteAvg));
+                    }
                     movieList.addAll(newMovies);
                     applyRatingFilter();
-                    progressBar.setVisibility(View.GONE);
-                    isLoading = false;
-                });
+                } catch (Exception ignored) {}
+                progressBar.setVisibility(View.GONE);
+                isLoading = false;
+            }
 
-            } catch (Exception e) {
-                handler.post(() -> {
-                    progressBar.setVisibility(View.GONE);
-                    isLoading = false;
-                    Toast.makeText(MoviesActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+            @Override
+            public void onError(String message) {
+                progressBar.setVisibility(View.GONE);
+                isLoading = false;
             }
         });
     }

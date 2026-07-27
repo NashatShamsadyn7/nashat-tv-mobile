@@ -190,7 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Seasons"
+                android:text="@string/seasons"
                 android:textColor="@color/text_primary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -242,7 +242,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cast &amp; Crew"
+                    android:text="@string/cast_crew"
                     android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -269,7 +269,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Similar Series"
+                    android:text="@string/similar_series"
                     android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     android:textStyle="bold" />

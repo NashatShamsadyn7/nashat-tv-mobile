@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ripple drawn on top of a lime fill: must be dark, not the usual white
+     wash, which is invisible against #C8F04C. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:alpha="0.16" android:color="@color/brand_ink" android:state_pressed="true" />
+    <item android:alpha="0.10" android:color="@color/brand_ink" />
+</selector>

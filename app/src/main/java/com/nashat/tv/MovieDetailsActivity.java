@@ -17,12 +17,8 @@ import com.google.android.material.button.MaterialButton;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import com.nashat.tv.util.AppConstants;
+import com.nashat.tv.util.HttpClient;
 
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.gms.cast.framework.CastState;
@@ -30,7 +26,7 @@ import com.google.android.gms.cast.framework.CastStateListener;
 
 public class MovieDetailsActivity extends AppCompatActivity {
 
-    private static final String TMDB_API_KEY = "4e44d9029b1270a757cddc766a1bcb63";
+    private static final String TMDB_API_KEY = AppConstants.TMDB_API_KEY;
 
     private Movie movie;
     private String trailerYoutubeKey = null;
@@ -249,158 +245,110 @@ public class MovieDetailsActivity extends AppCompatActivity {
     }
 
     private void fetchTrailer() {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        android.os.Handler handler = new android.os.Handler(android.os.Looper.getMainLooper());
-
-        executor.execute(() -> {
-            try {
-                String endpoint = "https://api.themoviedb.org/3/movie/" + movie.getUrl() + "/videos?api_key=" + TMDB_API_KEY + "&language=en-US";
-                URL url = new URL(endpoint);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) response.append(line);
-                reader.close();
-
-                JSONObject jsonObj = new JSONObject(response.toString());
-                JSONArray results = jsonObj.getJSONArray("results");
-
-                for (int i = 0; i < results.length(); i++) {
-                    JSONObject obj = results.getJSONObject(i);
-                    if ("Trailer".equals(obj.getString("type")) && "YouTube".equals(obj.getString("site"))) {
-                        trailerYoutubeKey = obj.getString("key");
-                        break;
+        String url = AppConstants.TMDB_BASE_URL + "/movie/" + movie.getUrl()
+                + "/videos?api_key=" + TMDB_API_KEY + "&language=en-US";
+        HttpClient.getJson(this, url, new HttpClient.Callback2() {
+            @Override public void onSuccess(String body) {
+                try {
+                    JSONArray results = new JSONObject(body).getJSONArray("results");
+                    for (int i = 0; i < results.length(); i++) {
+                        JSONObject obj = results.getJSONObject(i);
+                        if ("Trailer".equals(obj.optString("type")) && "YouTube".equals(obj.optString("site"))) {
+                            trailerYoutubeKey = obj.getString("key");
+                            break;
+                        }
                     }
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
+                } catch (Exception ignored) {}
             }
+            @Override public void onError(String m) {}
         });
     }
 
     private void fetchCast() {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        android.os.Handler handler = new android.os.Handler(android.os.Looper.getMainLooper());
-        executor.execute(() -> {
-            try {
-                URL url = new URL("https://api.themoviedb.org/3/movie/" + movie.getUrl() + "/credits?api_key=" + TMDB_API_KEY + "&language=ar");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) response.append(line);
-                reader.close();
-
-                JSONObject jsonObj = new JSONObject(response.toString());
-                JSONArray results = jsonObj.getJSONArray("cast");
-                for (int i = 0; i < Math.min(10, results.length()); i++) {
-                    JSONObject obj = results.getJSONObject(i);
-                    String name = obj.getString("name");
-                    String character = obj.optString("character", "");
-                    String profilePath = obj.optString("profile_path", "");
-                    String fullProfilePath = profilePath.isEmpty() || profilePath.equals("null") ? "" : "https://image.tmdb.org/t/p/w185" + profilePath;
-                    castList.add(new Actor(String.valueOf(obj.getInt("id")), name, character, fullProfilePath));
-                }
-                handler.post(() -> {
+        String url = AppConstants.TMDB_BASE_URL + "/movie/" + movie.getUrl()
+                + "/credits?api_key=" + TMDB_API_KEY + "&language=ar";
+        HttpClient.getJson(this, url, new HttpClient.Callback2() {
+            @Override public void onSuccess(String body) {
+                try {
+                    JSONArray results = new JSONObject(body).getJSONArray("cast");
+                    for (int i = 0; i < Math.min(10, results.length()); i++) {
+                        JSONObject obj = results.getJSONObject(i);
+                        String profilePath = obj.optString("profile_path", "");
+                        String fullProfilePath = profilePath.isEmpty() || profilePath.equals("null")
+                                ? "" : "https://image.tmdb.org/t/p/w185" + profilePath;
+                        castList.add(new Actor(String.valueOf(obj.getInt("id")),
+                                obj.getString("name"), obj.optString("character", ""), fullProfilePath));
+                    }
                     if (!castList.isEmpty()) {
                         layoutCast.setVisibility(View.VISIBLE);
                         castAdapter.notifyDataSetChanged();
                     }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
+                } catch (Exception ignored) {}
             }
+            @Override public void onError(String m) {}
         });
     }
 
     private void fetchSimilarMovies() {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        android.os.Handler handler = new android.os.Handler(android.os.Looper.getMainLooper());
-        executor.execute(() -> {
-            try {
-                URL url = new URL("https://api.themoviedb.org/3/movie/" + movie.getUrl() + "/similar?api_key=" + TMDB_API_KEY + "&language=ar");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) response.append(line);
-                reader.close();
-
-                JSONObject jsonObj = new JSONObject(response.toString());
-                JSONArray results = jsonObj.getJSONArray("results");
-                for (int i = 0; i < results.length(); i++) {
-                    JSONObject obj = results.getJSONObject(i);
-                    String id = String.valueOf(obj.getInt("id"));
-                    String title = obj.getString("title");
-                    String releaseDate = obj.optString("release_date", "");
-                    String year = releaseDate.length() >= 4 ? releaseDate.substring(0, 4) : "";
-                    String posterPath = obj.optString("poster_path", "");
-                    String posterFull = "https://image.tmdb.org/t/p/w500" + posterPath;
-                    double voteAvg = obj.optDouble("vote_average", 0.0);
-                    similarList.add(new Movie(title, posterFull, "⭐️ " + voteAvg, id, obj.optString("overview", ""), year, voteAvg));
-                }
-                handler.post(() -> {
+        String url = AppConstants.TMDB_BASE_URL + "/movie/" + movie.getUrl()
+                + "/similar?api_key=" + TMDB_API_KEY + "&language=ar";
+        HttpClient.getJson(this, url, new HttpClient.Callback2() {
+            @Override public void onSuccess(String body) {
+                try {
+                    JSONArray results = new JSONObject(body).getJSONArray("results");
+                    for (int i = 0; i < results.length(); i++) {
+                        JSONObject obj = results.getJSONObject(i);
+                        String id = String.valueOf(obj.getInt("id"));
+                        String title = obj.optString("title", "");
+                        String releaseDate = obj.optString("release_date", "");
+                        String year = releaseDate.length() >= 4 ? releaseDate.substring(0, 4) : "";
+                        String posterPath = obj.optString("poster_path", "");
+                        String posterFull = AppConstants.TMDB_IMAGE_BASE + posterPath;
+                        double voteAvg = obj.optDouble("vote_average", 0.0);
+                        similarList.add(new Movie(title, posterFull, "⭐️ " + voteAvg, id,
+                                obj.optString("overview", ""), year, voteAvg));
+                    }
                     if (!similarList.isEmpty()) {
                         layoutSimilar.setVisibility(View.VISIBLE);
                         similarAdapter.notifyDataSetChanged();
                     }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
+                } catch (Exception ignored) {}
             }
+            @Override public void onError(String m) {}
         });
     }
 
     private void fetchMetadata() {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        android.os.Handler handler = new android.os.Handler(android.os.Looper.getMainLooper());
-        executor.execute(() -> {
-            try {
-                URL url = new URL("https://api.themoviedb.org/3/movie/" + movie.getUrl() + "?api_key=" + TMDB_API_KEY + "&append_to_response=release_dates");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) response.append(line);
-                reader.close();
-
-                JSONObject jsonObj = new JSONObject(response.toString());
-                int runtime = jsonObj.optInt("runtime", 0);
-                
-                String certification = "";
-                if (jsonObj.has("release_dates")) {
-                    JSONArray results = jsonObj.getJSONObject("release_dates").getJSONArray("results");
-                    for (int i = 0; i < results.length(); i++) {
-                        JSONObject rObj = results.getJSONObject(i);
-                        if (rObj.optString("iso_3166_1").equals("US")) {
-                            JSONArray dates = rObj.getJSONArray("release_dates");
-                            if (dates.length() > 0) {
-                                certification = dates.getJSONObject(0).optString("certification", "");
+        String url = AppConstants.TMDB_BASE_URL + "/movie/" + movie.getUrl()
+                + "?api_key=" + TMDB_API_KEY + "&append_to_response=release_dates";
+        HttpClient.getJson(this, url, new HttpClient.Callback2() {
+            @Override public void onSuccess(String body) {
+                try {
+                    JSONObject jsonObj = new JSONObject(body);
+                    int runtime = jsonObj.optInt("runtime", 0);
+                    String certification = "";
+                    if (jsonObj.has("release_dates")) {
+                        JSONArray results = jsonObj.getJSONObject("release_dates").getJSONArray("results");
+                        for (int i = 0; i < results.length(); i++) {
+                            JSONObject rObj = results.getJSONObject(i);
+                            if ("US".equals(rObj.optString("iso_3166_1"))) {
+                                JSONArray dates = rObj.getJSONArray("release_dates");
+                                if (dates.length() > 0) {
+                                    certification = dates.getJSONObject(0).optString("certification", "");
+                                }
+                                break;
                             }
-                            break;
                         }
                     }
-                }
-                
-                final String finalRuntime = runtime > 0 ? (runtime / 60) + "h " + (runtime % 60) + "m" : "";
-                final String finalCert = certification.isEmpty() ? "NR" : certification;
-
-                handler.post(() -> {
+                    String finalRuntime = runtime > 0 ? (runtime / 60) + "h " + (runtime % 60) + "m" : "";
+                    String finalCert = certification.isEmpty() ? "NR" : certification;
                     TextView txtRuntime = findViewById(R.id.txtRuntime);
                     TextView txtAgeRating = findViewById(R.id.txtAgeRating);
                     if (txtRuntime != null && !finalRuntime.isEmpty()) txtRuntime.setText(finalRuntime);
                     if (txtAgeRating != null) txtAgeRating.setText(finalCert);
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
+                } catch (Exception ignored) {}
             }
+            @Override public void onError(String m) {}
         });
     }
 }

@@ -73,10 +73,19 @@ public class MainActivity extends BaseActivity implements ChannelAdapter.Listene
     private String sortMode = SORT_CURATED;
     private boolean isGridView = true;
     private static final List<String> CURATED_ORDER = Arrays.asList(
-            "Rudaw TV", "Kurdistan 24", "Kurdsat News", "Kurdsat", "Kurdistan TV",
-            "Ava Media TV", "Rojava TV", "Ronahi TV", "Channel 8 Kurdish", "Mixkurdy",
-            "Zarok TV", "Payam TV", "4 Kurd TV", "Zoom TV Kurdish", "Zagros TV",
-            "MBC Iraq", "Al Sharqiya", "beIN Sports 1 HD", "Jin TV", "Komala TV"
+            "Rûdaw TV", "Kurdistan24 TV", "KurdMax TV Sorani", "KurdMax Show Sorani",
+            "Nalia TV", "Nalia TV 2", "KurdSat TV", "KurdSat News TV", "Ava TV",
+            "Waar TV", "Kurdistan TV", "Zagros TV", "ZAGROS 24", "Gelî KurdIstan TV",
+            "KurdMax TV Kurmanci", "KurdMax Show Kurmanci", "KurdMax Music",
+            "Kurd Channel", "Duhok TV", "Spêda TV", "Payam TV", "Kirkuk TV",
+            "Euro kurd TV", "Halabja TV", "Ranya TV", "Slemani TV", "Zaxo TV",
+            "4 Kurd TV", "Kalapur TV", "Sterk TV", "Med Müzik TV", "Çira TV",
+            "Komala TV", "Kurdana TV", "Kurd 7", "IMK TV", "Nishtmani mn NTV",
+            "TV KURDI", "BASK TV", "BASK KIDS", "BASK Plus", "Amozhgary TV",
+            "Amozhgary academy", "NRT 3 Kids", "NRT 4", "NRT SPORT", "AVA Sport",
+            "DUHOK TV SPORT", "Zaxo Sport", "Speda Drama", "Parwarday TV Hawler",
+            "Parwarday TV Slemani", "Parwarday TV Duhok", "Kurdmax Pepule",
+            "Niga Kids", "NIGA Family", "Niga Movies", "Avar TV", "UTV Duhok"
     );
 
     @Override

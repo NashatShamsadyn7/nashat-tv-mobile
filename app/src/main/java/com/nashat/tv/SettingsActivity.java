@@ -26,12 +26,20 @@ public class SettingsActivity extends BaseActivity {
     private static final String KEY_AUTO_PLAY = "auto_play";
     private static final String KEY_HD_QUALITY = "hd_quality";
     private static final String KEY_NOTIFICATIONS = "notifications";
+    public static final String KEY_DATA_SAVER = "data_saver";
+    public static final String KEY_BACKGROUND_PLAY = "background_play";
+    public static final String KEY_BUFFER_SIZE = "buffer_size"; // 0=small,1=medium,2=large
+    public static final String KEY_REFRESH_FREQ = "refresh_freq"; // 0=manual,1=daily,2=weekly,3=never
 
     private SharedPreferences settings;
 
     private MaterialSwitch switchDarkMode;
     private MaterialSwitch switchAutoPlay;
     private MaterialSwitch switchHDQuality;
+    private MaterialSwitch switchDataSaver;
+    private MaterialSwitch switchBackgroundPlay;
+    private TextView tvBufferValue;
+    private TextView tvRefreshValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +58,16 @@ public class SettingsActivity extends BaseActivity {
         switchDarkMode = findViewById(R.id.switchDarkMode);
         switchAutoPlay = findViewById(R.id.switchAutoPlay);
         switchHDQuality = findViewById(R.id.switchHDQuality);
+        switchDataSaver = findViewById(R.id.switchDataSaver);
+        switchBackgroundPlay = findViewById(R.id.switchBackgroundPlay);
+        tvBufferValue = findViewById(R.id.tvBufferValue);
+        tvRefreshValue = findViewById(R.id.tvRefreshValue);
+
+        View bufferOption = findViewById(R.id.buffer_option);
+        if (bufferOption != null) bufferOption.setOnClickListener(v -> showBufferDialog());
+
+        View refreshOption = findViewById(R.id.refresh_option);
+        if (refreshOption != null) refreshOption.setOnClickListener(v -> showRefreshDialog());
 
         // Appearance section
         findViewById(R.id.theme_option).setOnClickListener(v -> showThemeDialog());
@@ -139,13 +157,24 @@ public class SettingsActivity extends BaseActivity {
         }
     }
 
+    /*
+     * Both previews below build their text through getString(id, args) rather
+     * than by concatenating a number onto a translated word.
+     *
+     * Concatenation is what produced the visible "0 لیست %1$d" on this screen:
+     * the count was glued in front of a resource that already contained its own
+     * placeholder, so the placeholder was never substituted and leaked to the
+     * user as literal text. It also hard-codes English word order — Kurdish and
+     * Arabic place the number differently — which a positional argument lets
+     * each translation decide for itself.
+     */
+
     private void updateStatsPreview() {
         TextView tvStatsPreview = findViewById(R.id.tvStatsPreview);
         if (tvStatsPreview != null) {
             WatchStatsManager stats = new WatchStatsManager(this);
-            String totalTime = stats.getTotalTimeFormatted();
-            long sessions = stats.getTotalSessions();
-            tvStatsPreview.setText(totalTime + " · " + sessions + " " + getString(R.string.stats_sessions));
+            tvStatsPreview.setText(getString(R.string.stats_preview,
+                    stats.getTotalTimeFormatted(), stats.getTotalSessions()));
         }
     }
 
@@ -153,8 +182,8 @@ public class SettingsActivity extends BaseActivity {
         TextView tvPlaylistsPreview = findViewById(R.id.tvPlaylistsPreview);
         if (tvPlaylistsPreview != null) {
             PlaylistManager pm = new PlaylistManager(this);
-            int count = pm.getPlaylists().size();
-            tvPlaylistsPreview.setText(count + " " + getString(R.string.playlists_count));
+            tvPlaylistsPreview.setText(
+                    getString(R.string.playlists_count, pm.getPlaylists().size()));
         }
     }
 
@@ -175,6 +204,74 @@ public class SettingsActivity extends BaseActivity {
         switchDarkMode.setChecked(mode == AppCompatDelegate.MODE_NIGHT_YES);
         switchAutoPlay.setChecked(settings.getBoolean(KEY_AUTO_PLAY, true));
         switchHDQuality.setChecked(settings.getBoolean(KEY_HD_QUALITY, true));
+        switchDataSaver.setChecked(settings.getBoolean(KEY_DATA_SAVER, false));
+        switchBackgroundPlay.setChecked(settings.getBoolean(KEY_BACKGROUND_PLAY, false));
+        updateBufferLabel();
+        updateRefreshLabel();
+    }
+
+    private void updateBufferLabel() {
+        if (tvBufferValue == null) return;
+        int idx = settings.getInt(KEY_BUFFER_SIZE, 1);
+        int[] labels = {R.string.buffer_small, R.string.buffer_medium, R.string.buffer_large};
+        tvBufferValue.setText(labels[Math.max(0, Math.min(idx, 2))]);
+    }
+
+    private void updateRefreshLabel() {
+        if (tvRefreshValue == null) return;
+        int idx = settings.getInt(KEY_REFRESH_FREQ, 2);
+        int[] labels = {R.string.refresh_manual, R.string.refresh_daily, R.string.refresh_weekly, R.string.refresh_never};
+        tvRefreshValue.setText(labels[Math.max(0, Math.min(idx, 3))]);
+    }
+
+    private void showBufferDialog() {
+        String[] items = {
+                getString(R.string.buffer_small),
+                getString(R.string.buffer_medium),
+                getString(R.string.buffer_large)
+        };
+        int current = settings.getInt(KEY_BUFFER_SIZE, 1);
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.buffer_size)
+                .setSingleChoiceItems(items, current, (dialog, which) -> {
+                    settings.edit().putInt(KEY_BUFFER_SIZE, which).apply();
+                    updateBufferLabel();
+                    dialog.dismiss();
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+    }
+
+    private void showRefreshDialog() {
+        String[] items = {
+                getString(R.string.refresh_manual),
+                getString(R.string.refresh_daily),
+                getString(R.string.refresh_weekly),
+                getString(R.string.refresh_never)
+        };
+        int current = settings.getInt(KEY_REFRESH_FREQ, 2);
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.refresh_frequency)
+                .setSingleChoiceItems(items, current, (dialog, which) -> {
+                    settings.edit().putInt(KEY_REFRESH_FREQ, which).apply();
+                    updateRefreshLabel();
+                    dialog.dismiss();
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+    }
+
+    public static boolean isDataSaverEnabled(android.content.Context ctx) {
+        return ctx.getSharedPreferences(PREFS_SETTINGS, MODE_PRIVATE).getBoolean(KEY_DATA_SAVER, false);
+    }
+    public static boolean isBackgroundPlayEnabled(android.content.Context ctx) {
+        return ctx.getSharedPreferences(PREFS_SETTINGS, MODE_PRIVATE).getBoolean(KEY_BACKGROUND_PLAY, false);
+    }
+    public static int getBufferSize(android.content.Context ctx) {
+        return ctx.getSharedPreferences(PREFS_SETTINGS, MODE_PRIVATE).getInt(KEY_BUFFER_SIZE, 1);
+    }
+    public static int getRefreshFrequency(android.content.Context ctx) {
+        return ctx.getSharedPreferences(PREFS_SETTINGS, MODE_PRIVATE).getInt(KEY_REFRESH_FREQ, 2);
     }
 
     private void setupClickListeners() {
@@ -186,34 +283,41 @@ public class SettingsActivity extends BaseActivity {
                     .putBoolean(KEY_DARK_MODE, isChecked)
                     .putInt(BaseActivity.KEY_THEME_MODE, mode)
                     .apply();
-            Toast.makeText(this, getString(isChecked ? R.string.dark_mode : R.string.light_mode),
-                    Toast.LENGTH_SHORT).show();
-            // Restart completely to apply new Theme Style
-            Intent intent = new Intent(this, MainActivity.class);
+            // No toast: the Activity is torn down on the next line, taking the
+            // toast's window token with it, and the whole screen visibly
+            // repainting in the new mode is the confirmation.
+            Intent intent = new Intent(this, LiveTvActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
         });
 
-        switchAutoPlay.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            settings.edit().putBoolean(KEY_AUTO_PLAY, isChecked).apply();
-            Toast.makeText(this,
-                    getString(R.string.auto_play) + " " + (isChecked ? "✓" : "✗"),
-                    Toast.LENGTH_SHORT).show();
-        });
+        /*
+         * No confirmation toast on any of these.
+         *
+         * Each one previously fired a Toast reading e.g. "Autoplay ✓" — which
+         * restated, in a floating window that covers the very control the user
+         * just touched, the state that the switch itself already shows. Four
+         * of them meant a run through this screen buried it under a stack of
+         * toasts. A switch is self-evidencing: its position IS the feedback.
+         */
+        switchAutoPlay.setOnCheckedChangeListener((buttonView, isChecked) ->
+                settings.edit().putBoolean(KEY_AUTO_PLAY, isChecked).apply());
 
-        switchHDQuality.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            settings.edit().putBoolean(KEY_HD_QUALITY, isChecked).apply();
-            Toast.makeText(this,
-                    getString(R.string.prefer_hd_quality) + " " + (isChecked ? "✓" : "✗"),
-                    Toast.LENGTH_SHORT).show();
-        });
+        switchHDQuality.setOnCheckedChangeListener((buttonView, isChecked) ->
+                settings.edit().putBoolean(KEY_HD_QUALITY, isChecked).apply());
+
+        switchDataSaver.setOnCheckedChangeListener((buttonView, isChecked) ->
+                settings.edit().putBoolean(KEY_DATA_SAVER, isChecked).apply());
+
+        switchBackgroundPlay.setOnCheckedChangeListener((buttonView, isChecked) ->
+                settings.edit().putBoolean(KEY_BACKGROUND_PLAY, isChecked).apply());
     }
 
     private void showThemeDialog() {
         String[] themes = {
-                "🌙 " + getString(R.string.dark_mode),
-                "☀️ " + getString(R.string.light_mode)
+                getString(R.string.dark_mode),
+                getString(R.string.light_mode)
         };
 
         int mode = settings.getInt(BaseActivity.KEY_THEME_MODE, AppCompatDelegate.MODE_NIGHT_YES);
@@ -233,7 +337,7 @@ public class SettingsActivity extends BaseActivity {
                     switchDarkMode.setChecked(newMode == AppCompatDelegate.MODE_NIGHT_YES);
                     dialog.dismiss();
                     
-                    Intent intent = new Intent(this, MainActivity.class);
+                    Intent intent = new Intent(this, LiveTvActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
@@ -249,15 +353,15 @@ public class SettingsActivity extends BaseActivity {
         StringBuilder sb = new StringBuilder();
         
         // Header stats
-        sb.append("⏱ ").append(getString(R.string.stats_total_time)).append(": ")
+        sb.append("").append(getString(R.string.stats_total_time)).append(": ")
           .append(stats.getTotalTimeFormatted()).append("\n");
-        sb.append("📺 ").append(getString(R.string.stats_sessions)).append(": ")
+        sb.append("").append(getString(R.string.stats_sessions)).append(": ")
           .append(stats.getTotalSessions()).append("\n");
-        sb.append("🏆 ").append(getString(R.string.stats_top_category)).append(": ")
+        sb.append("").append(getString(R.string.stats_top_category)).append(": ")
           .append(stats.getTopCategory()).append("\n\n");
 
         // Weekly breakdown
-        sb.append("📊 ").append(getString(R.string.stats_this_week)).append(":\n");
+        sb.append("").append(getString(R.string.stats_this_week)).append(":\n");
         String[] dayNames = {"Today", "Yesterday", "2d ago", "3d ago", "4d ago", "5d ago", "6d ago"};
         int[] weekly = stats.getWeeklyMinutes();
         for (int i = 0; i < 7; i++) {
@@ -297,7 +401,7 @@ public class SettingsActivity extends BaseActivity {
         }
 
         new AlertDialog.Builder(this)
-                .setTitle("📈 " + getString(R.string.stats_title))
+                .setTitle(getString(R.string.stats_title))
                 .setMessage(sb.toString())
                 .setPositiveButton(android.R.string.ok, null)
                 .setNeutralButton(R.string.stats_reset, (dialog, which) -> {
@@ -328,14 +432,14 @@ public class SettingsActivity extends BaseActivity {
         }
 
         String[] names = new String[playlists.size() + 1];
-        names[0] = "➕ " + getString(R.string.playlist_create_new);
+        names[0] = getString(R.string.playlist_create_new);
         for (int i = 0; i < playlists.size(); i++) {
             PlaylistManager.Playlist p = playlists.get(i);
             names[i + 1] = p.emoji + " " + p.name + " (" + p.getItemCount() + ")";
         }
 
         new AlertDialog.Builder(this)
-                .setTitle("🗂 " + getString(R.string.playlists_title))
+                .setTitle(getString(R.string.playlists_title))
                 .setItems(names, (dialog, which) -> {
                     if (which == 0) {
                         showCreatePlaylistDialog();

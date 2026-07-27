@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/bg_card"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="3dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Logo 4:3 ratio, no padding — fills the card fully -->
+        <ImageView
+            android:id="@+id/ivChannelLogo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:contentDescription="@string/cd_channel_logo"
+            android:scaleType="fitCenter"
+            app:layout_constraintDimensionRatio="4:3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Live dot removed per user request -->
+        <View
+            android:id="@+id/liveDot"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvChannelName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="6dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="8dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Channel"
+            android:textColor="@color/text_primary"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/ivChannelLogo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

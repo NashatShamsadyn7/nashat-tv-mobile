@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Play / pause.
+     Translucent black, NOT a solid brand-coloured disc. This control sits in
+     the dead centre of the frame — over the presenter's face on a news
+     channel — so it has to stay legible without blocking the picture. The
+     white glyph and the darkened backing give it contrast; you can still see
+     through it. Focus turns the ring lime for D-pad users on a TV. -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#40FFFFFF">
+    <item>
+        <selector>
+            <item android:state_focused="true">
+                <shape android:shape="oval">
+                    <solid android:color="#8C000000" />
+                    <stroke android:width="@dimen/focus_ring_width" android:color="@color/focus_ring" />
+                </shape>
+            </item>
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="#73000000" />
+                    <stroke android:width="@dimen/stroke_hairline" android:color="#40FFFFFF" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+</ripple>

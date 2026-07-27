@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════════
+   THEME · DARK MODE
+  ══════════════════════════════════════════════════════════════════════
+
+   Colour needs no override here — the theme reads semantic tokens, and
+   values-night/colors.xml has already redefined them. The only things that
+   cannot be expressed as a colour token are the two system-bar icon flags,
+   which are booleans: they tell the OS to draw its status and navigation
+   icons dark (for a light background) or light (for a dark one).
+
+   Getting these wrong is the single most common dark-mode bug in Android
+   apps — black clock and battery icons on a near-black status bar.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.Nashat" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Inherit everything from the day definition… -->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+    </style>
+
+</resources>

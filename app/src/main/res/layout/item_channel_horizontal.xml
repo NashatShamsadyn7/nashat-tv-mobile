@@ -44,7 +44,6 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/accent_primary"
-                android:fontFamily="sans-serif-black"
                 android:visibility="gone"
                 android:background="@drawable/fallback_logo_background" />
         </FrameLayout>
@@ -61,7 +60,6 @@
             android:gravity="center"
             android:maxLines="2"
             android:ellipsize="end"
-            android:fontFamily="sans-serif-medium"
             android:lineSpacingExtra="2dp" />
 
         <TextView
@@ -69,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="● REC"
+            android:text="● LIVE"
             android:textSize="9sp"
             android:textColor="@color/accent_emerald"
             android:textStyle="bold"

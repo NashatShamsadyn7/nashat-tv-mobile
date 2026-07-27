@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- LIVE status. Coral, never lime: lime is the brand and appears on every
+     screen, so a lime "live" marker would carry no information. Coral is
+     reserved for "this is happening right now" and nothing else. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+    <solid android:color="@color/status_live_fill" />
+    <size android:width="8dp" android:height="8dp" />
+</shape>

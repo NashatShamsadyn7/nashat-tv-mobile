@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Bottom-navigation item tint.
+
+  The selected item sits on the lime active-indicator pill, so its icon and
+  label must be INK, not lime — lime-on-lime would erase the icon entirely.
+  This is the one place in the app where the selected state uses the dark
+  brand value rather than the bright one.
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/on_accent_fill" android:state_checked="true" />
+    <item android:color="@color/content_primary" android:state_pressed="true" />
+    <item android:color="@color/content_secondary" />
+</selector>

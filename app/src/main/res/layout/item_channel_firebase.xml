@@ -46,7 +46,6 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="#00E676"
-                android:fontFamily="sans-serif-black"
                 android:visibility="gone" />
 
             <!-- LIVE Badge -->
@@ -94,7 +93,6 @@
                 android:paddingBottom="2dp"
                 android:textSize="9sp"
                 android:textColor="#B0B0B0"
-                android:fontFamily="sans-serif-medium"
                 android:visibility="gone" />
 
         </FrameLayout>
@@ -116,7 +114,6 @@
                 android:textSize="13sp"
                 android:textStyle="bold"
                 android:textColor="#E0E0E0"
-                android:fontFamily="sans-serif-medium"
                 android:maxLines="1"
                 android:ellipsize="end" />
 
@@ -127,7 +124,6 @@
                 android:layout_marginTop="2dp"
                 android:textSize="11sp"
                 android:textColor="#00E676"
-                android:fontFamily="sans-serif"
                 android:maxLines="1"
                 android:ellipsize="end" />
 

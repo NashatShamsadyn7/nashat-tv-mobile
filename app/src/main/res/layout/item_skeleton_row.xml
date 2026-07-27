@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  One row of loading placeholders, included three times by the Live TV screen.
+
+  The old skeleton was twelve <View> elements written out longhand in the
+  screen layout — 45 lines of duplicated markup that had to be edited in four
+  places whenever the grid changed. Each placeholder also reused the real
+  channel-card background, so it rendered as a fully-formed empty card and
+  looked like the list had loaded and found nothing.
+
+  These are deliberately flatter than a real card: sunken surface, no outline.
+  A placeholder must read as "not yet content".
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/channel_tile_size"
+        android:layout_margin="@dimen/space_100"
+        android:layout_weight="1"
+        android:background="@drawable/bg_skeleton_tile" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/channel_tile_size"
+        android:layout_margin="@dimen/space_100"
+        android:layout_weight="1"
+        android:background="@drawable/bg_skeleton_tile" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/channel_tile_size"
+        android:layout_margin="@dimen/space_100"
+        android:layout_weight="1"
+        android:background="@drawable/bg_skeleton_tile" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/channel_tile_size"
+        android:layout_margin="@dimen/space_100"
+        android:layout_weight="1"
+        android:background="@drawable/bg_skeleton_tile" />
+
+</LinearLayout>

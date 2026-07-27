@@ -1,21 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════════
+   NASHAT TV — العربية (Arabic)
+  ══════════════════════════════════════════════════════════════════════
+
+   Complete. 52 keys were missing here before, including the entire Live TV
+   screen, so the app's first screen appeared in English to Arabic users.
+
+   Fixed terminology, applied consistently:
+     قناة        channel        فيلم         film
+     مسلسل       series         مباشر        live
+     المفضّلة     favourites     قائمة المشاهدة watchlist
+     بحث         search         الإعدادات     settings
+
+   Orthography: hamza, taa marbuta and shadda are written correctly
+   throughout (مفضّلة not مفضلة, الجودة not الجوده). Arabic-Indic digits are
+   NOT used for counts — those come from the platform number formatter and
+   follow the user's locale settings.
+-->
 <resources>
-    <string name="app_name">Nashat TV</string>
-    <string name="app_subtitle">مركز الترفيه المتميز</string>
+
+    <!-- Identity -->
+    <string name="app_name">نشأت تي في</string>
+    <string name="app_tagline">قنوات كردية مباشرة، وأفلام ومسلسلات</string>
+    <string name="app_subtitle">قنوات كردية مباشرة، وأفلام ومسلسلات</string>
 
     <!-- Navigation -->
-    <string name="title_channels">القنوات</string>
+    <string name="nav_home">الرئيسية</string>
+    <string name="nav_live">مباشر</string>
+    <string name="nav_search">بحث</string>
+    <string name="nav_library">مكتبتي</string>
+    <string name="nav_live_tv">مباشر</string>
+    <string name="nav_movies">الأفلام</string>
+    <string name="nav_series">المسلسلات</string>
+    <string name="nav_settings">الإعدادات</string>
     <string name="title_home">الرئيسية</string>
-    <string name="title_favorites">المفضلة</string>
+    <string name="title_channels">القنوات</string>
+    <string name="title_favorites">المفضّلة</string>
     <string name="title_categories">الفئات</string>
+    <string name="title_profile">الملف الشخصي</string>
 
-    <!-- Search -->
-    <string name="hint_search">ابحث عن القنوات والبرامج...</string>
-    <string name="voice_search">البحث الصوتي</string>
+    <!-- Home -->
+    <string name="home_greeting_morning">صباح الخير</string>
+    <string name="home_greeting_afternoon">نهارك سعيد</string>
+    <string name="home_greeting_evening">مساء الخير</string>
+
+    <string name="row_continue_watching">تابع المشاهدة</string>
+    <string name="row_live_now">مباشر الآن</string>
+    <string name="row_your_channels">قنواتك</string>
+    <string name="row_trending_films">أفلام رائجة</string>
+    <string name="row_trending_series">مسلسلات رائجة</string>
+    <string name="row_top_rated_films">الأعلى تقييماً من الأفلام</string>
+    <string name="row_top_rated_series">الأعلى تقييماً من المسلسلات</string>
+    <string name="row_in_theatres">في دور العرض الآن</string>
+    <string name="row_airing_today">يُعرض اليوم</string>
+    <string name="row_animation">رسوم متحرّكة وأنمي</string>
+    <string name="row_because_you_watched">لأنّك شاهدت %1$s</string>
+    <string name="row_popular_in">رائج في %1$s</string>
+
+    <!-- Actions -->
+    <string name="action_see_all">عرض الكل</string>
+    <string name="action_play">تشغيل</string>
+    <string name="action_resume">متابعة</string>
+    <string name="action_watch_now">شاهد الآن</string>
+    <string name="action_more_info">تفاصيل</string>
+    <string name="action_add_to_list">أضف إلى قائمتي</string>
+    <string name="action_in_your_list">في قائمتك</string>
+    <string name="action_remove">إزالة</string>
+    <string name="action_share">مشاركة</string>
+    <string name="action_retry">أعد المحاولة</string>
+    <string name="action_refresh">تحديث</string>
+    <string name="action_filter">تصفية</string>
+    <string name="action_sort">ترتيب</string>
+    <string name="action_clear">مسح</string>
+    <string name="action_clear_all">مسح الكل</string>
+    <string name="action_done">تم</string>
+    <string name="action_cancel">إلغاء</string>
+    <string name="action_save">حفظ</string>
+    <string name="action_continue">متابعة</string>
+    <string name="action_skip">تخطٍّ</string>
+    <string name="action_undo">تراجع</string>
+    <string name="action_settings">الإعدادات</string>
+    <string name="see_all">عرض الكل</string>
+    <string name="view_all">عرض الكل</string>
+    <string name="action_watch">تشغيل</string>
+    <string name="retry">أعد المحاولة</string>
+    <string name="refresh">تحديث</string>
+    <string name="filter">تصفية</string>
+    <string name="sort">ترتيب</string>
+    <string name="clear_all">مسح الكل</string>
+    <string name="ok">حسناً</string>
+    <string name="cancel">إلغاء</string>
+
+    <!-- Live TV -->
+    <string name="live_title">البث المباشر</string>
+    <string name="live_tv_title">البث المباشر</string>
+    <string name="live_subtitle">%1$d قناة، مرتّبة لـ%2$s</string>
+    <string name="live_tv_subtitle">قنوات كردية وإقليمية، تعمل دائماً</string>
+    <string name="live_tv_simple_subtitle">%1$s أولاً · %2$s</string>
+    <string name="live_search_hint">ابحث عن قناة</string>
+    <string name="live_tv_search_hint">ابحث عن قناة</string>
+    <string name="live_tv_count">%1$d قناة</string>
+    <string name="live_tv_global">عالمي</string>
+    <string name="live_tv_featured">مميّز الآن</string>
+    <string name="live_tv_all_channels">كل القنوات</string>
+    <string name="live_tv_hint_text">اضغط على أي قناة لبدء المشاهدة</string>
+    <string name="live_tv_country_focus">عرض %1$s أولاً</string>
+    <string name="live_tv_top_pick">%1$s · %2$s</string>
+    <string name="live_tv_featured_iraq">أفضل الاختيارات لك</string>
+
+    <string name="badge_live">مباشر</string>
+    <string name="live">مباشر</string>
+    <string name="badge_hd">HD</string>
+    <string name="badge_new">جديد</string>
 
     <!-- Categories -->
-    <string name="label_category">الفئات</string>
-    <string name="label_favorites_only">المفضلة فقط</string>
     <string name="category_all">الكل</string>
     <string name="category_news">أخبار</string>
     <string name="category_sports">رياضة</string>
@@ -24,173 +123,389 @@
     <string name="category_documentary">وثائقي</string>
     <string name="category_music">موسيقى</string>
     <string name="category_movies">أفلام</string>
+    <string name="category_series">مسلسلات</string>
+    <string name="category_religion">ديني</string>
+    <string name="cat_religion">ديني</string>
+    <string name="label_category">الفئات</string>
+    <string name="categories_label">الفئات</string>
+    <string name="label_favorites_only">المفضّلة فقط</string>
 
-    <!-- Sections -->
-    <string name="recommended_channels">مقترح لك</string>
-    <string name="all_channels">كل القنوات</string>
-    <string name="trending_now">الرائج الآن</string>
-    <string name="recently_watched">المشاهدة مؤخراً</string>
-    <string name="popular_channels">القنوات الشائعة</string>
+    <!-- Search -->
+    <string name="search_title">بحث</string>
+    <string name="search_hint">ابحث في القنوات والأفلام والمسلسلات</string>
+    <string name="hint_search">ابحث في القنوات والأفلام والمسلسلات</string>
+    <string name="hint_search_movie">ابحث عن فيلم</string>
+    <string name="hint_search_series">ابحث عن مسلسل</string>
+    <string name="search_recent">عمليات البحث الأخيرة</string>
+    <string name="recent_searches">عمليات البحث الأخيرة</string>
+    <string name="search_results_for">نتائج «%1$s»</string>
+    <string name="search_no_results_title">لا نتائج لـ«%1$s»</string>
+    <string name="search_no_results_body">تحقّق من الإملاء، أو جرّب كلمة أقصر.</string>
+    <string name="search_empty_title">ابحث عمّا تريد مشاهدته</string>
+    <string name="search_empty_body">ابحث في القنوات المباشرة والأفلام والمسلسلات دفعةً واحدة.</string>
+    <string name="search_tab_all">الكل</string>
+    <string name="search_tab_channels">القنوات</string>
+    <string name="search_tab_films">الأفلام</string>
+    <string name="search_tab_series">المسلسلات</string>
+    <string name="voice_search">البحث الصوتي</string>
+    <string name="voice_search_unavailable">البحث الصوتي غير متاح على هذا الجهاز.</string>
+    <string name="voice_search_permission">يحتاج نشأت تي في إلى إذن الميكروفون للبحث الصوتي.</string>
 
-    <!-- Actions -->
-    <string name="see_all">عرض الكل</string>
-    <string name="view_all">عرض الكل</string>
-    <string name="grid_view">شبكة</string>
-    <string name="list_view">قائمة</string>
-    <string name="settings">الإعدادات</string>
-    <string name="refresh">تحديث</string>
-    <string name="filter">تصفية</string>
-    <string name="sort">ترتيب</string>
-    <string name="action_watch">مشاهدة</string>
+    <!-- Library -->
+    <string name="library_title">مكتبتك</string>
+    <string name="library_tab_favourites">المفضّلة</string>
+    <string name="library_tab_watchlist">قائمة المشاهدة</string>
+    <string name="library_tab_history">السجلّ</string>
+    <string name="library_tab_playlists">القوائم</string>
+
+    <string name="favourites">المفضّلة</string>
+    <string name="favorites">المفضّلة</string>
+    <string name="menu_favorites">المفضّلة</string>
+    <string name="favourite_added">أُضيفت إلى المفضّلة</string>
+    <string name="favourite_removed">أُزيلت من المفضّلة</string>
+    <string name="added_to_favorites">أُضيفت إلى المفضّلة</string>
+    <string name="removed_from_favorites">أُزيلت من المفضّلة</string>
+    <string name="watchlist_added">أُضيف إلى قائمة المشاهدة</string>
+    <string name="watchlist_removed">أُزيل من قائمة المشاهدة</string>
+
+    <string name="empty_favourites_title">لا شيء محفوظ بعد</string>
+    <string name="empty_favourites_body">اضغط على القلب في أي قناة أو عنوان ليبقى هنا.</string>
+    <string name="empty_watchlist_title">قائمة المشاهدة فارغة</string>
+    <string name="empty_watchlist_body">أضف الأفلام والمسلسلات التي تريد مشاهدتها لاحقاً.</string>
+    <string name="empty_history_title">لا يوجد سجلّ مشاهدة</string>
+    <string name="empty_history_body">كل ما تبدأ بمشاهدته يظهر هنا لتتمكّن من متابعته.</string>
+
+    <!-- Playlists -->
+    <string name="playlists_title">القوائم</string>
+    <string name="playlists_subtitle">رتّب القنوات والعناوين بطريقتك</string>
+    <string name="playlists_count">%1$d قائمة</string>
+    <string name="playlist_create_new">قائمة جديدة</string>
+    <string name="playlist_create">إنشاء</string>
+    <string name="playlist_created">أُنشئت القائمة</string>
+    <string name="playlist_name_hint">اسم القائمة</string>
+    <string name="playlist_empty">هذه القائمة فارغة. أضف قنوات أو عناوين من صفحة التفاصيل.</string>
+    <string name="playlist_rename">إعادة تسمية</string>
+    <string name="playlist_delete">حذف</string>
+    <string name="playlist_delete_confirm">حذف «%1$s»؟ القنوات التي بداخلها لن تُزال من مفضّلتك.</string>
+    <string name="playlist_deleted">حُذفت القائمة</string>
+    <string name="playlist_add_to">أضف إلى قائمة</string>
+    <string name="playlist_added">أُضيف إلى القائمة</string>
 
     <!-- Stats -->
-    <string name="total_channels">إجمالي القنوات</string>
-    <string name="favorites">المفضلة</string>
-    <string name="watching_now">يُشاهد الآن</string>
-    <string name="live">مباشر</string>
+    <string name="stats_title">وقت المشاهدة</string>
+    <string name="stats_subtitle">كم شاهدت، وماذا شاهدت</string>
+    <string name="stats_total_time">إجمالي وقت المشاهدة</string>
+    <string name="stats_sessions">جلسة</string>
+    <string name="stats_top_category">الأكثر مشاهدة</string>
+    <string name="stats_this_week">هذا الأسبوع</string>
+    <string name="stats_by_category">حسب الفئة</string>
+    <string name="stats_recent">الأخيرة</string>
+    <string name="stats_reset">تصفير وقت المشاهدة</string>
+    <string name="stats_reset_confirm">تصفير كل إحصاءات المشاهدة؟ لا يمكن التراجع عن هذا.</string>
+    <string name="stats_reset_done">صُفّر وقت المشاهدة</string>
+    <string name="stats_empty">لا شيء بعد. شاهد شيئاً وستتجمّع إحصاءاتك هنا.</string>
+
+    <!-- Detail -->
+    <string name="detail_storyline">القصة</string>
+    <string name="storyline">القصة</string>
+    <string name="detail_cast">التمثيل وطاقم العمل</string>
+    <string name="cast_crew">التمثيل وطاقم العمل</string>
+    <string name="detail_seasons">المواسم</string>
+    <string name="seasons">المواسم</string>
+    <string name="detail_episodes">الحلقات</string>
+    <string name="detail_similar_films">أعمال مشابهة</string>
+    <string name="similar_movies">أعمال مشابهة</string>
+    <string name="detail_similar_series">أعمال مشابهة</string>
+    <string name="similar_series">أعمال مشابهة</string>
+    <string name="detail_biography">السيرة</string>
+    <string name="biography">السيرة</string>
+    <string name="detail_known_for">اشتُهر بـ</string>
+    <string name="known_for">اشتُهر بـ</string>
+    <string name="detail_season_episode">الموسم %1$d، الحلقة %2$d</string>
+    <string name="detail_runtime_minutes">%1$d دقيقة</string>
+    <string name="detail_rating">%1$s من ١٠</string>
+    <string name="detail_no_synopsis">لا يتوفّر ملخّص لهذا العنوان بعد.</string>
 
     <!-- Player -->
+    <string name="player_play">تشغيل</string>
+    <string name="player_pause">إيقاف مؤقّت</string>
+    <string name="player_replay">إعادة التشغيل</string>
+    <string name="player_rewind">١٠ ثوانٍ للخلف</string>
+    <string name="player_forward">١٠ ثوانٍ للأمام</string>
+    <string name="player_next">التالي</string>
+    <string name="player_previous">السابق</string>
+    <string name="player_fullscreen">ملء الشاشة</string>
+    <string name="player_exit_fullscreen">إنهاء ملء الشاشة</string>
+    <string name="player_quality">الجودة</string>
+    <string name="player_quality_auto">تلقائي</string>
+    <string name="player_subtitles">الترجمة</string>
+    <string name="player_subtitles_off">مُعطّلة</string>
+    <string name="player_audio_track">الصوت</string>
+    <string name="player_speed">السرعة</string>
+    <string name="player_speed_value">%1$sx</string>
+    <string name="player_mute">كتم</string>
+    <string name="player_unmute">إلغاء الكتم</string>
+    <string name="player_pip">صورة داخل صورة</string>
+    <string name="player_settings">إعدادات التشغيل</string>
+    <string name="player_now_playing">قيد التشغيل</string>
+    <string name="player_up_next">التالي: %1$s</string>
+    <string name="player_live_edge">مباشر</string>
+    <string name="player_buffering">جارٍ التحميل…</string>
+    <string name="player_connecting">جارٍ الاتصال…</string>
+
     <string name="play">تشغيل</string>
-    <string name="pause">إيقاف مؤقت</string>
+    <string name="pause">إيقاف مؤقّت</string>
     <string name="stop">إيقاف</string>
     <string name="next">التالي</string>
     <string name="previous">السابق</string>
     <string name="fullscreen">ملء الشاشة</string>
-    <string name="exit_fullscreen">الخروج من ملء الشاشة</string>
+    <string name="exit_fullscreen">إنهاء ملء الشاشة</string>
     <string name="quality">الجودة</string>
     <string name="subtitles">الترجمة</string>
-    <string name="audio_track">المسار الصوتي</string>
-    <string name="player_exit_fullscreen">الخروج من ملء الشاشة</string>
-    <string name="player_fullscreen">ملء الشاشة</string>
-    <string name="player_now_playing">يعمل الآن</string>
-    <string name="player_settings">إعدادات المشغل</string>
+    <string name="audio_track">الصوت</string>
+    <string name="picture_in_picture">صورة داخل صورة</string>
+
+    <string name="player_error_generic">هذه القناة لا تستجيب. جرّب قناة أخرى.</string>
+    <string name="player_error_network">انقطع الاتصال. تحقّق من الشبكة وأعد المحاولة.</string>
+    <string name="player_error_source">هذا البث متوقّف حالياً.</string>
+    <string name="player_pip_unsupported">هذا الجهاز لا يدعم «صورة داخل صورة».</string>
+
+    <string name="loading_please_wait">لحظة من فضلك</string>
+    <string name="loading_preparing_movie">جارٍ تجهيز التشغيل</string>
+    <string name="loading_trying_another_server">جارٍ تجربة مصدر آخر…</string>
+    <string name="loading_unavailable">هذا العنوان غير متاح حالياً</string>
+    <string name="loading_try_another">جرّب عنواناً آخر، أو عُد لاحقاً.</string>
+
+    <!-- Cast -->
+    <string name="cast_to_tv">البثّ إلى التلفزيون</string>
+    <string name="cast_connecting">جارٍ الاتصال…</string>
+    <string name="cast_connected">قيد التشغيل على %1$s</string>
+    <string name="cast_disconnected">توقّف البثّ</string>
+    <string name="cast_not_available">لم يُعثر على أجهزة بثّ على هذه الشبكة.</string>
+    <string name="cast_error">تعذّر البثّ. أعد المحاولة.</string>
 
     <!-- Settings -->
+    <string name="settings">الإعدادات</string>
+    <string name="settings_title">الإعدادات</string>
+    <string name="settings_section_appearance">المظهر</string>
+    <string name="settings_section_playback">التشغيل</string>
+    <string name="settings_section_data">البيانات والتخزين</string>
+    <string name="settings_section_privacy">الخصوصية</string>
+    <string name="settings_section_about">حول</string>
+    <string name="appearance">المظهر</string>
+    <string name="settings_playback">التشغيل</string>
+    <string name="settings_storage">التخزين</string>
+    <string name="settings_my_content">محتواك</string>
+    <string name="section_support">الدعم</string>
+    <string name="section_general">عام</string>
     <string name="settings_general">عام</string>
     <string name="settings_appearance">المظهر</string>
-    <string name="settings_playback">التشغيل</string>
     <string name="settings_network">الشبكة</string>
     <string name="settings_about">حول</string>
-    <string name="settings_storage">التخزين</string>
-    <string name="dark_mode">الوضع الداكن</string>
-    <string name="light_mode">الوضع الفاتح</string>
-    <string name="system_default">الافتراضي</string>
+
+    <string name="theme">المظهر</string>
+    <string name="theme_desc">اتبع النظام، أو اختر مظهراً</string>
+    <string name="theme_system">اتّباع النظام</string>
+    <string name="theme_light">فاتح</string>
+    <string name="theme_dark">داكن</string>
+    <string name="dark_mode">داكن</string>
+    <string name="light_mode">فاتح</string>
+    <string name="system_default">اتّباع النظام</string>
+
     <string name="language">اللغة</string>
-    <string name="notifications">الإشعارات</string>
+    <string name="menu_language">اللغة</string>
+    <string name="choose_language">اللغة</string>
+    <string name="language_system">اتّباع النظام</string>
+
+    <string name="setting_autoplay">التشغيل التلقائي</string>
+    <string name="setting_autoplay_desc">ابدأ الحلقة التالية تلقائياً</string>
     <string name="auto_play">التشغيل التلقائي</string>
-    <string name="picture_in_picture">صورة في صورة</string>
-    <string name="section_general">عام</string>
-    <string name="auto_play_videos">التشغيل التلقائي للفيديو</string>
-    <string name="prefer_hd_quality">تفضيل جودة HD</string>
-    <string name="appearance">المظهر</string>
-    <string name="theme">السمة</string>
-    <string name="theme_preview">معاينة السمة</string>
-    <string name="section_support">الدعم</string>
-    <string name="contact_us">تواصل معنا</string>
-    <string name="clear_cache">مسح ذاكرة التخزين المؤقت</string>
-    <string name="clear_cache_desc">تحرير مساحة بمسح البيانات المؤقتة</string>
-    <string name="clear_cache_confirm">سيتم مسح %s من البيانات المؤقتة بما فيها الصور والملفات المؤقتة. هل تريد المتابعة؟</string>
+    <string name="auto_play_videos">التشغيل التلقائي</string>
+    <string name="setting_hd">تفضيل الجودة العالية</string>
+    <string name="setting_hd_desc">استخدم أعلى جودة يسمح بها اتصالك</string>
+    <string name="prefer_hd_quality">تفضيل الجودة العالية</string>
+    <string name="setting_background_audio">الصوت في الخلفية</string>
+    <string name="setting_background_audio_desc">أبقِ الصوت يعمل عند مغادرة التطبيق</string>
+    <string name="background_play">الصوت في الخلفية</string>
+    <string name="setting_data_saver">توفير البيانات</string>
+    <string name="setting_data_saver_desc">جودة أقل وصور أقل على بيانات الجوّال</string>
+    <string name="data_saver">توفير البيانات</string>
+
+    <string name="buffer_size">التخزين المؤقّت</string>
+    <string name="buffer_size_desc">تخزين أكبر يعني تقطيعاً أقل لكن بدايةً أبطأ</string>
+    <string name="buffer_small">صغير — أسرع بداية</string>
+    <string name="buffer_medium">متوازن — مُوصى به</string>
+    <string name="buffer_large">كبير — أكثر سلاسة</string>
+
+    <string name="refresh_frequency">تحديث قائمة القنوات</string>
+    <string name="refresh_manual">عند الطلب فقط</string>
+    <string name="refresh_daily">يومياً</string>
+    <string name="refresh_weekly">أسبوعياً</string>
+    <string name="refresh_never">أبداً</string>
+
+    <string name="clear_cache">مسح ذاكرة التخزين المؤقّت</string>
+    <string name="clear_cache_desc">حرّر المساحة التي تشغلها الشعارات والصور</string>
+    <string name="clear_cache_confirm">مسح %1$s من الصور المخزّنة؟ ستُنزَّل مجدّداً أثناء التصفّح.</string>
     <string name="clear_cache_btn">مسح</string>
-    <string name="cache_cleared">تم مسح ذاكرة التخزين المؤقت بنجاح</string>
-    <string name="share_app">مشاركة التطبيق</string>
-    <string name="share_message">شاهد Nashat TV - قنوات كردية مباشرة!</string>
-    <string name="version_info">الإصدار %s</string>
+    <string name="cache_cleared">مُسحت الذاكرة المؤقّتة</string>
 
-    <!-- Messages -->
-    <string name="loading">جارٍ التحميل...</string>
-    <string name="error_loading">حدث خطأ أثناء تحميل المحتوى</string>
-    <string name="no_channels">لا توجد قنوات متاحة</string>
-    <string name="no_favorites">لا توجد قنوات مفضلة</string>
-    <string name="added_to_favorites">تمت الإضافة للمفضلة</string>
-    <string name="removed_from_favorites">تمت الإزالة من المفضلة</string>
-    <string name="network_error">خطأ في اتصال الشبكة</string>
-    <string name="retry">إعادة المحاولة</string>
-    <string name="empty_list">القائمة فارغة</string>
-
-    <!-- Content Description -->
-    <string name="cd_channel_logo">شعار القناة</string>
-    <string name="cd_favorite_button">إضافة للمفضلة</string>
-    <string name="cd_play_button">تشغيل القناة</string>
-
-    <!-- About -->
-    <string name="version">الإصدار</string>
-    <string name="developer">المطوّر</string>
-    <string name="developer_name">نشاط شمس الدين</string>
-    <string name="contact">التواصل</string>
-    <string name="contact_and_social">التواصل والشبكات الاجتماعية</string>
+    <string name="setting_crash_reports">إرسال تقارير الأعطال</string>
+    <string name="setting_crash_reports_desc">شارك تفاصيل مجهولة الهوية عن الأعطال ليتم إصلاحها</string>
+    <string name="setting_analytics">مشاركة بيانات الاستخدام</string>
+    <string name="setting_analytics_desc">بيانات مجهولة الهوية عن الشاشات والقنوات المستخدمة</string>
     <string name="privacy_policy">سياسة الخصوصية</string>
-    <string name="terms_of_service">شروط الخدمة</string>
-    <string name="rate_app">⭐ تقييم التطبيق</string>
+    <string name="terms_of_service">شروط الاستخدام</string>
+
+    <string name="setting_auto_update">التحديث التلقائي</string>
+    <string name="setting_auto_update_desc">ابحث عن إصدار جديد عند فتح التطبيق</string>
+    <string name="update_check">البحث عن تحديثات</string>
+    <string name="update_checking">جارٍ البحث…</string>
+    <string name="update_up_to_date">أنت على أحدث إصدار</string>
+    <string name="update_available_title">الإصدار %1$s متاح</string>
+    <string name="update_available_body">لديك %1$s.</string>
+    <string name="update_download">تنزيل</string>
+    <string name="update_downloading">جارٍ التنزيل %1$d%%</string>
+    <string name="update_install">تثبيت</string>
+    <string name="update_later">لاحقاً</string>
+    <string name="update_failed">تعذّر تنزيل التحديث. تحقّق من اتصالك وأعد المحاولة.</string>
+    <string name="update_permission_needed">يحتاج نشأت تي في إلى إذن لتثبيت التحديثات.</string>
+
     <string name="about_title">حول</string>
-    <string name="about_body">Nashat TV هو تطبيقك المتميز لمشاهدة القنوات الكردية مباشرة. شاهد قنواتك المفضلة في أي وقت ومن أي مكان بجودة عالية. صُنع بـ ❤️ بواسطة نشاط شمس الدين.\n\nللإبلاغ عن الأخطاء أو الملاحظات، تواصل عبر البريد الإلكتروني أو وسائل التواصل الاجتماعي.</string>
-    <string name="contact_value">Nashatkurdi02@gmail.com</string>
+    <string name="menu_about">حول</string>
+    <string name="about_body">يجمع نشأت تي في القنوات الكردية والإقليمية المباشرة مع الأفلام والمسلسلات في مكان واحد، وبلغتك.</string>
+    <string name="version">الإصدار</string>
+    <string name="version_info">الإصدار %1$s</string>
+    <string name="last_updated">آخر تحديث %1$s</string>
+    <string name="developer">المطوّر</string>
+    <string name="developer_name">نشأت شمس الدين</string>
+    <string name="created_by">من إعداد</string>
+    <string name="contact">التواصل</string>
+    <string name="contact_us">التواصل مع الدعم</string>
+    <string name="contact_and_social">التواصل</string>
     <string name="email_label">البريد الإلكتروني</string>
     <string name="instagram_label">إنستغرام</string>
     <string name="facebook_label">فيسبوك</string>
+    <string name="rate_app">قيّم التطبيق</string>
+    <string name="share_app">شارك نشأت تي في</string>
+    <string name="share_message">شاهد القنوات الكردية المباشرة والأفلام والمسلسلات على نشأت تي في.</string>
 
-    <!-- Menu -->
-    <string name="menu_about">حول</string>
-    <string name="menu_favorites">المفضلة</string>
-    <string name="menu_language">اللغة</string>
-    <string name="menu_sort_curated">الترتيب: مختار</string>
+    <!-- Onboarding -->
+    <string name="onboarding_language_title">اختر لغتك</string>
+    <string name="onboarding_language_body">يمكنك تغييرها في أي وقت من الإعدادات.</string>
+    <string name="onboarding_region_title">من أين تشاهد؟</string>
+    <string name="onboarding_region_body">تُعرض قنوات منطقتك أولاً.</string>
+    <string name="onboarding_region_skip">اعرض كل المناطق</string>
+    <string name="onboarding_interests_title">ماذا تحبّ أن تشاهد؟</string>
+    <string name="onboarding_interests_body">اختر بضعة اهتمامات. هذا يحدّد ما تراه في الرئيسية.</string>
+    <string name="onboarding_finish">ابدأ المشاهدة</string>
 
-    <!-- Language Dialog -->
-    <string name="choose_language">اختر اللغة</string>
-    <string name="lang_ckb">الكردية (سوراني)</string>
-    <string name="lang_ar">العربية</string>
-    <string name="lang_en">الإنجليزية</string>
+    <!-- States -->
+    <string name="state_loading">جارٍ التحميل…</string>
+    <string name="loading">جارٍ التحميل…</string>
+    <string name="splash_loading_text">جارٍ تحميل القنوات…</string>
+    <string name="splash_ready_text">جاهز</string>
+    <string name="splash_offline_text">غير متّصل — تُعرض قنواتك المحفوظة</string>
+
+    <string name="state_offline_title">أنت غير متّصل</string>
+    <string name="state_offline_body">اتّصل بالإنترنت لتحميل القنوات المباشرة.</string>
+    <string name="live_tv_no_connection">أنت غير متّصل. اتّصل وأعد المحاولة.</string>
+    <string name="network_error">لا يوجد اتصال. تحقّق من الشبكة وأعد المحاولة.</string>
+
+    <string name="state_error_title">حدث خطأ ما</string>
+    <string name="state_error_body">تعذّر تحميل هذا. أعد المحاولة بعد قليل.</string>
+    <string name="error_loading">تعذّر تحميل هذا. أعد المحاولة بعد قليل.</string>
+
+    <string name="state_empty_channels_title">لا توجد قنوات هنا</string>
+    <string name="state_empty_channels_body">جرّب فئة أخرى، أو امسح عوامل التصفية.</string>
+    <string name="no_channels">لا توجد قنوات تطابق التصفية</string>
+    <string name="no_favorites">لا توجد قنوات مفضّلة بعد</string>
+    <string name="empty_list">لا شيء هنا بعد</string>
+
+    <string name="toast_refresh_success">حُدّثت قائمة القنوات</string>
+    <string name="toast_offline_cached">غير متّصل — تُعرض القنوات المحفوظة</string>
+
+    <!-- Filters -->
+    <string name="advanced_filters">التصفية</string>
+    <string name="filter_rating">أدنى تقييم</string>
+    <string name="rating_label">أدنى تقييم</string>
+    <string name="filter_year">السنة</string>
+    <string name="year_range_label">السنة</string>
+    <string name="filter_genre">النوع</string>
+    <string name="filter_country">البلد</string>
+    <string name="filter_apply">اعرض النتائج</string>
+    <string name="filter_reset">إعادة تعيين</string>
+    <string name="filter_active_count">%1$d عامل تصفية</string>
+    <string name="menu_sort_curated">الترتيب المُوصى به</string>
+    <string name="sort_name">الاسم</string>
+    <string name="sort_recent">الأحدث إضافةً</string>
+    <string name="sort_rating">التقييم</string>
+
+    <string name="m3u_url_prompt">الصق عنوان قائمة M3U أو M3U8</string>
+
+    <!-- Legacy sections -->
+    <string name="recommended_channels">مُوصى به لك</string>
+    <string name="recommended_for_you">مُوصى به لك</string>
+    <string name="based_on_watching">بناءً على ما تشاهده</string>
+    <string name="all_channels">كل القنوات</string>
+    <string name="trending_now">رائج الآن</string>
+    <string name="trending_this_week">رائج هذا الأسبوع</string>
+    <string name="recently_watched">شُوهد مؤخّراً</string>
+    <string name="popular_channels">القنوات الرائجة</string>
+    <string name="popular_label">رائج</string>
+    <string name="popular_series">مسلسلات رائجة</string>
+    <string name="top_rated_label">الأعلى تقييماً</string>
+    <string name="top_rated_series">المسلسلات الأعلى تقييماً</string>
+    <string name="now_playing_theaters">في دور العرض الآن</string>
+    <string name="airing_today">يُعرض اليوم</string>
+    <string name="anime_animation">رسوم متحرّكة وأنمي</string>
+    <string name="anime_series">مسلسلات رسوم متحرّكة</string>
+    <string name="featured_label">مميّز</string>
+    <string name="total_channels">القنوات</string>
+    <string name="watching_now">تُشاهَد الآن</string>
+    <string name="grid_view">شبكة</string>
+    <string name="list_view">قائمة</string>
+    <string name="theme_preview">معاينة</string>
 
     <!-- Accessibility -->
+    <string name="cd_back">رجوع</string>
+    <string name="cd_back_button">رجوع</string>
+    <string name="cd_close">إغلاق</string>
+    <string name="cd_search">بحث</string>
+    <string name="cd_settings">الإعدادات</string>
     <string name="acc_settings">الإعدادات</string>
-    <string name="acc_pip">صورة في صورة</string>
-    <string name="acc_rewind">إرجاع</string>
+    <string name="cd_more_options">خيارات إضافية</string>
+    <string name="cd_share">مشاركة</string>
+    <string name="cd_channel_logo">شعار %1$s</string>
+    <string name="cd_poster">ملصق %1$s</string>
+    <string name="cd_play_channel">تشغيل %1$s</string>
+    <string name="cd_play_button">تشغيل</string>
+    <string name="cd_favourite_add">أضف %1$s إلى المفضّلة</string>
+    <string name="cd_favourite_remove">أزل %1$s من المفضّلة</string>
+    <string name="cd_favorite_button">أضف إلى المفضّلة</string>
+    <string name="cd_clear_search">مسح البحث</string>
+    <string name="cd_voice_search">البحث الصوتي</string>
+    <string name="cd_app_logo">نشأت تي في</string>
+    <string name="cd_progress">شُوهد %1$d%%</string>
+
     <string name="acc_play">تشغيل</string>
-    <string name="acc_pause">إيقاف مؤقت</string>
-    <string name="acc_fast_forward">تقديم سريع</string>
-    <string name="acc_audio_track">المسار الصوتي</string>
+    <string name="acc_pause">إيقاف مؤقّت</string>
+    <string name="acc_rewind">١٠ ثوانٍ للخلف</string>
+    <string name="acc_fast_forward">١٠ ثوانٍ للأمام</string>
     <string name="acc_subtitles">الترجمة</string>
-    <string name="acc_volume">مستوى الصوت</string>
+    <string name="acc_audio_track">مسار الصوت</string>
+    <string name="acc_volume">الصوت</string>
+    <string name="acc_pip">صورة داخل صورة</string>
+    <string name="acc_cast">البثّ إلى التلفزيون</string>
 
-    <!-- Theme Modes -->
-    <string name="nashat_theme">سمة نشأت</string>
-    <string name="theme_cinematic">سينمائي</string>
-    <string name="theme_ambient">مريح</string>
-    <string name="theme_aurora">أورورا</string>
-    <string name="theme_desc">اختر تجربتك البصرية</string>
+    <string name="stats_preview">%1$s خلال %2$d جلسة</string>
 
-    <!-- My Content Section -->
-    <string name="settings_my_content">محتواي</string>
+    <string name="player_gesture_hints">اسحب لأعلى أو لأسفل على اليسار للسطوع، وعلى اليمين للصوت. اضغط مرّتين للتخطّي.</string>
 
-    <!-- Watch Statistics -->
-    <string name="stats_title">إحصائيات المشاهدة</string>
-    <string name="stats_subtitle">تتبع عادات المشاهدة الخاصة بك</string>
-    <string name="stats_total_time">إجمالي وقت المشاهدة</string>
-    <string name="stats_sessions">جلسات</string>
-    <string name="stats_top_category">الفئة الأكثر مشاهدة</string>
-    <string name="stats_this_week">هذا الأسبوع</string>
-    <string name="stats_by_category">حسب الفئة</string>
-    <string name="stats_recent">الجلسات الأخيرة</string>
-    <string name="stats_reset">إعادة تعيين الإحصائيات</string>
-    <string name="stats_reset_confirm">هل أنت متأكد من إعادة تعيين جميع إحصائيات المشاهدة؟ لا يمكن التراجع عن هذا.</string>
-    <string name="stats_reset_done">تم إعادة تعيين الإحصائيات بنجاح</string>
+    <string name="server_choose">اختر مصدراً</string>
+    <string name="server_latency_ms">%1$d ms</string>
+    <string name="server_checking">جارٍ الفحص…</string>
+    <string name="server_unavailable">غير متاح</string>
+    <string name="server_playing">قيد التشغيل</string>
+    <string name="server_unavailable_message">هذا المصدر لا يستجيب حالياً.</string>
 
-    <!-- Playlists -->
-    <string name="playlists_title">قوائم التشغيل</string>
-    <string name="playlists_subtitle">إنشاء وإدارة قوائم التشغيل</string>
-    <string name="playlists_count">قوائم تشغيل</string>
-    <string name="playlist_create_new">إنشاء قائمة تشغيل جديدة</string>
-    <string name="playlist_create">إنشاء</string>
-    <string name="playlist_created">تم إنشاء قائمة التشغيل!</string>
-    <string name="playlist_name_hint">اسم قائمة التشغيل…</string>
-    <string name="playlist_empty">قائمة التشغيل فارغة. أضف قنوات أو أفلام من صفحات التفاصيل.</string>
-    <string name="playlist_rename">إعادة تسمية</string>
-    <string name="playlist_delete">حذف</string>
-    <string name="playlist_delete_confirm">هل أنت متأكد من حذف قائمة التشغيل هذه؟</string>
-    <string name="playlist_deleted">تم حذف قائمة التشغيل</string>
-    <string name="playlist_add_to">إضافة إلى قائمة التشغيل</string>
-    <string name="playlist_added">تمت الإضافة إلى قائمة التشغيل!</string>
-
-    <!-- Recommendations -->
-    <string name="recommended_for_you">مقترح لك</string>
-    <string name="based_on_watching">بناءً على ما تشاهده</string>
 </resources>

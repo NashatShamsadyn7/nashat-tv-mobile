@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Advanced Filters"
+            android:text="@string/advanced_filters"
             android:textColor="@color/text_primary"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -47,7 +47,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Categories:"
+        android:text="@string/categories_label"
         android:textColor="@color/text_primary"
         android:textStyle="bold"
         android:layout_marginBottom="12dp"/>
@@ -63,7 +63,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rating"
+        android:text="@string/rating_label"
         android:textColor="@color/text_primary"
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
@@ -96,7 +96,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Year"
+        android:text="@string/year_range_label"
         android:textColor="@color/text_primary"
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>

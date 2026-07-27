@@ -23,6 +23,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.mediarouter.app.MediaRouteButton;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import com.google.android.exoplayer2.ext.cast.CastPlayer;
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.gms.cast.framework.CastState;
@@ -35,6 +37,7 @@ import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.MappingTrackSelector;
 import com.google.android.exoplayer2.util.Util;
+import com.google.android.exoplayer2.util.MimeTypes;
 import com.google.android.exoplayer2.ui.PlayerView;
 import android.app.PictureInPictureParams;
 import android.util.Rational;
@@ -48,6 +51,41 @@ import androidx.core.content.ContextCompat;
 import android.util.Log;
 
 public class PlayerActivity extends BaseActivity {
+
+    private static final String TAG = "PlayerActivity";
+
+    /**
+     * Swaps the bottom bar between its live and on-demand forms.
+     *
+     * <p>A live channel has no duration, so ExoPlayer reports its position
+     * against an unset timeline. The shared controller used to show the seek
+     * bar regardless, which rendered readings like "01:00 / 00:31" on a
+     * broadcast and offered a scrubber that could not move — and a playback
+     * speed control, which means nothing on a live feed.
+     *
+     * <p>Called on STATE_READY because that is the first point at which the
+     * timeline is populated and {@code isCurrentMediaItemLive()} is reliable.
+     */
+    private void applyLiveOrOnDemandControls() {
+        if (player == null || playerView == null) return;
+
+        boolean live = player.isCurrentMediaItemLive();
+
+        View liveBadge = playerView.findViewById(R.id.live_indicator);
+        View vodControls = playerView.findViewById(R.id.vod_controls);
+
+        if (liveBadge != null) liveBadge.setVisibility(live ? View.VISIBLE : View.GONE);
+        if (vodControls != null) vodControls.setVisibility(live ? View.GONE : View.VISIBLE);
+        if (playbackSpeedView != null) {
+            playbackSpeedView.setVisibility(live ? View.GONE : View.VISIBLE);
+        }
+
+        // Skip buttons are only meaningful when there is somewhere to skip to.
+        View rew = playerView.findViewById(com.google.android.exoplayer2.ui.R.id.exo_rew);
+        View ffwd = playerView.findViewById(com.google.android.exoplayer2.ui.R.id.exo_ffwd);
+        if (rew != null) rew.setVisibility(live ? View.GONE : View.VISIBLE);
+        if (ffwd != null) ffwd.setVisibility(live ? View.GONE : View.VISIBLE);
+    }
 
     private PlayerView playerView;
     private ExoPlayer player;
@@ -305,10 +343,15 @@ public class PlayerActivity extends BaseActivity {
     @Override
     public void onUserLeaveHint() {
         super.onUserLeaveHint();
-        // User requested that the channel must be closed and not continue when leaving
-        // if (player != null && player.isPlaying() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        //     enterPipMode();
-        // }
+        if (player != null && player.isPlaying()
+                && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+                && SettingsActivity.isBackgroundPlayEnabled(this)
+                && getPackageManager().hasSystemFeature(android.content.pm.PackageManager.FEATURE_PICTURE_IN_PICTURE)) {
+            try {
+                enterPipMode();
+            } catch (Throwable ignore) {
+            }
+        }
     }
 
     @Override
@@ -351,6 +394,15 @@ public class PlayerActivity extends BaseActivity {
                 String cmd = results.get(0);
                 handleVoiceCommand(cmd);
             }
+        } else if (requestCode == REQ_PICK_SUBTITLE && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            Uri uri = data.getData();
+            try {
+                getContentResolver().takePersistableUriPermission(uri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            } catch (Throwable ignore) {
+            }
+            applySubtitleUri(uri);
         }
     }
 
@@ -508,6 +560,10 @@ public class PlayerActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        if (SettingsActivity.isBackgroundPlayEnabled(this)) {
+            // Keep player alive — audio continues
+            return;
+        }
         if (Util.SDK_INT <= 23) {
             releasePlayer();
         }
@@ -516,6 +572,9 @@ public class PlayerActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        if (SettingsActivity.isBackgroundPlayEnabled(this)) {
+            return;
+        }
         if (Util.SDK_INT > 23) {
             releasePlayer();
         }
@@ -532,13 +591,29 @@ public class PlayerActivity extends BaseActivity {
                 .setPreferredAudioLanguage("ku"); // Kurdish preference
 
         // If HD is disabled, limit to SD to save data and improve stability
-        if (!hdEnabled) {
+        boolean dataSaver = SettingsActivity.isDataSaverEnabled(this);
+        if (!hdEnabled || dataSaver) {
             params.setMaxVideoSizeSd();
+        }
+        if (dataSaver) {
+            params.setMaxVideoBitrate(800_000);
         }
         trackSelector.setParameters(params.build());
 
+        int bufIdx = SettingsActivity.getBufferSize(this);
+        int minBufMs = (bufIdx == 0) ? 8000 : (bufIdx == 2 ? 30000 : 15000);
+        int maxBufMs = (bufIdx == 0) ? 20000 : (bufIdx == 2 ? 60000 : 30000);
+        int playbackBufMs = (bufIdx == 0) ? 1500 : (bufIdx == 2 ? 5000 : 2500);
+        int rebufMs = (bufIdx == 0) ? 3000 : (bufIdx == 2 ? 8000 : 5000);
+
+        com.google.android.exoplayer2.DefaultLoadControl loadControl =
+                new com.google.android.exoplayer2.DefaultLoadControl.Builder()
+                        .setBufferDurationsMs(minBufMs, maxBufMs, playbackBufMs, rebufMs)
+                        .build();
+
         player = new ExoPlayer.Builder(this)
                 .setTrackSelector(trackSelector)
+                .setLoadControl(loadControl)
                 .build();
 
         playerView.setPlayer(player);
@@ -552,14 +627,36 @@ public class PlayerActivity extends BaseActivity {
                     if (playbackStartTime == 0) {
                         playbackStartTime = System.currentTimeMillis();
                     }
-                } else if (playbackState == Player.STATE_BUFFERING) {
-                    // Show loading indicator
+                    applyLiveOrOnDemandControls();
                 }
             }
 
             @Override
             public void onPlayerError(com.google.android.exoplayer2.PlaybackException error) {
-                Toast.makeText(PlayerActivity.this, "Playback error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                // The old handler surfaced error.getMessage() directly — raw
+                // ExoPlayer text such as "Source error" or an HTTP status, in
+                // English, telling the user nothing they could act on. The
+                // cause is mapped to advice instead, and the detail goes to
+                // Crashlytics where it is actually useful.
+                Log.w(TAG, "Playback failed", error);
+                int message;
+                switch (error.errorCode) {
+                    case com.google.android.exoplayer2.PlaybackException
+                            .ERROR_CODE_IO_NETWORK_CONNECTION_FAILED:
+                    case com.google.android.exoplayer2.PlaybackException
+                            .ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT:
+                        message = R.string.player_error_network;
+                        break;
+                    case com.google.android.exoplayer2.PlaybackException
+                            .ERROR_CODE_IO_BAD_HTTP_STATUS:
+                    case com.google.android.exoplayer2.PlaybackException
+                            .ERROR_CODE_IO_FILE_NOT_FOUND:
+                        message = R.string.player_error_source;
+                        break;
+                    default:
+                        message = R.string.player_error_generic;
+                }
+                Snackbar.make(playerView, message, Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -615,6 +712,12 @@ public class PlayerActivity extends BaseActivity {
                     }
                 }
                 playbackStartTime = 0;
+            }
+            try {
+                player.setPlayWhenReady(false);
+                player.stop();
+                player.clearMediaItems();
+            } catch (Exception ignore) {
             }
             playerView.setPlayer(null);
             player.release();
@@ -764,20 +867,55 @@ public class PlayerActivity extends BaseActivity {
     }
 
     private void showSubtitleDialog() {
-        if (trackSelector == null) return;
-        
-        MappingTrackSelector.MappedTrackInfo mappedTrackInfo = trackSelector.getCurrentMappedTrackInfo();
-        if (mappedTrackInfo != null) {
-            for (int rendererIndex = 0; rendererIndex < mappedTrackInfo.getRendererCount(); rendererIndex++) {
-                if (mappedTrackInfo.getRendererType(rendererIndex) == C.TRACK_TYPE_TEXT) {
-                    // Show subtitle selection dialog
-                    Toast.makeText(this, "Subtitle selection available", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-            }
-        } else {
-            Toast.makeText(this, "No subtitles available", Toast.LENGTH_SHORT).show();
+        String[] options = {"📁 Load subtitle file (.srt / .vtt)", "❌ Disable subtitles"};
+        new AlertDialog.Builder(this)
+                .setTitle("Subtitles")
+                .setItems(options, (dialog, which) -> {
+                    if (which == 0) {
+                        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                        intent.addCategory(Intent.CATEGORY_OPENABLE);
+                        intent.setType("*/*");
+                        intent.putExtra(Intent.EXTRA_MIME_TYPES,
+                                new String[]{"application/x-subrip", "text/vtt", "text/plain", "*/*"});
+                        try {
+                            startActivityForResult(intent, REQ_PICK_SUBTITLE);
+                        } catch (Exception e) {
+                            Toast.makeText(this, "No file picker available", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        applySubtitleUri(null);
+                        Toast.makeText(this, "Subtitles disabled", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show();
+    }
+
+    private static final int REQ_PICK_SUBTITLE = 9931;
+
+    private void applySubtitleUri(@Nullable Uri subtitleUri) {
+        if (player == null || channelUrl == null) return;
+        long savedPosition = player.getCurrentPosition();
+
+        MediaItem.Builder builder = new MediaItem.Builder().setUri(Uri.parse(channelUrl));
+        if (subtitleUri != null) {
+            String mime = MimeTypes.APPLICATION_SUBRIP;
+            String ext = subtitleUri.toString().toLowerCase(java.util.Locale.US);
+            if (ext.endsWith(".vtt")) mime = MimeTypes.TEXT_VTT;
+            else if (ext.endsWith(".ssa") || ext.endsWith(".ass")) mime = MimeTypes.TEXT_SSA;
+
+            MediaItem.SubtitleConfiguration sub = new MediaItem.SubtitleConfiguration.Builder(subtitleUri)
+                    .setMimeType(mime)
+                    .setLanguage("en")
+                    .setSelectionFlags(C.SELECTION_FLAG_DEFAULT)
+                    .build();
+            builder.setSubtitleConfigurations(java.util.Collections.singletonList(sub));
+            Toast.makeText(this, "Subtitle loaded", Toast.LENGTH_SHORT).show();
         }
+
+        player.setMediaItem(builder.build());
+        player.prepare();
+        player.seekTo(savedPosition);
+        player.play();
     }
 
     private void showVolumeDialog() {
@@ -1012,6 +1150,7 @@ public class PlayerActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        releasePlayer();
         if (castManager != null) {
             castManager.release();
             castManager = null;

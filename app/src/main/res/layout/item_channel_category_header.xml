@@ -16,8 +16,7 @@
         android:layout_weight="1"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:fontFamily="sans-serif-medium" />
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/tvViewAll"
@@ -27,7 +26,6 @@
         android:textSize="12sp"
         android:textColor="#D50000"
         android:textStyle="bold"
-        android:fontFamily="sans-serif-medium"
         android:focusable="true"
         android:clickable="true"
         android:padding="4dp" />

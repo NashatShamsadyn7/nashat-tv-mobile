@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Watch-time icon. Replaces a 📈 emoji that was set as the text of a TextView:
+  an emoji cannot be tinted with the theme, renders as a different picture on
+  every vendor's font, and TalkBack announces it as "chart increasing" in the
+  middle of the row's label.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal">
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M5,20h2c0.55,0 1,-0.45 1,-1v-8c0,-0.55 -0.45,-1 -1,-1H5c-0.55,0 -1,0.45 -1,1v8C4,19.55 4.45,20 5,20z" />
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M11,20h2c0.55,0 1,-0.45 1,-1V5c0,-0.55 -0.45,-1 -1,-1h-2c-0.55,0 -1,0.45 -1,1v14C10,19.55 10.45,20 11,20z" />
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M16,14v5c0,0.55 0.45,1 1,1h2c0.55,0 1,-0.45 1,-1v-5c0,-0.55 -0.45,-1 -1,-1h-2C16.45,13 16,13.45 16,14z" />
+</vector>

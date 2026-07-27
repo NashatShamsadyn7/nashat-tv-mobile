@@ -14,8 +14,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-medium" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtChannelCategory"

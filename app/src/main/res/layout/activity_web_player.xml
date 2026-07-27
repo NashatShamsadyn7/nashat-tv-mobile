@@ -42,7 +42,6 @@
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
-            android:fontFamily="sans-serif-medium"
             android:maxLines="1"
             android:ellipsize="end" />
 
@@ -116,13 +115,50 @@
             android:layout_marginStart="4dp"
             android:textColor="@color/accent_primary"
             android:textSize="11sp"
-            android:fontFamily="sans-serif-medium"
             android:text="Server 1" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1" />
+
+        <!-- Episode controls (only visible for series) -->
+        <LinearLayout
+            android:id="@+id/episodeControls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageButton
+                android:id="@+id/btnPrevEpisode"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Previous Episode"
+                android:rotation="180"
+                android:src="@drawable/ic_chevron_right_24"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/txtEpisodeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:text="S1·E1"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+            <ImageButton
+                android:id="@+id/btnNextEpisode"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Next Episode"
+                android:src="@drawable/ic_chevron_right_24"
+                app:tint="@color/accent_primary" />
+        </LinearLayout>
 
         <!-- Lock/Unlock controls toggle -->
         <ImageButton
@@ -137,12 +173,91 @@
 
     </LinearLayout>
 
-    <!-- Loading indicator -->
+    <!-- Loading indicator (small spinner) -->
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:indeterminateTint="@color/accent_primary" />
+
+    <!-- ============ Persistent Floating Server Button (always visible) ============ -->
+    <LinearLayout
+        android:id="@+id/floatingServerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/chip_bg_active"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_settings_24"
+            app:tint="@color/white"
+            android:contentDescription="Server" />
+
+        <TextView
+            android:id="@+id/floatingServerLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="Server"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- ============ Custom Loading Overlay (covers WebView errors) ============ -->
+    <FrameLayout
+        android:id="@+id/loadingOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ProgressBar
+                android:id="@+id/loadingSpinner"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:indeterminateTint="@color/accent_primary" />
+
+            <TextView
+                android:id="@+id/loadingTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/loading_please_wait"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/loadingSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/loading_preparing_movie"
+                android:textColor="#B3FFFFFF"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </FrameLayout>
 
 </FrameLayout>

@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════════
+   LIVE TV — the launcher screen
+  ══════════════════════════════════════════════════════════════════════
+
+   What changed and why:
+
+   · THE CATEGORY FILTER IS VISIBLE. The old file built the whole filter row
+     and then set visibility="gone" on it, so a fully working News/Sport/Kids
+     filter shipped switched off and 40 channels arrived as one flat grid.
+
+   · THE COUNT IS NOT A BADGE. "38 channels" sat in a loud filled pill in the
+     corner — the highest-contrast object on a screen whose actual subject is
+     the artwork below it. It is now a quiet line of metadata under the title,
+     where it informs without competing.
+
+   · THE SEARCH FIELD IS PART OF THE BAR. It was a floating white card with
+     its own elevation, which on the light surface read as a separate sheet
+     laid on the screen.
+
+   · EVERY SIZE COMES FROM A TOKEN. No inline sp or dp values, so the TV and
+     tablet builds rescale this screen with no second copy of the file.
+
+   · NAV ITEMS ARE 48dp TOUCH TARGETS with 12sp labels. They were unbounded
+     rows with 10sp labels, below the legibility floor and below the
+     accessibility minimum for a tap target.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_base"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".LiveTvActivity">
+
+    <!-- ══ APP BAR ══════════════════════════════════════════════════ -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface_base"
+        app:elevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/screen_gutter"
+            android:paddingTop="@dimen/space_300"
+            android:paddingEnd="@dimen/screen_gutter">
+
+            <!-- Wordmark + count -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_size_lg"
+                    android:layout_height="@dimen/icon_size_lg"
+                    android:contentDescription="@string/cd_app_logo"
+                    android:src="@drawable/nashat_logo" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_300"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"
+                        android:textAppearance="@style/TextAppearance.Nashat.Wordmark"
+                        android:textColor="@color/content_primary" />
+
+                    <!-- Region focus. Populated by updateSubtitle(). -->
+                    <TextView
+                        android:id="@+id/tvScreenSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textAppearance="@style/TextAppearance.Nashat.Body.Small"
+                        tools:text="Showing Iraq first" />
+                </LinearLayout>
+
+                <!-- Channel count. Plain text, tertiary: it is a fact about
+                     the list, not an action or a status. -->
+                <TextView
+                    android:id="@+id/tvChannelCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_200"
+                    android:textAppearance="@style/TextAppearance.Nashat.Label.Medium"
+                    android:textColor="@color/content_tertiary"
+                    tools:text="38 channels" />
+            </LinearLayout>
+
+            <!-- Search -->
+            <EditText
+                android:id="@+id/editSearch"
+                style="@style/Widget.Nashat.SearchField"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/space_300"
+                android:autofillHints=""
+                android:drawableStart="@drawable/ic_search_24"
+                android:drawableTint="@color/content_tertiary"
+                android:hint="@string/live_search_hint"
+                android:importantForAutofill="no" />
+        </LinearLayout>
+
+        <!-- ══ CATEGORY FILTER ══════════════════════════════════════
+             Populated by rebuildCategoryChips(). Visible — the old file
+             hid this row entirely. -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingStart="@dimen/screen_gutter"
+            android:paddingTop="@dimen/space_300"
+            android:paddingEnd="@dimen/screen_gutter"
+            android:paddingBottom="@dimen/space_200"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/categoryContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- ══ CONTENT ══════════════════════════════════════════════════ -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerChannels"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingStart="@dimen/space_300"
+                android:paddingEnd="@dimen/space_300"
+                android:paddingBottom="@dimen/space_400"
+                android:scrollbars="none"
+                tools:itemCount="12"
+                tools:listitem="@layout/item_live_channel" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <!-- Empty / error state. Title, explanation, and one recovery
+             action — the old version had an icon and a bare error line. -->
+        <LinearLayout
+            android:id="@+id/emptyView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/space_800"
+            android:visibility="gone"
+            tools:visibility="gone">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size_xl"
+                android:layout_height="@dimen/icon_size_xl"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_tv_series"
+                app:tint="@color/content_tertiary" />
+
+            <TextView
+                android:id="@+id/tvEmptyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_400"
+                android:gravity="center"
+                android:text="@string/state_empty_channels_title"
+                android:textAppearance="@style/TextAppearance.Nashat.Title.Medium"
+                android:textColor="@color/content_primary" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_200"
+                android:gravity="center"
+                android:text="@string/state_empty_channels_body"
+                android:textAppearance="@style/TextAppearance.Nashat.Body.Medium" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRetry"
+                style="@style/Widget.Nashat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_600"
+                android:text="@string/action_retry" />
+        </LinearLayout>
+
+        <!-- Loading skeleton. Twelve placeholder tiles laid out on the same
+             grid as the real content, so the list does not jump when it
+             arrives. -->
+        <LinearLayout
+            android:id="@+id/skeletonView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/space_300"
+            android:visibility="gone"
+            tools:visibility="gone">
+
+            <include layout="@layout/item_skeleton_row" />
+            <include layout="@layout/item_skeleton_row" />
+            <include layout="@layout/item_skeleton_row" />
+        </LinearLayout>
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progress"
+            style="@style/Widget.Nashat.Progress.Circular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <!-- ══ BOTTOM NAVIGATION ════════════════════════════════════════
+         Still hand-built here because this Activity has not yet moved to
+         the shared NavHost. Every item is a full-height 48dp target with a
+         12sp label, matching the tokens the rest of the app uses. -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/stroke_hairline"
+        android:background="@color/border_hairline" />
+
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_nav_height"
+        android:background="@color/surface_base"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:minHeight="@dimen/touch_target_min"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/bottom_nav_icon_size"
+                android:layout_height="@dimen/bottom_nav_icon_size"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_tv_series"
+                app:tint="@color/accent_text" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_100"
+                android:text="@string/nav_live"
+                android:textAppearance="@style/TextAppearance.Nashat.Label.Medium"
+                android:textColor="@color/accent_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navMovies"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="@string/nav_movies"
+            android:focusable="true"
+            android:gravity="center"
+            android:minHeight="@dimen/touch_target_min"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/bottom_nav_icon_size"
+                android:layout_height="@dimen/bottom_nav_icon_size"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_movie_24"
+                app:tint="@color/content_secondary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_100"
+                android:text="@string/nav_movies"
+                android:textAppearance="@style/TextAppearance.Nashat.Label.Medium"
+                android:textColor="@color/content_secondary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navSeries"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="@string/nav_series"
+            android:focusable="true"
+            android:gravity="center"
+            android:minHeight="@dimen/touch_target_min"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/bottom_nav_icon_size"
+                android:layout_height="@dimen/bottom_nav_icon_size"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_list_24"
+                app:tint="@color/content_secondary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_100"
+                android:text="@string/nav_series"
+                android:textAppearance="@style/TextAppearance.Nashat.Label.Medium"
+                android:textColor="@color/content_secondary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fabSettings"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="@string/nav_settings"
+            android:focusable="true"
+            android:gravity="center"
+            android:minHeight="@dimen/touch_target_min"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/bottom_nav_icon_size"
+                android:layout_height="@dimen/bottom_nav_icon_size"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_settings_24"
+                app:tint="@color/content_secondary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_100"
+                android:text="@string/nav_settings"
+                android:textAppearance="@style/TextAppearance.Nashat.Label.Medium"
+                android:textColor="@color/content_secondary" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

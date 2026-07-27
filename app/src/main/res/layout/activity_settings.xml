@@ -38,7 +38,7 @@
                 android:paddingStart="4dp"
                 android:paddingBottom="8dp"
                 android:text="@string/settings_playback"
-                android:textColor="@color/accent_primary" />
+                android:textColor="@color/content_tertiary" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -62,9 +62,7 @@
                         android:padding="16dp"
                         android:text="@string/auto_play_videos"
                         android:textColor="@color/text_primary"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        app:thumbTint="@color/accent_primary"
-                        app:trackTint="@color/border_subtle" />
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
 
                     <View
                         android:layout_width="match_parent"
@@ -80,9 +78,147 @@
                         android:padding="16dp"
                         android:text="@string/prefer_hd_quality"
                         android:textColor="@color/text_primary"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        app:thumbTint="@color/accent_primary"
-                        app:trackTint="@color/border_subtle" />
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@color/border_subtle" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/switchDataSaver"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="@string/data_saver"
+                        android:textColor="@color/text_primary"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@color/border_subtle" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/switchBackgroundPlay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:text="@string/background_play"
+                        android:textColor="@color/text_primary"
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@color/border_subtle" />
+
+                    <LinearLayout
+                        android:id="@+id/buffer_option"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="16dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="16dp"
+                            android:src="@drawable/ic_settings_24"
+                            app:tint="@color/content_secondary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/buffer_size"
+                                android:textColor="@color/text_primary"
+                                android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                            <TextView
+                                android:id="@+id/tvBufferValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/buffer_medium"
+                                android:textColor="@color/text_tertiary"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_chevron_right_24"
+                            app:tint="@color/text_tertiary" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@color/border_subtle" />
+
+                    <LinearLayout
+                        android:id="@+id/refresh_option"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="16dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="16dp"
+                            android:src="@drawable/ic_settings_24"
+                            app:tint="@color/content_secondary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/refresh_frequency"
+                                android:textColor="@color/text_primary"
+                                android:textAppearance="?attr/textAppearanceBodyLarge" />
+
+                            <TextView
+                                android:id="@+id/tvRefreshValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/refresh_weekly"
+                                android:textColor="@color/text_tertiary"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_chevron_right_24"
+                            app:tint="@color/text_tertiary" />
+                    </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -95,7 +231,7 @@
                 android:paddingTop="24dp"
                 android:paddingBottom="8dp"
                 android:text="@string/appearance"
-                android:textColor="@color/accent_primary" />
+                android:textColor="@color/content_tertiary" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -120,9 +256,7 @@
                         android:padding="16dp"
                         android:text="@string/dark_mode"
                         android:textColor="@color/text_primary"
-                        android:textAppearance="?attr/textAppearanceBodyLarge"
-                        app:thumbTint="@color/accent_primary"
-                        app:trackTint="@color/border_subtle" />
+                        android:textAppearance="?attr/textAppearanceBodyLarge" />
 
                     <View
                         android:layout_width="match_parent"
@@ -147,7 +281,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_settings_24"
-                            app:tint="@color/accent_primary"
+                            app:tint="@color/content_secondary"
                             android:layout_marginEnd="16dp" />
 
                         <LinearLayout
@@ -201,7 +335,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_about_24"
-                            app:tint="@color/accent_primary"
+                            app:tint="@color/content_secondary"
                             android:layout_marginEnd="16dp" />
 
                         <LinearLayout
@@ -244,7 +378,7 @@
                 android:paddingTop="24dp"
                 android:paddingBottom="8dp"
                 android:text="@string/settings_my_content"
-                android:textColor="@color/accent_primary" />
+                android:textColor="@color/content_tertiary" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -273,13 +407,13 @@
                         android:clickable="true"
                         android:focusable="true">
 
-                        <TextView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:text="📈"
-                            android:textSize="18sp"
-                            android:gravity="center"
-                            android:layout_marginEnd="16dp" />
+                        <ImageView
+                            android:layout_width="@dimen/icon_size_md"
+                            android:layout_height="@dimen/icon_size_md"
+                            android:layout_marginEnd="@dimen/space_400"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_stats_24"
+                            app:tint="@color/content_secondary" />
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -329,13 +463,13 @@
                         android:clickable="true"
                         android:focusable="true">
 
-                        <TextView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:text="🗂"
-                            android:textSize="18sp"
-                            android:gravity="center"
-                            android:layout_marginEnd="16dp" />
+                        <ImageView
+                            android:layout_width="@dimen/icon_size_md"
+                            android:layout_height="@dimen/icon_size_md"
+                            android:layout_marginEnd="@dimen/space_400"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_list_24"
+                            app:tint="@color/content_secondary" />
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -377,7 +511,7 @@
                 android:paddingTop="24dp"
                 android:paddingBottom="8dp"
                 android:text="@string/settings_storage"
-                android:textColor="@color/accent_primary" />
+                android:textColor="@color/content_tertiary" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -452,7 +586,7 @@
                 android:paddingTop="24dp"
                 android:paddingBottom="8dp"
                 android:text="@string/section_support"
-                android:textColor="@color/accent_primary" />
+                android:textColor="@color/content_tertiary" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -485,7 +619,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_about_24"
-                            app:tint="@color/accent_primary"
+                            app:tint="@color/content_secondary"
                             android:layout_marginEnd="16dp" />
 
                         <TextView
@@ -526,7 +660,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_contact_24"
-                            app:tint="@color/accent_primary"
+                            app:tint="@color/content_secondary"
                             android:layout_marginEnd="16dp" />
 
                         <TextView
@@ -567,7 +701,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_rate_24"
-                            app:tint="@color/accent_primary"
+                            app:tint="@color/content_secondary"
                             android:layout_marginEnd="16dp" />
 
                         <TextView
@@ -608,7 +742,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_home_24"
-                            app:tint="@color/accent_primary"
+                            app:tint="@color/content_secondary"
                             android:layout_marginEnd="16dp" />
 
                         <TextView

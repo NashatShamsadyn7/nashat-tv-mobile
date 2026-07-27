@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Switch thumb. Ink on a lime track when on; the raised surface when off,
+     so the thumb always reads as a physical object above the track. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:alpha="0.38" android:color="@color/content_disabled" android:state_enabled="false" />
+    <item android:color="@color/on_accent_fill" android:state_checked="true" />
+    <item android:color="@color/content_tertiary" />
+</selector>

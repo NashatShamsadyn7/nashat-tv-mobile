@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A checked chip is already a solid lime shape; an outline on top of it
+     only muddies the edge, so the stroke goes fully transparent there. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@android:color/transparent" android:state_checked="true" />
+    <item android:color="@color/focus_ring" android:state_focused="true" />
+    <item android:color="@color/border_default" />
+</selector>

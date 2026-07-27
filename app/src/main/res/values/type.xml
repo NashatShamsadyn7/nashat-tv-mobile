@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════════
+   NASHAT TV — TYPE SCALE
+  ══════════════════════════════════════════════════════════════════════
+
+   Eleven roles. A layout picks a role; it never sets textSize, textStyle,
+   fontFamily or letterSpacing itself. Before this file the app used eleven
+   ad-hoc sizes from 10sp to 32sp scattered inline across 35 layouts, which
+   is why no two screens shared a heading.
+
+   SIZES  live in dimens.xml (type_size_*) so values-television can scale the
+   whole scale for a 10-foot viewing distance by editing one file, without
+   duplicating these style definitions.
+
+   WEIGHTS come from the IBM Plex Sans Arabic family. `textFontWeight` is
+   API 28+; `fontFamily` pointing at a specific weight file is the fallback
+   that actually works on this app's minSdk of 23, so each role names its
+   weight file directly rather than relying on synthetic bolding — synthetic
+   bold on Arabic smears the joins between letters.
+
+   LINE HEIGHT is set with lineSpacingMultiplier rather than lineHeight
+   because lineHeight is API 28+. Arabic and Kurdish carry ascenders and
+   descenders that Latin does not, so body roles run at 1.45 where a
+   Latin-only app would use 1.25; headings tighten to 1.2 because a large
+   Arabic heading at 1.45 drifts apart into separate lines.
+-->
+<resources>
+
+    <!-- Root: everything inherits the family and colour from here. -->
+    <style name="TextAppearance.Nashat" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:fontFamily">@font/plex_arabic</item>
+        <item name="fontFamily">@font/plex_arabic</item>
+        <item name="android:textColor">@color/content_primary</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <!-- ══ DISPLAY ══════════════════════════════════════════════════
+         Hero titles over artwork. One per screen, at most. -->
+    <style name="TextAppearance.Nashat.Display" parent="TextAppearance.Nashat">
+        <item name="android:fontFamily">@font/plex_arabic_bold</item>
+        <item name="fontFamily">@font/plex_arabic_bold</item>
+        <item name="android:textSize">@dimen/type_size_display</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:lineSpacingMultiplier">1.15</item>
+    </style>
+
+    <!-- ══ HEADLINE ═════════════════════════════════════════════════
+         Screen titles, detail-page titles. -->
+    <style name="TextAppearance.Nashat.Headline" parent="TextAppearance.Nashat">
+        <item name="android:fontFamily">@font/plex_arabic_bold</item>
+        <item name="fontFamily">@font/plex_arabic_bold</item>
+        <item name="android:textSize">@dimen/type_size_headline</item>
+        <item name="android:letterSpacing">-0.015</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <!-- ══ TITLE ════════════════════════════════════════════════════ -->
+
+    <!-- Toolbar titles, dialog titles. -->
+    <style name="TextAppearance.Nashat.Title.Large" parent="TextAppearance.Nashat">
+        <item name="android:fontFamily">@font/plex_arabic_semibold</item>
+        <item name="fontFamily">@font/plex_arabic_semibold</item>
+        <item name="android:textSize">@dimen/type_size_title_large</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:lineSpacingMultiplier">1.25</item>
+    </style>
+
+    <!-- Row headers: "Continue Watching", "Live Now". -->
+    <style name="TextAppearance.Nashat.Title.Medium" parent="TextAppearance.Nashat">
+        <item name="android:fontFamily">@font/plex_arabic_semibold</item>
+        <item name="fontFamily">@font/plex_arabic_semibold</item>
+        <item name="android:textSize">@dimen/type_size_title_medium</item>
+        <item name="android:lineSpacingMultiplier">1.3</item>
+    </style>
+
+    <!-- Card titles: a channel name, a film title under its poster. -->
+    <style name="TextAppearance.Nashat.Title.Small" parent="TextAppearance.Nashat">
+        <item name="android:fontFamily">@font/plex_arabic_semibold</item>
+        <item name="fontFamily">@font/plex_arabic_semibold</item>
+        <item name="android:textSize">@dimen/type_size_title_small</item>
+        <item name="android:lineSpacingMultiplier">1.3</item>
+    </style>
+
+    <!-- ══ BODY ═════════════════════════════════════════════════════ -->
+
+    <!-- Long-form reading: synopsis, biography, about text. -->
+    <style name="TextAppearance.Nashat.Body.Large" parent="TextAppearance.Nashat">
+        <item name="android:fontFamily">@font/plex_arabic_regular</item>
+        <item name="fontFamily">@font/plex_arabic_regular</item>
+        <item name="android:textSize">@dimen/type_size_body_large</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:textColor">@color/content_secondary</item>
+    </style>
+
+    <!-- Default body. Settings rows, list subtitles, dialog copy. -->
+    <style name="TextAppearance.Nashat.Body.Medium" parent="TextAppearance.Nashat">
+        <item name="android:fontFamily">@font/plex_arabic_regular</item>
+        <item name="fontFamily">@font/plex_arabic_regular</item>
+        <item name="android:textSize">@dimen/type_size_body_medium</item>
+        <item name="android:lineSpacingMultiplier">1.45</item>
+        <item name="android:textColor">@color/content_secondary</item>
+    </style>
+
+    <!-- Dense supporting text under a card title. -->
+    <style name="TextAppearance.Nashat.Body.Small" parent="TextAppearance.Nashat">
+        <item name="android:fontFamily">@font/plex_arabic_regular</item>
+        <item name="fontFamily">@font/plex_arabic_regular</item>
+        <item name="android:textSize">@dimen/type_size_body_small</item>
+        <item name="android:lineSpacingMultiplier">1.4</item>
+        <item name="android:textColor">@color/content_tertiary</item>
+    </style>
+
+    <!-- ══ LABEL ════════════════════════════════════════════════════
+         Interactive or metadata text. Never used for sentences. -->
+
+    <!-- Buttons. -->
+    <style name="TextAppearance.Nashat.Label.Large" parent="TextAppearance.Nashat">
+        <item name="android:fontFamily">@font/plex_arabic_semibold</item>
+        <item name="fontFamily">@font/plex_arabic_semibold</item>
+        <item name="android:textSize">@dimen/type_size_label_large</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- Chips, tab labels, bottom-nav labels.
+         12sp is the floor for anything a user must read to navigate; the
+         old bottom nav ran at 10sp, below the legibility threshold at arm's
+         length and far below it on a TV. -->
+    <style name="TextAppearance.Nashat.Label.Medium" parent="TextAppearance.Nashat">
+        <item name="android:fontFamily">@font/plex_arabic_medium</item>
+        <item name="fontFamily">@font/plex_arabic_medium</item>
+        <item name="android:textSize">@dimen/type_size_label_medium</item>
+        <item name="android:letterSpacing">0.01</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- Badges and inline metadata only — "HD", "2024", a duration.
+         Anything a user must read as language belongs in Label.Medium. -->
+    <style name="TextAppearance.Nashat.Label.Small" parent="TextAppearance.Nashat">
+        <item name="android:fontFamily">@font/plex_arabic_medium</item>
+        <item name="fontFamily">@font/plex_arabic_medium</item>
+        <item name="android:textSize">@dimen/type_size_label_small</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- ══ SPECIALS ═════════════════════════════════════════════════ -->
+
+    <!-- The LIVE badge. Uppercase and widely tracked so it reads as a
+         status indicator rather than a word, in every one of the three
+         languages — the Kurdish and Arabic words for "live" differ in
+         length, and tracking keeps the badge visually constant. -->
+    <style name="TextAppearance.Nashat.Badge.Live" parent="TextAppearance.Nashat.Label.Small">
+        <item name="android:fontFamily">@font/plex_arabic_bold</item>
+        <item name="fontFamily">@font/plex_arabic_bold</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!-- Wordmark in the app bar. -->
+    <style name="TextAppearance.Nashat.Wordmark" parent="TextAppearance.Nashat.Title.Large">
+        <item name="android:fontFamily">@font/plex_arabic_bold</item>
+        <item name="fontFamily">@font/plex_arabic_bold</item>
+        <item name="android:letterSpacing">-0.005</item>
+    </style>
+
+</resources>

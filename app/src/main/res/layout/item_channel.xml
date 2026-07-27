@@ -47,7 +47,6 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/accent_primary"
-                android:fontFamily="sans-serif-black"
                 android:visibility="gone"
                 android:background="@drawable/fallback_logo_background" />
         </FrameLayout>
@@ -65,7 +64,6 @@
             android:gravity="center"
             android:maxLines="2"
             android:ellipsize="end"
-            android:fontFamily="sans-serif-medium"
             android:lineSpacingExtra="2dp" />
 
         <!-- Live indicator -->

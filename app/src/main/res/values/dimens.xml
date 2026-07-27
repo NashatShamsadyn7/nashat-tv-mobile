@@ -1,77 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════════
+   NASHAT TV — SPACE, SIZE & SHAPE SCALE
+  ══════════════════════════════════════════════════════════════════════
+
+   Everything here is a multiple of 4dp. The pre-redesign layouts mixed
+   6/10/14/18/28dp with the 4-grid values, which is why nothing aligned
+   between two adjacent screens.
+
+   values-television/ and values-sw600dp/ override this file wholesale.
+   Because type sizes live here rather than in type.xml, a TV build scales
+   the entire type scale by editing one file — no style is duplicated.
+-->
 <resources>
-    <!-- Default screen margins -->
+
+    <!-- ══ TYPE SIZES ═══════════════════════════════════════════════
+         Consumed by values/type.xml. See that file for the roles. -->
+    <dimen name="type_size_display">32sp</dimen>
+    <dimen name="type_size_headline">24sp</dimen>
+    <dimen name="type_size_title_large">20sp</dimen>
+    <dimen name="type_size_title_medium">17sp</dimen>
+    <dimen name="type_size_title_small">15sp</dimen>
+    <dimen name="type_size_body_large">16sp</dimen>
+    <dimen name="type_size_body_medium">14sp</dimen>
+    <dimen name="type_size_body_small">13sp</dimen>
+    <dimen name="type_size_label_large">15sp</dimen>
+    <dimen name="type_size_label_medium">12sp</dimen>
+    <dimen name="type_size_label_small">11sp</dimen>
+
+    <!-- ══ SPACE ════════════════════════════════════════════════════
+         Named by size, not by purpose, so one token is not owned by one
+         component. space_400 (16dp) is the default gutter everywhere. -->
+    <dimen name="space_50">2dp</dimen>
+    <dimen name="space_100">4dp</dimen>
+    <dimen name="space_200">8dp</dimen>
+    <dimen name="space_300">12dp</dimen>
+    <dimen name="space_400">16dp</dimen>
+    <dimen name="space_500">20dp</dimen>
+    <dimen name="space_600">24dp</dimen>
+    <dimen name="space_800">32dp</dimen>
+    <dimen name="space_1000">40dp</dimen>
+    <dimen name="space_1200">48dp</dimen>
+    <dimen name="space_1600">64dp</dimen>
+
+    <!-- Screen gutter. Every full-width screen uses exactly this. -->
+    <dimen name="screen_gutter">16dp</dimen>
+    <!-- Gap between stacked content rows on the home screen. -->
+    <dimen name="row_gap">28dp</dimen>
+    <!-- Gap between sibling cards inside a horizontal row. -->
+    <dimen name="card_gap">12dp</dimen>
+
+    <!-- ══ SHAPE ════════════════════════════════════════════════════
+         Five radii and a pill. The old app shipped nine, which reads as
+         inconsistency rather than variety. -->
+    <dimen name="radius_xs">8dp</dimen>
+    <dimen name="radius_sm">12dp</dimen>
+    <dimen name="radius_md">16dp</dimen>
+    <dimen name="radius_lg">20dp</dimen>
+    <dimen name="radius_xl">28dp</dimen>
+    <dimen name="radius_pill">999dp</dimen>
+
+    <!-- ══ TOUCH & FOCUS ════════════════════════════════════════════ -->
+    <!-- Material's accessibility floor. No tappable view goes below this;
+         several old icon buttons sat at 36dp. -->
+    <dimen name="touch_target_min">48dp</dimen>
+    <!-- D-pad focus ring. Thick enough to be unmistakable across a room. -->
+    <dimen name="focus_ring_width">3dp</dimen>
+    <dimen name="focus_ring_width_tv">4dp</dimen>
+
+    <!-- ══ STROKE & DIVIDER ═════════════════════════════════════════ -->
+    <dimen name="stroke_hairline">1dp</dimen>
+    <dimen name="stroke_emphasis">2dp</dimen>
+
+    <!-- ══ ICONS ════════════════════════════════════════════════════ -->
+    <dimen name="icon_size_sm">16dp</dimen>
+    <dimen name="icon_size_md">24dp</dimen>
+    <dimen name="icon_size_lg">32dp</dimen>
+    <dimen name="icon_size_xl">48dp</dimen>
+
+    <!-- ══ COMPONENTS ═══════════════════════════════════════════════ -->
+
+    <!-- Bottom navigation. 64dp fits a 24dp icon, a 12sp label and the
+         4dp breathing room between them without crowding. -->
+    <dimen name="bottom_nav_height">64dp</dimen>
+    <dimen name="bottom_nav_icon_size">24dp</dimen>
+
+    <!-- App bar. -->
+    <dimen name="app_bar_height">56dp</dimen>
+    <dimen name="app_bar_icon_button">40dp</dimen>
+
+    <!-- Search field. -->
+    <dimen name="search_field_height">48dp</dimen>
+
+    <!-- Hero. 4:3-ish on phones so the artwork dominates the first screen
+         without pushing the rows below the fold entirely. -->
+    <dimen name="hero_height">440dp</dimen>
+    <dimen name="hero_scrim_height">200dp</dimen>
+
+    <!-- Poster card (films, series). 2:3 — the industry-standard poster
+         ratio, so TMDB artwork is never letterboxed or cropped. -->
+    <dimen name="poster_width">128dp</dimen>
+    <dimen name="poster_height">192dp</dimen>
+
+    <!-- Backdrop card (continue-watching, episodes). 16:9. -->
+    <dimen name="backdrop_width">232dp</dimen>
+    <dimen name="backdrop_height">130dp</dimen>
+
+    <!-- Channel tile. Square, because broadcaster logos are square-ish and
+         a 16:9 tile leaves two dead pillars of background on every card. -->
+    <dimen name="channel_tile_size">104dp</dimen>
+    <dimen name="channel_logo_size">64dp</dimen>
+
+    <!-- Avatar (cast & crew). -->
+    <dimen name="avatar_size">72dp</dimen>
+
+    <!-- Chip. 40dp visual height inside a 48dp touch target. -->
+    <dimen name="chip_height">40dp</dimen>
+
+    <!-- Progress bar under a continue-watching card. -->
+    <dimen name="progress_track_height">3dp</dimen>
+
+
+    <!-- ══════════════════════════════════════════════════════════════
+         LEGACY BRIDGE
+         Names the pre-redesign layouts still reference. Each points at a
+         value above; deleted as each screen is rewritten.
+         ══════════════════════════════════════════════════════════════ -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    
-    <!-- Card dimensions -->
     <dimen name="card_corner_radius">16dp</dimen>
-    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="card_elevation">0dp</dimen>
     <dimen name="card_margin">8dp</dimen>
     <dimen name="card_padding">16dp</dimen>
-    
-    <!-- Channel item dimensions -->
-    <dimen name="channel_item_height">120dp</dimen>
-    <dimen name="channel_logo_size">60dp</dimen>
-    <dimen name="channel_card_width">160dp</dimen>
-    <dimen name="channel_card_height">200dp</dimen>
-    
-    <!-- Recommended section -->
-    <dimen name="recommended_row_height">180dp</dimen>
-    <dimen name="recommended_card_width">140dp</dimen>
+    <dimen name="channel_item_height">104dp</dimen>
+    <dimen name="channel_card_width">128dp</dimen>
+    <dimen name="channel_card_height">192dp</dimen>
+    <dimen name="recommended_row_height">192dp</dimen>
+    <dimen name="recommended_card_width">128dp</dimen>
     <dimen name="recommended_card_height">160dp</dimen>
-    
-    <!-- Text sizes -->
     <dimen name="text_size_small">12sp</dimen>
     <dimen name="text_size_medium">14sp</dimen>
     <dimen name="text_size_large">16sp</dimen>
     <dimen name="text_size_xlarge">20sp</dimen>
     <dimen name="text_size_xxlarge">24sp</dimen>
     <dimen name="text_size_headline">32sp</dimen>
-    
-    <!-- Spacing -->
     <dimen name="spacing_tiny">4dp</dimen>
     <dimen name="spacing_small">8dp</dimen>
     <dimen name="spacing_medium">16dp</dimen>
     <dimen name="spacing_large">24dp</dimen>
     <dimen name="spacing_xlarge">32dp</dimen>
     <dimen name="spacing_xxlarge">48dp</dimen>
-    
-    <!-- Button dimensions -->
     <dimen name="button_height">48dp</dimen>
     <dimen name="button_min_width">88dp</dimen>
-    <dimen name="button_corner_radius">24dp</dimen>
+    <dimen name="button_corner_radius">28dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    
-    <!-- Icon sizes -->
-    <dimen name="icon_size_small">18dp</dimen>
+    <dimen name="icon_size_small">16dp</dimen>
     <dimen name="icon_size_medium">24dp</dimen>
     <dimen name="icon_size_large">32dp</dimen>
     <dimen name="icon_size_xlarge">48dp</dimen>
-    
-    <!-- Search bar -->
-    <dimen name="search_bar_height">56dp</dimen>
-    <dimen name="search_bar_corner_radius">28dp</dimen>
-    <dimen name="search_bar_elevation">8dp</dimen>
-    
-    <!-- Chip dimensions -->
-    <dimen name="chip_height">40dp</dimen>
-    <dimen name="chip_corner_radius">20dp</dimen>
+    <dimen name="search_bar_height">48dp</dimen>
+    <dimen name="search_bar_corner_radius">16dp</dimen>
+    <dimen name="search_bar_elevation">0dp</dimen>
+    <dimen name="chip_corner_radius">999dp</dimen>
     <dimen name="chip_spacing">8dp</dimen>
-    
-    <!-- Bottom navigation -->
-    <dimen name="bottom_nav_height">56dp</dimen>
-    <dimen name="bottom_nav_icon_size">24dp</dimen>
-    
-    <!-- Progress indicators -->
-    <dimen name="progress_bar_height">4dp</dimen>
+    <dimen name="progress_bar_height">3dp</dimen>
     <dimen name="circular_progress_size">48dp</dimen>
-    
-    <!-- Divider -->
     <dimen name="divider_height">1dp</dimen>
     <dimen name="divider_margin">16dp</dimen>
-    
-    <!-- Animation -->
-    <dimen name="animation_offset_y">50dp</dimen>
-    <dimen name="animation_offset_x">30dp</dimen>
+    <dimen name="animation_offset_y">48dp</dimen>
+    <dimen name="animation_offset_x">32dp</dimen>
+
 </resources>

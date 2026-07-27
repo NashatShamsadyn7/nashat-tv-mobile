@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Filter-chip label. Checked chips are filled with lime, so their text
+     flips to ink for contrast; unchecked chips read as secondary. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:alpha="0.38" android:color="@color/content_disabled" android:state_enabled="false" />
+    <item android:color="@color/on_accent_fill" android:state_checked="true" />
+    <item android:color="@color/content_primary" android:state_focused="true" />
+    <item android:color="@color/content_secondary" />
+</selector>

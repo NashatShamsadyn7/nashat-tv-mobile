@@ -1,208 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════════
+   NASHAT TV — COLOR SYSTEM
+   Identity: LIME · CORAL · BEIGE
+  ══════════════════════════════════════════════════════════════════════
+
+   This file is the LIGHT mode. values-night/colors.xml overrides the
+   semantic layer for dark mode; the brand layer is identical in both.
+
+   Three layers, in dependency order. Only ever reference layer 2 from a
+   layout — layer 1 is raw paint, layer 3 exists solely so the pre-redesign
+   screens keep compiling and shrinks as each screen is rewritten.
+
+     1. BRAND     raw palette values. Mode-independent. Never used directly.
+     2. SEMANTIC  what a colour is FOR (surface_base, content_primary…).
+                  This is the only layer a layout may name.
+     3. LEGACY    old names → semantic tokens. Delete entries as screens move.
+
+   Why beige-tinted neutrals rather than pure grey: lime and coral are both
+   warm, and a neutral grey next to them reads as dirty blue-green. Warming
+   the greys by a few points of red keeps the whole screen on one temperature.
+-->
 <resources>
-    <!-- ═══════════════════════════════════════════════ -->
-    <!--  Nashat TV — Modern Premium Color System       -->
-    <!--  LIGHT MODE (Default)                          -->
-    <!--  Inspired by: Apple TV+, YouTube, Disney+      -->
-    <!-- ═══════════════════════════════════════════════ -->
 
-    <!-- ★ Backgrounds — soft clean whites ★ -->
-    <color name="bg_primary">#F8F8FA</color>              <!-- Soft off-white -->
-    <color name="bg_secondary">#F0F1F5</color>            <!-- Light cool grey -->
-    <color name="bg_card">#FFFFFF</color>                  <!-- Pure white cards -->
-    <color name="bg_card_elevated">#FFFFFF</color>
-    <color name="bg_toolbar">#F8F8FA</color>
-    <color name="bg_input">#EEEEF2</color>                <!-- Search bar fill -->
-    <color name="chip_bg">#F0F1F5</color>
-    <!-- ★ Text — rich readable ★ -->
-    <color name="text_primary">#1B1B1F</color>            <!-- Near black -->
-    <color name="text_secondary">#5E5E6B</color>          <!-- Medium grey -->
-    <color name="text_tertiary">#9898A5</color>           <!-- Light grey -->
-    <color name="text_disabled">#C4C4CE</color>
-    <color name="text_on_accent">#FFFFFF</color>
+    <!-- ══════════════════════════════════════════════════════════
+         LAYER 1 — BRAND PALETTE (identical in light and dark)
+         ══════════════════════════════════════════════════════════ -->
 
-    <!-- ★ Borders — barely visible, clean ★ -->
-    <color name="border_subtle">#E4E4EA</color>
-    <color name="border_glow">#D8D8E0</color>
-    <color name="divider">#EBEBF0</color>
+    <!-- LIME — the hero. Energetic, unusual for a TV app, and bright
+         enough to sit on near-black at 14.6:1 without any glow tricks. -->
+    <color name="brand_lime">#C8F04C</color>
+    <color name="brand_lime_bright">#DBFF6E</color>
+    <color name="brand_lime_deep">#9BC02E</color>
+    <color name="brand_lime_shadow">#4F6B08</color>   <!-- readable on light bg -->
 
-    <!-- ★ Unified Light Theme Gradients & Surfaces ★ -->
-    <color name="main_gradient_start">#F0F1F5</color>
-    <color name="main_gradient_end">#F8F8FA</color>
-    
-    <color name="glass_card_solid">#B3FFFFFF</color>
-    <color name="glass_card_stroke">#40E4E4EA</color>
-    <color name="glass_card_focused_solid">#E6FFFFFF</color>
-    <color name="glass_card_focused_stroke">@color/accent_primary</color>
-    
-    <color name="overlay_pill_solid">#E6FFFFFF</color>
-    <color name="overlay_pill_stroke">#33D4A853</color>
-    
-    <color name="exo_play_solid">#4DD4A853</color>
-    <color name="exo_play_stroke">@color/accent_primary</color>
-    
-    <color name="movie_overlay_start">#B3F8F8FA</color>
-    <color name="movie_overlay_end">#00F8F8FA</color>
-    <color name="player_gradient_dark">#E6FFFFFF</color>
-    <color name="player_gradient_clear">#00FFFFFF</color>
+    <!-- CORAL — live, urgent, "on air". Never used for plain UI accent,
+         so that a coral element always means something is happening now. -->
+    <color name="brand_coral">#FF6B57</color>
+    <color name="brand_coral_bright">#FF8E7E</color>
+    <color name="brand_coral_deep">#C43A22</color>
 
-    <!-- ═════════════════════════════════ -->
-    <!--  ★ ACCENT — ONE HERO COLOR ★     -->
-    <!--  Nashat Gold #D4A853             -->
-    <!-- ═════════════════════════════════ -->
-    <color name="accent_primary">#D4A853</color>          <!-- Nashat Gold -->
-    <color name="accent_primary_light">#E8C678</color>
-    <color name="accent_primary_dark">#B38634</color>
-    <color name="accent_secondary">#FF4E50</color>        <!-- Coral red for live/important -->
-    <color name="accent_success">#00C48C</color>          <!-- Green for success/live -->
-    <color name="accent_warning">#FF9F1C</color>          <!-- Amber for warnings -->
+    <!-- BEIGE — the neutral spine. Every surface and text colour is a
+         desaturated step along this warm axis. -->
+    <color name="brand_beige">#E4D9C3</color>
+    <color name="brand_beige_pale">#F7F2E7</color>
+    <color name="brand_beige_deep">#A79B84</color>
 
-    <!-- Legacy accent aliases -->
-    <color name="accent_purple">@color/accent_primary</color>
-    <color name="accent_purple_light">@color/accent_primary_light</color>
-    <color name="accent_purple_dark">@color/accent_primary_dark</color>
-    <color name="accent_gold">#D4A853</color>
-    <color name="accent_gold_dim">#B38634</color>
-    <color name="accent_emerald">@color/accent_success</color>
-    <color name="accent_emerald_dim">#00A878</color>
-    <color name="accent_coral">@color/accent_secondary</color>
-    <color name="accent_cyan">#00B4D8</color>
-    <color name="accent_rose">#E8457A</color>
+    <!-- INK — the darkest brand value; what sits ON lime. -->
+    <color name="brand_ink">#14170A</color>
 
-    <!-- Standard -->
+    <!-- Absolutes -->
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
     <color name="transparent">#00000000</color>
 
-    <!-- Legacy aliases -->
-    <color name="emerald_green">@color/accent_success</color>
-    <color name="emerald_green_light">#40D8A4</color>
-    <color name="emerald_green_dark">#008868</color>
-    <color name="gentle_gold">@color/accent_primary</color>
-    <color name="gentle_gold_light">@color/accent_primary_light</color>
-    <color name="warm_gray">#E8E8EE</color>
-    <color name="warm_gray_light">#F0F0F5</color>
-    <color name="calm_navy">#2D3748</color>
-    <color name="calm_navy_light">#4A5568</color>
-    <color name="creamy_white">#FAFAFA</color>
 
-    <!-- Home aliases -->
-    <color name="home_bg_dark">@color/bg_primary</color>
-    <color name="home_toolbar_bg">@color/bg_toolbar</color>
-    <color name="home_card_bg">@color/bg_card</color>
-    <color name="home_card_border">@color/border_subtle</color>
-    <color name="home_text_secondary">@color/text_secondary</color>
-    <color name="home_text_tertiary">@color/text_tertiary</color>
+    <!-- ══════════════════════════════════════════════════════════
+         LAYER 2 — SEMANTIC TOKENS  (LIGHT MODE)
+         ══════════════════════════════════════════════════════════ -->
 
-    <!-- About aliases -->
-    <color name="about_bg_dark">@color/bg_primary</color>
-    <color name="about_toolbar_bg">@color/bg_toolbar</color>
-    <color name="about_card_bg">@color/bg_card</color>
-    <color name="about_card_border">@color/border_subtle</color>
-    <color name="about_text_secondary">@color/text_secondary</color>
-    <color name="about_text_tertiary">@color/text_tertiary</color>
+    <!-- ── Surfaces ─────────────────────────────────────────────── -->
+    <color name="surface_base">#FBF8F1</color>       <!-- page background -->
+    <color name="surface_raised">#FFFFFF</color>     <!-- cards, sheets -->
+    <color name="surface_sunken">#F2EDE2</color>     <!-- wells, track fills -->
+    <color name="surface_input">#F2EDE2</color>      <!-- search field, chips -->
+    <color name="surface_overlay">#F5FBF8F1</color>  <!-- 96% base, over media -->
+    <color name="surface_inverse">#17150F</color>    <!-- tooltips, snackbars -->
 
-    <!-- Social -->
+    <!-- Scrims. Media-forward screens need a gradient, not a flat wash,
+         or the poster underneath turns to mud. -->
+    <color name="scrim_strong">#B3000000</color>
+    <color name="scrim_soft">#59000000</color>
+    <color name="scrim_none">#00000000</color>
+
+    <!-- ── Borders ──────────────────────────────────────────────── -->
+    <color name="border_hairline">#EFE9DC</color>    <!-- dividers -->
+    <color name="border_default">#E5DECE</color>     <!-- card outlines -->
+    <color name="border_strong">#D2C9B5</color>      <!-- inputs, pressed -->
+    <color name="border_focus">@color/brand_lime_shadow</color>
+
+    <!-- ── Content (text + icons) ───────────────────────────────── -->
+    <color name="content_primary">#17150F</color>    <!-- 15.9:1 on base -->
+    <color name="content_secondary">#5A5445</color>  <!--  7.4:1 -->
+    <color name="content_tertiary">#8C8471</color>   <!--  3.9:1, large only -->
+    <color name="content_disabled">#B5AD9A</color>
+    <color name="content_inverse">#FBF8F1</color>    <!-- on surface_inverse -->
+
+    <!-- ── Accent ───────────────────────────────────────────────── -->
+    <!-- Two accents by necessity: lime is a brilliant FILL but an illegible
+         TEXT colour on a light page (1.4:1). accent_text is the darkened
+         lime used for links and icons; accent_fill stays the true brand
+         lime and always carries on_accent_fill as its foreground. -->
+    <color name="accent_text">@color/brand_lime_shadow</color>
+    <color name="accent_fill">@color/brand_lime</color>
+    <color name="accent_fill_pressed">@color/brand_lime_deep</color>
+    <color name="on_accent_fill">@color/brand_ink</color>
+    <color name="accent_wash">#1FC8F04C</color>      <!-- 12% lime, selected rows -->
+
+    <!-- ── Status ───────────────────────────────────────────────── -->
+    <color name="status_live">@color/brand_coral_deep</color>
+    <color name="status_live_fill">@color/brand_coral</color>
+    <color name="on_status_live_fill">#FFFFFF</color>
+    <color name="status_success">#2E7D32</color>
+    <color name="status_warning">#B26A00</color>
+    <color name="status_danger">@color/brand_coral_deep</color>
+
+    <!-- ── Focus (Android TV / D-pad) ───────────────────────────── -->
+    <!-- On a TV the focused item is the ONLY affordance the user has.
+         It gets the full-strength brand lime plus a ring, in both modes. -->
+    <color name="focus_ring">@color/brand_lime</color>
+    <color name="focus_surface">#29C8F04C</color>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         LAYER 3 — LEGACY BRIDGE
+         Every name the pre-redesign screens still reference, mapped onto
+         a semantic token. Nothing below defines a new value; entries are
+         deleted as each screen is rewritten.
+         ══════════════════════════════════════════════════════════ -->
+
+    <!-- Backgrounds -->
+    <color name="bg_primary">@color/surface_base</color>
+    <color name="bg_secondary">@color/surface_sunken</color>
+    <color name="bg_card">@color/surface_raised</color>
+    <color name="bg_card_elevated">@color/surface_raised</color>
+    <color name="bg_toolbar">@color/surface_base</color>
+    <color name="bg_input">@color/surface_input</color>
+    <color name="chip_bg">@color/surface_input</color>
+    <color name="surface_light">@color/surface_base</color>
+    <color name="surface_dark">@color/surface_inverse</color>
+    <color name="surface_variant">@color/surface_sunken</color>
+    <color name="creamy_white">@color/surface_base</color>
+    <color name="warm_gray_light">@color/surface_sunken</color>
+    <color name="calm_navy">@color/content_primary</color>
+    <color name="main_gradient_start">@color/surface_sunken</color>
+    <color name="main_gradient_end">@color/surface_base</color>
+
+    <!-- Text -->
+    <color name="text_primary">@color/content_primary</color>
+    <color name="text_secondary">@color/content_secondary</color>
+    <color name="text_tertiary">@color/content_tertiary</color>
+    <color name="text_disabled">@color/content_disabled</color>
+    <color name="text_on_accent">@color/on_accent_fill</color>
+    <color name="home_text_secondary">@color/content_secondary</color>
+    <color name="home_text_tertiary">@color/content_tertiary</color>
+    <color name="about_text_secondary">@color/content_secondary</color>
+    <color name="about_text_tertiary">@color/content_tertiary</color>
+
+    <!-- Borders -->
+    <color name="border_subtle">@color/border_default</color>
+    <color name="border_glow">@color/accent_fill</color>
+    <color name="divider">@color/border_hairline</color>
+    <color name="about_bg_dark">@color/surface_base</color>
+    <color name="about_toolbar_bg">@color/surface_base</color>
+    <color name="about_card_bg">@color/surface_raised</color>
+    <color name="about_card_border">@color/border_default</color>
+
+    <!-- Accents. The old palette was crimson called "gold"; every one of
+         these now resolves to the lime system so no screen keeps a stale hue. -->
+    <color name="accent_primary">@color/accent_text</color>
+    <color name="accent_primary_light">@color/brand_lime</color>
+    <color name="accent_primary_dark">@color/brand_lime_deep</color>
+    <color name="accent_secondary">@color/status_live</color>
+    <color name="accent_success">@color/status_success</color>
+    <color name="accent_purple">@color/accent_text</color>
+    <color name="accent_gold">@color/accent_text</color>
+    <color name="accent_emerald">@color/status_success</color>
+    <color name="gentle_gold">@color/accent_text</color>
+    <color name="gentle_gold_light">@color/brand_lime</color>
+    <color name="emerald_green">@color/status_success</color>
+    <color name="emerald_green_light">@color/status_success</color>
+    <color name="emerald_green_dark">@color/status_success</color>
+
+    <!-- Glass / overlay surfaces -->
+    <color name="glass_card_solid">#B3FFFFFF</color>
+    <color name="glass_card_stroke">@color/border_default</color>
+    <color name="glass_card_focused_solid">#E6FFFFFF</color>
+    <color name="glass_card_focused_stroke">@color/focus_ring</color>
+    <color name="overlay_pill_solid">#E6FFFFFF</color>
+    <color name="overlay_pill_stroke">@color/border_strong</color>
+    <color name="exo_play_solid">@color/accent_fill</color>
+    <color name="exo_play_stroke">@color/accent_fill_pressed</color>
+    <color name="movie_overlay_start">#F2FBF8F1</color>
+    <color name="movie_overlay_end">#00FBF8F1</color>
+    <color name="player_gradient_dark">@color/scrim_strong</color>
+    <color name="player_gradient_clear">@color/scrim_none</color>
+
+    <!-- Material 3 mapping consumed by themes.xml -->
+    <color name="kd_secondary">@color/content_secondary</color>
+    <color name="kd_on_secondary">@color/surface_base</color>
+    <color name="kd_secondary_container">@color/surface_sunken</color>
+    <color name="kd_on_secondary_container">@color/content_primary</color>
+    <color name="kd_tertiary">@color/status_live</color>
+    <color name="kd_on_tertiary">#FFFFFF</color>
+    <color name="kd_tertiary_container">#FFE3DD</color>
+    <color name="kd_on_tertiary_container">#3D0E06</color>
+    <color name="kd_primary_container">#E8FBB8</color>
+    <color name="kd_on_primary_container">#2A3A02</color>
+
+    <!-- Channel-logo plate. Broadcaster logos are supplied as PNGs baked for
+         a white background, so the plate stays light-on-light and gains a
+         warm tint in dark mode rather than inverting. -->
+    <color name="logo_inner_circle_bg">#FFFFFF</color>
+    <color name="logo_gradient_start">#FFFFFF</color>
+    <color name="logo_gradient_center">#FBF8F1</color>
+    <color name="logo_gradient_end">#F2EDE2</color>
+
+    <!-- Category identity. Derived from the brand axis rather than a stock
+         Material ramp, so a category chip never fights the lime. -->
+    <color name="category_news">#C43A22</color>
+    <color name="category_sports">#4F6B08</color>
+    <color name="category_entertainment">#B26A00</color>
+    <color name="category_kids">#8E4EC6</color>
+    <color name="category_documentary">#00707A</color>
+    <color name="category_music">#B02E6B</color>
+    <color name="category_movies">#3D5A99</color>
+    <color name="category_general">#6B6555</color>
+
+    <!-- Social brand marks — fixed by the platforms, not ours to restyle. -->
     <color name="instagram_pink">#E1306C</color>
     <color name="facebook_blue">#1877F2</color>
     <color name="whatsapp_green">#25D366</color>
-    <color name="telegram_blue">#0088cc</color>
+    <color name="telegram_blue">#0088CC</color>
 
-    <color name="semi_transparent_white">#80FFFFFF</color>
-    <color name="semi_transparent_black">#80000000</color>
-    <color name="surface_dark">#0D1117</color>
-    <color name="surface_light">#F8F8FA</color>
-    <color name="surface_variant">#F0F1F5</color>
+    <!-- Stock Material names still referenced by styles.xml and a few
+         drawables. Remapped so nothing renders purple any more. -->
+    <color name="purple_100">@color/surface_sunken</color>
+    <color name="purple_200">@color/brand_lime</color>
+    <color name="purple_300">@color/brand_lime_deep</color>
+    <color name="purple_500">@color/accent_text</color>
+    <color name="purple_600">@color/accent_text</color>
+    <color name="purple_700">@color/brand_lime_shadow</color>
+    <color name="teal_200">@color/brand_coral</color>
+    <color name="teal_700">@color/brand_coral_deep</color>
 
-    <!-- ★ Material Design 3 (LIGHT) ★ -->
-    <color name="kd_primary">@color/accent_primary</color>
-    <color name="kd_on_primary">#FFFFFF</color>
-    <color name="kd_primary_container">#D6EEFF</color>
-    <color name="kd_on_primary_container">#00325A</color>
-    <color name="kd_secondary">#5E5E6B</color>
-    <color name="kd_on_secondary">#FFFFFF</color>
-    <color name="kd_secondary_container">#E8E8F0</color>
-    <color name="kd_on_secondary_container">#1B1B1F</color>
-    <color name="kd_tertiary">#7D5260</color>
-    <color name="kd_on_tertiary">#FFFFFF</color>
-    <color name="kd_tertiary_container">#FFD8E4</color>
-    <color name="kd_on_tertiary_container">#31111D</color>
-    <color name="kd_background">@color/bg_primary</color>
-    <color name="kd_on_background">@color/text_primary</color>
-    <color name="kd_surface">@color/bg_secondary</color>
-    <color name="kd_on_surface">@color/text_primary</color>
-    <color name="kd_surface_variant">@color/bg_card</color>
-    <color name="kd_on_surface_variant">@color/text_secondary</color>
-    <color name="kd_outline">@color/border_subtle</color>
-
-    <!-- Legacy -->
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="gradient_start_1">#0096FF</color>
-    <color name="gradient_end_1">#00C48C</color>
-    <color name="gradient_start_2">#FF4E50</color>
-    <color name="gradient_end_2">#F9D423</color>
-
-    <!-- Category Colors -->
-    <color name="category_news">#EF4444</color>
-    <color name="category_sports">#22C55E</color>
-    <color name="category_entertainment">#F59E0B</color>
-    <color name="category_kids">#A855F7</color>
-    <color name="category_documentary">#06B6D4</color>
-    <color name="category_music">#EC4899</color>
-    <color name="category_movies">#8B5CF6</color>
-    <color name="category_general">#64748B</color>
-
-    <color name="purple_50">#F3E5F5</color>
-    <color name="purple_100">#E1BEE7</color>
-    <color name="purple_300">#BA68C8</color>
-    <color name="purple_400">#AB47BC</color>
-    <color name="purple_600">#8E24AA</color>
-    <color name="purple_800">#6A1B9A</color>
-    <color name="purple_900">#4A148C</color>
-    <color name="pink_200">#F48FB1</color>
-    <color name="pink_500">#E91E63</color>
-    <color name="indigo_200">#9FA8DA</color>
-    <color name="indigo_500">#3F51B5</color>
-    <color name="blue_200">#90CAF9</color>
-    <color name="blue_500">#2196F3</color>
-    <color name="cyan_200">#80DEEA</color>
-    <color name="cyan_500">#00BCD4</color>
-    <color name="teal_500">#009688</color>
-    <color name="green_200">#A5D6A7</color>
-    <color name="green_500">#4CAF50</color>
-    <color name="lime_200">#E6EE9C</color>
-    <color name="lime_500">#CDDC39</color>
-    <color name="yellow_200">#FFF59D</color>
-    <color name="yellow_500">#FFEB3B</color>
-    <color name="amber_200">#FFE082</color>
-    <color name="amber_500">#FFC107</color>
-    <color name="orange_200">#FFCC80</color>
-    <color name="orange_500">#FF9800</color>
-    <color name="deep_orange_200">#FFAB91</color>
-    <color name="deep_orange_500">#FF5722</color>
-
-    <!-- Mode 1: Cinematic Deep Space (Dark Mode) -->
-    <color name="cinematic_gradient_start">#0B0F19</color>
-    <color name="cinematic_gradient_end">#1A233A</color>
-    <color name="cinematic_card_bg">#99252F4A</color>
-    <color name="cinematic_text_primary">#E2E8F0</color>
-    <color name="cinematic_text_secondary">#94A3B8</color>
-
-    <!-- Mode 2: Ambient Soft Room (Light Mode) -->
-    <color name="ambient_gradient_start">#F1F5F9</color>
-    <color name="ambient_gradient_end">#E2E8F0</color>
-    <color name="ambient_card_bg">#CCFFFFFF</color>
-    <color name="ambient_text_primary">#0F172A</color>
-    <color name="ambient_text_secondary">#64748B</color>
-
-    <!-- Mode 3: Aurora (Immersive Mode) -->
-    <color name="aurora_gradient_start">#667EEA</color>
-    <color name="aurora_gradient_end">#F093FB</color>
-    <color name="aurora_card_bg">#2AFFFFFF</color>
-    <color name="aurora_text_primary">#FFFFFF</color>
-    <color name="aurora_text_secondary">#E8E0F0</color>
 </resources>

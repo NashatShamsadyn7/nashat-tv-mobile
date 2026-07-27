@@ -89,7 +89,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Biography"
+                android:text="@string/biography"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -107,7 +107,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Known For"
+                android:text="@string/known_for"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"

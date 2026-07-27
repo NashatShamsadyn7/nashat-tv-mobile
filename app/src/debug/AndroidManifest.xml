@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Debug-only overlay. Screens are unexported in the shipping manifest, which is
+  correct — nothing outside the app should be able to open the player. But it
+  also means `adb shell am start` cannot reach them, so a screen can only be
+  inspected by tapping through the UI. On devices where the vendor blocks
+  `adb shell input` (HyperOS refuses INJECT_EVENTS without the extra USB
+  debugging security toggle), that leaves no way to verify a screen at all.
+
+  Exporting them here restores that path for debug builds only; the release
+  manifest is untouched.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application>
+        <activity
+            android:name=".WebPlayerActivity"
+            android:exported="true"
+            tools:node="merge"
+            tools:replace="android:exported" />
+        <activity
+            android:name=".MoviesActivity"
+            android:exported="true"
+            tools:node="merge"
+            tools:replace="android:exported" />
+        <activity
+            android:name=".MovieDetailsActivity"
+            android:exported="true"
+            tools:node="merge"
+            tools:replace="android:exported" />
+        <activity
+            android:name=".SeriesActivity"
+            android:exported="true"
+            tools:node="merge"
+            tools:replace="android:exported" />
+        <activity
+            android:name=".SeriesDetailsActivity"
+            android:exported="true"
+            tools:node="merge"
+            tools:replace="android:exported" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="true"
+            tools:node="merge"
+            tools:replace="android:exported" />
+        <activity
+            android:name=".PlayerActivity"
+            android:exported="true"
+            tools:node="merge"
+            tools:replace="android:exported" />
+    </application>
+</manifest>

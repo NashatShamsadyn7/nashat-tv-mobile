@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Splash-screen icon.
+
+  The platform SplashScreen API masks its icon to a circle and reserves the
+  outer third of the canvas as padding — an unpadded logo gets its edges
+  clipped by that mask. The inset here reproduces the same 2/3 safe area the
+  adaptive-launcher spec uses, so the mark lands centred and uncropped.
+-->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/nashat_logo"
+    android:insetLeft="24dp"
+    android:insetTop="24dp"
+    android:insetRight="24dp"
+    android:insetBottom="24dp" />

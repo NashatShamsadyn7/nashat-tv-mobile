@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════════
+   FOCUS RING — applied as android:foreground on every media card
+  ══════════════════════════════════════════════════════════════════════
+
+   Drawn OVER the card's artwork rather than behind it, because a poster
+   fills its card edge to edge: a background-drawn ring would be completely
+   covered by the image.
+
+   Why a ring and not a scale-up: growing the focused tile is the Android TV
+   convention, but it reflows the row and forces every neighbour to shift,
+   which reads as a jitter on lower-end TV hardware. A high-contrast lime
+   ring communicates the same thing at zero layout cost, and it doubles as
+   the touch ripple on phones — one drawable, both input models.
+
+   The `state_focused` case also fires for keyboard navigation on tablets
+   and Chromebooks, so this is not TV-only polish.
+-->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/accent_wash">
+
+    <!-- Clips the ripple to the card's silhouette; without a mask the
+         ripple spreads as a square behind the rounded corners. -->
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_sm" />
+            <solid android:color="@android:color/white" />
+        </shape>
+    </item>
+
+    <item>
+        <selector>
+            <item android:state_focused="true">
+                <shape android:shape="rectangle">
+                    <corners android:radius="@dimen/radius_sm" />
+                    <stroke
+                        android:width="@dimen/focus_ring_width"
+                        android:color="@color/focus_ring" />
+                    <!-- A faint lime wash inside the ring lifts the whole
+                         tile, so focus is legible even when the artwork
+                         behind it is itself bright. -->
+                    <solid android:color="@color/focus_surface" />
+                </shape>
+            </item>
+            <item android:state_selected="true">
+                <shape android:shape="rectangle">
+                    <corners android:radius="@dimen/radius_sm" />
+                    <stroke
+                        android:width="@dimen/stroke_emphasis"
+                        android:color="@color/focus_ring" />
+                </shape>
+            </item>
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:radius="@dimen/radius_sm" />
+                    <solid android:color="@android:color/transparent" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+</ripple>

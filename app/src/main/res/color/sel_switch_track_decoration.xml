@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The hairline around an OFF track. Without it the unchecked switch is an
+     unbounded grey blob on surface_input, which is nearly the same value. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@android:color/transparent" android:state_checked="true" />
+    <item android:color="@color/border_strong" />
+</selector>

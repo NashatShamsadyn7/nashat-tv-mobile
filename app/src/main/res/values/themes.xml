@@ -1,126 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="Base.Theme.NashatTV" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/accent_purple</item>
-        <item name="colorOnPrimary">@color/white</item>
+<!--
+  ══════════════════════════════════════════════════════════════════════
+   NASHAT TV — THEME
+  ══════════════════════════════════════════════════════════════════════
+
+   ONE theme. The previous build declared five (Base, Nashat, Cinematic,
+   Ambient, Aurora) plus a second unrelated Theme.TVApp in styles.xml —
+   and BaseActivity called setTheme(Theme_NashatTV) unconditionally, so
+   four of them were unreachable code backing a settings screen that
+   appeared to work and did nothing.
+
+   Light and dark are not separate themes here: they are the same theme
+   resolving the same semantic tokens through values/ and values-night/.
+   That is what keeps the two modes from drifting apart.
+
+   Theme.Nashat.Tv (values-television/) and Theme.Nashat.Player are the
+   only genuine variants — one changes focus behaviour for a D-pad, the
+   other removes system chrome for fullscreen video. Neither changes colour.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ══════════════════════════════════════════════════════════════
+         BASE
+         ══════════════════════════════════════════════════════════════ -->
+    <style name="Theme.Nashat" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <!-- ── Material 3 colour roles ──────────────────────────────
+             Mapped onto the semantic layer so any stock Material widget
+             the app has not restyled still lands inside the palette. -->
+        <item name="colorPrimary">@color/accent_text</item>
+        <item name="colorOnPrimary">@color/on_accent_fill</item>
         <item name="colorPrimaryContainer">@color/kd_primary_container</item>
         <item name="colorOnPrimaryContainer">@color/kd_on_primary_container</item>
-        <item name="colorSecondary">@color/kd_secondary</item>
-        <item name="colorOnSecondary">@color/kd_on_secondary</item>
-        <item name="colorSecondaryContainer">@color/kd_secondary_container</item>
-        <item name="colorOnSecondaryContainer">@color/kd_on_secondary_container</item>
-        <item name="colorTertiary">@color/kd_tertiary</item>
-        <item name="colorOnTertiary">@color/kd_on_tertiary</item>
+
+        <item name="colorSecondary">@color/content_secondary</item>
+        <item name="colorOnSecondary">@color/surface_base</item>
+        <item name="colorSecondaryContainer">@color/surface_sunken</item>
+        <item name="colorOnSecondaryContainer">@color/content_primary</item>
+
+        <item name="colorTertiary">@color/status_live</item>
+        <item name="colorOnTertiary">@color/on_status_live_fill</item>
         <item name="colorTertiaryContainer">@color/kd_tertiary_container</item>
         <item name="colorOnTertiaryContainer">@color/kd_on_tertiary_container</item>
-        <item name="android:colorBackground">@color/bg_primary</item>
-        <item name="colorOnBackground">@color/text_primary</item>
-        <item name="colorSurface">@color/bg_secondary</item>
-        <item name="colorOnSurface">@color/text_primary</item>
-        <item name="colorSurfaceVariant">@color/bg_card</item>
-        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
-        <item name="colorOutline">@color/border_subtle</item>
 
-        <!-- Component styles -->
-        <item name="toolbarStyle">@style/Widget.NashatTV.Toolbar</item>
-        <item name="materialCardViewStyle">@style/Widget.NashatTV.Card</item>
-        <item name="textInputStyle">@style/Widget.NashatTV.TextInputLayout</item>
-        <item name="chipStyle">@style/Widget.NashatTV.Chip</item>
+        <item name="colorError">@color/status_danger</item>
+        <item name="colorOnError">@color/on_status_live_fill</item>
 
-        <!-- Status & Nav Bar -->
-        <item name="android:navigationBarColor">@color/bg_primary</item>
-        <item name="android:statusBarColor">@color/bg_primary</item>
+        <item name="android:colorBackground">@color/surface_base</item>
+        <item name="colorOnBackground">@color/content_primary</item>
+        <item name="colorSurface">@color/surface_base</item>
+        <item name="colorOnSurface">@color/content_primary</item>
+        <item name="colorSurfaceVariant">@color/surface_raised</item>
+        <item name="colorOnSurfaceVariant">@color/content_secondary</item>
+        <item name="colorSurfaceInverse">@color/surface_inverse</item>
+        <item name="colorOnSurfaceInverse">@color/content_inverse</item>
+        <item name="colorOutline">@color/border_default</item>
+        <item name="colorOutlineVariant">@color/border_hairline</item>
 
-        <!-- Font -->
-        <item name="fontFamily">@font/noto_naskh</item>
-        <item name="android:fontFamily">@font/noto_naskh</item>
-    </style>
+        <!-- Ripple. Tinted lime rather than the default grey so touch
+             feedback reads as part of the identity. -->
+        <item name="colorControlHighlight">@color/accent_wash</item>
 
-    <style name="Theme.NashatTV" parent="Base.Theme.NashatTV" />
-    
-    <style name="Theme.NashatTV.Nashat" parent="Base.Theme.NashatTV">
-        <item name="android:windowBackground">@drawable/bg_gradient_nashat</item>
-        <item name="android:colorBackground">@android:color/transparent</item>
-        <item name="colorSurface">@android:color/transparent</item>
-        <item name="colorSurfaceVariant">@android:color/transparent</item>
-        <item name="android:textColorPrimary">#F7F8F0</item>
-        <item name="android:textColorSecondary">#F5E7C6</item>
-        
-        <item name="colorPrimary">#F5E7C6</item>
-        <item name="colorOnPrimary">#355872</item>
-        <item name="colorSecondary">#F26076</item>
-        
+        <!-- ── Typography ───────────────────────────────────────────
+             Bound to the Material text-appearance roles so that stock
+             widgets (dialogs, snackbars, menus) pick up IBM Plex without
+             each call site having to set fontFamily. -->
+        <item name="fontFamily">@font/plex_arabic</item>
+        <item name="android:fontFamily">@font/plex_arabic</item>
+
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.Nashat.Display</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Nashat.Headline</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.Nashat.Title.Large</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.Nashat.Title.Large</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.Nashat.Title.Medium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.Nashat.Title.Small</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Nashat.Body.Large</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Nashat.Body.Medium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.Nashat.Body.Small</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.Nashat.Label.Large</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.Nashat.Label.Medium</item>
+        <item name="textAppearanceLabelSmall">@style/TextAppearance.Nashat.Label.Small</item>
+
+        <!-- ── Shape ────────────────────────────────────────────────
+             Three shape roles, matching radius_sm / md / xl. -->
+        <item name="shapeAppearanceCornerSmall">@style/ShapeAppearance.Nashat.Small</item>
+        <item name="shapeAppearanceCornerMedium">@style/ShapeAppearance.Nashat.Medium</item>
+        <item name="shapeAppearanceCornerLarge">@style/ShapeAppearance.Nashat.Large</item>
+
+        <!-- ── Component defaults ───────────────────────────────────
+             Set once here so a layout that drops in a plain MaterialButton
+             or Chip gets the app's version of it automatically. -->
+        <item name="materialCardViewStyle">@style/Widget.Nashat.Card</item>
+        <item name="materialButtonStyle">@style/Widget.Nashat.Button</item>
+        <item name="borderlessButtonStyle">@style/Widget.Nashat.Button.Text</item>
+        <item name="chipStyle">@style/Widget.Nashat.Chip</item>
+        <item name="toolbarStyle">@style/Widget.Nashat.Toolbar</item>
+        <item name="textInputStyle">@style/Widget.Nashat.TextInput</item>
+        <item name="bottomNavigationStyle">@style/Widget.Nashat.BottomNav</item>
+        <item name="tabStyle">@style/Widget.Nashat.TabLayout</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Nashat.Dialog</item>
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.Nashat.BottomSheet</item>
+        <item name="snackbarStyle">@style/Widget.Nashat.Snackbar</item>
+        <item name="snackbarTextViewStyle">@style/Widget.Nashat.Snackbar.Text</item>
+        <item name="snackbarButtonStyle">@style/Widget.Nashat.Snackbar.Button</item>
+        <item name="materialSwitchStyle">@style/Widget.Nashat.Switch</item>
+        <item name="linearProgressIndicatorStyle">@style/Widget.Nashat.Progress.Linear</item>
+        <item name="circularProgressIndicatorStyle">@style/Widget.Nashat.Progress.Circular</item>
+
+        <!-- ── System bars ──────────────────────────────────────────
+             Transparent, with the app drawing behind them. Media apps that
+             leave an opaque status bar get a visible band across the top of
+             every poster. windowLightStatusBar is flipped per-mode below. -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        
-        <!-- Make cards transparent to see the gradient -->
-        <item name="materialCardViewStyle">@style/Widget.NashatTV.Card.Nashat</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="p">shortEdges</item>
+
+        <!-- ── Motion ───────────────────────────────────────────────
+             Content transitions between destinations. Off by default in
+             Material3; a media app without them feels like a slide deck. -->
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowContentTransitions">true</item>
+
+        <!-- ── Text selection ───────────────────────────────────────
+             The handles default to colorPrimary, which is a dark olive in
+             light mode and invisible against a selection highlight. -->
+        <item name="android:textColorHighlight">@color/accent_wash</item>
     </style>
 
-    <!-- Mode 1: Cinematic Deep Space -->
-    <style name="Theme.NashatTV.Cinematic" parent="Base.Theme.NashatTV">
-        <item name="android:windowBackground">@drawable/bg_gradient_cinematic</item>
-        <item name="android:colorBackground">@android:color/transparent</item>
-        <item name="colorSurface">@android:color/transparent</item>
-        <item name="colorSurfaceVariant">@color/cinematic_card_bg</item>
-        <item name="android:textColorPrimary">@color/cinematic_text_primary</item>
-        <item name="android:textColorSecondary">@color/cinematic_text_secondary</item>
-        
-        <item name="colorPrimary">@color/cinematic_text_primary</item>
-        <item name="colorOnPrimary">@color/cinematic_gradient_start</item>
-        
+    <!-- ══════════════════════════════════════════════════════════════
+         SPLASH
+         Uses the platform SplashScreen API (androidx.core.splashscreen),
+         which shows the window background for exactly as long as the app
+         genuinely takes to start. The previous SplashActivity slept on a
+         fixed timer — and was never registered in the manifest, so it
+         never ran at all.
+         ══════════════════════════════════════════════════════════════ -->
+    <style name="Theme.Nashat.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/surface_base</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
+        <item name="windowSplashScreenAnimationDuration">400</item>
+        <item name="postSplashScreenTheme">@style/Theme.Nashat</item>
+    </style>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         PLAYER
+         Fullscreen video. Black window background rather than surface_base:
+         letterbox bars beside a 4:3 broadcast must be black, not beige, or
+         the picture appears to be sitting on a lit table.
+         ══════════════════════════════════════════════════════════════ -->
+    <style name="Theme.Nashat.Player" parent="Theme.Nashat">
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:colorBackground">@android:color/black</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="materialCardViewStyle">@style/Widget.NashatTV.Card.Nashat</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+        <!-- Controls sit on video, never on a themed surface. -->
+        <item name="colorOnSurface">#FFFFFF</item>
+        <item name="colorOnSurfaceVariant">#D9FFFFFF</item>
     </style>
 
-    <!-- Mode 2: Ambient Soft Room -->
-    <style name="Theme.NashatTV.Ambient" parent="Base.Theme.NashatTV">
-        <item name="android:windowBackground">@drawable/bg_gradient_ambient</item>
-        <item name="android:colorBackground">@android:color/transparent</item>
-        <item name="colorSurface">@android:color/transparent</item>
-        <item name="colorSurfaceVariant">@color/ambient_card_bg</item>
-        <item name="android:textColorPrimary">@color/ambient_text_primary</item>
-        <item name="android:textColorSecondary">@color/ambient_text_secondary</item>
-        
-        <item name="colorPrimary">@color/ambient_text_primary</item>
-        <item name="colorOnPrimary">@color/ambient_gradient_start</item>
-        
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="materialCardViewStyle">@style/Widget.NashatTV.Card.Nashat</item>
+    <!-- ══════════════════════════════════════════════════════════════
+         DIALOG / SHEET OVERLAYS
+         ══════════════════════════════════════════════════════════════ -->
+    <style name="ThemeOverlay.Nashat.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.Nashat</item>
+        <item name="colorSurface">@color/surface_raised</item>
+        <item name="colorOnSurface">@color/content_primary</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.Nashat.Button.Text</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.Nashat.Button.Text</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.Nashat.Button.Text</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.Nashat.Title</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.Nashat.Body</item>
     </style>
 
-    <!-- Mode 3: Vibrant Aurora -->
-    <style name="Theme.NashatTV.Aurora" parent="Base.Theme.NashatTV">
-        <item name="android:windowBackground">@drawable/bg_gradient_aurora</item>
-        <item name="android:colorBackground">@android:color/transparent</item>
-        <item name="colorSurface">@android:color/transparent</item>
-        <item name="colorSurfaceVariant">@color/aurora_card_bg</item>
-        <item name="android:textColorPrimary">@color/aurora_text_primary</item>
-        <item name="android:textColorSecondary">@color/aurora_text_secondary</item>
-        
-        <item name="colorPrimary">@color/aurora_text_primary</item>
-        <item name="colorOnPrimary">@color/aurora_gradient_start</item>
-        
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="materialCardViewStyle">@style/Widget.NashatTV.Card.Nashat</item>
+    <style name="MaterialAlertDialog.Nashat" parent="MaterialAlertDialog.Material3">
+        <item name="shapeAppearance">@style/ShapeAppearance.Nashat.Large</item>
+        <item name="shapeAppearanceOverlay">@null</item>
+        <item name="backgroundInsetStart">@dimen/space_600</item>
+        <item name="backgroundInsetEnd">@dimen/space_600</item>
     </style>
 
-    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    <style name="MaterialAlertDialog.Nashat.Title" parent="MaterialAlertDialog.Material3.Title.Text">
+        <item name="android:textAppearance">@style/TextAppearance.Nashat.Title.Large</item>
+    </style>
+
+    <style name="MaterialAlertDialog.Nashat.Body" parent="MaterialAlertDialog.Material3.Body.Text">
+        <item name="android:textAppearance">@style/TextAppearance.Nashat.Body.Medium</item>
+    </style>
+
+    <style name="ThemeOverlay.Nashat.BottomSheet" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.Nashat.BottomSheet</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@android:color/transparent</item>
-    </style>
-
-    <style name="RoundedImageView" parent="">
+    <!-- ══════════════════════════════════════════════════════════════
+         SHAPE ROLES
+         ══════════════════════════════════════════════════════════════ -->
+    <style name="ShapeAppearance.Nashat.Small" parent="ShapeAppearance.Material3.Corner.Small">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
+        <item name="cornerSize">@dimen/radius_sm</item>
     </style>
+
+    <style name="ShapeAppearance.Nashat.Medium" parent="ShapeAppearance.Material3.Corner.Medium">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_md</item>
+    </style>
+
+    <style name="ShapeAppearance.Nashat.Large" parent="ShapeAppearance.Material3.Corner.Large">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_xl</item>
+    </style>
+
+    <style name="ShapeAppearance.Nashat.Pill" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="ShapeAppearance.Nashat.Circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+
+    <!-- ══════════════════════════════════════════════════════════════
+         COMPATIBILITY ALIASES
+         The manifest and BaseActivity still name the old theme. These keep
+         the build green during the migration and are removed once every
+         reference points at Theme.Nashat.
+         ══════════════════════════════════════════════════════════════ -->
+    <style name="Theme.NashatTV" parent="Theme.Nashat" />
+    <style name="Base.Theme.NashatTV" parent="Theme.Nashat" />
+    <style name="Theme.NashatTV.Nashat" parent="Theme.Nashat" />
+    <style name="Theme.NashatTV.Cinematic" parent="Theme.Nashat" />
+    <style name="Theme.NashatTV.Ambient" parent="Theme.Nashat" />
+    <style name="Theme.NashatTV.Aurora" parent="Theme.Nashat" />
+    <style name="Theme.TVApp" parent="Theme.Nashat" />
+    <style name="BottomSheetDialogTheme" parent="ThemeOverlay.Nashat.BottomSheet" />
+    <style name="RoundedImageView" parent="ShapeAppearance.Nashat.Medium" />
+    <style name="CircleImageView" parent="ShapeAppearance.Nashat.Circle" />
 
 </resources>

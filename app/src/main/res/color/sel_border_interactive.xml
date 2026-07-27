@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Outline for outlined buttons and text fields. Thickens to the brand
+     colour on focus so a D-pad user can see which field is live. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:alpha="0.24" android:color="@color/content_disabled" android:state_enabled="false" />
+    <item android:color="@color/focus_ring" android:state_focused="true" />
+    <item android:color="@color/border_strong" android:state_pressed="true" />
+    <item android:color="@color/border_default" />
+</selector>

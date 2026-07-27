@@ -1,0 +1,32 @@
+{
+  "nrt_tv_720p_not_24_7_44": {
+    "name": "NRT TV (720p) [Not 24/7]",
+    "url": "https://media.streambrothers.com:1936/8226/8226/playlist.m3u8",
+    "reason": "HTTP 404"
+  },
+  "kurdmax_music_720p_34": {
+    "name": "KurdMax Music (720p)",
+    "url": "https://6476e46b58f91.streamlock.net/music/MUSIC2402/playlist.m3u8",
+    "reason": "Timeout"
+  },
+  "kurdmax_sorani_1080p_36": {
+    "name": "KurdMax Sorani (1080p)",
+    "url": "https://6476e46b58f91.streamlock.net/liveTrans/KURDS2211/playlist.m3u8",
+    "reason": "Timeout"
+  },
+  "kurdmax_show_720p_35": {
+    "name": "KurdMax Show (720p)",
+    "url": "https://6476e46b58f91.streamlock.net/liveTrans/SHOWS123/playlist.m3u8",
+    "reason": "Timeout"
+  },
+  "aryen_tv_1080p_not_24_7_304": {
+    "name": "Aryen TV (1080p) [Not 24/7]",
+    "url": "https://aryen.tv/live/tv/playlist.m3u8",
+    "reason": "Timeout"
+  },
+  "st_rk_tv_1080p_330": {
+    "name": "Stêrk TV (1080p)",
+    "url": "https://muzkurd.com/sterktv/sterk/playlist.m3u8",
+    "reason": "Timeout"
+  }
+}

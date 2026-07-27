@@ -13,8 +13,7 @@
         android:padding="16dp"
         android:textColor="@color/accent_primary"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-medium" />
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editSearchChannel"

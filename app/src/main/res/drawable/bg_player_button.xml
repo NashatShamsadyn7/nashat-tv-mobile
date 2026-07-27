@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Secondary transport button (skip back / skip forward).
+     A soft dark disc rather than no background at all: the old buttons were
+     bare white glyphs, which vanished the moment the video behind them cut to
+     a bright shot. The disc guarantees contrast on any frame. -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#40FFFFFF">
+    <item>
+        <selector>
+            <item android:state_focused="true">
+                <shape android:shape="oval">
+                    <solid android:color="#73000000" />
+                    <stroke android:width="@dimen/focus_ring_width" android:color="@color/focus_ring" />
+                </shape>
+            </item>
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="#59000000" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+</ripple>

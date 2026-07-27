@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Focus ring at radius_md, for the square channel tiles.
+
+  Two files rather than one parameterised drawable because a foreground is
+  not clipped to the host card's cornerRadius on API 23–27 — the ring's own
+  corner radius has to match the card it is placed on, or the highlight
+  visibly overshoots the corners on older devices.
+-->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/accent_wash">
+
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_md" />
+            <solid android:color="@android:color/white" />
+        </shape>
+    </item>
+
+    <item>
+        <selector>
+            <item android:state_focused="true">
+                <shape android:shape="rectangle">
+                    <corners android:radius="@dimen/radius_md" />
+                    <stroke
+                        android:width="@dimen/focus_ring_width"
+                        android:color="@color/focus_ring" />
+                    <solid android:color="@color/focus_surface" />
+                </shape>
+            </item>
+            <item android:state_selected="true">
+                <shape android:shape="rectangle">
+                    <corners android:radius="@dimen/radius_md" />
+                    <stroke
+                        android:width="@dimen/stroke_emphasis"
+                        android:color="@color/focus_ring" />
+                </shape>
+            </item>
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:radius="@dimen/radius_md" />
+                    <solid android:color="@android:color/transparent" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+</ripple>

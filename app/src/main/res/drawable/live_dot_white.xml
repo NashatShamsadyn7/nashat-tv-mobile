@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The dot inside the LIVE pill. White, because the pill itself is already
+     coral — a coral dot on coral would be invisible. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+    <solid android:color="@color/on_status_live_fill" />
+</shape>

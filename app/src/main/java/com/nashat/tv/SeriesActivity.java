@@ -30,14 +30,11 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
+import com.nashat.tv.util.AppConstants;
+import com.nashat.tv.util.HttpClient;
 
 public class SeriesActivity extends BaseActivity {
 
@@ -51,7 +48,7 @@ public class SeriesActivity extends BaseActivity {
     private String currentQuery = "";
     private String currentGenreId = "";
 
-    private static final String TMDB_API_KEY = "4e44d9029b1270a757cddc766a1bcb63";
+    private static final String TMDB_API_KEY = AppConstants.TMDB_API_KEY;
 
     // Advanced filters
     private float minRatingFilter = 0.0f;
@@ -68,6 +65,33 @@ public class SeriesActivity extends BaseActivity {
     private ContinueWatchingManager continueWatchingManager;
     private RecyclerView recyclerContinueWatching;
 
+    // Hero banner
+    private View heroBannerContainer;
+    private ImageView ivHeroBackdrop;
+    private TextView tvHeroTitle;
+    private TextView tvHeroMeta;
+    private android.widget.LinearLayout heroIndicators;
+    private final Handler heroHandler = new Handler(Looper.getMainLooper());
+    private final List<Movie> heroSeries = new ArrayList<>();
+    private int heroIndex = 0;
+    private final Runnable heroRotator = new Runnable() {
+        @Override
+        public void run() {
+            if (heroSeries.isEmpty()) return;
+            heroIndex = (heroIndex + 1) % heroSeries.size();
+            bindHeroAt(heroIndex);
+            heroHandler.postDelayed(this, 5000);
+        }
+    };
+
+    // Home categories
+    private View layoutHomeCategories;
+    private RecyclerView recyclerAiringToday, recyclerPopular, recyclerTopRated, recyclerAnime;
+    private List<Movie> listAiringToday = new ArrayList<>(), listPopular = new ArrayList<>(),
+            listTopRated = new ArrayList<>(), listAnime = new ArrayList<>();
+    private HorizontalMovieAdapter adapterAiringToday, adapterPopular, adapterTopRated, adapterAnime;
+    private boolean homeFetched = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,8 +102,44 @@ public class SeriesActivity extends BaseActivity {
 
         progressBar = findViewById(R.id.progressBar);
         recyclerSeries = findViewById(R.id.recyclerSeries);
-        
-        // 5 columns layout
+        layoutHomeCategories = findViewById(R.id.layoutHomeCategories);
+        recyclerAiringToday = findViewById(R.id.recyclerAiringToday);
+        recyclerPopular = findViewById(R.id.recyclerPopular);
+        recyclerTopRated = findViewById(R.id.recyclerTopRated);
+        recyclerAnime = findViewById(R.id.recyclerAnime);
+
+        heroBannerContainer = findViewById(R.id.heroBannerContainer);
+        ivHeroBackdrop = findViewById(R.id.ivHeroBackdrop);
+        tvHeroTitle = findViewById(R.id.tvHeroTitle);
+        tvHeroMeta = findViewById(R.id.tvHeroMeta);
+        heroIndicators = findViewById(R.id.heroIndicators);
+        if (heroBannerContainer != null) {
+            heroBannerContainer.setOnClickListener(v -> {
+                if (!heroSeries.isEmpty() && heroIndex < heroSeries.size()) {
+                    openSeriesDetails(heroSeries.get(heroIndex));
+                }
+            });
+        }
+
+        // Wire horizontal adapters for home sections
+        HorizontalMovieAdapter.OnMovieClickListener homeClickListener = this::openSeriesDetails;
+        adapterAiringToday = new HorizontalMovieAdapter(listAiringToday, homeClickListener);
+        recyclerAiringToday.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerAiringToday.setAdapter(adapterAiringToday);
+
+        adapterPopular = new HorizontalMovieAdapter(listPopular, homeClickListener);
+        recyclerPopular.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerPopular.setAdapter(adapterPopular);
+
+        adapterTopRated = new HorizontalMovieAdapter(listTopRated, homeClickListener);
+        recyclerTopRated.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerTopRated.setAdapter(adapterTopRated);
+
+        adapterAnime = new HorizontalMovieAdapter(listAnime, homeClickListener);
+        recyclerAnime.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerAnime.setAdapter(adapterAnime);
+
+        // 5 columns layout for the search-results grid
         GridLayoutManager layoutManager = new GridLayoutManager(this, 5);
         recyclerSeries.setLayoutManager(layoutManager);
 
@@ -113,8 +173,11 @@ public class SeriesActivity extends BaseActivity {
                 // Hide search history and continue watching when typing
                 hideSearchHistory();
                 if (headerAdapter != null) headerAdapter.notifyDataSetChanged();
-                
-                fetchTMDBSeries(currentPage);
+
+                checkViewMode();
+                if (recyclerSeries.getVisibility() == View.VISIBLE) {
+                    fetchTMDBSeries(currentPage);
+                }
             }
         };
 
@@ -199,10 +262,167 @@ public class SeriesActivity extends BaseActivity {
             }
         });
 
+        // Wire favorite-toggle (filters home → watchlist later if needed)
+        ImageView btnFavToggle = findViewById(R.id.btnFavToggle);
+        if (btnFavToggle != null) {
+            btnFavToggle.setOnClickListener(v ->
+                    Toast.makeText(this, "Watchlist coming soon", Toast.LENGTH_SHORT).show());
+        }
+
         // Setup Search History
         setupSearchHistory();
 
-        fetchTMDBSeries(currentPage);
+        // ═══ Wire Bottom Navigation ═══
+        View navLiveTv = findViewById(R.id.navLiveTv);
+        if (navLiveTv != null) {
+            navLiveTv.setOnClickListener(v -> navigateToTab(LiveTvActivity.class));
+        }
+        View navMovies = findViewById(R.id.navMovies);
+        if (navMovies != null) {
+            navMovies.setOnClickListener(v -> navigateToTab(MoviesActivity.class));
+        }
+        View navSettings = findViewById(R.id.fabSettings);
+        if (navSettings != null) {
+            navSettings.setOnClickListener(v -> navigateToTab(SettingsActivity.class));
+        }
+
+        // Load initial data (home grid if no query, else search results)
+        checkViewMode();
+        if (recyclerSeries.getVisibility() == View.VISIBLE) {
+            fetchTMDBSeries(currentPage);
+        }
+    }
+
+    private void checkViewMode() {
+        boolean isDefault = currentQuery.isEmpty() && currentGenreId.isEmpty()
+                && minRatingFilter == 0.0f && minYearFilter <= 1990f
+                && maxYearFilter >= 2026f;
+        if (isDefault) {
+            layoutHomeCategories.setVisibility(View.VISIBLE);
+            recyclerSeries.setVisibility(View.GONE);
+            if (!homeFetched) {
+                fetchHomeCategories();
+            }
+        } else {
+            layoutHomeCategories.setVisibility(View.GONE);
+            recyclerSeries.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void fetchCategoryList(String endpoint, List<Movie> targetList, HorizontalMovieAdapter adapter) {
+        HttpClient.getJson(this, endpoint, new HttpClient.Callback2() {
+            @Override
+            public void onSuccess(String body) {
+                try {
+                    JSONArray results = new JSONObject(body).getJSONArray("results");
+                    for (int i = 0; i < results.length(); i++) {
+                        JSONObject obj = results.getJSONObject(i);
+                        String id = String.valueOf(obj.getInt("id"));
+                        String title = obj.optString("name", obj.optString("original_name", ""));
+                        String firstAir = obj.optString("first_air_date", "");
+                        String year = firstAir.length() >= 4 ? firstAir.substring(0, 4) : "";
+                        String posterPath = obj.optString("poster_path", "");
+                        String posterFull = AppConstants.TMDB_IMAGE_BASE + posterPath;
+                        double voteAvg = obj.optDouble("vote_average", 0.0);
+                        targetList.add(new Movie(title, posterFull, "⭐️ " + voteAvg, id,
+                                obj.optString("overview", ""), year, voteAvg));
+                    }
+                    adapter.notifyDataSetChanged();
+                } catch (Exception ignored) {}
+            }
+            @Override public void onError(String message) {}
+        });
+    }
+
+    private void fetchHomeCategories() {
+        homeFetched = true;
+        String lang = "&language=ar";
+        String base = AppConstants.TMDB_BASE_URL;
+        fetchCategoryList(base + "/tv/airing_today?api_key=" + TMDB_API_KEY + lang,
+                listAiringToday, adapterAiringToday);
+        fetchCategoryList(base + "/tv/popular?api_key=" + TMDB_API_KEY + lang,
+                listPopular, adapterPopular);
+        fetchCategoryList(base + "/tv/top_rated?api_key=" + TMDB_API_KEY + lang,
+                listTopRated, adapterTopRated);
+        fetchCategoryList(base + "/discover/tv?api_key=" + TMDB_API_KEY + "&with_genres=16" + lang,
+                listAnime, adapterAnime);
+
+        // Same fix as MoviesActivity: posted on the tracked heroHandler, which
+        // onPause() and onDestroy() both clear. An anonymous Handler here left
+        // the callback alive after the screen was gone, and it crashed the
+        // process inside Glide.with(this) on a destroyed Activity.
+        heroHandler.postDelayed(this::populateHero, 800);
+    }
+
+    private void populateHero() {
+        if (heroBannerContainer == null || isFinishing() || isDestroyed()) return;
+        heroSeries.clear();
+        int limit = Math.min(5, listPopular.size());
+        for (int i = 0; i < limit; i++) heroSeries.add(listPopular.get(i));
+        if (heroSeries.isEmpty()) {
+            heroBannerContainer.setVisibility(View.GONE);
+            return;
+        }
+        heroBannerContainer.setVisibility(View.VISIBLE);
+        buildHeroIndicators();
+        heroIndex = 0;
+        bindHeroAt(0);
+        heroHandler.removeCallbacks(heroRotator);
+        heroHandler.postDelayed(heroRotator, 5000);
+    }
+
+    private void buildHeroIndicators() {
+        if (heroIndicators == null) return;
+        heroIndicators.removeAllViews();
+        int dp = (int) (getResources().getDisplayMetrics().density);
+        for (int i = 0; i < heroSeries.size(); i++) {
+            View dot = new View(this);
+            android.widget.LinearLayout.LayoutParams lp =
+                    new android.widget.LinearLayout.LayoutParams(7 * dp, 7 * dp);
+            lp.setMarginEnd(5 * dp);
+            dot.setLayoutParams(lp);
+            dot.setBackgroundResource(R.drawable.bg_hero_dot);
+            dot.setAlpha(i == heroIndex ? 1f : 0.4f);
+            heroIndicators.addView(dot);
+        }
+    }
+
+    private void bindHeroAt(int idx) {
+        if (idx < 0 || idx >= heroSeries.size() || ivHeroBackdrop == null) return;
+        // Reachable from the rotation timer, so the host is checked before
+        // Glide is handed a reference to it.
+        if (isFinishing() || isDestroyed()) return;
+
+        Movie m = heroSeries.get(idx);
+        tvHeroTitle.setText(m.getName() != null ? m.getName() : "");
+        StringBuilder meta = new StringBuilder();
+        if (m.getYear() != null && !m.getYear().isEmpty()) meta.append(m.getYear());
+        if (m.getVoteAverage() > 0) {
+            if (meta.length() > 0) meta.append("  ·  ");
+            meta.append(String.format(java.util.Locale.US, "%.1f", m.getVoteAverage()));
+        }
+        tvHeroMeta.setText(meta.toString());
+        com.bumptech.glide.Glide.with(this)
+                .load(m.getPoster())
+                .centerCrop()
+                .into(ivHeroBackdrop);
+        if (heroIndicators != null) {
+            for (int i = 0; i < heroIndicators.getChildCount(); i++) {
+                heroIndicators.getChildAt(i).setAlpha(i == idx ? 1f : 0.4f);
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        heroHandler.removeCallbacks(heroRotator);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        heroHandler.removeCallbacksAndMessages(null);
     }
 
     @Override
@@ -430,16 +650,19 @@ public class SeriesActivity extends BaseActivity {
         currentQuery = ""; // Clear explicit search
         android.widget.EditText editSearch = findViewById(R.id.editSearch);
         if (editSearch != null) editSearch.setText("");
-        
+
         currentPage = 1;
         seriesList.clear();
         filteredSeriesList.clear();
         adapter.notifyDataSetChanged();
-        
+
         hideSearchHistory();
         if (headerAdapter != null) headerAdapter.notifyDataSetChanged();
-        
-        fetchTMDBSeries(currentPage);
+
+        checkViewMode();
+        if (recyclerSeries.getVisibility() == View.VISIBLE) {
+            fetchTMDBSeries(currentPage);
+        }
     }
 
     private void applyRatingFilter() {
@@ -485,53 +708,35 @@ public class SeriesActivity extends BaseActivity {
             endpoint = baseQuery;
         }
 
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        Handler handler = new Handler(Looper.getMainLooper());
-
-        executor.execute(() -> {
-            try {
-                URL url = new URL(endpoint);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("GET");
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) response.append(line);
-                reader.close();
-
-                JSONObject jsonObj = new JSONObject(response.toString());
-                JSONArray results = jsonObj.getJSONArray("results");
-                List<Movie> newSeries = new ArrayList<>();
-
-                for (int i = 0; i < results.length(); i++) {
-                    JSONObject obj = results.getJSONObject(i);
-                    String id = String.valueOf(obj.getInt("id"));
-                    String title = obj.optString("name", obj.optString("original_name"));
-                    String firstAirDate = obj.optString("first_air_date", "");
-                    String year = firstAirDate.length() >= 4 ? firstAirDate.substring(0, 4) : "";
-                    String posterPath = obj.optString("poster_path", "");
-                    String posterFull = "https://image.tmdb.org/t/p/w500" + posterPath;
-                    double voteAvg = obj.optDouble("vote_average", 0.0);
-                    String vote = String.valueOf(voteAvg);
-
-                    Movie m = new Movie(title, posterFull, "⭐️ " + vote, id, obj.optString("overview", ""), year, voteAvg);
-                    newSeries.add(m);
-                }
-
-                handler.post(() -> {
+        HttpClient.getJson(this, endpoint, new HttpClient.Callback2() {
+            @Override
+            public void onSuccess(String body) {
+                try {
+                    JSONArray results = new JSONObject(body).getJSONArray("results");
+                    List<Movie> newSeries = new ArrayList<>();
+                    for (int i = 0; i < results.length(); i++) {
+                        JSONObject obj = results.getJSONObject(i);
+                        String id = String.valueOf(obj.getInt("id"));
+                        String title = obj.optString("name", obj.optString("original_name", ""));
+                        String firstAirDate = obj.optString("first_air_date", "");
+                        String year = firstAirDate.length() >= 4 ? firstAirDate.substring(0, 4) : "";
+                        String posterPath = obj.optString("poster_path", "");
+                        String posterFull = AppConstants.TMDB_IMAGE_BASE + posterPath;
+                        double voteAvg = obj.optDouble("vote_average", 0.0);
+                        newSeries.add(new Movie(title, posterFull, "⭐️ " + voteAvg, id,
+                                obj.optString("overview", ""), year, voteAvg));
+                    }
                     seriesList.addAll(newSeries);
                     applyRatingFilter();
-                    progressBar.setVisibility(View.GONE);
-                    isLoading = false;
-                });
+                } catch (Exception ignored) {}
+                progressBar.setVisibility(View.GONE);
+                isLoading = false;
+            }
 
-            } catch (Exception e) {
-                handler.post(() -> {
-                    progressBar.setVisibility(View.GONE);
-                    isLoading = false;
-                    Toast.makeText(SeriesActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+            @Override
+            public void onError(String message) {
+                progressBar.setVisibility(View.GONE);
+                isLoading = false;
             }
         });
     }

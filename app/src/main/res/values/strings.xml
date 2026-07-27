@@ -1,188 +1,177 @@
-<resources>
-    <string name="app_name">Nashat TV</string>
-    <string name="app_subtitle">Your Premium Entertainment Hub</string>
-    <string name="channels_json_url" translatable="false">https://raw.githubusercontent.com/iptv-org/iptv/master/channels/krd.m3u</string>
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════════
+   NASHAT TV — STRINGS (English, source of truth)
+  ══════════════════════════════════════════════════════════════════════
 
-    <!-- Navigation -->
-    <string name="title_channels">Channels</string>
+   Every user-visible word in the app lives here and is translated into
+   Kurdish Sorani (values-ckb) and Arabic (values-ar). Both translations
+   are COMPLETE — the previous build was missing 52 keys in each, including
+   every string on the Live TV screen, so a Kurdish user opened the app to
+   an English home screen.
+
+   VOICE
+   · Say what happened and what to do next. "Couldn't load channels. Check
+     your connection and try again." — not "Error loading content".
+   · Second person, present tense, no exclamation marks.
+   · Sentence case for everything except the LIVE badge. Title Case makes
+     an interface feel like a form.
+   · No emoji in strings. An emoji is an image; images belong in drawables,
+     where they can be tinted, sized, and swapped per theme. The old copy
+     shipped "⭐ Rate App" and "🔥 Featured" as literal text.
+   · Never name a technology the user did not choose. "Couldn't reach the
+     server" — not "Firebase error" or "TMDB request failed".
+
+   TRANSLATION NOTES
+   · Kurdish and Arabic run 20–40% longer than English. Nothing here is
+     written to fit a fixed width; layouts wrap.
+   · %1$s style positional arguments everywhere, never bare %s, because
+     Kurdish and Arabic word order moves the substitution point.
+   · translatable="false" marks endpoints and identifiers, so translators
+     are not shown a URL to localise.
+-->
+<resources>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         IDENTITY
+         ══════════════════════════════════════════════════════════════ -->
+    <string name="app_name">Nashat TV</string>
+    <string name="app_tagline">Live Kurdish television, films and series</string>
+    <string name="app_subtitle">Live Kurdish television, films and series</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         NAVIGATION — the four destinations
+         ══════════════════════════════════════════════════════════════ -->
+    <string name="nav_home">Home</string>
+    <string name="nav_live">Live</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_library">Library</string>
+
+    <!-- Legacy nav keys still named by pre-redesign layouts. -->
+    <string name="nav_live_tv">Live</string>
+    <string name="nav_movies">Films</string>
+    <string name="nav_series">Series</string>
+    <string name="nav_settings">Settings</string>
     <string name="title_home">Home</string>
-    <string name="title_favorites">Favorites</string>
+    <string name="title_channels">Channels</string>
+    <string name="title_favorites">Favourites</string>
     <string name="title_categories">Categories</string>
     <string name="title_profile">Profile</string>
 
-    <!-- Search -->
-    <string name="hint_search">Search channels, shows...</string>
-    <string name="voice_search">Voice Search</string>
+    <!-- ══════════════════════════════════════════════════════════════
+         HOME — the unified hub
+         ══════════════════════════════════════════════════════════════ -->
+    <string name="home_greeting_morning">Good morning</string>
+    <string name="home_greeting_afternoon">Good afternoon</string>
+    <string name="home_greeting_evening">Good evening</string>
 
-    <!-- Categories -->
-    <string name="label_category">Categories</string>
-    <string name="label_favorites_only">Favorites Only</string>
+    <string name="row_continue_watching">Continue watching</string>
+    <string name="row_live_now">Live now</string>
+    <string name="row_your_channels">Your channels</string>
+    <string name="row_trending_films">Trending films</string>
+    <string name="row_trending_series">Trending series</string>
+    <string name="row_top_rated_films">Top rated films</string>
+    <string name="row_top_rated_series">Top rated series</string>
+    <string name="row_in_theatres">In cinemas now</string>
+    <string name="row_airing_today">Airing today</string>
+    <string name="row_animation">Animation and anime</string>
+    <string name="row_because_you_watched">Because you watched %1$s</string>
+    <string name="row_popular_in">Popular in %1$s</string>
+
+    <string name="action_see_all">See all</string>
+    <string name="action_play">Play</string>
+    <string name="action_resume">Resume</string>
+    <string name="action_watch_now">Watch now</string>
+    <string name="action_more_info">More info</string>
+    <string name="action_add_to_list">Add to list</string>
+    <string name="action_in_your_list">In your list</string>
+    <string name="action_remove">Remove</string>
+    <string name="action_share">Share</string>
+    <string name="action_retry">Try again</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_filter">Filter</string>
+    <string name="action_sort">Sort</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_clear_all">Clear all</string>
+    <string name="action_done">Done</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_save">Save</string>
+    <string name="action_continue">Continue</string>
+    <string name="action_skip">Skip</string>
+    <string name="action_undo">Undo</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Legacy action keys. -->
+    <string name="see_all">See all</string>
+    <string name="view_all">See all</string>
+    <string name="action_watch">Play</string>
+    <string name="retry">Try again</string>
+    <string name="refresh">Refresh</string>
+    <string name="filter">Filter</string>
+    <string name="sort">Sort</string>
+    <string name="clear_all">Clear all</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         LIVE TV
+         ══════════════════════════════════════════════════════════════ -->
+    <string name="live_title">Live TV</string>
+    <string name="live_tv_title">Live TV</string>
+    <string name="live_subtitle">%1$d channels, sorted for %2$s</string>
+    <string name="live_tv_subtitle">Kurdish and regional channels, always on</string>
+    <string name="live_tv_simple_subtitle">%1$s first · %2$s</string>
+    <string name="live_search_hint">Search channels</string>
+    <string name="live_tv_search_hint">Search channels</string>
+    <string name="live_tv_count">%1$d channels</string>
+    <string name="live_tv_global">Worldwide</string>
+    <string name="live_tv_featured">Featured now</string>
+    <string name="live_tv_all_channels">All channels</string>
+    <string name="live_tv_hint_text">Tap a channel to start watching</string>
+    <string name="live_tv_country_focus">Showing %1$s first</string>
+    <string name="live_tv_top_pick">%1$s · %2$s</string>
+    <string name="live_tv_featured_iraq">Top picks for you</string>
+
+    <!-- The LIVE badge. Kept to one short word in every language; the badge
+         is a fixed-width pill and this is the only string inside it. -->
+    <string name="badge_live">Live</string>
+    <string name="live">Live</string>
+    <string name="badge_hd">HD</string>
+    <string name="badge_new">New</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         CATEGORIES
+         ══════════════════════════════════════════════════════════════ -->
     <string name="category_all">All</string>
     <string name="category_news">News</string>
-    <string name="category_sports">Sports</string>
+    <string name="category_sports">Sport</string>
     <string name="category_entertainment">Entertainment</string>
     <string name="category_kids">Kids</string>
     <string name="category_documentary">Documentary</string>
     <string name="category_music">Music</string>
-    <string name="category_movies">Movies</string>
+    <string name="category_movies">Films</string>
+    <string name="category_series">Series</string>
+    <string name="category_religion">Religion</string>
     <string name="cat_religion">Religion</string>
-
-    <!-- Sections -->
-    <string name="recommended_channels">Recommended for You</string>
-    <string name="all_channels">All Channels</string>
-    <string name="trending_now">Trending Now</string>
-    <string name="recently_watched">Recently Watched</string>
-    <string name="popular_channels">Popular Channels</string>
-
-    <!-- Actions -->
-    <string name="see_all">See All</string>
-    <string name="view_all">View All</string>
-    <string name="grid_view">Grid</string>
-    <string name="list_view">List</string>
-    <string name="settings">Settings</string>
-    <string name="refresh">Refresh</string>
-    <string name="filter">Filter</string>
-    <string name="sort">Sort</string>
-    <string name="action_watch">Watch</string>
-
-    <!-- Stats -->
-    <string name="total_channels">Total Channels</string>
-    <string name="favorites">Favorites</string>
-    <string name="watching_now">Watching Now</string>
-    <string name="live">LIVE</string>
-
-    <!-- Player -->
-    <string name="play">Play</string>
-    <string name="pause">Pause</string>
-    <string name="stop">Stop</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-    <string name="fullscreen">Fullscreen</string>
-    <string name="exit_fullscreen">Exit Fullscreen</string>
-    <string name="quality">Quality</string>
-    <string name="subtitles">Subtitles</string>
-    <string name="audio_track">Audio Track</string>
-    <string name="player_exit_fullscreen">Exit Fullscreen</string>
-    <string name="player_fullscreen">Fullscreen</string>
-    <string name="player_now_playing">Now Playing</string>
-    <string name="player_settings">Player Settings</string>
-
-    <!-- Settings -->
-    <string name="settings_general">General</string>
-    <string name="settings_appearance">Appearance</string>
-    <string name="settings_playback">Playback</string>
-    <string name="settings_network">Network</string>
-    <string name="settings_about">About</string>
-    <string name="dark_mode">Dark Mode</string>
-    <string name="light_mode">Light Mode</string>
-    <string name="system_default">System Default</string>
-    <string name="nashat_theme">Nashat Theme</string>
-    <string name="language">Language</string>
-    <string name="notifications">Notifications</string>
-    <string name="auto_play">Auto Play</string>
-    <string name="picture_in_picture">Picture in Picture</string>
-    <string name="section_general">General</string>
-    <string name="auto_play_videos">Auto Play Videos</string>
-    <string name="prefer_hd_quality">Prefer HD Quality</string>
-    <string name="appearance">Appearance</string>
-    <string name="theme">Theme</string>
-    <string name="theme_preview">Theme Preview</string>
-    <string name="section_support">Support</string>
-    <string name="contact_us">Contact Us</string>
-    <string name="settings_storage">Storage</string>
-    <string name="clear_cache">Clear Cache</string>
-    <string name="clear_cache_desc">Free up space by clearing cached data</string>
-    <string name="clear_cache_confirm">This will clear %s of cached data including logos and temporary files. Continue?</string>
-    <string name="clear_cache_btn">Clear</string>
-    <string name="cache_cleared">Cache cleared successfully</string>
-    <string name="share_app">Share App</string>
-    <string name="share_message">Check out Nashat TV - Watch Kurdish channels live!</string>
-    <string name="version_info">Version %s</string>
-
-    <!-- Messages -->
-    <string name="loading">Loading...</string>
-    <string name="error_loading">Error loading content</string>
-    <string name="no_channels">No channels available</string>
-    <string name="no_favorites">No favorite channels</string>
-    <string name="added_to_favorites">Added to favorites</string>
-    <string name="removed_from_favorites">Removed from favorites</string>
-    <string name="network_error">Network connection error</string>
-    <string name="retry">Retry</string>
-    <string name="empty_list">Empty List</string>
-
-    <!-- Content Description -->
-    <string name="cd_channel_logo">Channel Logo</string>
-    <string name="cd_favorite_button">Add to Favorites</string>
-    <string name="cd_play_button">Play Channel</string>
-    <string name="cd_more_options">More Options</string>
-    <string name="cd_back_button">Go Back</string>
-    <string name="cd_share">Share</string>
-    <string name="acc_settings">Settings</string>
-    <string name="acc_pip">Picture in Picture</string>
-    <string name="acc_rewind">Rewind</string>
-    <string name="acc_play">Play</string>
-    <string name="acc_pause">Pause</string>
-    <string name="acc_fast_forward">Fast Forward</string>
-    <string name="acc_audio_track">Audio Track</string>
-    <string name="acc_subtitles">Subtitles</string>
-    <string name="acc_volume">Volume</string>
-    <string name="acc_cast">Cast to TV</string>
-    <string name="cast_connecting">Connecting to Chromecast…</string>
-    <string name="cast_connected">Connected to %s</string>
-    <string name="cast_disconnected">Disconnected from Chromecast</string>
-    <string name="cast_not_available">Chromecast not available on this device</string>
-    <string name="cast_error">Error casting media</string>
-    <string name="cast_to_tv">Cast to TV</string>
-
-    <!-- About -->
-    <string name="version">Version</string>
-    <string name="developer">Mobile App Developer</string>
-    <string name="developer_name">Nashat Shamsadyn\nنشأت شمس الدين</string>
-    <string name="created_by">دروستکراوە لەلایەن</string>
-    <string name="contact">Contact</string>
-    <string name="contact_and_social">Contact \u0026 Social</string>
-    <string name="privacy_policy">Privacy Policy</string>
-    <string name="terms_of_service">Terms of Service</string>
-    <string name="rate_app">⭐ Rate App</string>
-    <string name="last_updated">Last updated: %s</string>
-    <string name="about_title">About</string>
-    <string name="about_body">Nashat TV is your premium Kurdish live TV streaming app. Watch your favorite Kurdish channels anytime, anywhere with crystal-clear quality. Built with ❤️ by Nashat Shamsadyn - نشأت شمس الدين.\n\nFor bug reports or feedback, reach out via email or social media below.</string>
-    <string name="contact_value">Nashatkurdi02@gmail.com</string>
-    <string name="contact_email">Nashatkurdi02@gmail.com</string>
-    <string name="email_label">Email</string>
-    <string name="instagram_label">Instagram</string>
-    <string name="instagram_handle">@iosbb0</string>
-    <string name="instagram_url" translatable="false">https://www.instagram.com/iosbb0/</string>
-    <string name="facebook_label">Facebook</string>
-    <string name="facebook_page">Nashat Shamsadyne</string>
-    <string name="facebook_url" translatable="false">https://www.facebook.com/share/1Dz5ZkT3jW/</string>
-
-    <!-- Menu -->
-    <string name="menu_about">About</string>
-    <string name="menu_favorites">Favorites</string>
-    <string name="menu_language">Language</string>
-
-
-    <!-- Language Dialog -->
-    <string name="choose_language">Choose Language</string>
-    <string name="lang_ckb">Kurdî (Soranî)</string>
-    <string name="lang_ar">العربية</string>
-    <string name="lang_en">English</string>
-
-    <!-- Misc -->
-    <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="label_category">Categories</string>
+    <string name="categories_label">Categories</string>
+    <string name="label_favorites_only">Favourites only</string>
 
     <string-array name="categories">
-        <item>All</item>
-        <item>News</item>
-        <item>Sports</item>
-        <item>Entertainment</item>
-        <item>Kids</item>
-        <item>Documentary</item>
-        <item>Music</item>
-        <item>Movies</item>
+        <item>@string/category_all</item>
+        <item>@string/category_news</item>
+        <item>@string/category_sports</item>
+        <item>@string/category_entertainment</item>
+        <item>@string/category_kids</item>
+        <item>@string/category_documentary</item>
+        <item>@string/category_music</item>
+        <item>@string/category_movies</item>
     </string-array>
-    <string-array name="categories_keys">
+
+    <!-- Stable lookup keys. Never translated: these match the category
+         field in channels.json and Firebase. Translating them silently
+         breaks every filter. -->
+    <string-array name="categories_keys" translatable="false">
         <item>ALL</item>
         <item>News</item>
         <item>Sports</item>
@@ -192,45 +181,436 @@
         <item>Music</item>
         <item>Movies</item>
     </string-array>
-<string name="menu_sort_curated">Sort: Curated</string>
-<string name="firebase_rtdb_url">https://nashat-tv-default-rtdb.asia-southeast1.firebasedatabase.app</string>
 
-    <!-- Theme Modes -->
-    <string name="theme_desc">Choose your visual experience</string>
+    <!-- ══════════════════════════════════════════════════════════════
+         SEARCH
+         ══════════════════════════════════════════════════════════════ -->
+    <string name="search_title">Search</string>
+    <string name="search_hint">Search channels, films and series</string>
+    <string name="hint_search">Search channels, films and series</string>
+    <string name="hint_search_movie">Search films</string>
+    <string name="hint_search_series">Search series</string>
+    <string name="search_recent">Recent searches</string>
+    <string name="recent_searches">Recent searches</string>
+    <string name="search_results_for">Results for “%1$s”</string>
+    <string name="search_no_results_title">No results for “%1$s”</string>
+    <string name="search_no_results_body">Check the spelling, or try a shorter search.</string>
+    <string name="search_empty_title">Find something to watch</string>
+    <string name="search_empty_body">Search across live channels, films and series at once.</string>
+    <string name="search_tab_all">All</string>
+    <string name="search_tab_channels">Channels</string>
+    <string name="search_tab_films">Films</string>
+    <string name="search_tab_series">Series</string>
+    <string name="voice_search">Voice search</string>
+    <string name="voice_search_unavailable">Voice search isn\'t available on this device.</string>
+    <string name="voice_search_permission">Nashat TV needs microphone access for voice search.</string>
 
-    <!-- My Content Section -->
-    <string name="settings_my_content">My Content</string>
+    <!-- ══════════════════════════════════════════════════════════════
+         LIBRARY — favourites, watchlist, history, playlists, stats
+         ══════════════════════════════════════════════════════════════ -->
+    <string name="library_title">Your library</string>
+    <string name="library_tab_favourites">Favourites</string>
+    <string name="library_tab_watchlist">Watchlist</string>
+    <string name="library_tab_history">History</string>
+    <string name="library_tab_playlists">Playlists</string>
 
-    <!-- Watch Statistics -->
-    <string name="stats_title">Watch Statistics</string>
-    <string name="stats_subtitle">Track your viewing habits</string>
-    <string name="stats_total_time">Total Watch Time</string>
-    <string name="stats_sessions">sessions</string>
-    <string name="stats_top_category">Top Category</string>
-    <string name="stats_this_week">This Week</string>
-    <string name="stats_by_category">By Category</string>
-    <string name="stats_recent">Recent Sessions</string>
-    <string name="stats_reset">Reset Statistics</string>
-    <string name="stats_reset_confirm">Are you sure you want to reset all watch statistics? This cannot be undone.</string>
-    <string name="stats_reset_done">Statistics reset successfully</string>
+    <string name="favourites">Favourites</string>
+    <string name="favorites">Favourites</string>
+    <string name="menu_favorites">Favourites</string>
+    <string name="favourite_added">Added to favourites</string>
+    <string name="favourite_removed">Removed from favourites</string>
+    <string name="added_to_favorites">Added to favourites</string>
+    <string name="removed_from_favorites">Removed from favourites</string>
+    <string name="watchlist_added">Added to your watchlist</string>
+    <string name="watchlist_removed">Removed from your watchlist</string>
+
+    <string name="empty_favourites_title">Nothing saved yet</string>
+    <string name="empty_favourites_body">Tap the heart on any channel or title to keep it here.</string>
+    <string name="empty_watchlist_title">Your watchlist is empty</string>
+    <string name="empty_watchlist_body">Add films and series you want to get to later.</string>
+    <string name="empty_history_title">No viewing history</string>
+    <string name="empty_history_body">Anything you start watching shows up here so you can pick it back up.</string>
 
     <!-- Playlists -->
-    <string name="playlists_title">My Playlists</string>
-    <string name="playlists_subtitle">Create and manage playlists</string>
-    <string name="playlists_count">playlists</string>
-    <string name="playlist_create_new">Create New Playlist</string>
+    <string name="playlists_title">Playlists</string>
+    <string name="playlists_subtitle">Group channels and titles your own way</string>
+    <string name="playlists_count">%1$d playlists</string>
+    <string name="playlist_create_new">New playlist</string>
     <string name="playlist_create">Create</string>
-    <string name="playlist_created">Playlist created!</string>
-    <string name="playlist_name_hint">Playlist name…</string>
-    <string name="playlist_empty">This playlist is empty. Add channels or movies from their detail screens.</string>
+    <string name="playlist_created">Playlist created</string>
+    <string name="playlist_name_hint">Playlist name</string>
+    <string name="playlist_empty">This playlist is empty. Add channels or titles from their detail screen.</string>
     <string name="playlist_rename">Rename</string>
     <string name="playlist_delete">Delete</string>
-    <string name="playlist_delete_confirm">Are you sure you want to delete this playlist?</string>
+    <string name="playlist_delete_confirm">Delete “%1$s”? The channels in it aren\'t removed from your favourites.</string>
     <string name="playlist_deleted">Playlist deleted</string>
-    <string name="playlist_add_to">Add to Playlist</string>
-    <string name="playlist_added">Added to playlist!</string>
+    <string name="playlist_add_to">Add to playlist</string>
+    <string name="playlist_added">Added to playlist</string>
 
-    <!-- Recommendations -->
-    <string name="recommended_for_you">Recommended For You</string>
+    <!-- Watch statistics -->
+    <string name="stats_title">Watch time</string>
+    <string name="stats_subtitle">How much you\'ve watched, and what</string>
+    <string name="stats_total_time">Total watch time</string>
+    <string name="stats_sessions">sessions</string>
+    <string name="stats_top_category">Most watched</string>
+    <string name="stats_this_week">This week</string>
+    <string name="stats_by_category">By category</string>
+    <string name="stats_recent">Recent</string>
+    <string name="stats_reset">Reset watch time</string>
+    <string name="stats_reset_confirm">Reset all watch statistics? This can\'t be undone.</string>
+    <string name="stats_reset_done">Watch time reset</string>
+    <string name="stats_empty">Nothing to show yet. Watch something and your stats will build up here.</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         DETAIL SCREENS
+         ══════════════════════════════════════════════════════════════ -->
+    <string name="detail_storyline">Storyline</string>
+    <string name="storyline">Storyline</string>
+    <string name="detail_cast">Cast and crew</string>
+    <string name="cast_crew">Cast and crew</string>
+    <string name="detail_seasons">Seasons</string>
+    <string name="seasons">Seasons</string>
+    <string name="detail_episodes">Episodes</string>
+    <string name="detail_similar_films">More like this</string>
+    <string name="similar_movies">More like this</string>
+    <string name="detail_similar_series">More like this</string>
+    <string name="similar_series">More like this</string>
+    <string name="detail_biography">Biography</string>
+    <string name="biography">Biography</string>
+    <string name="detail_known_for">Known for</string>
+    <string name="known_for">Known for</string>
+    <string name="detail_season_episode">Season %1$d, episode %2$d</string>
+    <string name="detail_runtime_minutes">%1$d min</string>
+    <string name="detail_rating">%1$s out of 10</string>
+    <string name="detail_no_synopsis">No synopsis available for this title yet.</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         PLAYER
+         ══════════════════════════════════════════════════════════════ -->
+    <string name="player_play">Play</string>
+    <string name="player_pause">Pause</string>
+    <string name="player_replay">Replay</string>
+    <string name="player_rewind">Back 10 seconds</string>
+    <string name="player_forward">Forward 10 seconds</string>
+    <string name="player_next">Next</string>
+    <string name="player_previous">Previous</string>
+    <string name="player_fullscreen">Full screen</string>
+    <string name="player_exit_fullscreen">Exit full screen</string>
+    <string name="player_quality">Quality</string>
+    <string name="player_quality_auto">Auto</string>
+    <string name="player_subtitles">Subtitles</string>
+    <string name="player_subtitles_off">Off</string>
+    <string name="player_audio_track">Audio</string>
+    <string name="player_speed">Speed</string>
+    <string name="player_speed_value">%1$sx</string>
+    <string name="player_mute">Mute</string>
+    <string name="player_unmute">Unmute</string>
+    <string name="player_pip">Picture in picture</string>
+    <string name="player_settings">Playback settings</string>
+    <string name="player_now_playing">Now playing</string>
+    <string name="player_up_next">Up next: %1$s</string>
+    <string name="player_live_edge">Live</string>
+    <string name="player_buffering">Buffering…</string>
+    <string name="player_connecting">Connecting…</string>
+
+    <!-- Legacy player keys. -->
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="fullscreen">Full screen</string>
+    <string name="exit_fullscreen">Exit full screen</string>
+    <string name="quality">Quality</string>
+    <string name="subtitles">Subtitles</string>
+    <string name="audio_track">Audio</string>
+    <string name="picture_in_picture">Picture in picture</string>
+
+    <!-- Player errors. Each says what failed AND what the user can do. -->
+    <string name="player_error_generic">This channel isn\'t responding. Try another one.</string>
+    <string name="player_error_network">Lost connection. Check your network and try again.</string>
+    <string name="player_error_source">This stream is offline right now.</string>
+    <string name="player_pip_unsupported">This device doesn\'t support picture in picture.</string>
+
+    <!-- Web player overlay -->
+    <string name="loading_please_wait">One moment</string>
+    <string name="loading_preparing_movie">Preparing playback</string>
+    <string name="loading_trying_another_server">Trying another source…</string>
+    <string name="loading_unavailable">This title isn\'t available right now</string>
+    <string name="loading_try_another">Try a different title, or check back later.</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         CAST
+         ══════════════════════════════════════════════════════════════ -->
+    <string name="cast_to_tv">Cast to TV</string>
+    <string name="cast_connecting">Connecting…</string>
+    <string name="cast_connected">Playing on %1$s</string>
+    <string name="cast_disconnected">Stopped casting</string>
+    <string name="cast_not_available">No cast devices found on this network.</string>
+    <string name="cast_error">Couldn\'t cast this. Try again.</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         SETTINGS
+         ══════════════════════════════════════════════════════════════ -->
+    <string name="settings">Settings</string>
+    <string name="settings_title">Settings</string>
+
+    <string name="settings_section_appearance">Appearance</string>
+    <string name="settings_section_playback">Playback</string>
+    <string name="settings_section_data">Data and storage</string>
+    <string name="settings_section_privacy">Privacy</string>
+    <string name="settings_section_about">About</string>
+    <string name="appearance">Appearance</string>
+    <string name="settings_playback">Playback</string>
+    <string name="settings_storage">Storage</string>
+    <string name="settings_my_content">Your content</string>
+    <string name="section_support">Support</string>
+    <string name="section_general">General</string>
+    <string name="settings_general">General</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_network">Network</string>
+    <string name="settings_about">About</string>
+
+    <!-- Theme -->
+    <string name="theme">Theme</string>
+    <string name="theme_desc">Match your system, or pick one</string>
+    <string name="theme_system">Follow system</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="dark_mode">Dark</string>
+    <string name="light_mode">Light</string>
+    <string name="system_default">Follow system</string>
+
+    <!-- Language -->
+    <string name="language">Language</string>
+    <string name="menu_language">Language</string>
+    <string name="choose_language">Language</string>
+    <string name="language_system">Follow system</string>
+    <string name="lang_ckb" translatable="false">کوردیی ناوەندی</string>
+    <string name="lang_ar" translatable="false">العربية</string>
+    <string name="lang_en" translatable="false">English</string>
+
+    <!-- Playback -->
+    <string name="setting_autoplay">Autoplay</string>
+    <string name="setting_autoplay_desc">Start the next episode automatically</string>
+    <string name="auto_play">Autoplay</string>
+    <string name="auto_play_videos">Autoplay</string>
+    <string name="setting_hd">Prefer HD</string>
+    <string name="setting_hd_desc">Use the highest quality your connection allows</string>
+    <string name="prefer_hd_quality">Prefer HD</string>
+    <string name="setting_background_audio">Background audio</string>
+    <string name="setting_background_audio_desc">Keep sound playing when you leave the app</string>
+    <string name="background_play">Background audio</string>
+    <string name="setting_data_saver">Data saver</string>
+    <string name="setting_data_saver_desc">Lower quality and fewer images on mobile data</string>
+    <string name="data_saver">Data saver</string>
+
+    <string name="buffer_size">Buffer</string>
+    <string name="buffer_size_desc">More buffer means fewer interruptions but a slower start</string>
+    <string name="buffer_small">Small — starts fastest</string>
+    <string name="buffer_medium">Balanced — recommended</string>
+    <string name="buffer_large">Large — smoothest</string>
+
+    <string name="refresh_frequency">Update channel list</string>
+    <string name="refresh_manual">Only when I ask</string>
+    <string name="refresh_daily">Daily</string>
+    <string name="refresh_weekly">Weekly</string>
+    <string name="refresh_never">Never</string>
+
+    <!-- Storage -->
+    <string name="clear_cache">Clear cache</string>
+    <string name="clear_cache_desc">Free up space used by logos and artwork</string>
+    <string name="clear_cache_confirm">Clear %1$s of cached images? They\'ll download again as you browse.</string>
+    <string name="clear_cache_btn">Clear</string>
+    <string name="cache_cleared">Cache cleared</string>
+
+    <!-- Privacy -->
+    <string name="setting_crash_reports">Send crash reports</string>
+    <string name="setting_crash_reports_desc">Share anonymous crash details so problems can be fixed</string>
+    <string name="setting_analytics">Share usage data</string>
+    <string name="setting_analytics_desc">Anonymous data about which screens and channels are used</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="terms_of_service">Terms of use</string>
+
+    <!-- Updates -->
+    <string name="setting_auto_update">Automatic updates</string>
+    <string name="setting_auto_update_desc">Check for a new version when the app opens</string>
+    <string name="update_check">Check for updates</string>
+    <string name="update_checking">Checking…</string>
+    <string name="update_up_to_date">You\'re on the latest version</string>
+    <string name="update_available_title">Version %1$s is available</string>
+    <string name="update_available_body">You have %1$s.</string>
+    <string name="update_download">Download</string>
+    <string name="update_downloading">Downloading %1$d%%</string>
+    <string name="update_install">Install</string>
+    <string name="update_later">Later</string>
+    <string name="update_failed">Couldn\'t download the update. Check your connection and try again.</string>
+    <string name="update_permission_needed">Nashat TV needs permission to install updates.</string>
+
+    <!-- About & support -->
+    <string name="about_title">About</string>
+    <string name="menu_about">About</string>
+    <string name="about_body">Nashat TV brings Kurdish and regional live channels together with films and series, in one place, in your language.</string>
+    <string name="version">Version</string>
+    <string name="version_info">Version %1$s</string>
+    <string name="last_updated">Updated %1$s</string>
+    <string name="developer">Developer</string>
+    <string name="developer_name">Nashat Shamsadyn</string>
+    <string name="created_by">Made by</string>
+    <string name="contact">Contact</string>
+    <string name="contact_us">Contact support</string>
+    <string name="contact_and_social">Contact</string>
+    <string name="email_label">Email</string>
+    <string name="instagram_label">Instagram</string>
+    <string name="facebook_label">Facebook</string>
+    <string name="rate_app">Rate this app</string>
+    <string name="share_app">Share Nashat TV</string>
+    <string name="share_message">Watch Kurdish live TV, films and series on Nashat TV.</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         ONBOARDING — first launch only
+         ══════════════════════════════════════════════════════════════ -->
+    <string name="onboarding_language_title">Choose your language</string>
+    <string name="onboarding_language_body">You can change this any time in Settings.</string>
+    <string name="onboarding_region_title">Where are you watching from?</string>
+    <string name="onboarding_region_body">Channels from your region are shown first.</string>
+    <string name="onboarding_region_skip">Show all regions</string>
+    <string name="onboarding_interests_title">What do you like to watch?</string>
+    <string name="onboarding_interests_body">Pick a few. This shapes what you see on Home.</string>
+    <string name="onboarding_finish">Start watching</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         STATES — loading, empty, error
+         Every error names a cause and an action. "Error loading content"
+         told the user nothing they could act on.
+         ══════════════════════════════════════════════════════════════ -->
+    <string name="state_loading">Loading…</string>
+    <string name="loading">Loading…</string>
+    <string name="splash_loading_text">Loading channels…</string>
+    <string name="splash_ready_text">Ready</string>
+    <string name="splash_offline_text">Offline — showing your saved channels</string>
+
+    <string name="state_offline_title">You\'re offline</string>
+    <string name="state_offline_body">Connect to the internet to load live channels.</string>
+    <string name="live_tv_no_connection">You\'re offline. Connect and try again.</string>
+    <string name="network_error">No connection. Check your network and try again.</string>
+
+    <string name="state_error_title">Something went wrong</string>
+    <string name="state_error_body">Couldn\'t load this. Try again in a moment.</string>
+    <string name="error_loading">Couldn\'t load this. Try again in a moment.</string>
+
+    <string name="state_empty_channels_title">No channels here</string>
+    <string name="state_empty_channels_body">Try a different category, or clear your filters.</string>
+    <string name="no_channels">No channels match your filters</string>
+    <string name="no_favorites">No favourite channels yet</string>
+    <string name="empty_list">Nothing here yet</string>
+
+    <string name="toast_refresh_success">Channel list updated</string>
+    <string name="toast_offline_cached">Offline — showing saved channels</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         FILTERS
+         ══════════════════════════════════════════════════════════════ -->
+    <string name="advanced_filters">Filters</string>
+    <string name="filter_rating">Minimum rating</string>
+    <string name="rating_label">Minimum rating</string>
+    <string name="filter_year">Year</string>
+    <string name="year_range_label">Year</string>
+    <string name="filter_genre">Genre</string>
+    <string name="filter_country">Country</string>
+    <string name="filter_apply">Show results</string>
+    <string name="filter_reset">Reset</string>
+    <string name="filter_active_count">%1$d filters</string>
+    <string name="menu_sort_curated">Recommended order</string>
+    <string name="sort_name">Name</string>
+    <string name="sort_recent">Recently added</string>
+    <string name="sort_rating">Rating</string>
+
+    <string name="m3u_url_prompt">Paste an M3U or M3U8 playlist address</string>
+
+    <!-- Section names kept for legacy layouts. -->
+    <string name="recommended_channels">Recommended for you</string>
+    <string name="recommended_for_you">Recommended for you</string>
     <string name="based_on_watching">Based on what you watch</string>
+    <string name="all_channels">All channels</string>
+    <string name="trending_now">Trending now</string>
+    <string name="trending_this_week">Trending this week</string>
+    <string name="recently_watched">Recently watched</string>
+    <string name="popular_channels">Popular channels</string>
+    <string name="popular_label">Popular</string>
+    <string name="popular_series">Popular series</string>
+    <string name="top_rated_label">Top rated</string>
+    <string name="top_rated_series">Top rated series</string>
+    <string name="now_playing_theaters">In cinemas now</string>
+    <string name="airing_today">Airing today</string>
+    <string name="anime_animation">Animation and anime</string>
+    <string name="anime_series">Animated series</string>
+    <string name="featured_label">Featured</string>
+    <string name="total_channels">Channels</string>
+    <string name="watching_now">Watching now</string>
+    <string name="grid_view">Grid</string>
+    <string name="list_view">List</string>
+    <string name="theme_preview">Preview</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         ACCESSIBILITY — spoken by TalkBack, never shown on screen
+         These describe the ACTION, not the picture. "Add to favourites",
+         not "Heart icon".
+         ══════════════════════════════════════════════════════════════ -->
+    <string name="cd_back">Go back</string>
+    <string name="cd_back_button">Go back</string>
+    <string name="cd_close">Close</string>
+    <string name="cd_search">Search</string>
+    <string name="cd_settings">Settings</string>
+    <string name="acc_settings">Settings</string>
+    <string name="cd_more_options">More options</string>
+    <string name="cd_share">Share</string>
+    <string name="cd_channel_logo">%1$s logo</string>
+    <string name="cd_poster">Poster for %1$s</string>
+    <string name="cd_play_channel">Play %1$s</string>
+    <string name="cd_play_button">Play</string>
+    <string name="cd_favourite_add">Add %1$s to favourites</string>
+    <string name="cd_favourite_remove">Remove %1$s from favourites</string>
+    <string name="cd_favorite_button">Add to favourites</string>
+    <string name="cd_clear_search">Clear search</string>
+    <string name="cd_voice_search">Search by voice</string>
+    <string name="cd_app_logo">Nashat TV</string>
+    <string name="cd_progress">%1$d%% watched</string>
+
+    <string name="acc_play">Play</string>
+    <string name="acc_pause">Pause</string>
+    <string name="acc_rewind">Back 10 seconds</string>
+    <string name="acc_fast_forward">Forward 10 seconds</string>
+    <string name="acc_subtitles">Subtitles</string>
+    <string name="acc_audio_track">Audio track</string>
+    <string name="acc_volume">Volume</string>
+    <string name="acc_pip">Picture in picture</string>
+    <string name="acc_cast">Cast to TV</string>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         NON-TRANSLATABLE — endpoints, handles, framework identifiers
+         ══════════════════════════════════════════════════════════════ -->
+    <string name="channels_json_url" translatable="false">https://raw.githubusercontent.com/iptv-org/iptv/master/channels/krd.m3u</string>
+    <string name="firebase_rtdb_url" translatable="false">https://nashat-tv-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+    <string name="contact_email" translatable="false">Nashatkurdi02@gmail.com</string>
+    <string name="contact_value" translatable="false">Nashatkurdi02@gmail.com</string>
+    <string name="instagram_handle" translatable="false">@iosbb0</string>
+    <string name="instagram_url" translatable="false">https://www.instagram.com/iosbb0/</string>
+    <string name="facebook_page" translatable="false">Nashat Shamsadyne</string>
+    <string name="facebook_url" translatable="false">https://www.facebook.com/share/1Dz5ZkT3jW/</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+
+    <string name="stats_preview">%1$s over %2$d sessions</string>
+
+    <!-- Shown once, on the first launch of the player. -->
+    <string name="player_gesture_hints">Swipe up or down on the left for brightness, on the right for volume. Double tap to skip.</string>
+
+    <!-- Movie/series source picker -->
+    <string name="server_choose">Choose a source</string>
+    <string name="server_latency_ms">%1$d ms</string>
+    <string name="server_checking">Checking…</string>
+    <string name="server_unavailable">Not available</string>
+    <string name="server_playing">Playing</string>
+    <string name="server_unavailable_message">That source isn\'t responding right now.</string>
+
 </resources>

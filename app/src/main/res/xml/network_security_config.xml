@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <!-- Allow cleartext during development for some IPTV endpoints. Consider tightening for release. -->
+
+    <!-- TMDB: HTTPS only, system CAs only (user-installed CAs are ignored, so
+         MITM proxies on a rooted device still get nothing).
+
+         Certificate pinning was REMOVED here on 2026-07-26. The pins were taken
+         from Amazon's chain, and image.tmdb.org has since moved to Let's
+         Encrypt / ISRG — so every pin missed and *all* poster and backdrop
+         artwork failed to load, app-wide. Let's Encrypt rotates intermediates
+         on a schedule measured in weeks, so re-pinning would only schedule the
+         same outage again. TMDB serves public, read-only catalogue data over a
+         publicly-trusted certificate; the residual risk of not pinning it does
+         not justify an app whose imagery breaks on someone else's CA rotation. -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">themoviedb.org</domain>
+        <domain includeSubdomains="true">tmdb.org</domain>
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </domain-config>
+
+    <!-- Firebase / Google APIs: HTTPS only, system CAs only. -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">firebaseio.com</domain>
+        <domain includeSubdomains="true">firebasedatabase.app</domain>
+        <domain includeSubdomains="true">googleapis.com</domain>
+        <domain includeSubdomains="true">gstatic.com</domain>
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </domain-config>
+
+    <!-- Default: allow cleartext for legacy IPTV streams (no TLS available) -->
     <base-config cleartextTrafficPermitted="true">
         <trust-anchors>
             <certificates src="system" />
         </trust-anchors>
     </base-config>
+
 </network-security-config>

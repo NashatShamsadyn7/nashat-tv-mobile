@@ -42,6 +42,17 @@ public class HorizontalMovieAdapter extends RecyclerView.Adapter<HorizontalMovie
         
         if (holder.txtName != null) holder.txtName.setText(movie.getName());
         if (holder.txtCategory != null) holder.txtCategory.setText(movie.getCategory() == null || movie.getCategory().isEmpty() ? movie.getYear() : movie.getCategory());
+
+        // The corner badge was never bound, so every poster in every row
+        // carried the layout's placeholder year — "2024" — regardless of the
+        // film. Show the real year, and hide the badge when TMDB has none.
+        if (holder.txtYear != null) {
+            String year = movie.getYear();
+            boolean hasYear = year != null && !year.trim().isEmpty() && !"null".equals(year);
+            holder.txtYear.setText(hasYear ? year : "");
+            holder.txtYear.setVisibility(hasYear ? View.VISIBLE : View.GONE);
+        }
+
         
         if (movie.getPoster() != null && !movie.getPoster().isEmpty() && !movie.getPoster().endsWith("null")) {
             Glide.with(holder.itemView.getContext())
@@ -64,12 +75,14 @@ public class HorizontalMovieAdapter extends RecyclerView.Adapter<HorizontalMovie
         ImageView imgPoster;
         TextView txtName;
         TextView txtCategory;
+        TextView txtYear;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgPoster = itemView.findViewById(R.id.imgPoster);
             txtName = itemView.findViewById(R.id.txtMovieName);
             txtCategory = itemView.findViewById(R.id.txtMovieCategory);
+            txtYear = itemView.findViewById(R.id.txtYear);
         }
     }
 }

@@ -1,154 +1,384 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════════
+   NASHAT TV — COMPONENT LIBRARY
+  ══════════════════════════════════════════════════════════════════════
+
+   Every reusable surface, control and state in the app, defined once.
+
+   The file this replaces held a SECOND application theme (Theme.TVApp,
+   still on stock Material purple) plus a parallel Widget.App.* family that
+   duplicated half of Widget.NashatTV.*. Two component sets meant a card on
+   the movies screen and a card on the live screen were different objects
+   with different radii and different elevation.
+
+   Two rules govern the whole file:
+
+   · ELEVATION IS ZERO. A drop shadow needs a surface to fall on; against
+     a near-black background it produces a grey halo instead and reads as
+     a rendering artefact. Depth here comes from surface value plus a
+     hairline outline, which works identically in both modes.
+
+   · FOCUS IS A FIRST-CLASS STATE. Not an afterthought for TV. Every
+     interactive style below declares what it looks like when a D-pad
+     lands on it, because on a television that is the only cue the user has.
+-->
 <resources>
-    <!-- Base application theme -->
-    <style name="Theme.TVApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Primary brand color -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color -->
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-        <!-- Enable edge to edge -->
-        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
-        <!-- Enable animations -->
-        <item name="android:windowActivityTransitions">true</item>
-        <item name="android:windowContentTransitions">true</item>
-    </style>
-    
-    <!-- Expanded Toolbar Title Style -->
-    <style name="ExpandedToolbarTitle">
-        <item name="android:textSize">32sp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">@font/noto_naskh</item>
-    </style>
-    
-    <!-- FAB Shape Style -->
-    <style name="ShapeAppearance.FAB.Rounded" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">28dp</item>
-    </style>
-    
-    <!-- Category Chip Style -->
-    <style name="Widget.App.Chip.Category" parent="Widget.Material3.Chip.Filter">
-        <item name="chipBackgroundColor">@color/chip_background_selector</item>
-        <item name="chipStrokeColor">@color/chip_stroke_selector</item>
-        <item name="chipStrokeWidth">1.5dp</item>
-        <item name="chipCornerRadius">20dp</item>
-        <item name="chipMinHeight">40dp</item>
-        <item name="android:textColor">@color/chip_text_selector</item>
-        <item name="chipIconTint">@color/chip_icon_selector</item>
-        <item name="chipStartPadding">12dp</item>
-        <item name="chipEndPadding">12dp</item>
-        <item name="rippleColor">@color/purple_200</item>
-    </style>
-    
-    <!-- Card Styles -->
-    <style name="Widget.App.CardView.Channel" parent="Widget.Material3.CardView.Elevated">
-        <item name="cardCornerRadius">16dp</item>
-        <item name="cardElevation">4dp</item>
-        <item name="cardMaxElevation">8dp</item>
-        <item name="cardUseCompatPadding">true</item>
-        <item name="android:clickable">true</item>
-        <item name="android:focusable">true</item>
-        <item name="android:foreground">?android:attr/selectableItemBackground</item>
-    </style>
-    
-    <!-- Button Styles -->
-    <style name="Widget.App.Button.Gradient" parent="Widget.Material3.Button">
-        <item name="android:backgroundTint">@null</item>
-        <item name="android:background">@drawable/fab_gradient_background</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="cornerRadius">24dp</item>
-        <item name="android:elevation">4dp</item>
-        <item name="android:stateListAnimator">@animator/button_state_animator</item>
-    </style>
-    
-    <!-- Text Styles -->
-    <style name="TextAppearance.App.Headline" parent="TextAppearance.Material3.HeadlineMedium">
-        <item name="android:textColor">@color/text_primary</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">@font/noto_naskh</item>
-    </style>
-    
-    <style name="TextAppearance.App.Body" parent="TextAppearance.Material3.BodyMedium">
-        <item name="android:textColor">@color/text_secondary</item>
-        <item name="android:fontFamily">@font/noto_naskh</item>
-    </style>
-    
-    <!-- Animation Styles -->
-    <style name="Animation" />
-    <style name="Animation.App.CardEnter" parent="Animation">
-        <item name="android:windowEnterTransition">@transition/card_enter</item>
-        <item name="android:windowExitTransition">@transition/card_exit</item>
-    </style>
-    
-    <!-- RecyclerView Item Animation -->
-    <style name="Animation.App.RecyclerView" parent="Animation">
-        <item name="android:layoutAnimation">@anim/layout_animation_fall_down</item>
-    </style>
-    
-    <!-- Search Bar Style -->
-    <style name="Widget.App.SearchBar" parent="">
-        <item name="android:background">@drawable/search_bar_background</item>
-        <item name="android:elevation">8dp</item>
-        <item name="android:padding">16dp</item>
-    </style>
-    
-    <!-- Switch Style -->
-    <style name="Widget.App.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
-        <item name="thumbTint">@color/switch_thumb_selector</item>
-        <item name="trackTint">@color/switch_track_selector</item>
-    </style>
-    
-    <!-- Progress Bar Style -->
-    <style name="Widget.App.ProgressBar" parent="Widget.AppCompat.ProgressBar">
-        <item name="android:indeterminateTint">@color/purple_500</item>
-    </style>
-    
-    <!-- Snackbar Style -->
-    <style name="Widget.App.Snackbar" parent="Widget.Material3.Snackbar">
-        <item name="backgroundTint">@color/purple_700</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="actionTextColorAlpha">1</item>
-    </style>
-    
-    <!-- Dialog Style -->
-    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorSecondary">@color/purple_200</item>
-        <item name="colorSurface">@color/white</item>
-        <item name="colorOnSurface">@color/text_primary</item>
-        <item name="alertDialogStyle">@style/MaterialAlertDialog.App</item>
-    </style>
-    
-    <style name="MaterialAlertDialog.App" parent="MaterialAlertDialog.Material3">
-        <item name="shapeAppearance">@style/ShapeAppearance.App.MediumComponent</item>
-        <item name="shapeAppearanceOverlay">@null</item>
-    </style>
-    
-    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         SURFACES
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- The default card: raised surface, hairline outline, no shadow. -->
+    <style name="Widget.Nashat.Card" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardBackgroundColor">@color/surface_raised</item>
+        <item name="cardCornerRadius">@dimen/radius_md</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">@color/border_default</item>
+        <item name="strokeWidth">@dimen/stroke_hairline</item>
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="cardUseCompatPadding">false</item>
     </style>
 
-    <style name="Widget.NashatTV.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary"></style>
-    <style name="Widget.NashatTV.Card" parent="Widget.Material3.CardView.Elevated"></style>
-    <style name="Widget.NashatTV.Card.Nashat" parent="Widget.NashatTV.Card">
-        <item name="cardBackgroundColor">#33000000</item>
+    <!-- Media card: holds artwork edge-to-edge, so it must NOT have an
+         outline (a border around a poster looks like a printing error) and
+         must clip its child to the corner radius. -->
+    <style name="Widget.Nashat.Card.Media">
         <item name="strokeWidth">0dp</item>
+        <item name="cardBackgroundColor">@color/surface_sunken</item>
+        <item name="cardCornerRadius">@dimen/radius_sm</item>
+        <item name="android:foreground">@drawable/fg_focus_ring</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
     </style>
-    <style name="Widget.NashatTV.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox"></style>
-    <style name="Widget.NashatTV.Chip" parent="Widget.Material3.Chip.Filter"></style>
-    
-    <style name="CircleImageView" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
+
+    <!-- Poster variant: same as media, tighter radius for 2:3 artwork. -->
+    <style name="Widget.Nashat.Card.Poster" parent="Widget.Nashat.Card.Media">
+        <item name="cardCornerRadius">@dimen/radius_sm</item>
     </style>
+
+    <!-- Channel tile: square, holds a logo on a light plate. -->
+    <style name="Widget.Nashat.Card.Channel" parent="Widget.Nashat.Card.Media">
+        <item name="cardCornerRadius">@dimen/radius_md</item>
+        <item name="cardBackgroundColor">@color/surface_raised</item>
+    </style>
+
+    <!-- Settings / list group container. -->
+    <style name="Widget.Nashat.Card.Group" parent="Widget.Nashat.Card">
+        <item name="cardCornerRadius">@dimen/radius_lg</item>
+    </style>
+
+    <style name="Widget.Nashat.BottomSheet" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">@color/surface_raised</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Nashat.Large</item>
+        <item name="behavior_peekHeight">auto</item>
+    </style>
+
+
+    <!-- ══════════════════════════════════════════════════════════════
+         BUTTONS
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- Primary. Lime fill with ink text — the app's one loud control.
+         At most one per screen region; a screen with three lime buttons has
+         no primary action. -->
+    <style name="Widget.Nashat.Button" parent="Widget.Material3.Button">
+        <item name="android:textAppearance">@style/TextAppearance.Nashat.Label.Large</item>
+        <item name="android:textColor">@color/on_accent_fill</item>
+        <item name="backgroundTint">@color/sel_button_fill</item>
+        <item name="iconTint">@color/on_accent_fill</item>
+        <item name="iconSize">@dimen/icon_size_md</item>
+        <item name="iconPadding">@dimen/space_200</item>
+        <item name="cornerRadius">@dimen/radius_pill</item>
+        <item name="android:minHeight">@dimen/touch_target_min</item>
+        <item name="android:paddingStart">@dimen/space_600</item>
+        <item name="android:paddingEnd">@dimen/space_600</item>
+        <item name="elevation">0dp</item>
+        <item name="rippleColor">@color/sel_ripple_on_accent</item>
+    </style>
+
+    <!-- Secondary. Outlined; carries the "add to list" / "more info" role
+         beside a primary Play button. -->
+    <style name="Widget.Nashat.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textAppearance">@style/TextAppearance.Nashat.Label.Large</item>
+        <item name="android:textColor">@color/sel_content_on_surface</item>
+        <item name="iconTint">@color/sel_content_on_surface</item>
+        <item name="iconSize">@dimen/icon_size_md</item>
+        <item name="iconPadding">@dimen/space_200</item>
+        <item name="strokeColor">@color/sel_border_interactive</item>
+        <item name="strokeWidth">@dimen/stroke_hairline</item>
+        <item name="cornerRadius">@dimen/radius_pill</item>
+        <item name="android:minHeight">@dimen/touch_target_min</item>
+        <item name="android:paddingStart">@dimen/space_600</item>
+        <item name="android:paddingEnd">@dimen/space_600</item>
+        <item name="rippleColor">@color/accent_wash</item>
+    </style>
+
+    <!-- Tonal. Quiet filled button for in-card actions. -->
+    <style name="Widget.Nashat.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:textAppearance">@style/TextAppearance.Nashat.Label.Large</item>
+        <item name="android:textColor">@color/content_primary</item>
+        <item name="backgroundTint">@color/surface_input</item>
+        <item name="iconTint">@color/content_primary</item>
+        <item name="cornerRadius">@dimen/radius_pill</item>
+        <item name="android:minHeight">@dimen/touch_target_min</item>
+        <item name="rippleColor">@color/accent_wash</item>
+    </style>
+
+    <!-- Text. Dialog actions, "See all". -->
+    <style name="Widget.Nashat.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textAppearance">@style/TextAppearance.Nashat.Label.Large</item>
+        <item name="android:textColor">@color/accent_text</item>
+        <item name="iconTint">@color/accent_text</item>
+        <item name="cornerRadius">@dimen/radius_pill</item>
+        <item name="android:minHeight">@dimen/touch_target_min</item>
+        <item name="rippleColor">@color/accent_wash</item>
+    </style>
+
+    <!-- Icon-only. Sized to the accessibility floor even though the glyph
+         inside is 24dp; several old icon buttons were 36dp overall. -->
+    <style name="Widget.Nashat.Button.Icon" parent="Widget.Material3.Button.IconButton">
+        <item name="android:layout_width">@dimen/touch_target_min</item>
+        <item name="android:layout_height">@dimen/touch_target_min</item>
+        <item name="android:minWidth">@dimen/touch_target_min</item>
+        <item name="android:minHeight">@dimen/touch_target_min</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="iconTint">@color/sel_content_on_surface</item>
+        <item name="iconSize">@dimen/icon_size_md</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+        <item name="cornerRadius">@dimen/radius_pill</item>
+        <item name="rippleColor">@color/accent_wash</item>
+    </style>
+
+    <!-- Icon button placed on top of video or artwork, where the themed
+         content colour would be invisible. -->
+    <style name="Widget.Nashat.Button.Icon.OnMedia" parent="Widget.Nashat.Button.Icon">
+        <item name="iconTint">@android:color/white</item>
+        <item name="backgroundTint">@color/scrim_soft</item>
+        <item name="rippleColor">#33FFFFFF</item>
+    </style>
+
+
+    <!-- ══════════════════════════════════════════════════════════════
+         CHIPS  (category filters)
+         ══════════════════════════════════════════════════════════════ -->
+    <style name="Widget.Nashat.Chip" parent="Widget.Material3.Chip.Filter">
+        <item name="android:textAppearance">@style/TextAppearance.Nashat.Label.Medium</item>
+        <item name="android:textColor">@color/sel_chip_text</item>
+        <item name="chipBackgroundColor">@color/sel_chip_background</item>
+        <item name="chipStrokeColor">@color/sel_chip_stroke</item>
+        <item name="chipStrokeWidth">@dimen/stroke_hairline</item>
+        <item name="chipCornerRadius">@dimen/radius_pill</item>
+        <item name="chipMinHeight">@dimen/chip_height</item>
+        <item name="chipMinTouchTargetSize">@dimen/touch_target_min</item>
+        <item name="ensureMinTouchTargetSize">true</item>
+        <item name="chipStartPadding">@dimen/space_400</item>
+        <item name="chipEndPadding">@dimen/space_400</item>
+        <item name="chipIconVisible">false</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="closeIconVisible">false</item>
+        <item name="rippleColor">@color/accent_wash</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+
+    <!-- ══════════════════════════════════════════════════════════════
+         NAVIGATION
+         ══════════════════════════════════════════════════════════════ -->
+    <style name="Widget.Nashat.BottomNav" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/surface_base</item>
+        <item name="itemIconTint">@color/sel_nav_item</item>
+        <item name="itemTextColor">@color/sel_nav_item</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.Nashat.BottomNav.Indicator</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.Nashat.Label.Medium</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.Nashat.Label.Medium</item>
+        <item name="itemIconSize">@dimen/bottom_nav_icon_size</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="elevation">0dp</item>
+    </style>
+
+    <!-- The lime pill behind the selected tab's icon. This is the only
+         place in the chrome where the brand colour appears at full
+         strength, which is what makes "where am I" instant. -->
+    <style name="Widget.Nashat.BottomNav.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/accent_fill</item>
+        <item name="android:width">64dp</item>
+        <item name="android:height">32dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Nashat.Pill</item>
+    </style>
+
+    <style name="Widget.Nashat.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Nashat.Title.Large</item>
+        <item name="subtitleTextAppearance">@style/TextAppearance.Nashat.Body.Small</item>
+        <item name="titleTextColor">@color/content_primary</item>
+        <item name="subtitleTextColor">@color/content_secondary</item>
+        <item name="navigationIconTint">@color/content_primary</item>
+        <item name="android:minHeight">@dimen/app_bar_height</item>
+    </style>
+
+    <style name="Widget.Nashat.TabLayout" parent="Widget.Material3.TabLayout">
+        <item name="tabTextAppearance">@style/TextAppearance.Nashat.Label.Large</item>
+        <item name="tabSelectedTextColor">@color/content_primary</item>
+        <item name="tabTextColor">@color/content_tertiary</item>
+        <item name="tabIndicatorColor">@color/accent_fill</item>
+        <item name="tabIndicatorHeight">@dimen/stroke_emphasis</item>
+        <item name="tabIndicatorFullWidth">false</item>
+        <item name="tabRippleColor">@color/accent_wash</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+
+    <!-- ══════════════════════════════════════════════════════════════
+         INPUTS
+         ══════════════════════════════════════════════════════════════ -->
+    <style name="Widget.Nashat.TextInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/radius_sm</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_sm</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_sm</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_sm</item>
+        <item name="boxStrokeColor">@color/sel_border_interactive</item>
+        <item name="boxStrokeWidth">@dimen/stroke_hairline</item>
+        <item name="boxStrokeWidthFocused">@dimen/stroke_emphasis</item>
+        <item name="hintTextColor">@color/content_secondary</item>
+        <item name="android:textColorHint">@color/content_tertiary</item>
+    </style>
+
+    <!-- Search field. Filled rather than outlined: search is used constantly
+         and an outline on every screen adds visual noise. -->
+    <style name="Widget.Nashat.SearchField" parent="">
+        <item name="android:layout_height">@dimen/search_field_height</item>
+        <item name="android:background">@drawable/bg_search_field</item>
+        <item name="android:textAppearance">@style/TextAppearance.Nashat.Body.Medium</item>
+        <item name="android:textColor">@color/content_primary</item>
+        <item name="android:textColorHint">@color/content_tertiary</item>
+        <item name="android:paddingStart">@dimen/space_400</item>
+        <item name="android:paddingEnd">@dimen/space_400</item>
+        <item name="android:drawablePadding">@dimen/space_300</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:imeOptions">actionSearch</item>
+        <item name="android:inputType">text</item>
+    </style>
+
+    <style name="Widget.Nashat.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="thumbTint">@color/sel_switch_thumb</item>
+        <item name="trackTint">@color/sel_switch_track</item>
+        <item name="trackDecorationTint">@color/sel_switch_track_decoration</item>
+    </style>
+
+
+    <!-- ══════════════════════════════════════════════════════════════
+         FEEDBACK
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- Snackbar replaces Toast throughout. A Toast cannot be undone, cannot
+         be dismissed, ignores the app's theme and is drawn outside the app
+         window entirely — the previous build used ~60 of them as its only
+         feedback channel, including for destructive actions. -->
+    <style name="Widget.Nashat.Snackbar" parent="Widget.Material3.Snackbar">
+        <item name="backgroundTint">@color/surface_inverse</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Nashat.Small</item>
+        <item name="animationMode">slide</item>
+    </style>
+
+    <style name="Widget.Nashat.Snackbar.Text" parent="Widget.Material3.Snackbar.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.Nashat.Body.Medium</item>
+        <item name="android:textColor">@color/content_inverse</item>
+    </style>
+
+    <style name="Widget.Nashat.Snackbar.Button" parent="Widget.Material3.Button.TextButton.Snackbar">
+        <item name="android:textAppearance">@style/TextAppearance.Nashat.Label.Large</item>
+        <item name="android:textColor">@color/accent_fill</item>
+    </style>
+
+    <style name="Widget.Nashat.Progress.Linear" parent="Widget.Material3.LinearProgressIndicator">
+        <item name="indicatorColor">@color/accent_fill</item>
+        <item name="trackColor">@color/surface_input</item>
+        <item name="trackThickness">@dimen/progress_track_height</item>
+        <item name="trackCornerRadius">@dimen/progress_track_height</item>
+    </style>
+
+    <style name="Widget.Nashat.Progress.Circular" parent="Widget.Material3.CircularProgressIndicator">
+        <item name="indicatorColor">@color/accent_fill</item>
+        <item name="trackColor">@android:color/transparent</item>
+        <item name="indicatorSize">@dimen/icon_size_xl</item>
+        <item name="trackThickness">@dimen/stroke_emphasis</item>
+    </style>
+
+
+    <!-- ══════════════════════════════════════════════════════════════
+         TEXT ROLES USED DIRECTLY IN LAYOUTS
+         Thin wrappers so a layout writes style="..." instead of repeating
+         four attributes, and so colour travels with the role.
+         ══════════════════════════════════════════════════════════════ -->
+
+    <style name="Widget.Nashat.Text" parent="">
+        <item name="android:textAppearance">@style/TextAppearance.Nashat.Body.Medium</item>
+    </style>
+
+    <!-- "Continue Watching", "Live Now" — the header above a content row. -->
+    <style name="Widget.Nashat.Text.RowHeader">
+        <item name="android:textAppearance">@style/TextAppearance.Nashat.Title.Medium</item>
+        <item name="android:textColor">@color/content_primary</item>
+        <item name="android:paddingStart">@dimen/screen_gutter</item>
+        <item name="android:paddingEnd">@dimen/screen_gutter</item>
+        <item name="android:paddingBottom">@dimen/space_300</item>
+    </style>
+
+    <!-- Title under a poster or beside a channel logo. -->
+    <style name="Widget.Nashat.Text.CardTitle">
+        <item name="android:textAppearance">@style/TextAppearance.Nashat.Title.Small</item>
+        <item name="android:textColor">@color/content_primary</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <!-- Year · genre · duration line beneath a card title. -->
+    <style name="Widget.Nashat.Text.CardMeta">
+        <item name="android:textAppearance">@style/TextAppearance.Nashat.Body.Small</item>
+        <item name="android:textColor">@color/content_tertiary</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <!-- Section label above a settings group. -->
+    <style name="Widget.Nashat.Text.SectionLabel">
+        <item name="android:textAppearance">@style/TextAppearance.Nashat.Label.Medium</item>
+        <item name="android:textColor">@color/content_tertiary</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+
+    <!-- ══════════════════════════════════════════════════════════════
+         COMPATIBILITY ALIASES
+         Names the pre-redesign layouts still reference.
+         ══════════════════════════════════════════════════════════════ -->
+    <style name="Widget.NashatTV.Card" parent="Widget.Nashat.Card" />
+    <style name="Widget.NashatTV.Card.Nashat" parent="Widget.Nashat.Card.Media" />
+    <style name="Widget.NashatTV.Toolbar" parent="Widget.Nashat.Toolbar" />
+    <style name="Widget.NashatTV.TextInputLayout" parent="Widget.Nashat.TextInput" />
+    <style name="Widget.NashatTV.Chip" parent="Widget.Nashat.Chip" />
+    <style name="Widget.App.Chip.Category" parent="Widget.Nashat.Chip" />
+    <style name="Widget.App.CardView.Channel" parent="Widget.Nashat.Card.Channel" />
+    <style name="Widget.App.Button.Gradient" parent="Widget.Nashat.Button" />
+    <style name="Widget.App.SearchBar" parent="Widget.Nashat.SearchField" />
+    <style name="Widget.App.Switch" parent="Widget.Nashat.Switch" />
+    <style name="Widget.App.ProgressBar" parent="Widget.Nashat.Progress.Circular" />
+    <style name="Widget.App.Snackbar" parent="Widget.Nashat.Snackbar" />
+    <style name="TextAppearance.App.Headline" parent="TextAppearance.Nashat.Headline" />
+    <style name="TextAppearance.App.Body" parent="TextAppearance.Nashat.Body.Medium" />
+    <style name="ExpandedToolbarTitle" parent="TextAppearance.Nashat.Display" />
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Nashat.Dialog" />
+    <style name="MaterialAlertDialog.App" parent="MaterialAlertDialog.Nashat" />
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Nashat.Medium" />
+    <style name="ShapeAppearance.FAB.Rounded" parent="ShapeAppearance.Nashat.Pill" />
+    <style name="BottomSheetStyle" parent="Widget.Nashat.BottomSheet" />
+    <style name="Animation" />
+    <style name="Animation.App.CardEnter" parent="Animation" />
+    <style name="Animation.App.RecyclerView" parent="Animation" />
+
 </resources>

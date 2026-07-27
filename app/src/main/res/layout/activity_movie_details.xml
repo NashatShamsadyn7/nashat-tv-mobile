@@ -225,7 +225,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Storyline"
+                android:text="@string/storyline"
                 android:textColor="@color/text_primary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -252,7 +252,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cast &amp; Crew"
+                    android:text="@string/cast_crew"
                     android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -279,7 +279,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Similar Movies"
+                    android:text="@string/similar_movies"
                     android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     android:textStyle="bold" />

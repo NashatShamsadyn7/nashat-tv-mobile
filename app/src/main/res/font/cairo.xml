@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Cairo — the same family the website uses, so the app and nashat-tv.web.app
+  read as one product. It covers Latin, Arabic and Kurdish (Sorani/Badini),
+  which the previous UI font (Noto Naskh, a serif) also did, but Naskh is a
+  text-body face: as UI chrome it made every screen look dated.
+
+  Cairo ships as a single variable font. On API 26+ the weight axis is set via
+  fontVariationSettings below; on API 23-25 the default instance renders and
+  bold is synthesised, which is fine for a UI face.
+-->
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <font
+        android:font="@font/cairo_variable"
+        android:fontWeight="400"
+        android:fontStyle="normal"
+        app:font="@font/cairo_variable"
+        app:fontWeight="400"
+        app:fontStyle="normal" />
+
+</font-family>
