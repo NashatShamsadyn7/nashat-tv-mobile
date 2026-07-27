@@ -104,10 +104,24 @@
             android:clipToPadding="false"
             android:paddingBottom="@dimen/space_400">
 
+            <!--
+                focusableInTouchMode is load-bearing, not decoration.
+
+                Without it the first RecyclerView to finish loading claims
+                focus, and NestedScrollView dutifully scrolls that child into
+                view — so the screen opened already scrolled past the first
+                row's heading, every time. Letting the container hold focus
+                instead leaves the scroll position where it belongs.
+
+                blocksDescendants would also fix it, and would break D-pad
+                navigation on Android TV, so it is not used here.
+            -->
             <LinearLayout
                 android:id="@+id/rowsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:orientation="vertical" />
         </androidx.core.widget.NestedScrollView>
 
