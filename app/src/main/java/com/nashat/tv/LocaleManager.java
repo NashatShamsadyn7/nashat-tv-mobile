@@ -31,6 +31,26 @@ public class LocaleManager {
         return sp.getString(KEY_LOCALE, "ckb");
     }
 
+    /**
+     * The {@code language} value to send to TMDB for the user's current locale.
+     *
+     * <p>TMDB has no Central Kurdish catalogue — asking for {@code ckb} returns
+     * a payload with every title and synopsis empty, which on screen looks like
+     * the app failing rather than the database not having the language. Kurdish
+     * users are served Arabic metadata instead: it is the language they are
+     * most likely to also read, and every field is actually populated.
+     *
+     * <p>The app's own interface stays in Kurdish regardless. This governs only
+     * the film descriptions that come from TMDB.
+     */
+    public static String getTmdbLanguage(Context ctx) {
+        String code = getSavedLocale(ctx);
+        if (code == null || code.isEmpty()) return "ar";
+        if ("ckb".equalsIgnoreCase(code) || "ar".equalsIgnoreCase(code)) return "ar";
+        if ("en".equalsIgnoreCase(code)) return "en-US";
+        return code;
+    }
+
     private static Context updateResources(Context context, String language) {
         // Normalize to BCP-47 tag where possible (improves script/region & RTL handling)
         String tag = language;

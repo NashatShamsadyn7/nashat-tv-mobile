@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Scrim behind the rating on a poster.
+
+    A fixed dark scrim rather than a themed surface colour: this sits on top of
+    artwork, not on the app's background, so it has to stay legible in both
+    light and dark mode against a picture whose colours are unknown.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/rating_chip_scrim" />
+    <corners android:radius="@dimen/radius_xs" />
+</shape>

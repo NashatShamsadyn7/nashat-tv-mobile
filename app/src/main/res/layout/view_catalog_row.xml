@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    One titled row of posters.
+
+    The RecyclerView is edge-to-edge with the gutter applied as padding rather
+    than as a margin, so the first poster starts on the gutter but the row can
+    still be scrolled fully to the screen edge. A margin would leave a dead
+    strip the user's thumb cannot drag from.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/space_400">
+
+    <TextView
+        android:id="@+id/rowTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/screen_gutter"
+        android:paddingBottom="@dimen/space_200"
+        android:textAppearance="@style/TextAppearance.Nashat.Title.Medium"
+        android:textColor="@color/content_primary" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rowList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingHorizontal="@dimen/screen_gutter"
+        android:scrollbars="none" />
+
+    <!-- Placeholder shown while the row's request is in flight. Occupies the
+         same height as the loaded row so the page does not jump when it
+         resolves. -->
+    <ProgressBar
+        android:id="@+id/rowLoading"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="@dimen/space_800"
+        android:indeterminateTint="@color/accent_text" />
+
+</LinearLayout>

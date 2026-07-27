@@ -508,4 +508,88 @@
     <string name="server_playing">قيد التشغيل</string>
     <string name="server_unavailable_message">هذا المصدر لا يستجيب حالياً.</string>
 
+    <!-- ══════════════════════════════════════════════════════════
+         الكتالوج (الأفلام والمسلسلات)
+         ══════════════════════════════════════════════════════════ -->
+
+    <string name="movies_search_hint">ابحث في الأفلام</string>
+    <string name="series_search_hint">ابحث في المسلسلات</string>
+    <string name="action_clear_search">مسح البحث</string>
+
+    <string name="row_trending">الأكثر رواجاً هذا الأسبوع</string>
+    <string name="row_popular">الأكثر شعبية</string>
+    <string name="row_top_rated">الأعلى تقييماً</string>
+    <string name="row_in_cinemas">في دور العرض الآن</string>
+
+    <string name="search_failed_title">لم يكتمل البحث</string>
+    <string name="search_failed_body">تحقّق من اتصالك وأعد المحاولة.</string>
+    <string name="catalog_offline_title">لم يُحمَّل شيء</string>
+    <string name="catalog_offline_body">يبدو أنك غير متّصل. أعد الاتصال وحاول مرّة أخرى.</string>
+
+    <!-- ══════════════════════════════════════════════════════════
+         التفاصيل
+         ══════════════════════════════════════════════════════════ -->
+
+    <string name="action_trailer">المقطع الدعائي</string>
+    <string name="action_add_favorite">أضف إلى المفضّلة</string>
+    <string name="action_remove_favorite">أزل من المفضّلة</string>
+    <string name="action_add_watchlist">أضف إلى قائمة المشاهدة</string>
+    <string name="action_remove_watchlist">أزل من قائمة المشاهدة</string>
+
+    <string name="details_cast">طاقم التمثيل</string>
+    <string name="details_episodes">الحلقات</string>
+    <string name="details_also_like">قد يعجبك أيضاً</string>
+    <string name="details_no_overview">لا تتوفّر نبذة.</string>
+    <string name="details_choose_season">اختر موسماً</string>
+    <string name="details_specials">حلقات خاصّة</string>
+    <string name="details_season_number">الموسم %1$d</string>
+    <string name="details_episode_number">ح%1$d</string>
+    <string name="details_load_failed_title">تعذّر تحميل هذا العمل</string>
+    <string name="details_load_failed_body">تحقّق من اتصالك وأعد المحاولة.</string>
+
+    <string name="details_runtime_minutes">%1$d دقيقة</string>
+    <string name="details_runtime_hours">%1$d ساعة</string>
+    <string name="details_runtime_full">%1$d س و%2$d د</string>
+
+    <!-- العربية تميّز ستّ صيغ للعدد، وهذا هو سبب وجودها كاملةً هنا. -->
+    <plurals name="details_seasons">
+        <item quantity="zero">لا مواسم</item>
+        <item quantity="one">موسم واحد</item>
+        <item quantity="two">موسمان</item>
+        <item quantity="few">%1$d مواسم</item>
+        <item quantity="many">%1$d موسماً</item>
+        <item quantity="other">%1$d موسم</item>
+    </plurals>
+
+    <!-- ══════════════════════════════════════════════════════════
+         المشغّل
+         ══════════════════════════════════════════════════════════ -->
+
+    <string name="player_finding_source">جارٍ إيجاد مصدر</string>
+    <string name="player_finding_source_body">نتحقّق من المصادر العاملة الآن.</string>
+    <string name="player_loading_title">بدء التشغيل</string>
+    <string name="player_loading_body">جارٍ الاتصال بـ %1$s</string>
+    <string name="player_starting_playback">أوشكنا.</string>
+    <string name="player_trying_next_title">تجربة مصدر آخر</string>
+    <string name="player_trying_next_body">ذاك المصدر لم يستجب.</string>
+
+    <string name="player_unavailable_title">غير متاح الآن</string>
+    <string name="player_unavailable_body">لا يوجد مصدر يحمل هذا العمل حالياً. يمكنك اختيار مصدر يدوياً، أو مشاهدة المقطع الدعائي.</string>
+    <string name="player_watch_trailer">شاهد المقطع الدعائي</string>
+
+    <string name="player_choose_source">المصدر</string>
+    <string name="player_choose_source_hint">المصادر مرتّبة حسب الأسرع عملاً لديك. قيّم مصدراً لترفعه أو تخفضه.</string>
+    <string name="player_current_source">قيد التشغيل الآن</string>
+    <string name="player_source_latency">%1$d م.ث</string>
+    <string name="player_source_checking">جارٍ الفحص…</string>
+    <string name="player_source_unavailable">لا يستجيب</string>
+    <string name="player_source_did_not_load">لم يُحمَّل</string>
+    <string name="player_source_unreliable">كثيراً ما يرفض التشغيل</string>
+    <string name="player_vote_up">تقييم إيجابي لهذا المصدر</string>
+    <string name="player_vote_down">تقييم سلبي لهذا المصدر</string>
+
+    <string name="player_previous_episode">الحلقة السابقة</string>
+    <string name="player_next_episode">الحلقة التالية</string>
+    <string name="player_season_episode">الموسم %1$d · الحلقة %2$d</string>
+
 </resources>

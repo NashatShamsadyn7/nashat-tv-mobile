@@ -507,4 +507,83 @@
     <string name="server_playing">لێدەدرێت</string>
     <string name="server_unavailable_message">ئەم سەرچاوەیە ئێستا وەڵام نادات.</string>
 
+    <!-- ══════════════════════════════════════════════════════════
+         پێرست (فیلم و زنجیرە)
+         ══════════════════════════════════════════════════════════ -->
+
+    <string name="movies_search_hint">گەڕان بۆ فیلم</string>
+    <string name="series_search_hint">گەڕان بۆ زنجیرە</string>
+    <string name="action_clear_search">سڕینەوەی گەڕان</string>
+
+    <string name="row_trending">باوی ئەم هەفتەیە</string>
+    <string name="row_popular">بەناوبانگ</string>
+    <string name="row_top_rated">بەرزترین هەڵسەنگاندن</string>
+    <string name="row_in_cinemas">ئێستا لە سینەما</string>
+
+    <string name="search_failed_title">گەڕان سەرکەوتوو نەبوو</string>
+    <string name="search_failed_body">پەیوەندییەکەت بپشکنە و دووبارە هەوڵ بدەرەوە.</string>
+    <string name="catalog_offline_title">هیچ نەهاتە خوارەوە</string>
+    <string name="catalog_offline_body">وا دیارە ئۆفڵاینیت. پەیوەندی بکەرەوە و دووبارە هەوڵ بدە.</string>
+
+    <!-- ══════════════════════════════════════════════════════════
+         وردەکاری
+         ══════════════════════════════════════════════════════════ -->
+
+    <string name="action_trailer">پێشبینین</string>
+    <string name="action_add_favorite">زیادکردن بۆ دڵخوازەکان</string>
+    <string name="action_remove_favorite">لابردن لە دڵخوازەکان</string>
+    <string name="action_add_watchlist">زیادکردن بۆ لیستی بینین</string>
+    <string name="action_remove_watchlist">لابردن لە لیستی بینین</string>
+
+    <string name="details_cast">ئەکتەرەکان</string>
+    <string name="details_episodes">ئەڵقەکان</string>
+    <string name="details_also_like">لەوانەیە ئەمانەشت بەدڵ بێت</string>
+    <string name="details_no_overview">کورتەیەک بەردەست نییە.</string>
+    <string name="details_choose_season">وەرزێک هەڵبژێرە</string>
+    <string name="details_specials">تایبەتەکان</string>
+    <string name="details_season_number">وەرزی %1$d</string>
+    <string name="details_episode_number">ئ%1$d</string>
+    <string name="details_load_failed_title">نەتوانرا ئەمە بهێنرێت</string>
+    <string name="details_load_failed_body">پەیوەندییەکەت بپشکنە و دووبارە هەوڵ بدەرەوە.</string>
+
+    <string name="details_runtime_minutes">%1$d خولەک</string>
+    <string name="details_runtime_hours">%1$d کاتژمێر</string>
+    <string name="details_runtime_full">%1$d کاتژمێر و %2$d خولەک</string>
+
+    <plurals name="details_seasons">
+        <item quantity="one">%1$d وەرز</item>
+        <item quantity="other">%1$d وەرز</item>
+    </plurals>
+
+    <!-- ══════════════════════════════════════════════════════════
+         لێدەر
+         ══════════════════════════════════════════════════════════ -->
+
+    <string name="player_finding_source">گەڕان بۆ سەرچاوە</string>
+    <string name="player_finding_source_body">پشکنینی ئەوەی کامیان ئێستا کاردەکەن.</string>
+    <string name="player_loading_title">دەستپێکردنی لێدان</string>
+    <string name="player_loading_body">پەیوەندی بە %1$s</string>
+    <string name="player_starting_playback">نزیک بووینەوە.</string>
+    <string name="player_trying_next_title">هەوڵدان بە سەرچاوەیەکی تر</string>
+    <string name="player_trying_next_body">ئەوەیان وەڵامی نەدایەوە.</string>
+
+    <string name="player_unavailable_title">ئێستا بەردەست نییە</string>
+    <string name="player_unavailable_body">هیچ سەرچاوەیەک ئێستا ئەمەی نییە. دەتوانیت بە دەست یەکێک هەڵبژێریت، یان پێشبینینەکە ببینیت.</string>
+    <string name="player_watch_trailer">پێشبینینەکە ببینە</string>
+
+    <string name="player_choose_source">سەرچاوە</string>
+    <string name="player_choose_source_hint">سەرچاوەکان بەپێی ئەوەی خێراترین کاردەکەن ڕیزکراون. هەڵسەنگاندنیان بکە بۆ بەرزکردنەوە یان نزمکردنەوە.</string>
+    <string name="player_current_source">ئێستا لێدەدرێت</string>
+    <string name="player_source_latency">%1$d م.چ</string>
+    <string name="player_source_checking">پشکنین…</string>
+    <string name="player_source_unavailable">وەڵام نادات</string>
+    <string name="player_source_did_not_load">نەهاتە خوارەوە</string>
+    <string name="player_source_unreliable">زۆرجار ڕەت دەکاتەوە</string>
+    <string name="player_vote_up">هەڵسەنگاندنی بەرز</string>
+    <string name="player_vote_down">هەڵسەنگاندنی نزم</string>
+
+    <string name="player_previous_episode">ئەڵقەی پێشوو</string>
+    <string name="player_next_episode">ئەڵقەی داهاتوو</string>
+    <string name="player_season_episode">وەرزی %1$d · ئەڵقەی %2$d</string>
+
 </resources>

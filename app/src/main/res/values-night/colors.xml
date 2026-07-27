@@ -63,6 +63,14 @@
     <color name="status_warning">#E8A33D</color>
     <color name="status_danger">@color/brand_coral</color>
 
+    <!-- Brighter gold: the light-mode value is muddy against a dark surface. -->
+    <color name="rating_star">#FFC93C</color>
+    <color name="rating_chip_scrim">#B3000000</color>
+
+    <color name="server_ok">#8FD694</color>
+    <color name="server_fail">@color/brand_coral</color>
+    <color name="server_checking">@color/content_tertiary</color>
+
     <!-- ── Focus ────────────────────────────────────────────────── -->
     <color name="focus_ring">@color/brand_lime</color>
     <color name="focus_surface">#33C8F04C</color>

@@ -613,4 +613,94 @@
     <string name="server_playing">Playing</string>
     <string name="server_unavailable_message">That source isn\'t responding right now.</string>
 
+    <!-- ══════════════════════════════════════════════════════════
+         CATALOGUE  (films & series)
+         ══════════════════════════════════════════════════════════ -->
+
+    <string name="movies_search_hint">Search films</string>
+    <string name="series_search_hint">Search series</string>
+    <string name="action_clear_search">Clear search</string>
+
+    <string name="row_trending">Trending this week</string>
+    <string name="row_popular">Popular</string>
+    <string name="row_top_rated">Top rated</string>
+    <string name="row_in_cinemas">In cinemas now</string>
+
+    <string name="search_failed_title">Search didn\'t go through</string>
+    <string name="search_failed_body">Check your connection and try again.</string>
+    <string name="catalog_offline_title">Nothing loaded</string>
+    <string name="catalog_offline_body">You appear to be offline. Reconnect and try again.</string>
+
+    <!-- ══════════════════════════════════════════════════════════
+         DETAILS
+         ══════════════════════════════════════════════════════════ -->
+
+    <string name="action_trailer">Trailer</string>
+    <string name="action_add_favorite">Add to favourites</string>
+    <string name="action_remove_favorite">Remove from favourites</string>
+    <string name="action_add_watchlist">Add to watchlist</string>
+    <string name="action_remove_watchlist">Remove from watchlist</string>
+
+    <string name="details_cast">Cast</string>
+    <string name="details_episodes">Episodes</string>
+    <string name="details_also_like">You may also like</string>
+    <string name="details_no_overview">No synopsis available.</string>
+    <string name="details_choose_season">Choose a season</string>
+    <string name="details_specials">Specials</string>
+    <!-- %1$d is the season number -->
+    <string name="details_season_number">Season %1$d</string>
+    <!-- %1$d is the episode number -->
+    <string name="details_episode_number">E%1$d</string>
+    <string name="details_load_failed_title">Couldn\'t load this title</string>
+    <string name="details_load_failed_body">Check your connection and try again.</string>
+
+    <!-- Runtime. Three forms so no language is forced into "1h 0m". -->
+    <string name="details_runtime_minutes">%1$d min</string>
+    <string name="details_runtime_hours">%1$d hr</string>
+    <string name="details_runtime_full">%1$dh %2$dm</string>
+
+    <plurals name="details_seasons">
+        <item quantity="one">%1$d season</item>
+        <item quantity="other">%1$d seasons</item>
+    </plurals>
+
+    <!-- ══════════════════════════════════════════════════════════
+         PLAYER
+
+         Voice rule for this screen: never name the source that failed and
+         never show a technical reason. The viewer can only do two things —
+         wait, or pick a different source — so every message points at one
+         of those.
+         ══════════════════════════════════════════════════════════ -->
+
+    <string name="player_finding_source">Finding a source</string>
+    <string name="player_finding_source_body">Checking which ones are working right now.</string>
+    <string name="player_loading_title">Starting playback</string>
+    <!-- %1$s is the source name, e.g. VidLink -->
+    <string name="player_loading_body">Connecting to %1$s</string>
+    <string name="player_starting_playback">Almost there.</string>
+    <string name="player_trying_next_title">Trying another source</string>
+    <string name="player_trying_next_body">That one didn\'t respond.</string>
+
+    <string name="player_unavailable_title">Not available right now</string>
+    <string name="player_unavailable_body">No source has this title at the moment. You can pick one by hand, or watch the trailer instead.</string>
+    <string name="player_watch_trailer">Watch the trailer</string>
+
+    <string name="player_choose_source">Source</string>
+    <string name="player_choose_source_hint">Sources are ordered by what is working fastest for you. Rate one to move it up or down.</string>
+    <string name="player_current_source">Currently playing</string>
+    <!-- %1$d is a round-trip time in milliseconds -->
+    <string name="player_source_latency">%1$d ms</string>
+    <string name="player_source_checking">Checking…</string>
+    <string name="player_source_unavailable">Not responding</string>
+    <string name="player_source_did_not_load">Didn\'t load</string>
+    <string name="player_source_unreliable">often refuses to play</string>
+    <string name="player_vote_up">Rate this source up</string>
+    <string name="player_vote_down">Rate this source down</string>
+
+    <string name="player_previous_episode">Previous episode</string>
+    <string name="player_next_episode">Next episode</string>
+    <!-- %1$d season, %2$d episode -->
+    <string name="player_season_episode">Season %1$d · Episode %2$d</string>
+
 </resources>

@@ -33,6 +33,7 @@
          component. space_400 (16dp) is the default gutter everywhere. -->
     <dimen name="space_50">2dp</dimen>
     <dimen name="space_100">4dp</dimen>
+    <dimen name="space_150">6dp</dimen>
     <dimen name="space_200">8dp</dimen>
     <dimen name="space_300">12dp</dimen>
     <dimen name="space_400">16dp</dimen>
@@ -105,6 +106,11 @@
     <!-- Backdrop card (continue-watching, episodes). 16:9. -->
     <dimen name="backdrop_width">232dp</dimen>
     <dimen name="backdrop_height">130dp</dimen>
+
+    <!-- Details hero. Shorter than 16:9 on a phone: a full-ratio backdrop
+         pushes the title and the Play button below the fold, so the first
+         thing the screen shows is a picture and nothing to do with it. -->
+    <dimen name="details_backdrop_height">220dp</dimen>
 
     <!-- Channel tile. Square, because broadcaster logos are square-ish and
          a 16:9 tile leaves two dead pillars of background on every card. -->
