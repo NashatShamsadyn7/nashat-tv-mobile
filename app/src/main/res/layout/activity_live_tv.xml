@@ -22,19 +22,28 @@
    · EVERY SIZE COMES FROM A TOKEN. No inline sp or dp values, so the TV and
      tablet builds rescale this screen with no second copy of the file.
 
-   · NAV ITEMS ARE 48dp TOUCH TARGETS with 12sp labels. They were unbounded
-     rows with 10sp labels, below the legibility floor and below the
-     accessibility minimum for a tap target.
+   · THE NAV BAR IS THE SHARED ONE. This screen kept its own hand-written
+     copy — 120 lines, its own ids (fabSettings for what is a nav item, not
+     a FAB), its own idea of which colours mark the active tab. It now
+     includes view_bottom_nav like every other screen, and the bar floats
+     over the channel grid as a glass layer rather than sitting under it.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/surface_base"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
     tools:context=".LiveTvActivity">
+
+  <!-- Everything the glass nav floats over. Must stay a SIBLING of the bar,
+       never its parent — see BottomNav.bindBackdrop. -->
+  <LinearLayout
+      android:id="@+id/contentBehindNav"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
 
     <!-- ══ APP BAR ══════════════════════════════════════════════════ -->
     <com.google.android.material.appbar.AppBarLayout
@@ -133,6 +142,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" />
         </HorizontalScrollView>
+
+        <!-- Rule under the bar. The app bar and the grid share a background,
+             so without it the chips and the first row of channels read as one
+             continuous block. -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edge_width"
+            android:background="@color/edge" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- ══ CONTENT ══════════════════════════════════════════════════ -->
@@ -152,8 +169,9 @@
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:paddingStart="@dimen/space_300"
+                android:paddingTop="@dimen/space_300"
                 android:paddingEnd="@dimen/space_300"
-                android:paddingBottom="@dimen/space_400"
+                android:paddingBottom="@dimen/bottom_nav_height"
                 android:scrollbars="none"
                 tools:itemCount="12"
                 tools:listitem="@layout/item_live_channel" />
@@ -231,133 +249,11 @@
             android:indeterminate="true"
             android:visibility="gone" />
     </FrameLayout>
+  </LinearLayout>
 
-    <!-- ══ BOTTOM NAVIGATION ════════════════════════════════════════
-         Still hand-built here because this Activity has not yet moved to
-         the shared NavHost. Every item is a full-height 48dp target with a
-         12sp label, matching the tokens the rest of the app uses. -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/stroke_hairline"
-        android:background="@color/border_hairline" />
+  <!-- ══ BOTTOM NAVIGATION ════════════════════════════════════════
+       The shared bar. BottomNav.bind() fills it, marks LIVE as the active
+       tab and points its blur at contentBehindNav. -->
+  <include layout="@layout/view_bottom_nav" />
 
-    <LinearLayout
-        android:id="@+id/bottomNav"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/bottom_nav_height"
-        android:background="@color/surface_base"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:minHeight="@dimen/touch_target_min"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="@dimen/bottom_nav_icon_size"
-                android:layout_height="@dimen/bottom_nav_icon_size"
-                android:importantForAccessibility="no"
-                android:src="@drawable/ic_tv_series"
-                app:tint="@color/accent_text" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_100"
-                android:text="@string/nav_live"
-                android:textAppearance="@style/TextAppearance.Nashat.Label.Medium"
-                android:textColor="@color/accent_text" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/navMovies"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:contentDescription="@string/nav_movies"
-            android:focusable="true"
-            android:gravity="center"
-            android:minHeight="@dimen/touch_target_min"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="@dimen/bottom_nav_icon_size"
-                android:layout_height="@dimen/bottom_nav_icon_size"
-                android:importantForAccessibility="no"
-                android:src="@drawable/ic_movie_24"
-                app:tint="@color/content_secondary" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_100"
-                android:text="@string/nav_movies"
-                android:textAppearance="@style/TextAppearance.Nashat.Label.Medium"
-                android:textColor="@color/content_secondary" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/navSeries"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:contentDescription="@string/nav_series"
-            android:focusable="true"
-            android:gravity="center"
-            android:minHeight="@dimen/touch_target_min"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="@dimen/bottom_nav_icon_size"
-                android:layout_height="@dimen/bottom_nav_icon_size"
-                android:importantForAccessibility="no"
-                android:src="@drawable/ic_list_24"
-                app:tint="@color/content_secondary" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_100"
-                android:text="@string/nav_series"
-                android:textAppearance="@style/TextAppearance.Nashat.Label.Medium"
-                android:textColor="@color/content_secondary" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/fabSettings"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:contentDescription="@string/nav_settings"
-            android:focusable="true"
-            android:gravity="center"
-            android:minHeight="@dimen/touch_target_min"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="@dimen/bottom_nav_icon_size"
-                android:layout_height="@dimen/bottom_nav_icon_size"
-                android:importantForAccessibility="no"
-                android:src="@drawable/ic_settings_24"
-                app:tint="@color/content_secondary" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_100"
-                android:text="@string/nav_settings"
-                android:textAppearance="@style/TextAppearance.Nashat.Label.Medium"
-                android:textColor="@color/content_secondary" />
-        </LinearLayout>
-    </LinearLayout>
-
-</LinearLayout>
+</FrameLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Glass panel anchored to the top of the screen (app bar, sticky search).
+  Same layer as bg_glass_panel with the rule on the bottom edge, because the
+  line always sits between the panel and the content it is floating over.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/edge" />
+        </shape>
+    </item>
+
+    <item android:bottom="@dimen/edge_width">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/glass_fill" />
+        </shape>
+    </item>
+
+</layer-list>

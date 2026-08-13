@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Accent variant of bg_block, for the one primary action on a screen.
+
+  The colours swap rather than the geometry: the face becomes brand lime and
+  the block behind it becomes `edge` (ink in light, cream in dark). A lime
+  face on a lime block would be a single flat shape, so the primary control
+  is the one place the block is drawn in the border colour instead.
+
+  Because `edge` is content_primary, this button's block is the same value
+  as the text next to it in both modes — the depth reads identically after
+  a mode switch, which a pair of hand-picked per-mode shadows never does.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:top="@dimen/block_offset"
+        android:start="@dimen/block_offset">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/edge" />
+        </shape>
+    </item>
+
+    <item
+        android:bottom="@dimen/block_offset"
+        android:end="@dimen/block_offset">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/accent_fill" />
+            <stroke
+                android:width="@dimen/edge_width"
+                android:color="@color/edge" />
+        </shape>
+    </item>
+
+</layer-list>

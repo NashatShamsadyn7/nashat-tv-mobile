@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    A Continue Watching card.
+
+    Wider than a poster and 16:9, because these are resumed by recognising the
+    scene rather than the artwork, and because the row has to read as "things
+    you started" and not as another catalogue row.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/backdrop_width"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/space_200">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/thumb"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/backdrop_height"
+            android:background="@color/surface_sunken"
+            android:importantForAccessibility="no"
+            android:scaleType="centerCrop"
+            app:shapeAppearance="@style/ShapeAppearance.Nashat.Medium" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_scrim_circle"
+            android:importantForAccessibility="no"
+            android:padding="7dp"
+            android:src="@drawable/ic_play_arrow_24"
+            app:tint="@color/white" />
+
+        <!-- Remove. A visible control, not a long-press: the user asked to be
+             able to take things off this row, and a gesture nobody is told
+             about is the same as no feature at all. -->
+        <ImageButton
+            android:id="@+id/btnRemove"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="top|end"
+            android:layout_margin="@dimen/space_150"
+            android:background="@drawable/bg_scrim_circle"
+            android:contentDescription="@string/continue_remove"
+            android:padding="7dp"
+            android:src="@drawable/ic_close_24"
+            app:tint="@color/white" />
+
+        <!-- Progress. Sits on the artwork's bottom edge, the way every
+             streaming service does it, so it needs no label. -->
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="@dimen/space_100"
+            android:layout_marginBottom="@dimen/space_100"
+            android:max="100"
+            android:progressDrawable="@drawable/progress_watch" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_150"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.Nashat.Label.Large"
+        android:textColor="@color/content_primary" />
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.Nashat.Label.Small"
+        android:textColor="@color/content_tertiary" />
+
+</LinearLayout>

@@ -33,11 +33,29 @@
     <color name="scrim_soft">#66000000</color>
     <color name="scrim_none">#00000000</color>
 
-    <!-- ── Borders ──────────────────────────────────────────────── -->
-    <color name="border_hairline">#26221C</color>
-    <color name="border_default">#302B24</color>
-    <color name="border_strong">#453E34</color>
+    <!-- ── Borders ──────────────────────────────────────────────────
+         `edge` is content_primary here exactly as it is in light mode — the
+         same rule, not a dark-mode equivalent of it. That is the whole
+         reason a brutalist outline survives the mode switch: the border and
+         the text sitting inside it are always the same value, so the
+         drawing weight of every card is identical in both modes.
+
+         shadow_block is NOT redefined in this file. It stays brand_lime,
+         the same literal in both modes, so a raised element is raised by
+         the same amount of the same colour whichever mode you are in. -->
+    <color name="edge">@color/content_primary</color>
+    <color name="edge_inset">#3B352C</color>
+
+    <!-- Glass. Same alphas as light (C7 / EB); only the base hue flips. -->
+    <color name="glass_fill">#C7100F0C</color>
+    <color name="glass_fill_strong">#EB100F0C</color>
+    <color name="glass_fill_opaque">#100F0C</color>
+
     <color name="border_focus">@color/brand_lime</color>
+
+    <color name="border_hairline">@color/edge_inset</color>
+    <color name="border_default">@color/edge</color>
+    <color name="border_strong">@color/edge</color>
 
     <!-- ── Content ──────────────────────────────────────────────── -->
     <color name="content_primary">#F7F2E7</color>    <!-- 17.3:1 on base -->
@@ -81,9 +99,9 @@
          (aliases to semantic tokens inherit the above automatically)
          ══════════════════════════════════════════════════════════ -->
 
-    <color name="glass_card_solid">#14FFFFFF</color>
-    <color name="glass_card_focused_solid">#1FFFFFFF</color>
-    <color name="overlay_pill_solid">#D9100F0C</color>
+    <color name="glass_card_solid">@color/surface_raised</color>
+    <color name="glass_card_focused_solid">@color/surface_raised</color>
+    <color name="overlay_pill_solid">@color/glass_fill_strong</color>
     <color name="movie_overlay_start">#F2100F0C</color>
     <color name="movie_overlay_end">#00100F0C</color>
 

@@ -52,14 +52,55 @@
     <dimen name="card_gap">12dp</dimen>
 
     <!-- ══ SHAPE ════════════════════════════════════════════════════
-         Five radii and a pill. The old app shipped nine, which reads as
-         inconsistency rather than variety. -->
-    <dimen name="radius_xs">8dp</dimen>
-    <dimen name="radius_sm">12dp</dimen>
-    <dimen name="radius_md">16dp</dimen>
-    <dimen name="radius_lg">20dp</dimen>
-    <dimen name="radius_xl">28dp</dimen>
-    <dimen name="radius_pill">999dp</dimen>
+         ONE radius: zero.
+
+         The previous scale had five radii plus a pill, and picking between
+         12dp and 16dp for a given card was a judgement call made 40 times
+         by 40 layouts. Brutalism removes the decision entirely — a corner
+         is square, and the only shape variable left in the system is size.
+
+         The five names survive so no layout or drawable has to be edited to
+         stop being rounded; they all resolve to the same value. Delete a
+         name once nothing references it. -->
+    <dimen name="radius_none">0dp</dimen>
+    <dimen name="radius_xs">0dp</dimen>
+    <dimen name="radius_sm">0dp</dimen>
+    <dimen name="radius_md">0dp</dimen>
+    <dimen name="radius_lg">0dp</dimen>
+    <dimen name="radius_xl">0dp</dimen>
+    <dimen name="radius_pill">0dp</dimen>
+
+    <!-- ══ EDGE & BLOCK ═════════════════════════════════════════════
+         The two dimensions that carry the entire brutalist look.
+
+         edge_width is 2dp rather than 1dp because a 1dp line at 3x density
+         is a half-pixel hint of a border; 2dp is a decision. Everything
+         outlined in the app uses this one width — there is no "subtle"
+         variant, because a subtle brutalist border is a contradiction.
+
+         block_offset is how far the hard shadow block sits below and to the
+         side of a raised element. 4dp is one grid step: large enough to
+         read as depth at arm's length, small enough that a row of offset
+         cards does not visibly lose 4dp of gutter between them. -->
+    <dimen name="edge_width">2dp</dimen>
+    <dimen name="edge_width_focus">3dp</dimen>
+    <dimen name="edge_width_inset">1dp</dimen>
+    <dimen name="block_offset">4dp</dimen>
+
+    <!-- ══ GLASS ════════════════════════════════════════════════════
+         Blur radius for floating layers, applied via RenderEffect on API
+         31+ and ignored below (see GlassSurfaceView).
+
+         24dp is chosen so the backdrop is unreadable but its LUMINANCE and
+         COLOUR still come through — that is the entire point of a blurred
+         chrome layer over video. Below ~16dp text remains legible through
+         the panel and the nav bar looks dirty; above ~32dp the panel is
+         indistinguishable from a flat translucent fill and the GPU cost was
+         paid for nothing. -->
+    <dimen name="glass_blur_radius">24dp</dimen>
+    <!-- Sheets sit over a static page rather than moving video, so they can
+         take a heavier blur without the backdrop shimmering. -->
+    <dimen name="glass_blur_radius_sheet">32dp</dimen>
 
     <!-- ══ TOUCH & FOCUS ════════════════════════════════════════════ -->
     <!-- Material's accessibility floor. No tappable view goes below this;
@@ -69,9 +110,13 @@
     <dimen name="focus_ring_width">3dp</dimen>
     <dimen name="focus_ring_width_tv">4dp</dimen>
 
-    <!-- ══ STROKE & DIVIDER ═════════════════════════════════════════ -->
-    <dimen name="stroke_hairline">1dp</dimen>
-    <dimen name="stroke_emphasis">2dp</dimen>
+    <!-- ══ STROKE & DIVIDER ═════════════════════════════════════════
+         Collapsed onto edge_width: "hairline" and "emphasis" were two
+         weights for the same job, and the outlined components disagreed
+         about which they used. -->
+    <dimen name="stroke_hairline">@dimen/edge_width</dimen>
+    <dimen name="stroke_emphasis">@dimen/edge_width</dimen>
+    <dimen name="stroke_inset">@dimen/edge_width_inset</dimen>
 
     <!-- ══ ICONS ════════════════════════════════════════════════════ -->
     <dimen name="icon_size_sm">16dp</dimen>
@@ -134,7 +179,7 @@
          ══════════════════════════════════════════════════════════════ -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="card_corner_radius">16dp</dimen>
+    <dimen name="card_corner_radius">@dimen/radius_none</dimen>
     <dimen name="card_elevation">0dp</dimen>
     <dimen name="card_margin">8dp</dimen>
     <dimen name="card_padding">16dp</dimen>
@@ -158,20 +203,20 @@
     <dimen name="spacing_xxlarge">48dp</dimen>
     <dimen name="button_height">48dp</dimen>
     <dimen name="button_min_width">88dp</dimen>
-    <dimen name="button_corner_radius">28dp</dimen>
+    <dimen name="button_corner_radius">@dimen/radius_none</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="icon_size_small">16dp</dimen>
     <dimen name="icon_size_medium">24dp</dimen>
     <dimen name="icon_size_large">32dp</dimen>
     <dimen name="icon_size_xlarge">48dp</dimen>
     <dimen name="search_bar_height">48dp</dimen>
-    <dimen name="search_bar_corner_radius">16dp</dimen>
+    <dimen name="search_bar_corner_radius">@dimen/radius_none</dimen>
     <dimen name="search_bar_elevation">0dp</dimen>
-    <dimen name="chip_corner_radius">999dp</dimen>
+    <dimen name="chip_corner_radius">@dimen/radius_none</dimen>
     <dimen name="chip_spacing">8dp</dimen>
     <dimen name="progress_bar_height">3dp</dimen>
     <dimen name="circular_progress_size">48dp</dimen>
-    <dimen name="divider_height">1dp</dimen>
+    <dimen name="divider_height">@dimen/edge_width_inset</dimen>
     <dimen name="divider_margin">16dp</dimen>
     <dimen name="animation_offset_y">48dp</dimen>
     <dimen name="animation_offset_x">32dp</dimen>

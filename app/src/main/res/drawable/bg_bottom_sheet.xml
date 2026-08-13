@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/bg_card_elevated" />
-    <corners android:topLeftRadius="24dp" android:topRightRadius="24dp" />
-</shape>
+<!--
+  Alias. The sheet surface is defined once in bg_glass_sheet; this name
+  survives only because dialog_advanced_filter still references it.
+-->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/bg_glass_sheet" />

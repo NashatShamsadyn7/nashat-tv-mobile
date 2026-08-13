@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════════
+   THE OFFSET BLOCK — the one depth cue in the app
+  ══════════════════════════════════════════════════════════════════════
+
+   Replaces elevation everywhere. A Material drop shadow is a blurred dark
+   gradient, which needs a lit surface to fall on; on this app's #100F0C
+   dark base it renders as a grey smudge that users read as a rendering
+   artefact rather than as height. This draws height literally: a solid
+   lime rectangle sitting behind the surface, offset by one grid step.
+
+   RTL: the offsets use android:start / android:end rather than left /
+   right, so the block flips to the other side under an Arabic or Kurdish
+   locale automatically. Those attributes need API 23, which is exactly
+   this app's minSdk — no drawable-ldrtl copy is required. Using left/right
+   here would light the entire UI from the wrong side in two of the app's
+   three languages.
+
+   The block colour is brand_lime in BOTH modes (see shadow_block in
+   colors.xml), so the depth cue is the identical value in light and dark
+   rather than a per-mode approximation of each other.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- The block. Inset from the top and the start, so it protrudes at the
+         bottom and the end — as if lit from the top-start corner. -->
+    <item
+        android:top="@dimen/block_offset"
+        android:start="@dimen/block_offset">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/shadow_block" />
+        </shape>
+    </item>
+
+    <!-- The face. Inset from the bottom and the end by the same step, which
+         is what uncovers the block behind it. -->
+    <item
+        android:bottom="@dimen/block_offset"
+        android:end="@dimen/block_offset">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/surface_raised" />
+            <stroke
+                android:width="@dimen/edge_width"
+                android:color="@color/edge" />
+        </shape>
+    </item>
+
+</layer-list>

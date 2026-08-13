@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:textColor="@color/accent_primary"
-        android:textSize="18sp"
+        android:textSize="@dimen/type_size_title_medium"
         android:textStyle="bold" />
 
     <EditText

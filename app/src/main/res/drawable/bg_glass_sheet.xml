@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Bottom sheet and dialog surface.
+
+  Heavier fill than bg_glass_panel (92% vs 78%) because a sheet carries
+  dense controls that have to stay readable, and it sits over a static page
+  rather than moving video — there is no motion behind it to justify the
+  lighter treatment.
+
+  Square. The 24dp top corners this replaces were the last rounded shape in
+  the app; a sheet that meets the screen edge with a hard line is also the
+  only version that reads correctly when it is dragged to full height.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/edge" />
+        </shape>
+    </item>
+
+    <item android:top="@dimen/edge_width">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/glass_fill_strong" />
+        </shape>
+    </item>
+
+</layer-list>

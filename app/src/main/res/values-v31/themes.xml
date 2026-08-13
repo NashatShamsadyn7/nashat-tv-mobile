@@ -1,8 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════════
+   API 31+ — REAL WINDOW BLUR
+  ══════════════════════════════════════════════════════════════════════
+
+   Android 12 is the first version with a compositor-level blur, and these
+   attributes are the whole of it for anything that owns a window. No
+   offscreen buffer, no redraw, no custom view: the system blurs what is
+   already on screen behind the dialog. That is why sheets and dialogs get
+   the good blur, while the bottom nav — which lives inside the activity
+   window and so has nothing behind it at the window level — has to go
+   through GlassView instead.
+
+   The blur is a request, not a guarantee. The system drops it in
+   battery-saver mode, on devices whose GPU cannot afford it, and when the
+   "disable window blurs" developer option is set. The window then renders
+   without it, which is why every glass surface in this app carries a
+   translucent fill that already stands on its own. Code that needs to KNOW
+   should call GlassWindow.isBlurAvailable rather than checking
+   Build.VERSION — the API level is necessary but not sufficient.
+
+   windowIsTranslucent is not optional. The blur composites behind the
+   window's background, so an opaque window blurs pixels nothing can see.
+
+   This file previously redeclared Base.Theme.NashatTV with a stock
+   Material3 parent, silently overriding the app's own theme alias on every
+   device running Android 12 or newer. Nothing referenced that style, so it
+   was invisible — but it was one setTheme call away from shipping the
+   stock purple palette to most of the install base.
+-->
 <resources>
-    <style name="Base.Theme.NashatTV" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:windowSplashScreenBackground">?attr/colorSurface</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
-        <item name="android:windowSplashScreenAnimationDuration">1000</item>
+
+    <style name="ThemeOverlay.Nashat.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.Nashat</item>
+        <item name="colorSurface">@color/surface_raised</item>
+        <item name="colorOnSurface">@color/content_primary</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.Nashat.Button.Text</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.Nashat.Button.Text</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.Nashat.Button.Text</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.Nashat.Title</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.Nashat.Body</item>
+
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBlurBehindEnabled">true</item>
+        <item name="android:windowBlurBehindRadius">@dimen/glass_blur_radius_sheet</item>
+        <!-- The default dim is a flat black wash that cancels out exactly
+             the depth the blur creates. Lowered rather than removed: some
+             separation from the page behind is still wanted. -->
+        <item name="android:backgroundDimAmount">0.25</item>
     </style>
+
+    <style name="ThemeOverlay.Nashat.BottomSheet" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.Nashat.BottomSheet</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBlurBehindEnabled">true</item>
+        <item name="android:windowBlurBehindRadius">@dimen/glass_blur_radius_sheet</item>
+        <item name="android:backgroundDimAmount">0.25</item>
+    </style>
+
 </resources>

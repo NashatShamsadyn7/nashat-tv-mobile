@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Legacy name. Content is the new system token set; delete this file once
-     no layout references it. -->
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/on_accent_fill" android:state_checked="true" />
-    <item android:color="@color/on_accent_fill" android:state_selected="true" />
-    <item android:color="@color/content_secondary" />
-</selector>

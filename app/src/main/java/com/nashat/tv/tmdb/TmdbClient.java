@@ -68,6 +68,115 @@ public final class TmdbClient {
                 + "&include_adult=false", cb);
     }
 
+    // ─── Discover (filtering & sorting) ───────────────────────
+
+    /** How a filtered list is ordered. */
+    public enum Sort {
+        /** TMDB's own popularity score. The sensible default. */
+        POPULAR("popularity.desc"),
+        /** Highest rated. See the vote-count floor in {@link #discover}. */
+        RATING("vote_average.desc"),
+        /** Newest first. Resolved per kind, since the date field differs. */
+        NEWEST("release_date.desc"),
+        /** Biggest box office. Films only; TMDB has no revenue for series. */
+        REVENUE("revenue.desc"),
+        /** A–Z. */
+        TITLE("title.asc");
+
+        final String value;
+
+        Sort(String value) {
+            this.value = value;
+        }
+
+        String forKind(Kind kind) {
+            if (kind == Kind.MOVIE) return value;
+            // TMDB names these fields differently on the TV endpoint, and an
+            // unknown sort_by is rejected outright rather than ignored.
+            switch (this) {
+                case NEWEST: return "first_air_date.desc";
+                case TITLE: return "name.asc";
+                case REVENUE: return "popularity.desc"; // no revenue on TV
+                default: return value;
+            }
+        }
+    }
+
+    /**
+     * Minimum votes required before a title may appear in a rating-sorted list.
+     *
+     * <p>Without this, "top rated" is worthless: TMDB will happily return a
+     * short film with a single 10/10 vote ahead of every film the user has
+     * heard of. TMDB's own Top Rated list applies a similar floor, which is
+     * why the curated row looks sane and a naive discover query does not.
+     */
+    private static final int RATING_VOTE_FLOOR = 300;
+
+    /**
+     * A filtered, sorted page.
+     *
+     * @param minRating 0 disables the filter
+     * @param yearFrom  0 disables the lower bound
+     * @param yearTo    0 disables the upper bound
+     * @param genreId   0 disables the genre filter
+     * @param page      1-based
+     */
+    public static void discover(Context ctx, Kind kind, Sort sort, float minRating,
+                                int yearFrom, int yearTo, int genreId, int page,
+                                String language, Callback<List<Title>> cb) {
+        StringBuilder u = new StringBuilder(url("/discover/" + kind.path, language))
+                .append("&sort_by=").append(sort.forKind(kind))
+                .append("&page=").append(Math.max(1, page))
+                .append("&include_adult=false");
+
+        if (minRating > 0) {
+            u.append("&vote_average.gte=").append(minRating);
+        }
+        // The floor is applied whenever rating is the sort key OR a rating
+        // filter is set — both are cases where a one-vote title would surface.
+        if (sort == Sort.RATING || minRating > 0) {
+            u.append("&vote_count.gte=").append(RATING_VOTE_FLOOR);
+        }
+
+        String dateField = kind == Kind.MOVIE ? "primary_release_date" : "first_air_date";
+        if (yearFrom > 0) {
+            u.append('&').append(dateField).append(".gte=").append(yearFrom).append("-01-01");
+        }
+        if (yearTo > 0) {
+            u.append('&').append(dateField).append(".lte=").append(yearTo).append("-12-31");
+        }
+        if (genreId > 0) {
+            u.append("&with_genres=").append(genreId);
+        }
+        page(ctx, u.toString(), cb);
+    }
+
+    /** The genre list for one kind, used to build the filter chips. */
+    public static void genres(Context ctx, Kind kind, String language,
+                              Callback<List<TmdbModels.Genre>> cb) {
+        json(ctx, url("/genre/" + kind.path + "/list", language), TmdbModels.GenreList.class,
+                new Callback<TmdbModels.GenreList>() {
+                    @Override
+                    public void onSuccess(TmdbModels.GenreList data) {
+                        cb.onSuccess(data.genres != null ? data.genres : Collections.emptyList());
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        cb.onError(message);
+                    }
+                });
+    }
+
+    /** A search page, for paginated result grids. */
+    public static void searchPage(Context ctx, Kind kind, String query, int page,
+                                  String language, Callback<List<Title>> cb) {
+        page(ctx, url("/search/" + kind.path, language)
+                + "&query=" + Uri.encode(query)
+                + "&page=" + Math.max(1, page)
+                + "&include_adult=false", cb);
+    }
+
     // ─── Details ──────────────────────────────────────────────
 
     /**

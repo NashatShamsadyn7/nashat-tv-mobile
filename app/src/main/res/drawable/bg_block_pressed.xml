@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Pressed state of bg_block.
+
+  The face slides ONTO the block instead of the block disappearing: the
+  element travels the full 4dp offset and lands flush. This is the physical
+  reading of a press — the surface is pushed down onto what was holding it
+  up — and it is why a brutalist button needs no ripple, no alpha change
+  and no scale animation to feel like it was pressed.
+
+  Because the geometry inverts (face inset from top/start, block from
+  bottom/end), the overall drawable occupies exactly the same bounds as the
+  resting state. Nothing reflows on touch.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:bottom="@dimen/block_offset"
+        android:end="@dimen/block_offset">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/shadow_block" />
+        </shape>
+    </item>
+
+    <item
+        android:top="@dimen/block_offset"
+        android:start="@dimen/block_offset">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/surface_raised" />
+            <stroke
+                android:width="@dimen/edge_width"
+                android:color="@color/edge" />
+        </shape>
+    </item>
+
+</layer-list>

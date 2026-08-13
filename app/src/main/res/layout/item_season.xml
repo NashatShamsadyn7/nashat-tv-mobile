@@ -14,7 +14,7 @@
         android:background="@drawable/chip_bg"
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp"
-        android:textSize="14sp"
+        android:textSize="@dimen/type_size_body_medium"
         android:textStyle="bold"/>
 
 </LinearLayout>

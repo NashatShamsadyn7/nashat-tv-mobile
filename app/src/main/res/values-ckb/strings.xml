@@ -241,6 +241,8 @@
     <string name="player_subtitles_off">کوژاوە</string>
     <string name="player_audio_track">دەنگ</string>
     <string name="player_speed">خێرایی</string>
+    <string name="player_seek_forward">+%1$d چرکە</string>
+    <string name="player_seek_back">−%1$d چرکە</string>
     <string name="player_speed_value">%1$sx</string>
     <string name="player_mute">بێدەنگ</string>
     <string name="player_unmute">دەنگ بگەڕێنەوە</string>
@@ -585,5 +587,53 @@
     <string name="player_previous_episode">ئەڵقەی پێشوو</string>
     <string name="player_next_episode">ئەڵقەی داهاتوو</string>
     <string name="player_season_episode">وەرزی %1$d · ئەڵقەی %2$d</string>
+
+    <!-- ══ ڕیزی کەسی ══ -->
+    <string name="row_continue">بەردەوامبوون لە بینین</string>
+    <string name="row_favorites">دڵخوازەکانت</string>
+    <string name="row_watchlist">لیستی بینینت</string>
+    <string name="continue_remove">لابردن لە بەردەوامبوون لە بینین</string>
+
+    <!-- ══ مێژووی گەڕان ══ -->
+    <string name="search_clear_all">سڕینەوەی هەموو</string>
+
+    <!-- ══ فلتەر و ڕیزکردن ══ -->
+    <string name="filter_title">فلتەر</string>
+    <string name="filter_title_count">فلتەر (%1$d)</string>
+    <string name="filter_sort_by">ڕیزکردن بەپێی</string>
+    <string name="filter_min_rating">کەمترین هەڵسەنگاندن</string>
+    <string name="filter_years">ساڵەکان</string>
+    <string name="filter_any">هەرچییەک</string>
+    <string name="filter_rating_value">%1$.1f و سەرەوە</string>
+    <string name="filter_year_range">%1$d – %2$d</string>
+    <string name="filter_no_results_title">هیچ لەگەڵ ئەم فلتەرانە ناگونجێت</string>
+    <string name="filter_no_results_body">ساڵەکان فراوانتر بکە یان هەڵسەنگاندنەکە نزمتر بکە.</string>
+
+    <string name="sort_popular">بەناوبانگترین</string>
+    <string name="sort_newest">نوێترین</string>
+    <string name="sort_revenue">زۆرترین داهات</string>
+    <string name="sort_title">أ – ی</string>
+
+    <!-- ══ کۆنترۆڵی لێدەر ══ -->
+    <string name="player_speed_normal">ئاسایی</string>
+    <string name="player_lock">قوفڵکردنی کۆنترۆڵ</string>
+    <string name="player_unlock">کردنەوەی قوفڵ</string>
+    <string name="player_locked_hint">کۆنترۆڵ قوفڵکراوە. لە قوفڵەکە بدە بۆ کردنەوەی.</string>
+    <string name="player_sleep_timer">کاتژمێری خەو</string>
+    <string name="player_sleep_off">کوژاوە</string>
+    <string name="player_sleep_minutes">%1$d خولەک</string>
+    <string name="player_sleep_end">کۆتایی ئەم ئەڵقەیە</string>
+    <string name="player_sleep_set">لێدان لە %1$d خولەکدا دەوەستێت.</string>
+    <string name="player_sleep_cancelled">کاتژمێری خەو هەڵوەشێنرایەوە.</string>
+    <string name="player_episodes">ئەڵقەکان</string>
+    <string name="player_resume_title">بەردەوام بیت لەوێوە کە وەستایت؟</string>
+    <string name="player_resume_body">لە %1$s وەستایت.</string>
+    <string name="player_resume">بەردەوامبوون</string>
+    <string name="player_start_over">لە سەرەتاوە</string>
+    <string name="player_autoplay_next">ئەڵقەی داهاتوو دەست پێدەکات…</string>
+    <string name="player_brightness">ڕووناکی</string>
+    <string name="player_volume">دەنگ</string>
+
+    <string name="percent_value">%1$d%%</string>
 
 </resources>

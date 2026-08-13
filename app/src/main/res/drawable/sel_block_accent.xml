@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Resting / pressed pair for the primary action. See sel_block_surface. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:drawable="@drawable/bg_block_accent_pressed" />
+    <item android:state_focused="true" android:drawable="@drawable/bg_block_accent_pressed" />
+    <item android:drawable="@drawable/bg_block_accent" />
+</selector>

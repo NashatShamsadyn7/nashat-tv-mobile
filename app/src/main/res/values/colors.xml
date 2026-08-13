@@ -73,11 +73,58 @@
     <color name="scrim_soft">#59000000</color>
     <color name="scrim_none">#00000000</color>
 
-    <!-- ── Borders ──────────────────────────────────────────────── -->
-    <color name="border_hairline">#EFE9DC</color>    <!-- dividers -->
-    <color name="border_default">#E5DECE</color>     <!-- card outlines -->
-    <color name="border_strong">#D2C9B5</color>      <!-- inputs, pressed -->
+    <!-- ── Borders ──────────────────────────────────────────────────
+         BRUTALIST: there is one border colour, and it is the text colour.
+         The previous system had three tinted greys, which is how you get a
+         card that looks "almost" outlined. An outline either defines an
+         edge or it should not be drawn — a #E5DECE hairline on a #FBF8F1
+         page does neither.
+
+         `edge` is deliberately content_primary rather than a colour of its
+         own: it makes the border and the text on it the same value, which
+         is the single rule that holds the whole brutalist look together and
+         guarantees the outline carries the same weight in both modes. -->
+    <color name="edge">@color/content_primary</color>
+
+    <!-- Dividers INSIDE a bordered container. The only softened line in the
+         system: a full-strength ink rule between two settings rows turns a
+         list into a ladder. -->
+    <color name="edge_inset">#D6CDB8</color>
+
+    <!-- ── Brutalist offset block ───────────────────────────────────
+         Replaces elevation everywhere. Instead of a blurred shadow (which
+         needs a lit surface to fall on and produces a grey halo on dark),
+         a raised element sits on a hard-edged block offset by 4dp.
+
+         It is brand_lime in BOTH modes — the same literal value, not a
+         per-mode pair. Lime clears 14.6:1 on the dark base and reads as a
+         solid block on the light one, so the depth cue is physically
+         identical in light and dark rather than merely analogous. -->
+    <color name="shadow_block">@color/brand_lime</color>
+    <!-- The block under a destructive or "live" element. -->
+    <color name="shadow_block_live">@color/brand_coral</color>
+
+    <!-- ── Glass (floating layers only) ─────────────────────────────
+         Bottom nav, player controls, sheets, sticky search. NEVER on a
+         scrolling row — a blurred view inside a RecyclerView re-renders its
+         backdrop every frame.
+
+         The alpha values below are identical to the dark-mode pair; only
+         the base hue flips. That is what keeps a glass panel the same
+         object in both modes instead of two different-feeling surfaces. -->
+    <color name="glass_fill">#C7FBF8F1</color>        <!-- 78% base -->
+    <color name="glass_fill_strong">#EBFBF8F1</color> <!-- 92%, sheets -->
+    <!-- Fallback fill for API < 31, where there is no real blur to sit on
+         and a 78% panel would just look like a bug. -->
+    <color name="glass_fill_opaque">#FBF8F1</color>
+
     <color name="border_focus">@color/brand_lime_shadow</color>
+
+    <!-- Remapped onto `edge`: every existing layout that names one of these
+         picks up the brutalist outline without being touched. -->
+    <color name="border_hairline">@color/edge_inset</color>
+    <color name="border_default">@color/edge</color>
+    <color name="border_strong">@color/edge</color>
 
     <!-- ── Content (text + icons) ───────────────────────────────── -->
     <color name="content_primary">#17150F</color>    <!-- 15.9:1 on base -->
@@ -184,13 +231,17 @@
     <color name="emerald_green_light">@color/status_success</color>
     <color name="emerald_green_dark">@color/status_success</color>
 
-    <!-- Glass / overlay surfaces -->
-    <color name="glass_card_solid">#B3FFFFFF</color>
-    <color name="glass_card_stroke">@color/border_default</color>
-    <color name="glass_card_focused_solid">#E6FFFFFF</color>
+    <!-- Glass / overlay surfaces.
+         Note that glass_card_* now resolves to a SOLID surface. In this
+         system a card is brutalist — opaque, outlined, offset — and only a
+         floating layer is glass. The old names survive; the treatment does
+         not. -->
+    <color name="glass_card_solid">@color/surface_raised</color>
+    <color name="glass_card_stroke">@color/edge</color>
+    <color name="glass_card_focused_solid">@color/surface_raised</color>
     <color name="glass_card_focused_stroke">@color/focus_ring</color>
-    <color name="overlay_pill_solid">#E6FFFFFF</color>
-    <color name="overlay_pill_stroke">@color/border_strong</color>
+    <color name="overlay_pill_solid">@color/glass_fill_strong</color>
+    <color name="overlay_pill_stroke">@color/edge</color>
     <color name="exo_play_solid">@color/accent_fill</color>
     <color name="exo_play_stroke">@color/accent_fill_pressed</color>
     <color name="movie_overlay_start">#F2FBF8F1</color>

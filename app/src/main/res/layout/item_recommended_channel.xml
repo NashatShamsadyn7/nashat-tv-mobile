@@ -9,11 +9,11 @@
     android:foreground="?attr/selectableItemBackground"
     android:stateListAnimator="@animator/focus_scale"
     app:cardUseCompatPadding="true"
-    app:cardCornerRadius="16dp"
+    app:cardCornerRadius="@dimen/radius_none"
     android:background="@drawable/selector_glass_card"
     app:cardBackgroundColor="@color/transparent"
-    app:strokeColor="@color/transparent"
-    app:strokeWidth="1dp"
+    app:strokeColor="@color/edge"
+    app:strokeWidth="@dimen/edge_width"
     app:cardElevation="0dp">
 
     <LinearLayout

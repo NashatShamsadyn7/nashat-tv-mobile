@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Resting / pressed pair for a raised neutral element.
+
+  No ripple wrapper. A ripple is a Material affordance that spreads a
+  translucent circle from the touch point; layered under a 4dp travel it
+  reads as two unrelated things happening at once. The block travel IS the
+  feedback here, and it is more legible than a ripple on the low-end
+  hardware this app targets at minSdk 23.
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:drawable="@drawable/bg_block_pressed" />
+    <!-- D-pad focus lands on the same visual as a press, so a TV user sees
+         the element depress as they arrive on it. -->
+    <item android:state_focused="true" android:drawable="@drawable/bg_block_pressed" />
+    <item android:drawable="@drawable/bg_block" />
+</selector>

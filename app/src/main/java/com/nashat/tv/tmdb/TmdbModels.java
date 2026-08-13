@@ -68,6 +68,16 @@ public final class TmdbModels {
         @SerializedName("media_type")
         public String mediaType;
 
+        /**
+         * A ready-made poster URL, used when a Title is built from a locally
+         * saved record rather than from TMDB.
+         *
+         * <p>Favourites and the watchlist store the full image URL, not the
+         * {@code /abc.jpg} path TMDB returns, so there is nothing to prefix.
+         * Marked transient because it never appears in a TMDB payload.
+         */
+        public transient String posterUrlOverride;
+
         public String displayTitle() {
             if (title != null && !title.isEmpty()) return title;
             if (name != null && !name.isEmpty()) return name;
@@ -115,6 +125,11 @@ public final class TmdbModels {
     public static class Genre {
         public int id;
         public String name;
+    }
+
+    /** Response shape of {@code /genre/{kind}/list}. */
+    public static class GenreList {
+        public List<Genre> genres;
     }
 
     public static class CastMember {

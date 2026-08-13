@@ -48,6 +48,28 @@ public class SearchHistoryManager {
         prefs.edit().remove(KEY_SERIES).apply();
     }
 
+    /**
+     * Drops one remembered query.
+     *
+     * <p>Needed because "clear everything" is the wrong remedy for a single
+     * mistyped or private search, and it is the only remedy the class offered.
+     */
+    public void removeMovieSearch(String query) {
+        removeSearch(KEY_MOVIES, query);
+    }
+
+    public void removeSeriesSearch(String query) {
+        removeSearch(KEY_SERIES, query);
+    }
+
+    private void removeSearch(String key, String query) {
+        if (query == null) return;
+        List<String> history = getHistory(key);
+        if (history.remove(query.trim())) {
+            saveHistory(key, history);
+        }
+    }
+
     private void addSearch(String key, String query) {
         if (query == null || query.trim().isEmpty()) return;
         query = query.trim();
