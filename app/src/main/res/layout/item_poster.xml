@@ -21,6 +21,13 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/poster_height">
 
+        <!--
+            The 2dp frame is the change that makes a row of TMDB artwork look
+            like one designed screen rather than a folder of images. Posters
+            arrive with wildly different edges — some are full-bleed, some
+            have their own white border baked in, some fade to black — and
+            without a frame the row has no consistent left edge to scan down.
+        -->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/poster"
             android:layout_width="match_parent"
@@ -28,7 +35,9 @@
             android:background="@color/surface_sunken"
             android:importantForAccessibility="no"
             android:scaleType="centerCrop"
-            app:shapeAppearance="@style/ShapeAppearance.Nashat.Medium" />
+            app:shapeAppearance="@style/ShapeAppearance.Nashat.Square"
+            app:strokeColor="@color/edge"
+            app:strokeWidth="@dimen/edge_width" />
 
         <!-- Rating chip. Hidden entirely when TMDB has no score, rather than
              showing a meaningless 0.0. -->

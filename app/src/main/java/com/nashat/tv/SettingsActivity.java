@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.material.materialswitch.MaterialSwitch;
+import com.nashat.tv.ui.BottomNav;
 
 import java.util.List;
 import java.util.Map;
@@ -52,6 +53,11 @@ public class SettingsActivity extends BaseActivity {
         setupToolbar();
         loadSettings();
         setupClickListeners();
+
+        // Settings is a tab-bar destination, so it keeps the tab bar. Without
+        // this the Settings tab was the one place in the app you could arrive
+        // at and find no way back except the system Back button.
+        BottomNav.bind(this, BottomNav.Tab.SETTINGS);
     }
 
     private void initializeViews() {

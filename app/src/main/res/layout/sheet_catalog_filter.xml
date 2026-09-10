@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Catalogue filter.
+
+    Ordered by how often each control is touched: sort first, then rating,
+    then years, then genre. Apply is pinned at the bottom so it stays reachable
+    once the genre chips have pushed the sheet past a screen.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_glass_sheet"
+    android:baselineAligned="false"
+    android:orientation="vertical">
+
+    <!-- ═══ Title row ═══ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/space_400"
+        android:paddingTop="@dimen/space_400"
+        android:paddingBottom="@dimen/space_300">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/filter_title"
+            android:textAppearance="@style/TextAppearance.Nashat.Headline"
+            android:textColor="@color/content_primary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnResetFilter"
+            style="@style/Widget.Nashat.Button.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_reset" />
+    </LinearLayout>
+
+    <!-- Rule under the sheet header, matching the one under every content
+         row. It is also what separates the header from a scrolling body that
+         can run under it. -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edge_width"
+        android:layout_marginHorizontal="@dimen/space_400"
+        android:background="@color/edge" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:minHeight="220dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/space_400"
+            android:paddingBottom="@dimen/space_400">
+
+            <!-- ═══ Sort ═══ -->
+            <TextView
+                style="@style/FilterSectionLabel"
+                android:text="@string/filter_sort_by" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/sortGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:singleSelection="true"
+                app:selectionRequired="true" />
+
+            <!-- ═══ Rating ═══ -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_500"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/FilterSectionLabel"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="0dp"
+                    android:text="@string/filter_min_rating" />
+
+                <TextView
+                    android:id="@+id/ratingValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.Nashat.Label.Large"
+                    android:textColor="@color/accent_text" />
+            </LinearLayout>
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/ratingSlider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stepSize="0.5"
+                android:value="0"
+                android:valueFrom="0"
+                android:valueTo="9" />
+
+            <!-- ═══ Years ═══ -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_300"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/FilterSectionLabel"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="0dp"
+                    android:text="@string/filter_years" />
+
+                <TextView
+                    android:id="@+id/yearValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.Nashat.Label.Large"
+                    android:textColor="@color/accent_text" />
+            </LinearLayout>
+
+            <!-- A range slider, not two inputs: the constraint that "from" can
+                 never exceed "to" is expressed by the control itself, so an
+                 impossible range cannot be entered and does not need an
+                 error message. -->
+            <com.google.android.material.slider.RangeSlider
+                android:id="@+id/yearSlider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stepSize="1" />
+
+            <!-- ═══ Genre ═══ -->
+            <TextView
+                style="@style/FilterSectionLabel"
+                android:layout_marginTop="@dimen/space_300"
+                android:text="@string/filter_genre" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/genreGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:singleSelection="true" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- ═══ Apply ═══ -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edge_width"
+        android:background="@color/edge" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnApplyFilter"
+        style="@style/Widget.Nashat.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space_400"
+        android:text="@string/filter_apply" />
+
+</LinearLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pressed state of bg_block_accent: the face travels onto its block. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:bottom="@dimen/block_offset"
+        android:end="@dimen/block_offset">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/edge" />
+        </shape>
+    </item>
+
+    <item
+        android:top="@dimen/block_offset"
+        android:start="@dimen/block_offset">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/accent_fill_pressed" />
+            <stroke
+                android:width="@dimen/edge_width"
+                android:color="@color/edge" />
+        </shape>
+    </item>
+
+</layer-list>

@@ -14,7 +14,7 @@
         android:layout_marginBottom="8dp"
         android:text="Category Name"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textSize="@dimen/type_size_title_large"
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView

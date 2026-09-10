@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.chip.Chip;
+import com.nashat.tv.ui.BottomNav;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
@@ -192,21 +193,15 @@ public class LiveTvActivity extends BaseActivity {
         });
     }
 
+    /**
+     * The launcher screen was the last one still carrying a hand-written copy
+     * of the navigation bar — 120 lines of layout and the three click handlers
+     * that used to live here, with its own ids ({@code fabSettings} for what is
+     * a nav item, not a FAB) and its own idea of which colours mark the active
+     * tab. It now includes the shared bar like every other screen.
+     */
     private void setupBottomNavigation() {
-        View navMovies = findViewById(R.id.navMovies);
-        if (navMovies != null) {
-            navMovies.setOnClickListener(v -> navigateToTab(MoviesActivity.class));
-        }
-
-        View navSeries = findViewById(R.id.navSeries);
-        if (navSeries != null) {
-            navSeries.setOnClickListener(v -> navigateToTab(SeriesActivity.class));
-        }
-
-        View navSettings = findViewById(R.id.fabSettings);
-        if (navSettings != null) {
-            navSettings.setOnClickListener(v -> navigateToTab(SettingsActivity.class));
-        }
+        BottomNav.bind(this, BottomNav.Tab.LIVE);
     }
 
     private void loadChannels() {

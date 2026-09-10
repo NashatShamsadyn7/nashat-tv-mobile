@@ -5,6 +5,7 @@ import android.app.PictureInPictureParams;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,7 +13,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.util.Rational;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -37,6 +40,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.mediarouter.app.MediaRouteButton;
 
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.PlaybackException;
@@ -50,7 +54,10 @@ import com.google.android.gms.cast.framework.CastState;
 import com.google.android.gms.cast.framework.CastStateListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 import com.nashat.tv.player.EpisodeNav;
+import com.nashat.tv.player.PlaybackProgress;
 import com.nashat.tv.player.ServerHealth;
 import com.nashat.tv.player.ServerPrefs;
 import com.nashat.tv.player.StreamServers;
@@ -191,6 +198,53 @@ public class WebPlayerActivity extends AppCompatActivity {
     private final Runnable loadTimeout = this::onLoadTimedOut;
     private final Runnable rememberSource = this::commitRememberedSource;
     private final Runnable overlayCeiling = this::hideOverlay;
+    private final Runnable hideGestureHud = this::dismissGestureHud;
+
+    // ─── Viewing comfort ──────────────────────────────────────
+
+    /** Offered speeds. 2× is the ceiling — beyond it dialogue is unusable. */
+    private static final float[] SPEEDS = {0.5f, 0.75f, 1f, 1.25f, 1.5f, 1.75f, 2f};
+    private static final int[] SLEEP_MINUTES = {15, 30, 45, 60, 90};
+
+    /** How often the position is written while playing. */
+    private static final long PROGRESS_SAVE_INTERVAL_MS = 5_000;
+
+    /**
+     * Seek step for the controller's skip buttons and for a double tap.
+     *
+     * <p>Asymmetric on purpose, and it is the convention every major player has
+     * converged on: going back is almost always "I missed that line", which is
+     * a few seconds; going forward is almost always "skip this", which is a
+     * scene. A symmetric pair makes one of the two directions the wrong size.
+     */
+    private static final long SEEK_BACK_MS = 10_000;
+    private static final long SEEK_FORWARD_MS = 30_000;
+
+    private PlaybackProgress progressStore;
+    private ContinueWatchingManager continueStore;
+
+    private View gestureLayer, gestureHud, gestureLeft, gestureRight;
+    private ImageView gestureIcon;
+    private TextView gestureValue;
+    private ProgressBar gestureBar;
+    private ImageButton btnLock, btnSpeed, btnSleep, btnEpisodes;
+
+    private boolean controlsLocked = false;
+    private float speed = 1f;
+    private AudioManager audio;
+    private int maxVolume = 15;
+
+    /** Resume offer is made once per opened title, not on every source switch. */
+    private boolean resumeOffered = false;
+    private long pendingResumeMs = 0;
+
+    private final Runnable saveProgress = new Runnable() {
+        @Override
+        public void run() {
+            persistProgress();
+            handler.postDelayed(this, PROGRESS_SAVE_INTERVAL_MS);
+        }
+    };
 
     // ══════════════════════════════════════════════════════════
     //  Lifecycle
@@ -213,10 +267,14 @@ public class WebPlayerActivity extends AppCompatActivity {
 
         prefs = new ServerPrefs(this);
         health = new ServerHealth(HttpClient.get(this));
+        progressStore = new PlaybackProgress(this);
+        continueStore = new ContinueWatchingManager(this);
 
         bindViews();
+        setUpComfortControls();
         setUpWebView();
         setUpCast();
+        recordContinueWatching();
 
         if (tmdbId <= 0) {
             showFailure(getString(R.string.player_unavailable_title),
@@ -234,6 +292,7 @@ public class WebPlayerActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         if (webView != null) webView.onPause();
+        persistProgress();
         // Keep playing in PiP; that is what PiP is for. Anywhere else, audio
         // continuing over another app is a bug.
         if (nativePlayer != null && !isInPipCompat()) nativePlayer.pause();
@@ -248,6 +307,7 @@ public class WebPlayerActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        persistProgress();
         handler.removeCallbacksAndMessages(null);
         sniffer.disarm();
         releaseNativePlayer();
@@ -885,17 +945,37 @@ public class WebPlayerActivity extends AppCompatActivity {
 
         nativePlayer = new ExoPlayer.Builder(this)
                 .setMediaSourceFactory(new DefaultMediaSourceFactory(httpFactory))
+                // ExoPlayer's defaults are 5s back and 15s forward, which are
+                // tuned for correcting a missed line of dialogue. On a
+                // two-hour film they are also the only way to cover distance
+                // when the scrubber is not to hand, and 5s at a time is not a
+                // way to cross an hour. 10 back / 30 forward: back is for
+                // "what did they say", forward is for skipping a scene.
+                .setSeekBackIncrementMs(SEEK_BACK_MS)
+                .setSeekForwardIncrementMs(SEEK_FORWARD_MS)
                 .build();
 
         nativePlayer.addListener(new Player.Listener() {
             @Override
             public void onPlaybackStateChanged(int state) {
+                if (state == Player.STATE_ENDED) {
+                    onPlaybackFinished();
+                    return;
+                }
                 if (state != Player.STATE_READY) return;
                 pageReady = true;
                 enterNativeMode();
                 hideOverlay();
                 handler.removeCallbacks(rememberSource);
                 handler.postDelayed(rememberSource, REMEMBER_DELAY_MS);
+
+                // Speed and resume only exist once ExoPlayer owns playback.
+                // The speed control itself is revealed by applyOnDemandControls,
+                // on the controller — bottomBar's btnSpeed was being shown on a
+                // bar that enterNativeMode had already hidden.
+                maybeOfferResume();
+                handler.removeCallbacks(saveProgress);
+                handler.postDelayed(saveProgress, PROGRESS_SAVE_INTERVAL_MS);
             }
 
             @Override
@@ -945,10 +1025,69 @@ public class WebPlayerActivity extends AppCompatActivity {
         // sets of controls on top of each other.
         topBar.setVisibility(View.GONE);
         bottomBar.setVisibility(View.GONE);
+        applyOnDemandControls();
+    }
+
+    /**
+     * Reveals the seek bar.
+     *
+     * <p>custom_exo_controller ships with its timeline — position, scrubber and
+     * duration, grouped as {@code vod_controls} — set to {@code gone}, and its
+     * LIVE badge visible. That is the correct default for the file's original
+     * caller: PlayerActivity plays broadcast channels, where a scrubber cannot
+     * move and a duration cannot be read, and it calls
+     * {@code applyLiveOrOnDemandControls()} to swap the two whenever a stream
+     * turns out to be on-demand.
+     *
+     * <p>This Activity reused the same controller and never made that call. So
+     * a film that reached native playback showed a LIVE badge and no timeline:
+     * every second of it was reachable, the player was seekable, ExoPlayer knew
+     * the duration — there was simply no control on screen to say where to go.
+     * Jumping to 42 minutes meant tapping a 5-second rewind button.
+     *
+     * <p>There is no live/on-demand test here as there is in PlayerActivity,
+     * because this screen only ever plays films and episodes. A capture that
+     * genuinely had no duration would leave ExoPlayer to render an unset
+     * timeline, which is a broken source rather than a live one.
+     */
+    private void applyOnDemandControls() {
+        if (nativePlayerView == null) return;
+
+        View liveBadge = nativePlayerView.findViewById(R.id.live_indicator);
+        if (liveBadge != null) liveBadge.setVisibility(View.GONE);
+
+        View vodControls = nativePlayerView.findViewById(R.id.vod_controls);
+        if (vodControls != null) vodControls.setVisibility(View.VISIBLE);
+
+        View rew = nativePlayerView.findViewById(com.google.android.exoplayer2.ui.R.id.exo_rew);
+        if (rew != null) rew.setVisibility(View.VISIBLE);
+
+        View ffwd = nativePlayerView.findViewById(com.google.android.exoplayer2.ui.R.id.exo_ffwd);
+        if (ffwd != null) ffwd.setVisibility(View.VISIBLE);
+
+        // The controller has its own speed badge. btnSpeed lives on bottomBar,
+        // which enterNativeMode has just hidden — so setting that one visible,
+        // as this class did, put the speed control on a hidden bar.
+        TextView badge = nativePlayerView.findViewById(R.id.exo_playback_speed);
+        if (badge != null) {
+            badge.setVisibility(View.VISIBLE);
+            badge.setOnClickListener(v -> showSpeedPicker());
+        }
+        updateSpeedBadge();
+    }
+
+    /** Keeps the controller's speed badge in step with {@link #speed}. */
+    private void updateSpeedBadge() {
+        if (nativePlayerView == null) return;
+        TextView badge = nativePlayerView.findViewById(R.id.exo_playback_speed);
+        if (badge != null) {
+            badge.setText(getString(R.string.player_speed_value, trimZero(speed)));
+        }
     }
 
     private void exitNativeMode() {
         nativeMode = false;
+        if (btnSpeed != null) btnSpeed.setVisibility(View.GONE);
         if (nativePlayerView != null) {
             nativePlayerView.setPlayer(null);
             nativePlayerView.setVisibility(View.GONE);
@@ -1000,8 +1139,7 @@ public class WebPlayerActivity extends AppCompatActivity {
                 LocaleManager.getTmdbLanguage(this), nav -> {
                     if (isFinishing() || isDestroyed()) return;
                     episodeNav = nav;
-                    btnPrevEpisode.setVisibility(nav.previous != null ? View.VISIBLE : View.GONE);
-                    btnNextEpisode.setVisibility(nav.next != null ? View.VISIBLE : View.GONE);
+                    if (!controlsLocked) updateEpisodeButtons();
                 });
     }
 
@@ -1125,6 +1263,475 @@ public class WebPlayerActivity extends AppCompatActivity {
 
     private void hideOverlay() {
         loadingOverlay.setVisibility(View.GONE);
+    }
+
+    // ══════════════════════════════════════════════════════════
+    //  Comfort controls
+    // ══════════════════════════════════════════════════════════
+
+    private void setUpComfortControls() {
+        gestureLayer = findViewById(R.id.gestureLayer);
+        gestureLeft = findViewById(R.id.gestureLeft);
+        gestureRight = findViewById(R.id.gestureRight);
+        gestureHud = findViewById(R.id.gestureHud);
+        gestureIcon = findViewById(R.id.gestureIcon);
+        gestureValue = findViewById(R.id.gestureValue);
+        gestureBar = findViewById(R.id.gestureBar);
+        btnLock = findViewById(R.id.btnLock);
+        btnSpeed = findViewById(R.id.btnSpeed);
+        btnSleep = findViewById(R.id.btnSleep);
+        btnEpisodes = findViewById(R.id.btnEpisodes);
+
+        audio = (AudioManager) getSystemService(AUDIO_SERVICE);
+        if (audio != null) {
+            maxVolume = Math.max(1, audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+        }
+
+        btnLock.setOnClickListener(v -> toggleLock());
+        btnSpeed.setOnClickListener(v -> showSpeedPicker());
+        btnSleep.setOnClickListener(v -> showSleepPicker());
+        btnEpisodes.setOnClickListener(v -> showEpisodePicker());
+        btnEpisodes.setVisibility(kind == Kind.TV ? View.VISIBLE : View.GONE);
+
+        gestureLeft.setOnTouchListener(new VerticalDragListener(true));
+        gestureRight.setOnTouchListener(new VerticalDragListener(false));
+    }
+
+    /**
+     * Double-tap left to go back, right to go forward.
+     *
+     * <p>The gesture every video app on the phone already has, and the one
+     * users reach for before they look for a button. It matters more here than
+     * in most players because the controller auto-hides after four seconds:
+     * without it, moving through a film means first tapping to summon the
+     * controls and then finding a target inside a bar that is already fading.
+     *
+     * <p>Only active in native mode. During embed playback the app does not own
+     * the video element and cannot seek it at all — a gesture that silently did
+     * nothing would be worse than no gesture.
+     */
+    private final class DoubleTapSeekListener extends GestureDetector.SimpleOnGestureListener {
+        private final boolean forward;
+
+        DoubleTapSeekListener(boolean forward) {
+            this.forward = forward;
+        }
+
+        @Override
+        public boolean onDoubleTap(@NonNull MotionEvent e) {
+            if (controlsLocked || !nativeMode || nativePlayer == null) return false;
+
+            long delta = forward ? SEEK_FORWARD_MS : -SEEK_BACK_MS;
+            long duration = nativePlayer.getDuration();
+            long target = nativePlayer.getCurrentPosition() + delta;
+
+            // Clamp rather than let seekTo handle it: seeking past the end of a
+            // film ends playback, which is a destructive answer to "skip the
+            // last few seconds of this scene".
+            if (target < 0) target = 0;
+            if (duration != C.TIME_UNSET && target > duration) target = duration;
+            nativePlayer.seekTo(target);
+
+            showGestureHud(
+                    forward ? R.drawable.ic_fast_forward_24 : R.drawable.ic_fast_rewind_24,
+                    getString(forward ? R.string.player_seek_forward : R.string.player_seek_back,
+                            Math.abs(delta / 1000)));
+            handler.removeCallbacks(hideGestureHud);
+            handler.postDelayed(hideGestureHud, 700);
+            return true;
+        }
+    }
+
+    /**
+     * Brightness on the left, volume on the right — the platform convention.
+     *
+     * <p>The listener claims a gesture only once it has moved past a threshold
+     * and is more vertical than horizontal. Without that test, the embed's own
+     * horizontal scrubbing would be swallowed by this layer, and any stray
+     * finger movement during a tap would jolt the brightness.
+     */
+    private final class VerticalDragListener implements View.OnTouchListener {
+        private final boolean brightness;
+        private final GestureDetector doubleTap;
+        private float startY, startX, startValue;
+        private boolean claimed;
+
+        VerticalDragListener(boolean brightness) {
+            this.brightness = brightness;
+            // Left half seeks back, right half seeks forward — matching the
+            // side each half already owns for brightness and volume.
+            doubleTap = new GestureDetector(WebPlayerActivity.this,
+                    new DoubleTapSeekListener(!brightness));
+        }
+
+        @Override
+        public boolean onTouch(View v, MotionEvent e) {
+            if (controlsLocked) return false;
+
+            // Offered to the detector first, but its verdict is not returned
+            // directly: a double tap arrives as a sequence that also contains
+            // the DOWN and MOVE events a drag is built from, so consuming the
+            // whole stream here would break the vertical gesture. The detector
+            // only ever fires its callback; the drag logic below still sees
+            // every event and decides for itself whether it has been claimed.
+            if (doubleTap.onTouchEvent(e)) return true;
+
+            switch (e.getActionMasked()) {
+                case MotionEvent.ACTION_DOWN:
+                    startY = e.getRawY();
+                    startX = e.getRawX();
+                    claimed = false;
+                    startValue = brightness ? currentBrightness() : currentVolume();
+                    return false;   // let a tap through until a drag is proven
+
+                case MotionEvent.ACTION_MOVE: {
+                    float dy = startY - e.getRawY();
+                    float dx = Math.abs(e.getRawX() - startX);
+                    if (!claimed) {
+                        if (Math.abs(dy) < 24 || Math.abs(dy) < dx) return false;
+                        claimed = true;
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                    }
+                    // A full swipe of the view's height is the full range, so
+                    // the gesture's sensitivity is the same on any screen.
+                    float delta = dy / Math.max(1f, v.getHeight());
+                    float next = Math.max(0f, Math.min(1f, startValue + delta));
+                    if (brightness) applyBrightness(next);
+                    else applyVolume(next);
+                    return true;
+                }
+
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    if (claimed) {
+                        handler.removeCallbacks(hideGestureHud);
+                        handler.postDelayed(hideGestureHud, 700);
+                        return true;
+                    }
+                    return false;
+            }
+            return false;
+        }
+    }
+
+    private float currentBrightness() {
+        float b = getWindow().getAttributes().screenBrightness;
+        // -1 means "follow the system", which is not a value that can be
+        // adjusted from, so the first drag starts from the middle.
+        return b < 0 ? 0.5f : b;
+    }
+
+    private void applyBrightness(float value) {
+        android.view.WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.screenBrightness = Math.max(0.01f, value);   // never fully dark
+        getWindow().setAttributes(lp);
+        showGestureHud(R.drawable.ic_brightness_24, Math.round(value * 100));
+    }
+
+    private float currentVolume() {
+        if (audio == null) return 0.5f;
+        return audio.getStreamVolume(AudioManager.STREAM_MUSIC) / (float) maxVolume;
+    }
+
+    private void applyVolume(float value) {
+        if (audio == null) return;
+        int level = Math.round(value * maxVolume);
+        audio.setStreamVolume(AudioManager.STREAM_MUSIC, level, 0);
+        showGestureHud(R.drawable.ic_volume_24, Math.round(level * 100f / maxVolume));
+    }
+
+    /** Brightness and volume: a percentage, with the bar showing where it sits. */
+    private void showGestureHud(int iconRes, int percent) {
+        handler.removeCallbacks(hideGestureHud);
+        gestureIcon.setImageResource(iconRes);
+        gestureValue.setText(getString(R.string.percent_value, percent));
+        gestureBar.setVisibility(View.VISIBLE);
+        gestureBar.setProgress(percent);
+        gestureHud.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * Seeking: a label, and no bar.
+     *
+     * <p>The bar reads as "how much of the range you are at", which is true of
+     * brightness and volume and meaningless for a ±30s jump. Showing it at some
+     * arbitrary fill would invite the user to read a position out of it.
+     */
+    private void showGestureHud(int iconRes, String label) {
+        handler.removeCallbacks(hideGestureHud);
+        gestureIcon.setImageResource(iconRes);
+        gestureValue.setText(label);
+        gestureBar.setVisibility(View.GONE);
+        gestureHud.setVisibility(View.VISIBLE);
+    }
+
+    private void dismissGestureHud() {
+        if (gestureHud != null) gestureHud.setVisibility(View.GONE);
+    }
+
+    // ─── Lock ─────────────────────────────────────────────────
+
+    /**
+     * Hides every control and swallows touches until unlocked.
+     *
+     * <p>The padlock itself stays live and visible — a lock with no visible way
+     * out reads as a crash, and the only escape would be the back button,
+     * which leaves the film.
+     */
+    private void toggleLock() {
+        controlsLocked = !controlsLocked;
+
+        int barVisibility = controlsLocked ? View.GONE : View.VISIBLE;
+        if (!nativeMode) {
+            topBar.setVisibility(barVisibility);
+            bottomBar.setVisibility(barVisibility);
+        }
+        if (nativePlayerView != null) {
+            nativePlayerView.setUseController(!controlsLocked);
+        }
+
+        btnLock.setImageResource(controlsLocked
+                ? R.drawable.ic_lock_24 : R.drawable.ic_lock_open_24);
+        btnLock.setContentDescription(getString(
+                controlsLocked ? R.string.player_unlock : R.string.player_lock));
+
+        if (controlsLocked) {
+            // Re-parent the padlock above the hidden bar so it survives it.
+            btnLock.setVisibility(View.VISIBLE);
+            bottomBar.setVisibility(View.VISIBLE);
+            for (int i = 0; i < ((ViewGroup) bottomBar).getChildCount(); i++) {
+                View child = ((ViewGroup) bottomBar).getChildAt(i);
+                child.setVisibility(child == btnLock ? View.VISIBLE : View.GONE);
+            }
+            Snackbar.make(bottomBar, R.string.player_locked_hint, Snackbar.LENGTH_SHORT).show();
+        } else {
+            for (int i = 0; i < ((ViewGroup) bottomBar).getChildCount(); i++) {
+                ((ViewGroup) bottomBar).getChildAt(i).setVisibility(View.VISIBLE);
+            }
+            // Locking makes bottomBar visible so the unlock button stays
+            // reachable. Unlocking has to put it back the way the current mode
+            // wants it — in native mode that is hidden, because the ExoPlayer
+            // controller owns the chrome. Restoring only the CHILDREN, as this
+            // did, left a film with two stacked sets of controls after any
+            // lock/unlock round trip.
+            bottomBar.setVisibility(nativeMode ? View.GONE : View.VISIBLE);
+            btnSpeed.setVisibility(View.GONE);   // embed speed is unreachable
+            btnEpisodes.setVisibility(kind == Kind.TV ? View.VISIBLE : View.GONE);
+            updateEpisodeButtons();
+        }
+    }
+
+    // ─── Speed ────────────────────────────────────────────────
+
+    /**
+     * Speed applies to ExoPlayer only.
+     *
+     * <p>An embed's player is inside a cross-origin frame, so its playback rate
+     * cannot be reached at all. The button is therefore hidden rather than
+     * shown and silently doing nothing.
+     */
+    private void showSpeedPicker() {
+        if (nativePlayer == null) return;
+
+        String[] labels = new String[SPEEDS.length];
+        int checked = 0;
+        for (int i = 0; i < SPEEDS.length; i++) {
+            labels[i] = SPEEDS[i] == 1f
+                    ? getString(R.string.player_speed_normal)
+                    : getString(R.string.player_speed_value, trimZero(SPEEDS[i]));
+            if (Math.abs(SPEEDS[i] - speed) < 0.01f) checked = i;
+        }
+
+        new MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.player_speed)
+                .setSingleChoiceItems(labels, checked, (d, which) -> {
+                    speed = SPEEDS[which];
+                    nativePlayer.setPlaybackParameters(
+                            new com.google.android.exoplayer2.PlaybackParameters(speed));
+                    updateSpeedBadge();
+                    d.dismiss();
+                })
+                .setNegativeButton(R.string.action_cancel, null)
+                .show();
+    }
+
+    /** 1.50 → "1.5", 2.00 → "2". Trailing zeros read as false precision. */
+    private static String trimZero(float value) {
+        String s = String.format(Locale.US, "%.2f", value);
+        s = s.replaceAll("0+$", "");
+        return s.endsWith(".") ? s.substring(0, s.length() - 1) : s;
+    }
+
+    // ─── Sleep timer ──────────────────────────────────────────
+
+    private void showSleepPicker() {
+        String[] labels = new String[SLEEP_MINUTES.length + 1];
+        labels[0] = getString(R.string.player_sleep_off);
+        for (int i = 0; i < SLEEP_MINUTES.length; i++) {
+            labels[i + 1] = getString(R.string.player_sleep_minutes, SLEEP_MINUTES[i]);
+        }
+
+        new MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.player_sleep_timer)
+                .setItems(labels, (d, which) -> {
+                    handler.removeCallbacks(sleepAction);
+                    if (which == 0) {
+                        Snackbar.make(bottomBar, R.string.player_sleep_cancelled,
+                                Snackbar.LENGTH_SHORT).show();
+                        return;
+                    }
+                    int minutes = SLEEP_MINUTES[which - 1];
+                    handler.postDelayed(sleepAction, minutes * 60_000L);
+                    Snackbar.make(bottomBar,
+                            getString(R.string.player_sleep_set, minutes),
+                            Snackbar.LENGTH_SHORT).show();
+                })
+                .show();
+    }
+
+    /** Stops playback and leaves, rather than pausing on a lit screen. */
+    private final Runnable sleepAction = () -> {
+        persistProgress();
+        finish();
+    };
+
+    // ─── Episodes ─────────────────────────────────────────────
+
+    private void showEpisodePicker() {
+        if (kind != Kind.TV) return;
+
+        TmdbClient.season(this, tmdbId, season, LocaleManager.getTmdbLanguage(this),
+                new TmdbClient.Callback<com.nashat.tv.tmdb.TmdbModels.Season>() {
+                    @Override
+                    public void onSuccess(com.nashat.tv.tmdb.TmdbModels.Season data) {
+                        if (isFinishing() || isDestroyed() || data.episodes == null) return;
+                        BottomSheetDialog dialog = new BottomSheetDialog(WebPlayerActivity.this);
+                        View sheet = LayoutInflater.from(WebPlayerActivity.this)
+                                .inflate(R.layout.sheet_server_picker, null);
+                        ((TextView) sheet.findViewById(R.id.sheetTitle))
+                                .setText(R.string.player_episodes);
+                        ((TextView) sheet.findViewById(R.id.sheetHint))
+                                .setText(getString(R.string.details_season_number, season));
+
+                        LinearLayout list = sheet.findViewById(R.id.serverList);
+                        for (com.nashat.tv.tmdb.TmdbModels.Episode ep : data.episodes) {
+                            list.addView(buildEpisodeRow(list, ep, dialog));
+                        }
+                        dialog.setContentView(sheet);
+                        dialog.show();
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        // Prev/next still work; only the full list is unavailable.
+                    }
+                });
+    }
+
+    private View buildEpisodeRow(ViewGroup parent,
+                                 com.nashat.tv.tmdb.TmdbModels.Episode ep,
+                                 BottomSheetDialog dialog) {
+        View row = LayoutInflater.from(this).inflate(R.layout.item_server, parent, false);
+        row.findViewById(R.id.btnVoteUp).setVisibility(View.GONE);
+        row.findViewById(R.id.btnVoteDown).setVisibility(View.GONE);
+        row.findViewById(R.id.statusIcon).setVisibility(View.GONE);
+
+        TextView name = row.findViewById(R.id.serverName);
+        TextView status = row.findViewById(R.id.serverStatus);
+        View mark = row.findViewById(R.id.activeMark);
+
+        String label = getString(R.string.details_episode_number, ep.episodeNumber);
+        name.setText(ep.name == null || ep.name.isEmpty() ? label : label + " · " + ep.name);
+        status.setText(ep.airDate == null ? "" : ep.airDate);
+        status.setVisibility(ep.airDate == null ? View.GONE : View.VISIBLE);
+        mark.setVisibility(ep.episodeNumber == episode ? View.VISIBLE : View.INVISIBLE);
+
+        row.setOnClickListener(v -> {
+            dialog.dismiss();
+            goToEpisode(new EpisodeNav.Ref(season, ep.episodeNumber));
+        });
+        return row;
+    }
+
+    private void updateEpisodeButtons() {
+        if (episodeNav == null) return;
+        btnPrevEpisode.setVisibility(episodeNav.previous != null ? View.VISIBLE : View.GONE);
+        btnNextEpisode.setVisibility(episodeNav.next != null ? View.VISIBLE : View.GONE);
+    }
+
+    // ─── Resume & progress ────────────────────────────────────
+
+    /**
+     * Offers to pick up where the viewer stopped.
+     *
+     * <p>Asked rather than assumed. Automatic resume is wrong often enough —
+     * a rewatch, a different person on the same device — that silently
+     * skipping twenty minutes in is worse than one dialog.
+     */
+    private void maybeOfferResume() {
+        if (resumeOffered || nativePlayer == null) return;
+        resumeOffered = true;
+
+        long saved = progressStore.position(kind, tmdbId, season, episode);
+        if (saved <= 0) return;
+        pendingResumeMs = saved;
+
+        new MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.player_resume_title)
+                .setMessage(getString(R.string.player_resume_body, formatTime(saved)))
+                .setPositiveButton(R.string.player_resume, (d, w) -> {
+                    if (nativePlayer != null) nativePlayer.seekTo(pendingResumeMs);
+                })
+                .setNegativeButton(R.string.player_start_over, (d, w) -> {
+                    progressStore.clear(kind, tmdbId, season, episode);
+                })
+                .show();
+    }
+
+    private void persistProgress() {
+        if (nativePlayer == null) return;
+        long pos = nativePlayer.getCurrentPosition();
+        long dur = nativePlayer.getDuration();
+        if (dur <= 0) return;
+        progressStore.save(kind, tmdbId, season, episode, pos, dur);
+    }
+
+    private static String formatTime(long ms) {
+        long total = ms / 1000;
+        long h = total / 3600, m = (total % 3600) / 60, s = total % 60;
+        return h > 0
+                ? String.format(Locale.getDefault(), "%d:%02d:%02d", h, m, s)
+                : String.format(Locale.getDefault(), "%d:%02d", m, s);
+    }
+
+    /**
+     * The episode ended. Roll into the next one if there is one.
+     *
+     * <p>Only for series, and only when a next episode actually exists — after
+     * a film, or a season finale with nothing after it, playback simply stops
+     * and the viewer is left on the player rather than being sent somewhere
+     * they did not ask to go.
+     */
+    private void onPlaybackFinished() {
+        progressStore.clear(kind, tmdbId, season, episode);
+        handler.removeCallbacks(saveProgress);
+
+        if (kind != Kind.TV || episodeNav == null || episodeNav.next == null) return;
+
+        Snackbar.make(bottomBar, R.string.player_autoplay_next, Snackbar.LENGTH_SHORT).show();
+        goToEpisode(episodeNav.next);
+    }
+
+    /** Records the title so it appears under Continue watching. */
+    private void recordContinueWatching() {
+        try {
+            Movie m = new Movie(titleText, null, kind == Kind.TV ? "series" : "movie",
+                    String.valueOf(tmdbId), "", null, 0);
+            if (kind == Kind.TV) continueStore.addSeries(m, season, episode);
+            else continueStore.addMovie(m);
+        } catch (Exception ignored) {
+            // A convenience. Failing to record must never stop playback.
+        }
     }
 
     // ══════════════════════════════════════════════════════════

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The flat brutalist surface: opaque fill, 2dp edge, square, no block.
+
+  This is the default container in the app. The offset block is reserved for
+  things you can press — if every card were raised, nothing would be. Depth
+  here is a signal of interactivity, not a decoration applied by default.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/surface_raised" />
+    <stroke
+        android:width="@dimen/edge_width"
+        android:color="@color/edge" />
+</shape>

@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Page background.
+
+  Flat now, despite the name. It was a three-stop vertical gradient from
+  surface_sunken to surface_base — a difference of about four points of
+  luminance stretched over a whole screen, which is invisible on a good
+  display and shows up as banding on a cheap one. It also meant the page
+  behind a card was a different colour at the top of the screen than at the
+  bottom, so no card could sit correctly on both.
+
+  A brutalist page has one background value. The name survives because five
+  layouts still call for it.
+-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <gradient
-        android:startColor="@color/main_gradient_start"
-        android:centerColor="@color/main_gradient_end"
-        android:endColor="@color/main_gradient_end"
-        android:angle="270" />
+    <solid android:color="@color/surface_base" />
 </shape>

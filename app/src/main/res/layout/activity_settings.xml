@@ -1,28 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    Settings.
+
+    Two structural fixes beyond the restyle:
+
+    · THE NAV BAR IS HERE NOW. The bar has a Settings tab, and tapping it
+      landed the user on a screen with no bar — the only way back was the
+      system Back button or the toolbar arrow. A destination reachable from
+      the tab bar has to keep the tab bar.
+
+    · THE CARDS HAVE A SURFACE. Each group declared
+      cardBackgroundColor="@color/transparent" and then set
+      android:background="@drawable/bg_glass_card" — which MaterialCardView
+      ignores, because it manages its own background drawable. So the
+      "glass" never rendered and the groups were outlines around nothing.
+      They are opaque surfaces with a 2dp edge now, like every other card.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/bg_main_gradient"
+    android:background="@color/surface_base"
     android:fitsSystemWindows="true"
     tools:context=".SettingsActivity">
 
+  <LinearLayout
+      android:id="@+id/contentBehindNav"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
+        style="@style/Widget.Nashat.Toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent"
         android:elevation="0dp"
-        app:title="@string/settings"
-        app:titleTextColor="@color/text_primary"
         app:navigationIcon="@drawable/ic_arrow_back_24"
-        app:navigationIconTint="@color/accent_primary" />
+        app:title="@string/settings" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/bottom_nav_height">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,11 +65,10 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/border_subtle"
-                app:cardBackgroundColor="@color/transparent"
-                android:background="@drawable/bg_glass_card"
+                app:cardCornerRadius="@dimen/radius_none"
+                app:strokeWidth="@dimen/edge_width"
+                app:strokeColor="@color/edge"
+                app:cardBackgroundColor="@color/surface_raised"
                 app:cardElevation="0dp">
 
                 <LinearLayout
@@ -69,7 +90,7 @@
                         android:layout_height="1dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:background="@color/border_subtle" />
+                        android:background="@color/edge_inset" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/switchHDQuality"
@@ -85,7 +106,7 @@
                         android:layout_height="1dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:background="@color/border_subtle" />
+                        android:background="@color/edge_inset" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/switchDataSaver"
@@ -101,7 +122,7 @@
                         android:layout_height="1dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:background="@color/border_subtle" />
+                        android:background="@color/edge_inset" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/switchBackgroundPlay"
@@ -117,7 +138,7 @@
                         android:layout_height="1dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:background="@color/border_subtle" />
+                        android:background="@color/edge_inset" />
 
                     <LinearLayout
                         android:id="@+id/buffer_option"
@@ -156,7 +177,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/buffer_medium"
                                 android:textColor="@color/text_tertiary"
-                                android:textSize="13sp" />
+                                android:textSize="@dimen/type_size_body_small" />
                         </LinearLayout>
 
                         <ImageView
@@ -171,7 +192,7 @@
                         android:layout_height="1dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:background="@color/border_subtle" />
+                        android:background="@color/edge_inset" />
 
                     <LinearLayout
                         android:id="@+id/refresh_option"
@@ -210,7 +231,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/refresh_weekly"
                                 android:textColor="@color/text_tertiary"
-                                android:textSize="13sp" />
+                                android:textSize="@dimen/type_size_body_small" />
                         </LinearLayout>
 
                         <ImageView
@@ -236,11 +257,10 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/border_subtle"
-                app:cardBackgroundColor="@color/transparent"
-                android:background="@drawable/bg_glass_card"
+                app:cardCornerRadius="@dimen/radius_none"
+                app:strokeWidth="@dimen/edge_width"
+                app:strokeColor="@color/edge"
+                app:cardBackgroundColor="@color/surface_raised"
                 app:cardElevation="0dp">
 
                 <LinearLayout
@@ -263,7 +283,7 @@
                         android:layout_height="1dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:background="@color/border_subtle" />
+                        android:background="@color/edge_inset" />
 
                     <!-- Theme -->
                     <LinearLayout
@@ -302,7 +322,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/theme_desc"
                                 android:textColor="@color/text_tertiary"
-                                android:textSize="13sp" />
+                                android:textSize="@dimen/type_size_body_small" />
                         </LinearLayout>
 
                         <ImageView
@@ -317,7 +337,7 @@
                         android:layout_height="1dp"
                         android:layout_marginStart="56dp"
                         android:layout_marginEnd="16dp"
-                        android:background="@color/border_subtle" />
+                        android:background="@color/edge_inset" />
 
                     <!-- Language -->
                     <LinearLayout
@@ -357,7 +377,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="English"
                                 android:textColor="@color/text_tertiary"
-                                android:textSize="13sp" />
+                                android:textSize="@dimen/type_size_body_small" />
                         </LinearLayout>
 
                         <ImageView
@@ -383,11 +403,10 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/border_subtle"
-                app:cardBackgroundColor="@color/transparent"
-                android:background="@drawable/bg_glass_card"
+                app:cardCornerRadius="@dimen/radius_none"
+                app:strokeWidth="@dimen/edge_width"
+                app:strokeColor="@color/edge"
+                app:cardBackgroundColor="@color/surface_raised"
                 app:cardElevation="0dp">
 
                 <LinearLayout
@@ -434,7 +453,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/stats_subtitle"
                                 android:textColor="@color/text_tertiary"
-                                android:textSize="13sp" />
+                                android:textSize="@dimen/type_size_body_small" />
                         </LinearLayout>
 
                         <ImageView
@@ -449,7 +468,7 @@
                         android:layout_height="1dp"
                         android:layout_marginStart="56dp"
                         android:layout_marginEnd="16dp"
-                        android:background="@color/border_subtle" />
+                        android:background="@color/edge_inset" />
 
                     <!-- Custom Playlists -->
                     <LinearLayout
@@ -490,7 +509,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/playlists_subtitle"
                                 android:textColor="@color/text_tertiary"
-                                android:textSize="13sp" />
+                                android:textSize="@dimen/type_size_body_small" />
                         </LinearLayout>
 
                         <ImageView
@@ -516,11 +535,10 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/border_subtle"
-                app:cardBackgroundColor="@color/transparent"
-                android:background="@drawable/bg_glass_card"
+                app:cardCornerRadius="@dimen/radius_none"
+                app:strokeWidth="@dimen/edge_width"
+                app:strokeColor="@color/edge"
+                app:cardBackgroundColor="@color/surface_raised"
                 app:cardElevation="0dp">
 
                 <LinearLayout
@@ -565,7 +583,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/clear_cache_desc"
                                 android:textColor="@color/text_tertiary"
-                                android:textSize="13sp" />
+                                android:textSize="@dimen/type_size_body_small" />
                         </LinearLayout>
 
                         <ImageView
@@ -591,11 +609,10 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="@color/border_subtle"
-                app:cardBackgroundColor="@color/transparent"
-                android:background="@drawable/bg_glass_card"
+                app:cardCornerRadius="@dimen/radius_none"
+                app:strokeWidth="@dimen/edge_width"
+                app:strokeColor="@color/edge"
+                app:cardBackgroundColor="@color/surface_raised"
                 app:cardElevation="0dp">
 
                 <LinearLayout
@@ -642,7 +659,7 @@
                         android:layout_height="1dp"
                         android:layout_marginStart="56dp"
                         android:layout_marginEnd="16dp"
-                        android:background="@color/border_subtle" />
+                        android:background="@color/edge_inset" />
 
                     <!-- Contact Us -->
                     <LinearLayout
@@ -683,7 +700,7 @@
                         android:layout_height="1dp"
                         android:layout_marginStart="56dp"
                         android:layout_marginEnd="16dp"
-                        android:background="@color/border_subtle" />
+                        android:background="@color/edge_inset" />
 
                     <!-- Rate App -->
                     <LinearLayout
@@ -724,7 +741,7 @@
                         android:layout_height="1dp"
                         android:layout_marginStart="56dp"
                         android:layout_marginEnd="16dp"
-                        android:background="@color/border_subtle" />
+                        android:background="@color/edge_inset" />
 
                     <!-- Share App -->
                     <LinearLayout
@@ -777,7 +794,7 @@
                     android:text="@string/app_name"
                     android:textColor="@color/accent_primary"
                     android:textStyle="bold"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/type_size_body_medium" />
 
                 <TextView
                     android:id="@+id/tvVersionInfo"
@@ -786,7 +803,7 @@
                     android:layout_marginTop="4dp"
                     android:text="v1.0"
                     android:textColor="@color/text_tertiary"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/type_size_label_medium" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -794,8 +811,12 @@
                     android:layout_marginTop="2dp"
                     android:text="@string/developer_name"
                     android:textColor="@color/text_tertiary"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/type_size_label_medium" />
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+  </LinearLayout>
+
+  <include layout="@layout/view_bottom_nav" />
+
+</FrameLayout>

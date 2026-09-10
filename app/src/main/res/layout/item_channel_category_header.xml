@@ -14,7 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textSize="18sp"
+        android:textSize="@dimen/type_size_title_medium"
         android:textStyle="bold"
         android:textColor="#FFFFFF" />
 
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+ View all"
-        android:textSize="12sp"
+        android:textSize="@dimen/type_size_label_medium"
         android:textColor="#D50000"
         android:textStyle="bold"
         android:focusable="true"

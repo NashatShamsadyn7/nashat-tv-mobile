@@ -6,6 +6,10 @@
       ".read": true,
       ".write": false
     },
+    "live_tv_channels": {
+      ".read": true,
+      ".write": false
+    },
     "live_tv": {
       ".read": true,
       ".write": false

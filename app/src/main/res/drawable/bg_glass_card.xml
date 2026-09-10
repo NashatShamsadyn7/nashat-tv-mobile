@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/glass_card_solid" />
-    <corners android:radius="18dp" />
-    <stroke android:width="1dp" android:color="@color/glass_card_stroke" />
-</shape>
+<!--
+  Kept for activity_main and activity_settings, which still name it.
+
+  Despite the name this is now a SOLID brutalist surface, not glass. Glass
+  in this system is reserved for layers that float OVER content — nav,
+  sheets, player chrome. A card sits IN the page, so it is opaque and
+  outlined. The alias documents the change rather than touching both
+  layouts for no behavioural gain.
+-->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/bg_edge" />

@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="@string/advanced_filters"
             android:textColor="@color/text_primary"
-            android:textSize="20sp"
+            android:textSize="@dimen/type_size_title_large"
             android:textStyle="bold"
             android:layout_centerInParent="true"/>
 
@@ -131,9 +131,9 @@
         android:layout_height="56dp"
         android:text="APPLY"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="@dimen/type_size_body_large"
         android:textStyle="bold"
-        app:cornerRadius="28dp"
+        app:cornerRadius="@dimen/radius_none"
         app:backgroundTint="@color/accent_primary"/>
 
 </LinearLayout>

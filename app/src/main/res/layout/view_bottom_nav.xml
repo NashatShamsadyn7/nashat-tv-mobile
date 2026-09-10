@@ -5,133 +5,30 @@
     Each screen previously carried its own hand-written copy of this bar, which
     is why the four copies had drifted apart — different icon sizes, different
     label colours, and one of them missing a touch target. Every screen now
-    includes this and calls BottomNav.bind() to mark its own tab active.
+    includes this and calls BottomNav.bind() to fill and mark it.
 
-    Tint and text colour are set from code rather than here, because which item
-    is active depends on the host screen.
+    The bar is a GLASS layer: it floats over the content rather than sitting
+    below it, and the host screen pads its scrolling content by
+    bottom_nav_height so nothing is permanently hidden underneath. That is
+    what the blur is for — the user keeps the sense that the list continues
+    past the bar instead of ending at it.
+
+    The four tabs are no longer written out here. The container starts empty
+    and BottomNav inflates item_bottom_nav.xml once per destination; see that
+    file for why.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.nashat.tv.ui.GlassView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/bottomNav"
     android:layout_width="match_parent"
     android:layout_height="@dimen/bottom_nav_height"
-    android:background="@color/surface_base"
-    android:orientation="horizontal">
+    android:layout_gravity="bottom"
+    android:background="@drawable/bg_glass_panel">
 
     <LinearLayout
-        android:id="@+id/navLive"
-        android:layout_width="0dp"
+        android:id="@+id/bottomNavItems"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:contentDescription="@string/nav_live"
-        android:focusable="true"
-        android:gravity="center"
-        android:minHeight="@dimen/touch_target_min"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:baselineAligned="false" />
 
-        <ImageView
-            android:id="@+id/navLiveIcon"
-            android:layout_width="@dimen/bottom_nav_icon_size"
-            android:layout_height="@dimen/bottom_nav_icon_size"
-            android:importantForAccessibility="no"
-            android:src="@drawable/ic_tv_series" />
-
-        <TextView
-            android:id="@+id/navLiveLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_100"
-            android:text="@string/nav_live"
-            android:textAppearance="@style/TextAppearance.Nashat.Label.Medium" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/navMovies"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:contentDescription="@string/nav_movies"
-        android:focusable="true"
-        android:gravity="center"
-        android:minHeight="@dimen/touch_target_min"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/navMoviesIcon"
-            android:layout_width="@dimen/bottom_nav_icon_size"
-            android:layout_height="@dimen/bottom_nav_icon_size"
-            android:importantForAccessibility="no"
-            android:src="@drawable/ic_movie_24" />
-
-        <TextView
-            android:id="@+id/navMoviesLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_100"
-            android:text="@string/nav_movies"
-            android:textAppearance="@style/TextAppearance.Nashat.Label.Medium" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/navSeries"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:contentDescription="@string/nav_series"
-        android:focusable="true"
-        android:gravity="center"
-        android:minHeight="@dimen/touch_target_min"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/navSeriesIcon"
-            android:layout_width="@dimen/bottom_nav_icon_size"
-            android:layout_height="@dimen/bottom_nav_icon_size"
-            android:importantForAccessibility="no"
-            android:src="@drawable/ic_tv_series" />
-
-        <TextView
-            android:id="@+id/navSeriesLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_100"
-            android:text="@string/nav_series"
-            android:textAppearance="@style/TextAppearance.Nashat.Label.Medium" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/navSettings"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:contentDescription="@string/nav_settings"
-        android:focusable="true"
-        android:gravity="center"
-        android:minHeight="@dimen/touch_target_min"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/navSettingsIcon"
-            android:layout_width="@dimen/bottom_nav_icon_size"
-            android:layout_height="@dimen/bottom_nav_icon_size"
-            android:importantForAccessibility="no"
-            android:src="@drawable/ic_settings_24" />
-
-        <TextView
-            android:id="@+id/navSettingsLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_100"
-            android:text="@string/nav_settings"
-            android:textAppearance="@style/TextAppearance.Nashat.Label.Medium" />
-    </LinearLayout>
-
-</LinearLayout>
+</com.nashat.tv.ui.GlassView>
