@@ -2,9 +2,185 @@
   "rules": {
     ".read": false,
     ".write": false,
+    "live_tv_channels": {
+      ".read": true,
+      ".write": false,
+      ".indexOn": [
+        "category",
+        "isAlive"
+      ]
+    },
     "channels": {
       ".read": true,
+      ".write": false,
+      ".indexOn": [
+        "category",
+        "isAlive"
+      ]
+    },
+    "categories": {
+      ".read": true,
       ".write": false
+    },
+    "epg": {
+      ".read": true,
+      ".write": false,
+      "$channelKey": {
+        ".indexOn": [
+          "start",
+          "end"
+        ]
+      }
+    },
+    "trending_counters": {
+      ".read": true,
+      "$mediaId": {
+        ".write": "auth != null && newData.isNumber() && newData.val() == (data.exists() ? data.val() : 0) + 1"
+      }
+    },
+    "profiles": {
+      ".read": "auth != null",
+      ".indexOn": [
+        "username"
+      ],
+      "$uid": {
+        ".write": "auth != null && auth.uid === $uid",
+        ".validate": "newData.hasChildren(['displayName'])",
+        "username": {
+          ".validate": "newData.isString() && newData.val().matches(/^[a-z0-9_]{3,20}$/) && (!data.exists() || data.val() === newData.val() || !root.child('profiles/'+$uid+'/usernameChangedAt').exists() || (now - root.child('profiles/'+$uid+'/usernameChangedAt').val()) > 2592000000)"
+        },
+        "usernameChangedAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "displayName": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 40"
+        }
+      }
+    },
+    "usernames": {
+      ".read": "auth != null",
+      "$username": {
+        ".write": "auth != null && (!data.exists() || data.val() === auth.uid) && newData.val() === auth.uid",
+        ".validate": "newData.isString() && $username.matches(/^[a-z0-9_]{3,20}$/)"
+      }
+    },
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid",
+        "friends": {
+          "$friendUid": {
+            ".write": "auth != null && (auth.uid === $uid || auth.uid === $friendUid)"
+          }
+        },
+        "friendRequests": {
+          "incoming": {
+            "$fromUid": {
+              ".write": "auth != null && (auth.uid === $uid || auth.uid === $fromUid)"
+            }
+          },
+          "outgoing": {
+            "$toUid": {
+              ".write": "auth != null && (auth.uid === $uid || auth.uid === $toUid)"
+            }
+          }
+        },
+        "roomInvites": {
+          ".read": "auth != null && auth.uid === $uid",
+          "$inviteId": {
+            ".write": "auth != null"
+          }
+        },
+        "dms": {
+          "$chatId": {
+            ".write": "auth != null && $chatId.contains(auth.uid)"
+          }
+        },
+        "watchlist": {
+          "$id": {
+            ".validate": "newData.hasChildren(['id','kind','title','addedAt']) && newData.child('id').val() === $id && newData.child('kind').val().matches(/^(movie|tv|channel)$/) && newData.child('title').isString() && newData.child('addedAt').isNumber()"
+          }
+        },
+        "favorites": {
+          "$id": {
+            ".validate": "newData.hasChildren(['id','kind','title','addedAt']) && newData.child('id').val() === $id && newData.child('kind').val().matches(/^(movie|tv|channel)$/) && newData.child('title').isString() && newData.child('addedAt').isNumber()"
+          }
+        },
+        "progress": {
+          "$id": {
+            ".validate": "newData.hasChildren(['id','kind','title','position','duration','updatedAt']) && newData.child('kind').val().matches(/^(movie|tv|channel)$/) && newData.child('position').isNumber() && newData.child('duration').isNumber() && newData.child('updatedAt').isNumber() && (newData.child('kind').val() === 'channel' ? newData.child('channelKey').isString() : newData.child('tmdbId').isNumber())"
+          }
+        },
+        "stats": {
+          ".validate": "newData.hasChildren()"
+        },
+        "notes": {
+          "$id": {
+            ".validate": "newData.hasChildren(['mediaId','timestamp','text','createdAt']) && newData.child('timestamp').isNumber() && newData.child('text').isString() && newData.child('text').val().length < 2000"
+          }
+        }
+      }
+    },
+    "dms": {
+      "$chatId": {
+        ".read": "auth != null && $chatId.contains(auth.uid)",
+        ".write": "auth != null && $chatId.contains(auth.uid)",
+        "messages": {
+          "$msgId": {
+            ".validate": "newData.hasChildren(['uid','createdAt']) && newData.child('uid').val() === auth.uid && (newData.hasChild('text') || newData.hasChild('image') || newData.hasChild('gif'))"
+          }
+        }
+      }
+    },
+    "dubVotes": {
+      "$kind": {
+        ".read": "auth != null",
+        ".validate": "$kind === 'movie' || $kind === 'tv'",
+        "$tmdbId": {
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid",
+            ".validate": "newData.isBoolean() || newData.val() === null"
+          }
+        }
+      }
+    },
+    "rooms": {
+      "$roomId": {
+        ".read": "auth != null",
+        ".write": "auth != null && (data.exists() ? data.child('ownerId').val() === auth.uid : newData.child('ownerId').val() === auth.uid)",
+        ".validate": "newData.hasChildren(['ownerId','createdAt'])",
+        "members": {
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid",
+            ".validate": "auth.uid === $uid"
+          }
+        },
+        "state": {
+          ".write": "auth != null && root.child('rooms/'+$roomId+'/ownerId').val() === auth.uid",
+          ".validate": "newData.hasChildren(['playing','position','anchorAt','updatedAt'])"
+        },
+        "media": {
+          ".write": "auth != null && root.child('rooms/'+$roomId+'/ownerId').val() === auth.uid"
+        },
+        "chat": {
+          ".write": "auth != null",
+          "$msgId": {
+            ".validate": "newData.hasChildren(['uid','createdAt']) && newData.child('uid').val() === auth.uid && (newData.hasChild('text') || newData.hasChild('image') || newData.hasChild('gif'))"
+          }
+        },
+        "voice": {
+          ".read": "auth != null",
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid",
+            "inbox": {
+              ".write": "auth != null",
+              "$msgId": {
+                ".validate": "newData.hasChildren(['type','from']) && newData.child('from').val() === auth.uid"
+              }
+            }
+          }
+        }
+      }
     },
     "live_tv": {
       ".read": true,
@@ -15,10 +191,6 @@
       ".write": false
     },
     "series": {
-      ".read": true,
-      ".write": false
-    },
-    "categories": {
       ".read": true,
       ".write": false
     }
