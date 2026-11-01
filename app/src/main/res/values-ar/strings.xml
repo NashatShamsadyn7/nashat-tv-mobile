@@ -242,6 +242,8 @@
     <string name="player_subtitles_off">مُعطّلة</string>
     <string name="player_audio_track">الصوت</string>
     <string name="player_speed">السرعة</string>
+    <string name="player_seek_forward">+%1$d ثانية</string>
+    <string name="player_seek_back">−%1$d ثانية</string>
     <string name="player_speed_value">%1$sx</string>
     <string name="player_mute">كتم</string>
     <string name="player_unmute">إلغاء الكتم</string>
@@ -591,5 +593,53 @@
     <string name="player_previous_episode">الحلقة السابقة</string>
     <string name="player_next_episode">الحلقة التالية</string>
     <string name="player_season_episode">الموسم %1$d · الحلقة %2$d</string>
+
+    <!-- ══ الصفوف الشخصية ══ -->
+    <string name="row_continue">أكمل المشاهدة</string>
+    <string name="row_favorites">مفضّلتك</string>
+    <string name="row_watchlist">قائمة مشاهدتك</string>
+    <string name="continue_remove">أزل من «أكمل المشاهدة»</string>
+
+    <!-- ══ سجلّ البحث ══ -->
+    <string name="search_clear_all">امسح الكل</string>
+
+    <!-- ══ التصفية والترتيب ══ -->
+    <string name="filter_title">تصفية</string>
+    <string name="filter_title_count">تصفية (%1$d)</string>
+    <string name="filter_sort_by">الترتيب حسب</string>
+    <string name="filter_min_rating">أدنى تقييم</string>
+    <string name="filter_years">السنوات</string>
+    <string name="filter_any">الكل</string>
+    <string name="filter_rating_value">%1$.1f فأعلى</string>
+    <string name="filter_year_range">%1$d – %2$d</string>
+    <string name="filter_no_results_title">لا شيء يطابق هذه التصفية</string>
+    <string name="filter_no_results_body">وسّع نطاق السنوات أو اخفض التقييم.</string>
+
+    <string name="sort_popular">الأكثر شعبية</string>
+    <string name="sort_newest">الأحدث أولاً</string>
+    <string name="sort_revenue">الأعلى إيراداً</string>
+    <string name="sort_title">أ – ي</string>
+
+    <!-- ══ تحكّم المشغّل ══ -->
+    <string name="player_speed_normal">عادية</string>
+    <string name="player_lock">قفل أزرار التحكّم</string>
+    <string name="player_unlock">فتح أزرار التحكّم</string>
+    <string name="player_locked_hint">التحكّم مقفل. المس القفل لفتحه.</string>
+    <string name="player_sleep_timer">مؤقّت النوم</string>
+    <string name="player_sleep_off">معطّل</string>
+    <string name="player_sleep_minutes">%1$d دقيقة</string>
+    <string name="player_sleep_end">نهاية هذه الحلقة</string>
+    <string name="player_sleep_set">سيتوقّف التشغيل بعد %1$d دقيقة.</string>
+    <string name="player_sleep_cancelled">أُلغي مؤقّت النوم.</string>
+    <string name="player_episodes">الحلقات</string>
+    <string name="player_resume_title">أتكمل من حيث توقّفت؟</string>
+    <string name="player_resume_body">توقّفت عند %1$s.</string>
+    <string name="player_resume">أكمل</string>
+    <string name="player_start_over">من البداية</string>
+    <string name="player_autoplay_next">تبدأ الحلقة التالية…</string>
+    <string name="player_brightness">السطوع</string>
+    <string name="player_volume">الصوت</string>
+
+    <string name="percent_value">%1$d%%</string>
 
 </resources>

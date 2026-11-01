@@ -12,16 +12,37 @@
    the movies screen and a card on the live screen were different objects
    with different radii and different elevation.
 
-   Two rules govern the whole file:
+   Three rules govern the whole file:
 
-   · ELEVATION IS ZERO. A drop shadow needs a surface to fall on; against
-     a near-black background it produces a grey halo instead and reads as
-     a rendering artefact. Depth here comes from surface value plus a
-     hairline outline, which works identically in both modes.
+   · ELEVATION IS ZERO, AND DEPTH IS A BLOCK. A drop shadow needs a lit
+     surface to fall on; against a near-black background it produces a grey
+     halo that reads as a rendering artefact. Height here is drawn
+     literally — a solid lime rectangle offset 4dp behind the surface (see
+     bg_block). The block is the same value in light and dark, so depth
+     does not have to be re-tuned per mode.
+
+   · THE EDGE IS THE TEXT COLOUR. Every outline in the app is 2dp of
+     @color/edge, which is content_primary. One width, one colour, no
+     "subtle" variant. This is what survives the light/dark switch
+     unchanged: the border and the text inside it are always the same
+     value, so a card carries identical weight in both modes.
+
+   · GLASS FLOATS, SURFACES DO NOT. Translucency and blur are reserved for
+     layers that sit OVER content — nav, sheets, player chrome. Anything
+     that lives IN the page is opaque. A card is not glass.
 
    · FOCUS IS A FIRST-CLASS STATE. Not an afterthought for TV. Every
      interactive style below declares what it looks like when a D-pad
      lands on it, because on a television that is the only cue the user has.
+
+   A note on what Material will and will not allow. MaterialButton and
+   MaterialCardView both manage their own background drawable and ignore
+   android:background, so the offset block cannot be attached to them
+   through a style. Those components get the square-and-outlined half of
+   the language; the block is applied through Widget.Nashat.Block on plain
+   containers, where it is the hero action or the raised card that actually
+   benefits from it. Fighting the component library to put a block on every
+   button would have cost more than it bought.
 -->
 <resources>
 
@@ -29,48 +50,88 @@
          SURFACES
          ══════════════════════════════════════════════════════════════ -->
 
-    <!-- The default card: raised surface, hairline outline, no shadow. -->
+    <!-- The default card: opaque, square, 2dp edge, flat.
+
+         Collapsed from five card styles to two. Poster, Channel and Group
+         used to differ ONLY in corner radius — 12dp vs 16dp vs 20dp — which
+         is not a distinction anyone can name out loud, and it meant a card
+         on the films screen and a card on the live screen were different
+         objects for no reason. With one radius the variants have nothing
+         left to disagree about, so they are aliases at the bottom of the
+         file rather than styles. -->
     <style name="Widget.Nashat.Card" parent="Widget.Material3.CardView.Outlined">
         <item name="cardBackgroundColor">@color/surface_raised</item>
-        <item name="cardCornerRadius">@dimen/radius_md</item>
+        <item name="cardCornerRadius">@dimen/radius_none</item>
         <item name="cardElevation">0dp</item>
-        <item name="strokeColor">@color/border_default</item>
-        <item name="strokeWidth">@dimen/stroke_hairline</item>
+        <item name="strokeColor">@color/edge</item>
+        <item name="strokeWidth">@dimen/edge_width</item>
         <item name="cardPreventCornerOverlap">false</item>
         <item name="cardUseCompatPadding">false</item>
     </style>
 
-    <!-- Media card: holds artwork edge-to-edge, so it must NOT have an
-         outline (a border around a poster looks like a printing error) and
-         must clip its child to the corner radius. -->
+    <!-- Media card: holds artwork edge to edge.
+
+         Unlike the previous system this one KEEPS its outline. The old note
+         said a border around a poster looks like a printing error, and that
+         is true of a 1dp tinted grey hairline — it reads as a mistake
+         because it is too weak to read as a decision. A 2dp ink frame is
+         unambiguously deliberate, and framing the artwork is the single
+         change that makes a grid of TMDB posters look like one designed
+         screen rather than a folder of images. -->
     <style name="Widget.Nashat.Card.Media">
-        <item name="strokeWidth">0dp</item>
         <item name="cardBackgroundColor">@color/surface_sunken</item>
-        <item name="cardCornerRadius">@dimen/radius_sm</item>
         <item name="android:foreground">@drawable/fg_focus_ring</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
     </style>
 
-    <!-- Poster variant: same as media, tighter radius for 2:3 artwork. -->
-    <style name="Widget.Nashat.Card.Poster" parent="Widget.Nashat.Card.Media">
-        <item name="cardCornerRadius">@dimen/radius_sm</item>
+    <!-- ══════════════════════════════════════════════════════════════
+         BLOCK — raised containers
+
+         For plain ViewGroups (FrameLayout, LinearLayout, ConstraintLayout)
+         that need to read as pressable. Applies the offset block that
+         Material's own components will not accept.
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- A raised neutral surface. The 4dp end/bottom padding compensates for
+         the block, so the CONTENT stays optically centred inside the face
+         rather than inside the drawable's full bounds. -->
+    <style name="Widget.Nashat.Block" parent="">
+        <item name="android:background">@drawable/sel_block_surface</item>
+        <item name="android:paddingEnd">@dimen/block_offset</item>
+        <item name="android:paddingBottom">@dimen/block_offset</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:minHeight">@dimen/touch_target_min</item>
     </style>
 
-    <!-- Channel tile: square, holds a logo on a light plate. -->
-    <style name="Widget.Nashat.Card.Channel" parent="Widget.Nashat.Card.Media">
-        <item name="cardCornerRadius">@dimen/radius_md</item>
-        <item name="cardBackgroundColor">@color/surface_raised</item>
+    <!-- The one loud control on a screen. -->
+    <style name="Widget.Nashat.Block.Accent">
+        <item name="android:background">@drawable/sel_block_accent</item>
     </style>
 
-    <!-- Settings / list group container. -->
-    <style name="Widget.Nashat.Card.Group" parent="Widget.Nashat.Card">
-        <item name="cardCornerRadius">@dimen/radius_lg</item>
+    <!-- ══════════════════════════════════════════════════════════════
+         GLASS — floating layers
+
+         Backgrounds only. The blur itself is applied at runtime by
+         GlassView (chrome inside the activity window) or GlassWindow
+         (sheets and dialogs, which get it from the compositor for free).
+         Both degrade to the translucent fill declared here, so a device
+         that cannot blur still gets a finished design.
+         ══════════════════════════════════════════════════════════════ -->
+
+    <style name="Widget.Nashat.Glass" parent="">
+        <item name="android:background">@drawable/bg_glass_panel</item>
+    </style>
+
+    <style name="Widget.Nashat.Glass.Top">
+        <item name="android:background">@drawable/bg_glass_panel_top</item>
     </style>
 
     <style name="Widget.Nashat.BottomSheet" parent="Widget.Material3.BottomSheet.Modal">
-        <item name="backgroundTint">@color/surface_raised</item>
-        <item name="shapeAppearance">@style/ShapeAppearance.Nashat.Large</item>
+        <item name="android:background">@drawable/bg_glass_sheet</item>
+        <item name="backgroundTint">@null</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Nashat.Square</item>
         <item name="behavior_peekHeight">auto</item>
     </style>
 
@@ -79,9 +140,15 @@
          BUTTONS
          ══════════════════════════════════════════════════════════════ -->
 
-    <!-- Primary. Lime fill with ink text — the app's one loud control.
+    <!-- Primary. Lime fill, ink text, ink edge — the app's one loud control.
          At most one per screen region; a screen with three lime buttons has
-         no primary action. -->
+         no primary action.
+
+         The edge is what changed. A filled Material button carries no
+         outline because its fill is supposed to define its shape, but a lime
+         rectangle on a beige page has a weak boundary in light mode, and the
+         2dp ink frame gives every control the same silhouette whether it is
+         filled, outlined or empty. -->
     <style name="Widget.Nashat.Button" parent="Widget.Material3.Button">
         <item name="android:textAppearance">@style/TextAppearance.Nashat.Label.Large</item>
         <item name="android:textColor">@color/on_accent_fill</item>
@@ -89,7 +156,9 @@
         <item name="iconTint">@color/on_accent_fill</item>
         <item name="iconSize">@dimen/icon_size_md</item>
         <item name="iconPadding">@dimen/space_200</item>
-        <item name="cornerRadius">@dimen/radius_pill</item>
+        <item name="strokeColor">@color/edge</item>
+        <item name="strokeWidth">@dimen/edge_width</item>
+        <item name="cornerRadius">@dimen/radius_none</item>
         <item name="android:minHeight">@dimen/touch_target_min</item>
         <item name="android:paddingStart">@dimen/space_600</item>
         <item name="android:paddingEnd">@dimen/space_600</item>
@@ -97,40 +166,52 @@
         <item name="rippleColor">@color/sel_ripple_on_accent</item>
     </style>
 
-    <!-- Secondary. Outlined; carries the "add to list" / "more info" role
-         beside a primary Play button. -->
+    <!-- Secondary. Same frame, no fill; carries the "add to list" /
+         "more info" role beside a primary Play button.
+
+         Tonal has been folded into this. A tonal button is a filled button
+         at low contrast, which is a distinction that only exists in a system
+         built on elevation and tint — here it was a third grey rectangle
+         users could not tell apart from the other two. -->
     <style name="Widget.Nashat.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
         <item name="android:textAppearance">@style/TextAppearance.Nashat.Label.Large</item>
         <item name="android:textColor">@color/sel_content_on_surface</item>
         <item name="iconTint">@color/sel_content_on_surface</item>
         <item name="iconSize">@dimen/icon_size_md</item>
         <item name="iconPadding">@dimen/space_200</item>
-        <item name="strokeColor">@color/sel_border_interactive</item>
-        <item name="strokeWidth">@dimen/stroke_hairline</item>
-        <item name="cornerRadius">@dimen/radius_pill</item>
+        <item name="strokeColor">@color/edge</item>
+        <item name="strokeWidth">@dimen/edge_width</item>
+        <item name="cornerRadius">@dimen/radius_none</item>
         <item name="android:minHeight">@dimen/touch_target_min</item>
         <item name="android:paddingStart">@dimen/space_600</item>
         <item name="android:paddingEnd">@dimen/space_600</item>
         <item name="rippleColor">@color/accent_wash</item>
     </style>
 
-    <!-- Tonal. Quiet filled button for in-card actions. -->
-    <style name="Widget.Nashat.Button.Tonal" parent="Widget.Material3.Button.TonalButton">
-        <item name="android:textAppearance">@style/TextAppearance.Nashat.Label.Large</item>
-        <item name="android:textColor">@color/content_primary</item>
-        <item name="backgroundTint">@color/surface_input</item>
-        <item name="iconTint">@color/content_primary</item>
-        <item name="cornerRadius">@dimen/radius_pill</item>
-        <item name="android:minHeight">@dimen/touch_target_min</item>
-        <item name="rippleColor">@color/accent_wash</item>
+    <!-- Icon-only outlined button — the favourite and watchlist actions
+         beside Play, the season chevron.
+
+         It exists because Widget.Nashat.Button.Outlined carries 24dp of
+         horizontal padding for its label, and a button with no label but the
+         same padding comes out 72dp wide to hold a 24dp glyph. Same frame,
+         same height, padding sized for a square. -->
+    <style name="Widget.Nashat.Button.Outlined.Icon">
+        <item name="android:paddingStart">@dimen/space_300</item>
+        <item name="android:paddingEnd">@dimen/space_300</item>
+        <item name="android:minWidth">@dimen/touch_target_min</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="iconPadding">0dp</item>
+        <item name="iconGravity">textStart</item>
     </style>
 
-    <!-- Text. Dialog actions, "See all". -->
+    <!-- Text. Dialog actions, "See all". The only control with no frame,
+         which is exactly what makes it read as the quiet one. -->
     <style name="Widget.Nashat.Button.Text" parent="Widget.Material3.Button.TextButton">
         <item name="android:textAppearance">@style/TextAppearance.Nashat.Label.Large</item>
         <item name="android:textColor">@color/accent_text</item>
         <item name="iconTint">@color/accent_text</item>
-        <item name="cornerRadius">@dimen/radius_pill</item>
+        <item name="cornerRadius">@dimen/radius_none</item>
         <item name="android:minHeight">@dimen/touch_target_min</item>
         <item name="rippleColor">@color/accent_wash</item>
     </style>
@@ -150,29 +231,37 @@
         <item name="iconSize">@dimen/icon_size_md</item>
         <item name="iconGravity">textStart</item>
         <item name="iconPadding">0dp</item>
-        <item name="cornerRadius">@dimen/radius_pill</item>
+        <item name="cornerRadius">@dimen/radius_none</item>
         <item name="rippleColor">@color/accent_wash</item>
     </style>
 
     <!-- Icon button placed on top of video or artwork, where the themed
-         content colour would be invisible. -->
+         content colour would be invisible. Fixed white edge for the same
+         reason the tint is fixed white: video has no light or dark mode. -->
     <style name="Widget.Nashat.Button.Icon.OnMedia" parent="Widget.Nashat.Button.Icon">
         <item name="iconTint">@android:color/white</item>
         <item name="backgroundTint">@color/scrim_soft</item>
+        <item name="strokeColor">@android:color/white</item>
+        <item name="strokeWidth">@dimen/edge_width</item>
         <item name="rippleColor">#33FFFFFF</item>
     </style>
 
 
     <!-- ══════════════════════════════════════════════════════════════
          CHIPS  (category filters)
+
+         Square. A pill-shaped chip is the single most recognisable Material
+         shape in the app, and leaving it rounded while everything around it
+         went square would have made the filter row look like a widget
+         borrowed from another product.
          ══════════════════════════════════════════════════════════════ -->
     <style name="Widget.Nashat.Chip" parent="Widget.Material3.Chip.Filter">
         <item name="android:textAppearance">@style/TextAppearance.Nashat.Label.Medium</item>
         <item name="android:textColor">@color/sel_chip_text</item>
         <item name="chipBackgroundColor">@color/sel_chip_background</item>
         <item name="chipStrokeColor">@color/sel_chip_stroke</item>
-        <item name="chipStrokeWidth">@dimen/stroke_hairline</item>
-        <item name="chipCornerRadius">@dimen/radius_pill</item>
+        <item name="chipStrokeWidth">@dimen/edge_width</item>
+        <item name="chipCornerRadius">@dimen/radius_none</item>
         <item name="chipMinHeight">@dimen/chip_height</item>
         <item name="chipMinTouchTargetSize">@dimen/touch_target_min</item>
         <item name="ensureMinTouchTargetSize">true</item>
@@ -189,27 +278,19 @@
     <!-- ══════════════════════════════════════════════════════════════
          NAVIGATION
          ══════════════════════════════════════════════════════════════ -->
-    <style name="Widget.Nashat.BottomNav" parent="Widget.Material3.BottomNavigationView">
-        <item name="android:background">@color/surface_base</item>
-        <item name="itemIconTint">@color/sel_nav_item</item>
-        <item name="itemTextColor">@color/sel_nav_item</item>
-        <item name="itemActiveIndicatorStyle">@style/Widget.Nashat.BottomNav.Indicator</item>
-        <item name="itemTextAppearanceActive">@style/TextAppearance.Nashat.Label.Medium</item>
-        <item name="itemTextAppearanceInactive">@style/TextAppearance.Nashat.Label.Medium</item>
-        <item name="itemIconSize">@dimen/bottom_nav_icon_size</item>
-        <item name="labelVisibilityMode">labeled</item>
-        <item name="elevation">0dp</item>
-    </style>
+    <!--
+        There is no BottomNavigationView style here any more.
 
-    <!-- The lime pill behind the selected tab's icon. This is the only
-         place in the chrome where the brand colour appears at full
-         strength, which is what makes "where am I" instant. -->
-    <style name="Widget.Nashat.BottomNav.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:color">@color/accent_fill</item>
-        <item name="android:width">64dp</item>
-        <item name="android:height">32dp</item>
-        <item name="shapeAppearance">@style/ShapeAppearance.Nashat.Pill</item>
-    </style>
+        The app does not contain a single BottomNavigationView — its bar is
+        the hand-built view_bottom_nav, and always has been. The two styles
+        that used to sit here (Widget.Nashat.BottomNav and its ActiveIndicator)
+        together with the bottomNavigationStyle line in the theme and the
+        sel_nav_item colour selector were a complete, carefully-tuned
+        specification for a widget that is never inflated.
+
+        The bar's own appearance lives in bg_glass_panel (the glass layer) and
+        bg_nav_item (the active lime block).
+    -->
 
     <style name="Widget.Nashat.Toolbar" parent="Widget.Material3.Toolbar">
         <item name="android:background">@android:color/transparent</item>
@@ -237,13 +318,13 @@
          INPUTS
          ══════════════════════════════════════════════════════════════ -->
     <style name="Widget.Nashat.TextInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
-        <item name="boxCornerRadiusTopStart">@dimen/radius_sm</item>
-        <item name="boxCornerRadiusTopEnd">@dimen/radius_sm</item>
-        <item name="boxCornerRadiusBottomStart">@dimen/radius_sm</item>
-        <item name="boxCornerRadiusBottomEnd">@dimen/radius_sm</item>
+        <item name="boxCornerRadiusTopStart">@dimen/radius_none</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_none</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_none</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_none</item>
         <item name="boxStrokeColor">@color/sel_border_interactive</item>
-        <item name="boxStrokeWidth">@dimen/stroke_hairline</item>
-        <item name="boxStrokeWidthFocused">@dimen/stroke_emphasis</item>
+        <item name="boxStrokeWidth">@dimen/edge_width</item>
+        <item name="boxStrokeWidthFocused">@dimen/edge_width_focus</item>
         <item name="hintTextColor">@color/content_secondary</item>
         <item name="android:textColorHint">@color/content_tertiary</item>
     </style>
@@ -281,7 +362,7 @@
          feedback channel, including for destructive actions. -->
     <style name="Widget.Nashat.Snackbar" parent="Widget.Material3.Snackbar">
         <item name="backgroundTint">@color/surface_inverse</item>
-        <item name="shapeAppearance">@style/ShapeAppearance.Nashat.Small</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Nashat.Square</item>
         <item name="animationMode">slide</item>
     </style>
 
@@ -299,7 +380,7 @@
         <item name="indicatorColor">@color/accent_fill</item>
         <item name="trackColor">@color/surface_input</item>
         <item name="trackThickness">@dimen/progress_track_height</item>
-        <item name="trackCornerRadius">@dimen/progress_track_height</item>
+        <item name="trackCornerRadius">@dimen/radius_none</item>
     </style>
 
     <style name="Widget.Nashat.Progress.Circular" parent="Widget.Material3.CircularProgressIndicator">
@@ -357,6 +438,18 @@
          COMPATIBILITY ALIASES
          Names the pre-redesign layouts still reference.
          ══════════════════════════════════════════════════════════════ -->
+
+    <!-- Card variants collapsed into the two real ones. Poster, Channel and
+         Group differed only in corner radius; with one radius in the system
+         there is nothing left for them to differ in. -->
+    <style name="Widget.Nashat.Card.Poster" parent="Widget.Nashat.Card.Media" />
+    <style name="Widget.Nashat.Card.Channel" parent="Widget.Nashat.Card.Media" />
+    <style name="Widget.Nashat.Card.Group" parent="Widget.Nashat.Card" />
+
+    <!-- Tonal folded into Outlined: it was a filled button at low contrast,
+         which is a distinction that only reads in an elevation-based system. -->
+    <style name="Widget.Nashat.Button.Tonal" parent="Widget.Nashat.Button.Outlined" />
+
     <style name="Widget.NashatTV.Card" parent="Widget.Nashat.Card" />
     <style name="Widget.NashatTV.Card.Nashat" parent="Widget.Nashat.Card.Media" />
     <style name="Widget.NashatTV.Toolbar" parent="Widget.Nashat.Toolbar" />
@@ -380,5 +473,19 @@
     <style name="Animation" />
     <style name="Animation.App.CardEnter" parent="Animation" />
     <style name="Animation.App.RecyclerView" parent="Animation" />
+
+    <!--
+        Heading above a group of controls in the filter sheet. Small, uppercase
+        and quiet: it labels the group without competing with the values the
+        user is actually reading.
+    -->
+    <style name="FilterSectionLabel" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/space_400</item>
+        <item name="android:layout_marginBottom">@dimen/space_200</item>
+        <item name="android:textAppearance">@style/TextAppearance.Nashat.Label.Medium</item>
+        <item name="android:textColor">@color/content_secondary</item>
+    </style>
 
 </resources>

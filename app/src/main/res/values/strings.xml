@@ -302,6 +302,11 @@
     <string name="player_subtitles_off">Off</string>
     <string name="player_audio_track">Audio</string>
     <string name="player_speed">Speed</string>
+    <!-- Shown in the gesture HUD on a double tap. The sign carries the
+         direction, so these read correctly in an RTL layout without a
+         mirrored arrow. -->
+    <string name="player_seek_forward">+%1$d s</string>
+    <string name="player_seek_back">−%1$d s</string>
     <string name="player_speed_value">%1$sx</string>
     <string name="player_mute">Mute</string>
     <string name="player_unmute">Unmute</string>
@@ -702,5 +707,72 @@
     <string name="player_next_episode">Next episode</string>
     <!-- %1$d season, %2$d episode -->
     <string name="player_season_episode">Season %1$d · Episode %2$d</string>
+
+    <!-- ══════════════════════════════════════════════════════════
+         PERSONAL ROWS
+         ══════════════════════════════════════════════════════════ -->
+
+    <string name="row_continue">Continue watching</string>
+    <string name="row_favorites">Your favourites</string>
+    <string name="row_watchlist">Your watchlist</string>
+    <string name="continue_remove">Remove from Continue watching</string>
+
+    <!-- ══════════════════════════════════════════════════════════
+         SEARCH HISTORY
+         ══════════════════════════════════════════════════════════ -->
+
+    <string name="search_clear_all">Clear all</string>
+
+    <!-- ══════════════════════════════════════════════════════════
+         FILTER & SORT
+         ══════════════════════════════════════════════════════════ -->
+
+    <string name="filter_title">Filter</string>
+    <!-- %1$d is how many filters are active -->
+    <string name="filter_title_count">Filter (%1$d)</string>
+    <string name="filter_sort_by">Sort by</string>
+    <string name="filter_min_rating">Minimum rating</string>
+    <string name="filter_years">Years</string>
+    <string name="filter_any">Any</string>
+    <!-- %1$.1f is a rating out of 10 -->
+    <string name="filter_rating_value">%1$.1f and up</string>
+    <!-- %1$d first year, %2$d last year -->
+    <string name="filter_year_range">%1$d – %2$d</string>
+    <string name="filter_no_results_title">Nothing matches those filters</string>
+    <string name="filter_no_results_body">Try widening the years or lowering the rating.</string>
+
+    <string name="sort_popular">Most popular</string>
+    <string name="sort_newest">Newest first</string>
+    <string name="sort_revenue">Biggest earners</string>
+    <string name="sort_title">A – Z</string>
+
+    <!-- ══════════════════════════════════════════════════════════
+         PLAYER CONTROLS
+         ══════════════════════════════════════════════════════════ -->
+
+    <!-- %1$s is a multiplier such as 1.5 -->
+    <string name="player_speed_normal">Normal</string>
+    <string name="player_lock">Lock controls</string>
+    <string name="player_unlock">Unlock controls</string>
+    <string name="player_locked_hint">Controls locked. Tap the padlock to unlock.</string>
+    <string name="player_sleep_timer">Sleep timer</string>
+    <string name="player_sleep_off">Off</string>
+    <!-- %1$d is a number of minutes -->
+    <string name="player_sleep_minutes">%1$d minutes</string>
+    <string name="player_sleep_end">End of this episode</string>
+    <string name="player_sleep_set">Playback will stop in %1$d minutes.</string>
+    <string name="player_sleep_cancelled">Sleep timer cancelled.</string>
+    <string name="player_episodes">Episodes</string>
+    <string name="player_resume_title">Resume where you stopped?</string>
+    <!-- %1$s is a timestamp such as 24:15 -->
+    <string name="player_resume_body">You stopped at %1$s.</string>
+    <string name="player_resume">Resume</string>
+    <string name="player_start_over">Start over</string>
+    <string name="player_autoplay_next">Next episode starting…</string>
+    <string name="player_brightness">Brightness</string>
+    <string name="player_volume">Volume</string>
+
+    <!-- %1$d is a percentage, shown on the brightness / volume readout -->
+    <string name="percent_value">%1$d%%</string>
 
 </resources>

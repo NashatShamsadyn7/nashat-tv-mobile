@@ -41,6 +41,20 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterAdapter.Holder> {
         notifyDataSetChanged();
     }
 
+    /**
+     * Adds a further page.
+     *
+     * <p>Notifies only the inserted range. A full refresh would rebind every
+     * card already on screen and visibly reset the user's scroll position on
+     * each page — the classic infinite-scroll jump.
+     */
+    public void append(List<Title> more) {
+        if (more == null || more.isEmpty()) return;
+        int start = items.size();
+        items.addAll(more);
+        notifyItemRangeInserted(start, more.size());
+    }
+
     public boolean isEmpty() {
         return items.isEmpty();
     }
@@ -77,8 +91,11 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterAdapter.Holder> {
             h.ratingChip.setVisibility(View.GONE);
         }
 
+        String art = t.posterUrlOverride != null && !t.posterUrlOverride.isEmpty()
+                ? t.posterUrlOverride
+                : Tmdb.poster(t.posterPath);
         Glide.with(h.poster.getContext())
-                .load(Tmdb.poster(t.posterPath))
+                .load(art)
                 .placeholder(R.color.surface_sunken)
                 .centerCrop()
                 .into(h.poster);

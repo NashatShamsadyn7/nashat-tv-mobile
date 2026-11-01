@@ -25,7 +25,7 @@
         android:layout_marginStart="12dp"
         android:text="Search query"
         android:textColor="@color/text_primary"
-        android:textSize="15sp"
+        android:textSize="@dimen/type_size_title_small"
         android:ellipsize="end"
         android:maxLines="1" />
 

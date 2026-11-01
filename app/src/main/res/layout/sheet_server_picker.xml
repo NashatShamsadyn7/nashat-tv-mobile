@@ -10,7 +10,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/surface_raised"
+    android:background="@drawable/bg_glass_sheet"
     android:paddingBottom="@dimen/space_400">
 
     <LinearLayout
@@ -19,15 +19,17 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/sheetTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/space_400"
             android:paddingTop="@dimen/space_400"
             android:text="@string/player_choose_source"
-            android:textAppearance="@style/TextAppearance.Nashat.Title.Medium"
+            android:textAppearance="@style/TextAppearance.Nashat.Headline"
             android:textColor="@color/content_primary" />
 
         <TextView
+            android:id="@+id/sheetHint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/space_400"
@@ -36,6 +38,13 @@
             android:text="@string/player_choose_source_hint"
             android:textAppearance="@style/TextAppearance.Nashat.Body.Small"
             android:textColor="@color/content_tertiary" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edge_width"
+            android:layout_marginHorizontal="@dimen/space_400"
+            android:layout_marginBottom="@dimen/space_200"
+            android:background="@color/edge" />
 
         <LinearLayout
             android:id="@+id/serverList"

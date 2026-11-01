@@ -43,7 +43,7 @@
             android:paddingBottom="8dp"
             android:text="@string/splash_loading_text"
             android:textColor="@color/text_primary"
-            android:textSize="13sp"
+            android:textSize="@dimen/type_size_body_small"
             android:textStyle="bold" />
     </LinearLayout>
 

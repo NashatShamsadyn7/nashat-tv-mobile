@@ -10,14 +10,14 @@
         android:layout_height="wrap_content"
         android:text="@string/m3u_url_prompt"
         android:textColor="@color/home_text_secondary"
-        android:textSize="14sp"
+        android:textSize="@dimen/type_size_body_medium"
         android:layout_marginBottom="12dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="https://example.com/playlist.m3u"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+        style="@style/Widget.Nashat.TextInput">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editCustomUrl"

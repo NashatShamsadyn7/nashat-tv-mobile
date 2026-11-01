@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    One tab in the bottom navigation.
+
+    view_bottom_nav.xml used to spell all four tabs out longhand: 120 lines
+    of the same fourteen, and eight ids (navLiveIcon, navMoviesLabel …) that
+    BottomNav.java had to name individually. Adding a fifth destination meant
+    editing a layout, adding two ids, and adding two lines to each of three
+    methods.
+
+    Now the bar declares an empty container and BottomNav inflates this file
+    once per destination. The tab list is a single array in one Java file, and
+    the ids below are looked up against the inflated item rather than against
+    the Activity — so four copies of this view coexisting with the same ids is
+    correct, not a collision.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/navItem"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center"
+    android:minHeight="@dimen/touch_target_min"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/space_100">
+
+    <ImageView
+        android:id="@+id/navItemIcon"
+        android:layout_width="@dimen/bottom_nav_icon_size"
+        android:layout_height="@dimen/bottom_nav_icon_size"
+        android:importantForAccessibility="no" />
+
+    <TextView
+        android:id="@+id/navItemLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_100"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.Nashat.Label.Medium" />
+
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Fallback sheet surface for devices that will not blur (API < 31, low-RAM
+  hardware, battery saver, or the "disable window blurs" developer option).
+
+  Identical geometry to bg_glass_sheet — same 2dp rule, same square corners —
+  with the translucency taken out. The difference between the two is one
+  property, so a device that cannot blur gets a solid version of the same
+  design rather than a visibly different one.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/edge" />
+        </shape>
+    </item>
+
+    <item android:top="@dimen/edge_width">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/glass_fill_opaque" />
+        </shape>
+    </item>
+
+</layer-list>

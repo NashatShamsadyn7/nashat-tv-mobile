@@ -48,7 +48,7 @@
                     android:layout_marginStart="8dp"
                     android:text="Nashat TV"
                     android:textColor="@color/accent_primary"
-                    android:textSize="22sp"
+                    android:textSize="@dimen/type_size_headline"
                     android:textStyle="bold"
                     android:letterSpacing="0.02" />
             </LinearLayout>
@@ -65,7 +65,7 @@
                 android:paddingBottom="4dp"
                 android:text="0"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="@dimen/type_size_label_medium"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -77,12 +77,11 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="12dp"
-            app:cardBackgroundColor="@color/transparent"
-            android:background="@drawable/bg_glass_card"
-            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="@color/surface_raised"
+            app:cardCornerRadius="@dimen/radius_none"
             app:cardElevation="0dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/border_subtle">
+            app:strokeWidth="@dimen/edge_width"
+            app:strokeColor="@color/edge">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -113,11 +112,11 @@
                     android:paddingEnd="12dp"
                     android:textColor="@color/text_primary"
                     android:textColorHint="@color/text_tertiary"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/type_size_body_medium" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnVoiceSearch"
-                    style="@style/Widget.Material3.Button.IconButton"
+                    style="@style/Widget.Nashat.Button.Icon"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:backgroundTint="@color/accent_purple"
@@ -126,7 +125,7 @@
                     android:insetTop="0dp"
                     android:insetRight="0dp"
                     android:insetBottom="0dp"
-                    app:cornerRadius="12dp"
+                    app:cornerRadius="@dimen/radius_none"
                     app:icon="@drawable/ic_mic_24"
                     app:iconGravity="textStart"
                     app:iconPadding="0dp"
@@ -163,7 +162,7 @@
                 android:maxLines="1"
                 android:text="Continue: Title"
                 android:textColor="@color/white"
-                android:textSize="14sp"
+                android:textSize="@dimen/type_size_body_medium"
                 android:textStyle="bold" />
                 
             <ImageView
@@ -187,7 +186,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/recommended_for_you"
                 android:textColor="@color/text_primary"
-                android:textSize="16sp"
+                android:textSize="@dimen/type_size_body_large"
                 android:textStyle="bold"
                 android:paddingStart="20dp"
                 android:paddingBottom="8dp"/>
@@ -228,7 +227,7 @@
                     android:paddingEnd="18dp"
                     android:text="All"
                     android:textColor="@color/white"
-                    android:textSize="13sp"
+                    android:textSize="@dimen/type_size_body_small"
                     android:textStyle="bold" />
 
                 <TextView
@@ -242,7 +241,7 @@
                     android:paddingEnd="18dp"
                     android:text="📰 News"
                     android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/type_size_body_small" />
 
                 <TextView
                     android:id="@+id/chipEntertainment"
@@ -255,7 +254,7 @@
                     android:paddingEnd="18dp"
                     android:text="🎭 Entertainment"
                     android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/type_size_body_small" />
 
                 <TextView
                     android:id="@+id/chipSports"
@@ -268,7 +267,7 @@
                     android:paddingEnd="18dp"
                     android:text="⚽ Sports"
                     android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/type_size_body_small" />
 
                 <TextView
                     android:id="@+id/chipKids"
@@ -281,7 +280,7 @@
                     android:paddingEnd="18dp"
                     android:text="👶 Kids"
                     android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/type_size_body_small" />
 
                 <TextView
                     android:id="@+id/chipMusic"
@@ -293,7 +292,7 @@
                     android:paddingEnd="18dp"
                     android:text="🎵 Music"
                     android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/type_size_body_small" />
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>
@@ -313,7 +312,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnViewMode"
-            style="@style/Widget.Material3.Button.IconButton"
+            style="@style/Widget.Nashat.Button.Icon"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:backgroundTint="@color/bg_card"
@@ -321,14 +320,14 @@
             android:insetTop="0dp"
             android:insetRight="0dp"
             android:insetBottom="0dp"
-            app:cornerRadius="10dp"
+            app:cornerRadius="@dimen/radius_none"
             app:icon="@drawable/ic_grid_view_24"
             app:iconGravity="textStart"
             app:iconPadding="0dp"
             app:iconSize="18dp"
             app:iconTint="@color/text_secondary"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/border_subtle" />
+            app:strokeWidth="@dimen/edge_width"
+            app:strokeColor="@color/edge" />
 
         <View
             android:layout_width="0dp"
@@ -341,7 +340,7 @@
             android:layout_height="wrap_content"
             android:text="@string/label_favorites_only"
             android:textColor="@color/text_secondary"
-            android:textSize="12sp"
+            android:textSize="@dimen/type_size_label_medium"
             app:thumbTint="@color/accent_purple"
             app:trackTint="@color/border_subtle" />
     </LinearLayout>
@@ -377,7 +376,7 @@
                 android:layout_height="wrap_content"
                 android:text="Live TV"
                 android:textColor="@color/accent_primary"
-                android:textSize="10sp"
+                android:textSize="@dimen/type_size_label_small"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -404,7 +403,7 @@
                 android:layout_height="wrap_content"
                 android:text="Movies"
                 android:textColor="@color/text_tertiary"
-                android:textSize="10sp" />
+                android:textSize="@dimen/type_size_label_small" />
         </LinearLayout>
 
         <!-- Series -->
@@ -430,7 +429,7 @@
                 android:layout_height="wrap_content"
                 android:text="Series"
                 android:textColor="@color/text_tertiary"
-                android:textSize="10sp" />
+                android:textSize="@dimen/type_size_label_small" />
         </LinearLayout>
 
         <!-- Favorites -->
@@ -456,7 +455,7 @@
                 android:layout_height="wrap_content"
                 android:text="Favorites"
                 android:textColor="@color/text_tertiary"
-                android:textSize="10sp" />
+                android:textSize="@dimen/type_size_label_small" />
         </LinearLayout>
 
         <!-- Settings -->
@@ -482,7 +481,7 @@
                 android:layout_height="wrap_content"
                 android:text="Settings"
                 android:textColor="@color/text_tertiary"
-                android:textSize="10sp" />
+                android:textSize="@dimen/type_size_label_small" />
         </LinearLayout>
     </LinearLayout>
 

@@ -34,7 +34,9 @@ import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.Player;
+import com.google.android.exoplayer2.source.DefaultMediaSourceFactory;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
 import com.google.android.exoplayer2.trackselection.MappingTrackSelector;
 import com.google.android.exoplayer2.util.Util;
 import com.google.android.exoplayer2.util.MimeTypes;
@@ -92,6 +94,13 @@ public class PlayerActivity extends BaseActivity {
     private DefaultTrackSelector trackSelector;
     private AudioManager audioManager;
     private Handler handler;
+
+    /**
+     * Kept as a field so the Referer can be set for whichever URL is about to
+     * play. The headers must be in place before {@code prepare()}, because that
+     * is when the factory hands out the data source that fetches the manifest.
+     */
+    private DefaultHttpDataSource.Factory httpDataSourceFactory;
 
     private String channelName;
     private String channelUrl;
@@ -611,9 +620,19 @@ public class PlayerActivity extends BaseActivity {
                         .setBufferDurationsMs(minBufMs, maxBufMs, playbackBufMs, rebufMs)
                         .build();
 
+        // Channels such as KurdMax are served only to a request carrying the
+        // broadcaster's own Referer; ExoPlayer's default data source sends
+        // none and gets a 403 instead of a manifest. See StreamHeaders.
+        httpDataSourceFactory = new DefaultHttpDataSource.Factory()
+                .setUserAgent(com.nashat.tv.util.StreamHeaders.USER_AGENT)
+                .setAllowCrossProtocolRedirects(true)
+                .setConnectTimeoutMs(15000)
+                .setReadTimeoutMs(15000);
+
         player = new ExoPlayer.Builder(this)
                 .setTrackSelector(trackSelector)
                 .setLoadControl(loadControl)
+                .setMediaSourceFactory(new DefaultMediaSourceFactory(httpDataSourceFactory))
                 .build();
 
         playerView.setPlayer(player);
@@ -667,6 +686,7 @@ public class PlayerActivity extends BaseActivity {
                     @Override
                     public void onStreamFound(String streamUrl) {
                         Log.d("PlayerActivity", "Resolved stream URL: " + streamUrl);
+                        applyStreamHeaders(streamUrl);
                         MediaItem mediaItem = MediaItem.fromUri(Uri.parse(streamUrl));
                         player.setMediaItem(mediaItem);
                         player.prepare();
@@ -682,6 +702,7 @@ public class PlayerActivity extends BaseActivity {
                     }
                 });
             } else {
+                applyStreamHeaders(channelUrl);
                 MediaItem mediaItem = MediaItem.fromUri(Uri.parse(channelUrl));
                 player.setMediaItem(mediaItem);
                 player.prepare();
@@ -691,6 +712,17 @@ public class PlayerActivity extends BaseActivity {
                 }
             }
         }
+    }
+
+    /**
+     * Puts the Referer the given host insists on onto every request the player
+     * is about to make. A host that needs none clears the properties, so a
+     * previous channel's Referer is never carried over to an unrelated CDN.
+     */
+    private void applyStreamHeaders(String url) {
+        if (httpDataSourceFactory == null) return;
+        httpDataSourceFactory.setDefaultRequestProperties(
+                com.nashat.tv.util.StreamHeaders.forUrl(url));
     }
 
     private void releasePlayer() {

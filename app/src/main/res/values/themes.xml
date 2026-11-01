@@ -82,10 +82,17 @@
         <item name="textAppearanceLabelSmall">@style/TextAppearance.Nashat.Label.Small</item>
 
         <!-- ── Shape ────────────────────────────────────────────────
-             Three shape roles, matching radius_sm / md / xl. -->
-        <item name="shapeAppearanceCornerSmall">@style/ShapeAppearance.Nashat.Small</item>
-        <item name="shapeAppearanceCornerMedium">@style/ShapeAppearance.Nashat.Medium</item>
-        <item name="shapeAppearanceCornerLarge">@style/ShapeAppearance.Nashat.Large</item>
+             All three Material size roles resolve to the same square. Any
+             stock widget the app has not restyled — a date picker, a menu,
+             a tooltip — comes out square too, which is the only way a
+             single rounded corner does not survive somewhere unnoticed. -->
+        <item name="shapeAppearanceCornerExtraSmall">@style/ShapeAppearance.Nashat.Square</item>
+        <item name="shapeAppearanceCornerSmall">@style/ShapeAppearance.Nashat.Square</item>
+        <item name="shapeAppearanceCornerMedium">@style/ShapeAppearance.Nashat.Square</item>
+        <item name="shapeAppearanceCornerLarge">@style/ShapeAppearance.Nashat.Square</item>
+        <!-- ExtraLarge is the one dialogs and sheets resolve. Omitting it was
+             how a fully square app kept two 28dp-rounded surfaces. -->
+        <item name="shapeAppearanceCornerExtraLarge">@style/ShapeAppearance.Nashat.Square</item>
 
         <!-- ── Component defaults ───────────────────────────────────
              Set once here so a layout that drops in a plain MaterialButton
@@ -96,9 +103,16 @@
         <item name="chipStyle">@style/Widget.Nashat.Chip</item>
         <item name="toolbarStyle">@style/Widget.Nashat.Toolbar</item>
         <item name="textInputStyle">@style/Widget.Nashat.TextInput</item>
-        <item name="bottomNavigationStyle">@style/Widget.Nashat.BottomNav</item>
         <item name="tabStyle">@style/Widget.Nashat.TabLayout</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.Nashat.Dialog</item>
+        <!-- The app builds most of its dialogs with androidx.appcompat's
+             AlertDialog.Builder, not MaterialAlertDialogBuilder — around a
+             dozen call sites across Settings, Player and Main. Those resolve
+             alertDialogTheme, not materialAlertDialogTheme, so without this
+             line every one of them rendered in stock AppCompat styling: the
+             one family of surfaces in the app that the design system did not
+             reach. -->
+        <item name="alertDialogTheme">@style/ThemeOverlay.Nashat.Dialog.AppCompat</item>
         <item name="bottomSheetDialogTheme">@style/ThemeOverlay.Nashat.BottomSheet</item>
         <item name="snackbarStyle">@style/Widget.Nashat.Snackbar</item>
         <item name="snackbarTextViewStyle">@style/Widget.Nashat.Snackbar.Text</item>
@@ -192,6 +206,20 @@
         <item name="android:textAppearance">@style/TextAppearance.Nashat.Body.Medium</item>
     </style>
 
+    <!-- For androidx.appcompat's AlertDialog.Builder. Deliberately NOT the
+         same overlay as the Material one above: MaterialAlertDialog styles
+         assume MaterialAlertDialogBuilder's own view inflation, and handing
+         them to AppCompat's AlertController is how you get a dialog with no
+         title or a crash at show() time. This parent is Material's supported
+         bridge for exactly this case. -->
+    <style name="ThemeOverlay.Nashat.Dialog.AppCompat" parent="ThemeOverlay.Material3.Dialog.Alert">
+        <item name="colorSurface">@color/surface_raised</item>
+        <item name="colorOnSurface">@color/content_primary</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.Nashat.Button.Text</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.Nashat.Button.Text</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.Nashat.Button.Text</item>
+    </style>
+
     <style name="ThemeOverlay.Nashat.BottomSheet" parent="ThemeOverlay.Material3.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/Widget.Nashat.BottomSheet</item>
         <item name="android:windowIsFloating">false</item>
@@ -201,31 +229,23 @@
 
     <!-- ══════════════════════════════════════════════════════════════
          SHAPE ROLES
+
+         There is one shape. Small / Medium / Large / Pill / Circle are all
+         aliases of it, kept so that no style or layout has to be edited to
+         stop being rounded — including Circle, because a circular avatar
+         beside square everything else is the one exception that would make
+         the rule look accidental.
          ══════════════════════════════════════════════════════════════ -->
-    <style name="ShapeAppearance.Nashat.Small" parent="ShapeAppearance.Material3.Corner.Small">
+    <style name="ShapeAppearance.Nashat.Square" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/radius_sm</item>
+        <item name="cornerSize">@dimen/radius_none</item>
     </style>
 
-    <style name="ShapeAppearance.Nashat.Medium" parent="ShapeAppearance.Material3.Corner.Medium">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/radius_md</item>
-    </style>
-
-    <style name="ShapeAppearance.Nashat.Large" parent="ShapeAppearance.Material3.Corner.Large">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/radius_xl</item>
-    </style>
-
-    <style name="ShapeAppearance.Nashat.Pill" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
-    </style>
-
-    <style name="ShapeAppearance.Nashat.Circle" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
-    </style>
+    <style name="ShapeAppearance.Nashat.Small" parent="ShapeAppearance.Nashat.Square" />
+    <style name="ShapeAppearance.Nashat.Medium" parent="ShapeAppearance.Nashat.Square" />
+    <style name="ShapeAppearance.Nashat.Large" parent="ShapeAppearance.Nashat.Square" />
+    <style name="ShapeAppearance.Nashat.Pill" parent="ShapeAppearance.Nashat.Square" />
+    <style name="ShapeAppearance.Nashat.Circle" parent="ShapeAppearance.Nashat.Square" />
 
 
     <!-- ══════════════════════════════════════════════════════════════

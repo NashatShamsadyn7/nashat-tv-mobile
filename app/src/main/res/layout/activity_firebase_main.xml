@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="Live TV"
-                android:textSize="24sp"
+                android:textSize="@dimen/type_size_headline"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
                 android:letterSpacing="0.02" />
@@ -99,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/no_channels"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/type_size_body_large"
                     android:textColor="#666666"
                     android:gravity="center" />
             </LinearLayout>

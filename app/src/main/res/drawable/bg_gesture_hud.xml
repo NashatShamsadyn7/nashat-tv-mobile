@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Backing for the brightness / volume readout. Alias onto the canonical
+  over-video chip — the previous build defined four near-identical
+  translucent black rectangles at four different opacities.
+-->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/bg_glass_pill_media" />

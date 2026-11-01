@@ -19,8 +19,26 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/screen_gutter"
         android:paddingBottom="@dimen/space_200"
-        android:textAppearance="@style/TextAppearance.Nashat.Title.Medium"
+        android:textAppearance="@style/TextAppearance.Nashat.Title.Large"
         android:textColor="@color/content_primary" />
+
+    <!--
+        Rule under the row heading. The rows used to be separated by 28dp of
+        nothing, which on a page of five of them left the reader deciding for
+        themselves where one section ended and the next began. A hard line
+        under the heading answers it, and it is the cheapest possible way to
+        say "this label owns everything below it until the next line".
+
+        Full width to the gutter rather than the text width: a rule that
+        stops where the words stop reads as an underline on the words, not as
+        a division of the page.
+    -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edge_width"
+        android:layout_marginHorizontal="@dimen/screen_gutter"
+        android:layout_marginBottom="@dimen/space_300"
+        android:background="@color/edge" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rowList"

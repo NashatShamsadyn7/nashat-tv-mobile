@@ -40,21 +40,33 @@
                     android:importantForAccessibility="no"
                     android:scaleType="centerCrop" />
 
-                <!-- Fades the backdrop into the page so the join is not a hard
-                     horizontal line across the screen. -->
+                <!--
+                    The join is now a hard rule rather than a 96dp fade.
+
+                    A gradient fade is how a design hides the seam between a
+                    photograph and a page — it is the opposite instinct to
+                    this one, which is to state where the image stops. It also
+                    only ever worked in one mode: the fade is a ramp to a
+                    single surface colour, so it had to be re-picked for
+                    light and dark and never quite matched either.
+
+                    The poster below deliberately crosses this line. An
+                    element breaking the rule it sits on is the composition
+                    doing the work the drop shadow used to.
+                -->
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="96dp"
+                    android:layout_height="@dimen/edge_width"
                     android:layout_gravity="bottom"
-                    android:background="@drawable/gradient_details_fade" />
+                    android:background="@color/edge" />
 
                 <ImageButton
                     android:id="@+id/btnBack"
                     android:layout_width="@dimen/touch_target_min"
                     android:layout_height="@dimen/touch_target_min"
                     android:layout_gravity="top|start"
-                    android:layout_margin="@dimen/space_200"
-                    android:background="@drawable/bg_scrim_circle"
+                    android:layout_margin="@dimen/space_300"
+                    android:background="@drawable/bg_glass_pill_media"
                     android:contentDescription="@string/cd_back_button"
                     android:src="@drawable/ic_arrow_back_24"
                     app:tint="@color/white" />
@@ -75,9 +87,9 @@
                     android:background="@color/surface_sunken"
                     android:importantForAccessibility="no"
                     android:scaleType="centerCrop"
-                    app:shapeAppearance="@style/ShapeAppearance.Nashat.Medium"
-                    app:strokeColor="@color/border_default"
-                    app:strokeWidth="1dp" />
+                    app:shapeAppearance="@style/ShapeAppearance.Nashat.Square"
+                    app:strokeColor="@color/edge"
+                    app:strokeWidth="@dimen/edge_width" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -91,7 +103,7 @@
                         android:id="@+id/title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.Nashat.Title.Large"
+                        android:textAppearance="@style/TextAppearance.Nashat.Headline"
                         android:textColor="@color/content_primary" />
 
                     <TextView
@@ -132,36 +144,28 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnFavorite"
-                    style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                    style="@style/Widget.Nashat.Button.Outlined.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_200"
                     android:contentDescription="@string/action_add_favorite"
-                    android:insetLeft="0dp"
-                    android:insetRight="0dp"
-                    android:minWidth="@dimen/touch_target_min"
                     android:minHeight="@dimen/touch_target_min"
-                    app:icon="@drawable/ic_favorite_24"
-                    app:iconPadding="0dp" />
+                    app:icon="@drawable/ic_favorite_24" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnWatchlist"
-                    style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                    style="@style/Widget.Nashat.Button.Outlined.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_200"
                     android:contentDescription="@string/action_add_watchlist"
-                    android:insetLeft="0dp"
-                    android:insetRight="0dp"
-                    android:minWidth="@dimen/touch_target_min"
                     android:minHeight="@dimen/touch_target_min"
-                    app:icon="@drawable/ic_playlist_add"
-                    app:iconPadding="0dp" />
+                    app:icon="@drawable/ic_playlist_add" />
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnTrailer"
-                style="@style/Widget.Material3.Button.TextButton.Icon"
+                style="@style/Widget.Nashat.Button.Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/screen_gutter"
@@ -202,18 +206,27 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/details_episodes"
-                        android:textAppearance="@style/TextAppearance.Nashat.Title.Medium"
+                        android:textAppearance="@style/TextAppearance.Nashat.Title.Large"
                         android:textColor="@color/content_primary" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnSeason"
-                        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                        style="@style/Widget.Nashat.Button.Outlined"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="@dimen/touch_target_min"
+                        android:paddingStart="@dimen/space_400"
+                        android:paddingEnd="@dimen/space_300"
                         app:icon="@drawable/ic_chevron_right_24"
                         app:iconGravity="end" />
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edge_width"
+                    android:layout_marginHorizontal="@dimen/screen_gutter"
+                    android:layout_marginTop="@dimen/space_200"
+                    android:background="@color/edge" />
 
                 <ProgressBar
                     android:id="@+id/episodesLoading"
@@ -248,8 +261,15 @@
                     android:paddingHorizontal="@dimen/screen_gutter"
                     android:paddingBottom="@dimen/space_200"
                     android:text="@string/details_cast"
-                    android:textAppearance="@style/TextAppearance.Nashat.Title.Medium"
+                    android:textAppearance="@style/TextAppearance.Nashat.Title.Large"
                     android:textColor="@color/content_primary" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edge_width"
+                    android:layout_marginHorizontal="@dimen/screen_gutter"
+                    android:layout_marginBottom="@dimen/space_300"
+                    android:background="@color/edge" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/castList"
@@ -275,8 +295,15 @@
                     android:paddingHorizontal="@dimen/screen_gutter"
                     android:paddingBottom="@dimen/space_200"
                     android:text="@string/details_also_like"
-                    android:textAppearance="@style/TextAppearance.Nashat.Title.Medium"
+                    android:textAppearance="@style/TextAppearance.Nashat.Title.Large"
                     android:textColor="@color/content_primary" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edge_width"
+                    android:layout_marginHorizontal="@dimen/screen_gutter"
+                    android:layout_marginBottom="@dimen/space_300"
+                    android:background="@color/edge" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recommendationsList"

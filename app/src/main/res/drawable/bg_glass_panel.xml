@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════════
+   GLASS PANEL — bottom nav, sticky search, player control bar
+  ══════════════════════════════════════════════════════════════════════
+
+   The translucent fill only. The actual blur is applied at runtime by
+   GlassSurfaceView, which sets a RenderEffect on API 31+ and leaves this
+   fill to stand on its own below that. That split is deliberate: a blur
+   cannot be expressed in a drawable at all before API 31, so the fill has
+   to be legible whether or not the blur ever arrives.
+
+   A single 2dp rule along the top edge and nothing else. A glass panel with
+   a border on all four sides stops floating and becomes a card — the one
+   line where it meets the content is what says "this layer is above that
+   one". Which edge carries the rule is set by the layer's position, so a
+   top-anchored panel uses bg_glass_panel_top instead.
+
+   The three members of the glass family, and when each applies:
+
+     bg_glass_panel        full-width chrome inside the activity window;
+     bg_glass_panel_top    the same, anchored to the top;
+     bg_glass_sheet        a sheet or dialog, heavier fill, real window blur;
+     bg_glass_pill_media   a small chip floating on video, fixed dark.
+-->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- The rule. Drawn as a full-bleed rectangle that the fill then covers
+         all but 2dp of — cheaper than a shape with three transparent
+         strokes, which is not expressible in a shape drawable anyway. -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/edge" />
+        </shape>
+    </item>
+
+    <item android:top="@dimen/edge_width">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/glass_fill" />
+        </shape>
+    </item>
+
+</layer-list>

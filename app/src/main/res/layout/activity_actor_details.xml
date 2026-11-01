@@ -59,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:text="Actor Name"
                         android:textColor="@color/white"
-                        android:textSize="24sp"
+                        android:textSize="@dimen/type_size_headline"
                         android:textStyle="bold"
                         android:layout_marginBottom="8dp"/>
                         
@@ -69,7 +69,7 @@
                         android:layout_height="wrap_content"
                         android:text="Born: 1980"
                         android:textColor="@color/accent_gold"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/type_size_body_medium"
                         android:textStyle="bold"
                         android:layout_marginBottom="8dp"/>
                         
@@ -79,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:text="New York, USA"
                         android:textColor="@color/text_secondary"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/type_size_body_medium"
                         android:layout_marginBottom="8dp"/>
                         
                 </LinearLayout>
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/biography"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="@dimen/type_size_title_medium"
                 android:textStyle="bold"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="12dp"/>
@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_secondary"
-                android:textSize="14sp"
+                android:textSize="@dimen/type_size_body_medium"
                 android:lineSpacingExtra="4dp"/>
 
             <TextView
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/known_for"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="@dimen/type_size_title_medium"
                 android:textStyle="bold"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="12dp"/>

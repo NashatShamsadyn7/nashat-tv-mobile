@@ -33,6 +33,68 @@
         app:show_timeout="4000"
         app:use_controller="true" />
 
+    <!-- ═══ Gesture layer ═══
+         Sits above both playback surfaces and below the controls, so a swipe
+         is caught before it reaches the embed but a button press is not.
+         Left half is brightness, right half is volume — the convention every
+         video app on this platform uses, so it needs no teaching. -->
+    <LinearLayout
+        android:id="@+id/gestureLayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/gestureLeft"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <View
+            android:id="@+id/gestureRight"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Feedback for a gesture in progress. Centred, transient, no chrome. -->
+    <LinearLayout
+        android:id="@+id/gestureHud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_gesture_hud"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/space_500"
+        android:paddingVertical="@dimen/space_400"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/gestureIcon"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:importantForAccessibility="no"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/gestureValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_200"
+            android:textAppearance="@style/TextAppearance.Nashat.Title.Small"
+            android:textColor="@color/white" />
+
+        <ProgressBar
+            android:id="@+id/gestureBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="120dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="@dimen/space_200"
+            android:max="100"
+            android:progressDrawable="@drawable/progress_watch" />
+    </LinearLayout>
+
     <!-- ═══ Top bar ═══ -->
     <LinearLayout
         android:id="@+id/topBar"
@@ -116,7 +178,7 @@
              unlabelled cog does not answer either half of that. -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnServer"
-            style="@style/Widget.Material3.Button.TextButton.Icon"
+            style="@style/Widget.Nashat.Button.Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="@dimen/touch_target_min"
@@ -124,10 +186,48 @@
             app:icon="@drawable/ic_settings_24"
             app:iconTint="@color/white" />
 
+        <ImageButton
+            android:id="@+id/btnSpeed"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/player_speed"
+            android:src="@drawable/ic_speed_24"
+            android:visibility="gone"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/btnSleep"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/player_sleep_timer"
+            android:src="@drawable/ic_timer_24"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/btnLock"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/player_lock"
+            android:src="@drawable/ic_lock_open_24"
+            app:tint="@color/white" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/btnEpisodes"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/player_episodes"
+            android:src="@drawable/ic_list_24"
+            android:visibility="gone"
+            app:tint="@color/white" />
 
         <ImageButton
             android:id="@+id/btnPrevEpisode"
@@ -214,7 +314,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnPickServer"
-                style="@style/Widget.Material3.Button.OutlinedButton"
+                style="@style/Widget.Nashat.Button.Outlined"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_200"
