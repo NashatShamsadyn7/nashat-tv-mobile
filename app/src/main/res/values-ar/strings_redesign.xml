@@ -52,4 +52,5 @@
     <string name="details_votes_count">من %1$s صوت</string>
     <string name="details_no_votes">لم يُقيَّم بعد</string>
     <string name="details_year">السنة</string>
+    <string name="category_kurdish">كردية</string>
 </resources>

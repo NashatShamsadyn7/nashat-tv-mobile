@@ -15,7 +15,7 @@
 -->
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.Nashat" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Nashat" parent="Base.Theme.Nashat">
         <!-- Inherit everything from the day definition… -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>

@@ -81,34 +81,38 @@
             android:layout_marginTop="@dimen/space_400"
             android:orientation="horizontal">
 
-            <TextView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/heroInfo"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="52dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_button_white"
-                android:drawablePadding="@dimen/space_200"
-                android:gravity="center"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
                 android:text="@string/action_more_info"
-                android:textAppearance="@style/TextAppearance.Nashat.Label.Large"
                 android:textColor="@color/ink_900"
-                app:drawableStartCompat="@drawable/ic_info_24"
-                app:drawableTint="@color/ink_900" />
+                app:backgroundTint="@color/white"
+                app:cornerRadius="@dimen/radius_md"
+                app:icon="@drawable/ic_info_24"
+                app:iconGravity="textStart"
+                app:iconTint="@color/ink_900"
+                app:strokeWidth="0dp" />
 
-            <TextView
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/heroList"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="52dp"
                 android:layout_marginStart="@dimen/space_200"
                 android:layout_weight="1"
-                android:background="@drawable/bg_button_glass"
-                android:drawablePadding="@dimen/space_200"
-                android:gravity="center"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
                 android:text="@string/action_my_list"
-                android:textAppearance="@style/TextAppearance.Nashat.Label.Large"
                 android:textColor="@color/white"
-                app:drawableStartCompat="@drawable/ic_playlist_add"
-                app:drawableTint="@color/white" />
+                app:backgroundTint="#40FFFFFF"
+                app:cornerRadius="@dimen/radius_md"
+                app:icon="@drawable/ic_playlist_add"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white"
+                app:strokeWidth="0dp" />
         </LinearLayout>
     </LinearLayout>
 

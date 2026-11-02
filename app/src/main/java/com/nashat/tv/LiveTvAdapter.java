@@ -94,7 +94,7 @@ public class LiveTvAdapter extends RecyclerView.Adapter<LiveTvAdapter.ChannelVie
         if (holder.tvCategory != null) {
             String category = displayCategory(channel.getCategory());
             holder.tvCategory.setText(category.isEmpty()
-                    ? context.getString(R.string.category_general) : category);
+                    ? context.getString(R.string.category_kurdish) : category);
         }
 
         // The whole LIVE pill follows availability — previously only the dot

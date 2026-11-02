@@ -536,6 +536,7 @@ public class LiveTvActivity extends BaseActivity {
 
         String c = category.toLowerCase(Locale.US).trim();
         if (c.equals("all")) return getString(R.string.category_all);
+        if (c.equals("kurdish")) return getString(R.string.category_kurdish);
         if (c.contains("news")) return getString(R.string.category_news);
         if (c.contains("sport")) return getString(R.string.category_sports);
         if (c.contains("kid") || c.contains("cartoon")) return getString(R.string.category_kids);

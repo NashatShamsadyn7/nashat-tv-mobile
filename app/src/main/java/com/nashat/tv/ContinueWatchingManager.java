@@ -35,17 +35,22 @@ public class ContinueWatchingManager {
         if (movie == null) return;
         List<WatchItem> list = getItems();
         
-        // Remove existing entry for same movie/series
+        // Remove existing entry for same movie/series, keeping its artwork:
+        // the player records progress without a poster, and replacing the
+        // entry wholesale left Continue watching with blank cards.
+        String previousPoster = null;
         for (int i = list.size() - 1; i >= 0; i--) {
             if (list.get(i).tmdbId.equals(movie.getUrl())) {
+                if (previousPoster == null) previousPoster = list.get(i).poster;
                 list.remove(i);
             }
         }
-        
+
         // Add to top
         WatchItem item = new WatchItem();
         item.name = movie.getName();
-        item.poster = movie.getPoster();
+        String poster = movie.getPoster();
+        item.poster = poster != null && !poster.isEmpty() ? poster : previousPoster;
         item.category = movie.getCategory();
         item.tmdbId = movie.getUrl();
         item.description = movie.getDescription();

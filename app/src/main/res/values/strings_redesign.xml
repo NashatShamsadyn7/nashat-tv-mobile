@@ -52,4 +52,5 @@
     <string name="details_votes_count">from %1$s votes</string>
     <string name="details_no_votes">Not rated yet</string>
     <string name="details_year">Year</string>
+    <string name="category_kurdish">Kurdish</string>
 </resources>

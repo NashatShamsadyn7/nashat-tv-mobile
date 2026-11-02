@@ -23,7 +23,11 @@
     <!-- ══════════════════════════════════════════════════════════════
          BASE
          ══════════════════════════════════════════════════════════════ -->
-    <style name="Theme.Nashat" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- Everything lives on Base.Theme.Nashat; values-night/themes.xml derives
+         from it and flips only the system-bar icon flags. (Before, the night
+         file redefined Theme.Nashat from scratch, so dark mode silently lost
+         every attribute below and fell back to Material purple.) -->
+    <style name="Base.Theme.Nashat" parent="Theme.Material3.DayNight.NoActionBar">
 
         <!-- ── Material 3 colour roles ──────────────────────────────
              Mapped onto the semantic layer so any stock Material widget
@@ -143,6 +147,8 @@
              light mode and invisible against a selection highlight. -->
         <item name="android:textColorHighlight">@color/accent_wash</item>
     </style>
+
+    <style name="Theme.Nashat" parent="Base.Theme.Nashat" />
 
     <!-- ══════════════════════════════════════════════════════════════
          SPLASH

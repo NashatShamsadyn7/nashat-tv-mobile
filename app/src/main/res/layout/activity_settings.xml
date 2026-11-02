@@ -207,6 +207,7 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.materialswitch.MaterialSwitch
+                        style="@style/Widget.Nashat.Switch"
                         android:id="@+id/switchAutoPlay"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -223,6 +224,7 @@
                         android:background="@color/edge_inset" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
+                        style="@style/Widget.Nashat.Switch"
                         android:id="@+id/switchHDQuality"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -239,6 +241,7 @@
                         android:background="@color/edge_inset" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
+                        style="@style/Widget.Nashat.Switch"
                         android:id="@+id/switchDataSaver"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -255,6 +258,7 @@
                         android:background="@color/edge_inset" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
+                        style="@style/Widget.Nashat.Switch"
                         android:id="@+id/switchBackgroundPlay"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -400,6 +404,7 @@
 
                     <!-- Dark Mode Toggle -->
                     <com.google.android.material.materialswitch.MaterialSwitch
+                        style="@style/Widget.Nashat.Switch"
                         android:id="@+id/switchDarkMode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

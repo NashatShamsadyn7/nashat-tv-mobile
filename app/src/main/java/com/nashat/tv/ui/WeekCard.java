@@ -45,6 +45,7 @@ public final class WeekCard {
 
         ((TextView) card.findViewById(R.id.weekTotal)).setText(formatLong(ctx, week));
         card.findViewById(R.id.weekEmpty).setVisibility(week == 0 ? View.VISIBLE : View.GONE);
+        card.findViewById(R.id.weekBars).setVisibility(week == 0 ? View.GONE : View.VISIBLE);
 
         ((TextView) card.findViewById(R.id.weekSessions)).setText(
                 String.format(Locale.getDefault(), "%d", stats.getTotalSessions()));

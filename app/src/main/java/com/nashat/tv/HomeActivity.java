@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.button.MaterialButton;
 import com.nashat.tv.ContinueWatchingManager.WatchItem;
 import com.nashat.tv.player.PlaybackProgress;
 import com.nashat.tv.tmdb.Tmdb;
@@ -216,8 +217,15 @@ public class HomeActivity extends BaseActivity {
 
     private void updateDots() {
         int current = Math.max(0, currentHero());
+        float density = getResources().getDisplayMetrics().density;
         for (int i = 0; i < heroDots.getChildCount(); i++) {
-            heroDots.getChildAt(i).setSelected(i == current);
+            View dot = heroDots.getChildAt(i);
+            boolean on = i == current;
+            dot.setSelected(on);
+            ViewGroup.LayoutParams lp = dot.getLayoutParams();
+            lp.width = Math.round((on ? 18 : 6) * density);
+            lp.height = Math.round(6 * density);
+            dot.setLayoutParams(lp);
         }
     }
 
@@ -296,7 +304,8 @@ public class HomeActivity extends BaseActivity {
 
         class Holder extends RecyclerView.ViewHolder {
             final ImageView image;
-            final TextView eyebrow, title, meta, info, list;
+            final TextView eyebrow, title, meta;
+            final MaterialButton info, list;
             final RatingRing ring;
 
             Holder(@NonNull View v) {
@@ -312,11 +321,10 @@ public class HomeActivity extends BaseActivity {
         }
     }
 
-    private void bindListButton(TextView button, Title t) {
+    private void bindListButton(MaterialButton button, Title t) {
         Movie m = asMovie(t);
         boolean listed = watchlist.isInWatchlist(m);
-        button.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                listed ? R.drawable.ic_playlist_add_check : R.drawable.ic_playlist_add, 0, 0, 0);
+        button.setIconResource(listed ? R.drawable.ic_playlist_add_check : R.drawable.ic_playlist_add);
         button.setOnClickListener(v -> {
             if (watchlist.isInWatchlist(m)) watchlist.removeItem(m);
             else {
