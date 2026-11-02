@@ -12,6 +12,13 @@
 -keep class com.nashat.tv.Episode { *; }
 -keep class com.nashat.tv.Actor { *; }
 
+# TMDB response models. Gson fills them by field name, and most fields (e.g.
+# TitlePage.results, Title.title) carry no @SerializedName — once R8 renamed
+# them every catalogue response parsed to an empty list, so Films and Series
+# showed nothing in release builds while debug builds worked.
+-keep class com.nashat.tv.tmdb.TmdbModels { *; }
+-keep class com.nashat.tv.tmdb.TmdbModels$* { *; }
+
 # ----- Gson -----
 -keepattributes Signature
 -keepattributes *Annotation*

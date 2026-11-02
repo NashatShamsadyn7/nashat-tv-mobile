@@ -14,7 +14,9 @@
 bin/
 gen/
 out/
-release/
+# Android Studio APK output only — a bare `release/` also hid app/src/release
+/release/
+/app/release/
 
 # Gradle files
 .gradle/
