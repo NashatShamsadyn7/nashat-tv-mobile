@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Title details — one layout for films and series, ported from the desktop
-    client's pages/Details.tsx.
+  Details for one film or series.
 
-    The desktop lays the poster and metadata *over* the backdrop, which works at
-    1400px wide. On a phone that same composition leaves the synopsis sitting on
-    a busy photograph at four words a line. Here the backdrop is a 16:9 header
-    and the text sits below it on a real surface — the same information in the
-    same order, re-laid for the width it actually has.
+  The backdrop fades into the page and the poster card overlaps it. Under the
+  actions sits "By the numbers": the audience score as a large ring, a grid of
+  key figures, and a chart that fits the title — runtime against a 3-hour
+  film, budget against box office, or episodes per season. Then synopsis,
+  episodes, cast and recommendations.
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,72 +18,57 @@
         android:id="@+id/detailsScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingBottom="@dimen/space_800">
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/space_1200">
 
-            <!-- ═══ Hero ═══ -->
+            <!-- ═══ Backdrop ═══ -->
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="@dimen/details_backdrop_height">
 
                 <ImageView
                     android:id="@+id/backdrop"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/details_backdrop_height"
-                    android:background="@color/surface_sunken"
+                    android:layout_height="match_parent"
                     android:importantForAccessibility="no"
                     android:scaleType="centerCrop" />
 
-                <!--
-                    The join is now a hard rule rather than a 96dp fade.
-
-                    A gradient fade is how a design hides the seam between a
-                    photograph and a page — it is the opposite instinct to
-                    this one, which is to state where the image stops. It also
-                    only ever worked in one mode: the fade is a ramp to a
-                    single surface colour, so it had to be re-picked for
-                    light and dark and never quite matched either.
-
-                    The poster below deliberately crosses this line. An
-                    element breaking the rule it sits on is the composition
-                    doing the work the drop shadow used to.
-                -->
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/edge_width"
-                    android:layout_gravity="bottom"
-                    android:background="@color/edge" />
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_backdrop_fade" />
 
                 <ImageButton
                     android:id="@+id/btnBack"
-                    android:layout_width="@dimen/touch_target_min"
-                    android:layout_height="@dimen/touch_target_min"
-                    android:layout_gravity="top|start"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
                     android:layout_margin="@dimen/space_300"
-                    android:background="@drawable/bg_glass_pill_media"
+                    android:background="@drawable/bg_round_scrim"
                     android:contentDescription="@string/cd_back_button"
                     android:src="@drawable/ic_arrow_back_24"
                     app:tint="@color/white" />
             </FrameLayout>
 
-            <!-- ═══ Poster + headline ═══ -->
+            <!-- ═══ Poster + title ═══ -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-48dp"
+                android:layout_marginTop="-96dp"
+                android:gravity="bottom"
                 android:orientation="horizontal"
                 android:paddingHorizontal="@dimen/screen_gutter">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/poster"
-                    android:layout_width="96dp"
-                    android:layout_height="144dp"
+                    android:layout_width="@dimen/details_poster_width"
+                    android:layout_height="@dimen/details_poster_height"
                     android:background="@color/surface_sunken"
+                    android:elevation="6dp"
                     android:importantForAccessibility="no"
                     android:scaleType="centerCrop"
                     app:shapeAppearance="@style/ShapeAppearance.Nashat.Square"
@@ -94,35 +78,50 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/space_300"
-                    android:layout_marginTop="48dp"
+                    android:layout_marginStart="@dimen/space_400"
                     android:layout_weight="1"
                     android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/kindBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.Nashat.Eyebrow" />
 
                     <TextView
                         android:id="@+id/title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.Nashat.Headline"
-                        android:textColor="@color/content_primary" />
+                        android:layout_marginTop="@dimen/space_50"
+                        android:textAppearance="@style/TextAppearance.Nashat.HeroTitle"
+                        android:textColor="@color/content_primary"
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/meta"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_100"
-                        android:textAppearance="@style/TextAppearance.Nashat.Label.Medium"
+                        android:textAppearance="@style/TextAppearance.Nashat.Body.Small"
                         android:textColor="@color/content_secondary" />
-
-                    <TextView
-                        android:id="@+id/genres"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/space_100"
-                        android:textAppearance="@style/TextAppearance.Nashat.Label.Small"
-                        android:textColor="@color/content_tertiary" />
                 </LinearLayout>
             </LinearLayout>
+
+            <!-- Genre pills -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_400"
+                android:clipToPadding="false"
+                android:paddingHorizontal="@dimen/screen_gutter"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/genres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
 
             <!-- ═══ Actions ═══ -->
             <LinearLayout
@@ -138,59 +137,154 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:minHeight="@dimen/touch_target_min"
+                    android:minHeight="52dp"
                     android:text="@string/action_play"
                     app:icon="@drawable/ic_play_arrow_24" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnFavorite"
-                    style="@style/Widget.Nashat.Button.Outlined.Icon"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/btnTrailer"
+                    style="@style/Widget.Nashat.Button.Outlined"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_200"
-                    android:contentDescription="@string/action_add_favorite"
-                    android:minHeight="@dimen/touch_target_min"
-                    app:icon="@drawable/ic_favorite_24" />
+                    android:layout_weight="1"
+                    android:minHeight="52dp"
+                    android:text="@string/action_trailer"
+                    android:visibility="gone"
+                    app:icon="@drawable/ic_movie_24" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_200"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/screen_gutter">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnWatchlist"
-                    style="@style/Widget.Nashat.Button.Outlined.Icon"
-                    android:layout_width="wrap_content"
+                    style="@style/Widget.Nashat.Button.Outlined"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/action_add_watchlist"
+                    android:text="@string/action_my_list"
+                    app:icon="@drawable/ic_playlist_add" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFavorite"
+                    style="@style/Widget.Nashat.Button.Outlined"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_200"
-                    android:contentDescription="@string/action_add_watchlist"
-                    android:minHeight="@dimen/touch_target_min"
-                    app:icon="@drawable/ic_playlist_add" />
+                    android:layout_weight="1"
+                    android:contentDescription="@string/action_add_favorite"
+                    android:text="@string/row_favorites"
+                    app:icon="@drawable/ic_favorite_24" />
             </LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnTrailer"
-                style="@style/Widget.Nashat.Button.Text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/screen_gutter"
-                android:layout_marginTop="@dimen/space_100"
-                android:minHeight="@dimen/touch_target_min"
-                android:text="@string/action_trailer"
-                android:visibility="gone"
-                app:icon="@drawable/ic_movie_24" />
-
             <!-- ═══ Synopsis ═══ -->
+            <TextView
+                android:id="@+id/tagline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_600"
+                android:paddingHorizontal="@dimen/screen_gutter"
+                android:textAppearance="@style/TextAppearance.Nashat.Title.Medium"
+                android:textColor="@color/content_primary"
+                android:textStyle="italic"
+                android:visibility="gone" />
+
             <TextView
                 android:id="@+id/overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_300"
+                android:layout_marginTop="@dimen/space_200"
+                android:lineSpacingMultiplier="1.15"
                 android:paddingHorizontal="@dimen/screen_gutter"
                 android:textAppearance="@style/TextAppearance.Nashat.Body.Medium"
                 android:textColor="@color/content_secondary" />
 
-            <!-- ═══ Episodes (series only) ═══ -->
+            <!-- ═══ By the numbers ═══ -->
+            <LinearLayout
+                android:id="@+id/statsCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/screen_gutter"
+                android:layout_marginTop="@dimen/space_600"
+                android:background="@drawable/bg_card_soft"
+                android:orientation="vertical"
+                android:padding="@dimen/space_500">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/details_by_numbers"
+                    android:textAppearance="@style/TextAppearance.Nashat.Eyebrow" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_300"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.nashat.tv.ui.chart.RatingRing
+                        android:id="@+id/scoreRing"
+                        android:layout_width="76dp"
+                        android:layout_height="76dp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space_400"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/details_audience"
+                            android:textAppearance="@style/TextAppearance.Nashat.Title.Small"
+                            android:textColor="@color/content_primary" />
+
+                        <TextView
+                            android:id="@+id/scoreVotes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.Nashat.Body.Small"
+                            android:textColor="@color/content_secondary" />
+
+                        <!-- Score as a ten-step bar: easier to compare at a glance than a decimal. -->
+                        <com.nashat.tv.ui.chart.StepBar
+                            android:id="@+id/scoreSteps"
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp"
+                            android:layout_marginTop="@dimen/space_200" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <GridLayout
+                    android:id="@+id/statGrid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_500"
+                    android:columnCount="3" />
+
+                <!-- Runtime, money or seasons: filled per title. -->
+                <LinearLayout
+                    android:id="@+id/statCharts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </LinearLayout>
+
+            <!-- ═══ Episodes ═══ -->
             <LinearLayout
                 android:id="@+id/episodesSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/row_gap"
+                android:layout_marginTop="@dimen/space_800"
                 android:orientation="vertical"
                 android:visibility="gone">
 
@@ -201,32 +295,26 @@
                     android:orientation="horizontal"
                     android:paddingHorizontal="@dimen/screen_gutter">
 
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/bg_accent_tick" />
+
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space_200"
                         android:layout_weight="1"
                         android:text="@string/details_episodes"
-                        android:textAppearance="@style/TextAppearance.Nashat.Title.Large"
-                        android:textColor="@color/content_primary" />
+                        android:textAppearance="@style/TextAppearance.Nashat.Section" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnSeason"
                         style="@style/Widget.Nashat.Button.Outlined"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:minHeight="@dimen/touch_target_min"
-                        android:paddingStart="@dimen/space_400"
-                        android:paddingEnd="@dimen/space_300"
-                        app:icon="@drawable/ic_chevron_right_24"
-                        app:iconGravity="end" />
+                        app:icon="@drawable/ic_list_24" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/edge_width"
-                    android:layout_marginHorizontal="@dimen/screen_gutter"
-                    android:layout_marginTop="@dimen/space_200"
-                    android:background="@color/edge" />
 
                 <ProgressBar
                     android:id="@+id/episodesLoading"
@@ -234,15 +322,13 @@
                     android:layout_height="28dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginVertical="@dimen/space_600"
-                    android:indeterminateTint="@color/accent_text"
-                    android:visibility="gone" />
+                    android:indeterminateTint="@color/accent_text" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/episodesList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/space_200"
-                    android:nestedScrollingEnabled="false"
+                    android:layout_marginTop="@dimen/space_300"
                     android:paddingHorizontal="@dimen/screen_gutter" />
             </LinearLayout>
 
@@ -251,25 +337,11 @@
                 android:id="@+id/castSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/row_gap"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:layout_marginTop="@dimen/space_800"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/screen_gutter"
-                    android:paddingBottom="@dimen/space_200"
-                    android:text="@string/details_cast"
-                    android:textAppearance="@style/TextAppearance.Nashat.Title.Large"
-                    android:textColor="@color/content_primary" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/edge_width"
-                    android:layout_marginHorizontal="@dimen/screen_gutter"
-                    android:layout_marginBottom="@dimen/space_300"
-                    android:background="@color/edge" />
+                <include layout="@layout/view_section_title"
+                    android:id="@+id/castTitle" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/castList"
@@ -280,30 +352,16 @@
                     android:scrollbars="none" />
             </LinearLayout>
 
-            <!-- ═══ Recommendations ═══ -->
+            <!-- ═══ More like this ═══ -->
             <LinearLayout
                 android:id="@+id/recommendationsSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/row_gap"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:layout_marginTop="@dimen/space_800"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/screen_gutter"
-                    android:paddingBottom="@dimen/space_200"
-                    android:text="@string/details_also_like"
-                    android:textAppearance="@style/TextAppearance.Nashat.Title.Large"
-                    android:textColor="@color/content_primary" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/edge_width"
-                    android:layout_marginHorizontal="@dimen/screen_gutter"
-                    android:layout_marginBottom="@dimen/space_300"
-                    android:background="@color/edge" />
+                <include layout="@layout/view_section_title"
+                    android:id="@+id/recsTitle" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recommendationsList"
@@ -317,11 +375,10 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- ═══ Loading / error ═══ -->
     <ProgressBar
         android:id="@+id/detailsLoading"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:indeterminateTint="@color/accent_text" />
 
@@ -329,15 +386,15 @@
         android:id="@+id/detailsError"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/surface_base"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingHorizontal="@dimen/space_600"
+        android:padding="@dimen/space_800"
         android:visibility="gone">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/details_load_failed_title"
             android:textAppearance="@style/TextAppearance.Nashat.Title.Medium"
             android:textColor="@color/content_primary" />
@@ -348,14 +405,13 @@
             android:layout_marginTop="@dimen/space_200"
             android:gravity="center"
             android:text="@string/details_load_failed_body"
-            android:textAppearance="@style/TextAppearance.Nashat.Body.Medium"
-            android:textColor="@color/content_secondary" />
+            android:textAppearance="@style/TextAppearance.Nashat.Body.Medium" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnRetry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_400"
+            android:layout_marginTop="@dimen/space_600"
             android:text="@string/action_retry" />
     </LinearLayout>
 

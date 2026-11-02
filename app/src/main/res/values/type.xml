@@ -29,8 +29,8 @@
 
     <!-- Root: everything inherits the family and colour from here. -->
     <style name="TextAppearance.Nashat" parent="TextAppearance.Material3.BodyMedium">
-        <item name="android:fontFamily">@font/plex_arabic</item>
-        <item name="fontFamily">@font/plex_arabic</item>
+        <item name="android:fontFamily">@font/cairo</item>
+        <item name="fontFamily">@font/cairo</item>
         <item name="android:textColor">@color/content_primary</item>
         <item name="android:includeFontPadding">false</item>
     </style>
@@ -38,8 +38,8 @@
     <!-- ══ DISPLAY ══════════════════════════════════════════════════
          Hero titles over artwork. One per screen, at most. -->
     <style name="TextAppearance.Nashat.Display" parent="TextAppearance.Nashat">
-        <item name="android:fontFamily">@font/plex_arabic_bold</item>
-        <item name="fontFamily">@font/plex_arabic_bold</item>
+        <item name="android:fontFamily">@font/cairo_bold</item>
+        <item name="fontFamily">@font/cairo_bold</item>
         <item name="android:textSize">@dimen/type_size_display</item>
         <item name="android:letterSpacing">-0.02</item>
         <item name="android:lineSpacingMultiplier">1.15</item>
@@ -48,8 +48,8 @@
     <!-- ══ HEADLINE ═════════════════════════════════════════════════
          Screen titles, detail-page titles. -->
     <style name="TextAppearance.Nashat.Headline" parent="TextAppearance.Nashat">
-        <item name="android:fontFamily">@font/plex_arabic_bold</item>
-        <item name="fontFamily">@font/plex_arabic_bold</item>
+        <item name="android:fontFamily">@font/cairo_bold</item>
+        <item name="fontFamily">@font/cairo_bold</item>
         <item name="android:textSize">@dimen/type_size_headline</item>
         <item name="android:letterSpacing">-0.015</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
@@ -59,8 +59,8 @@
 
     <!-- Toolbar titles, dialog titles. -->
     <style name="TextAppearance.Nashat.Title.Large" parent="TextAppearance.Nashat">
-        <item name="android:fontFamily">@font/plex_arabic_semibold</item>
-        <item name="fontFamily">@font/plex_arabic_semibold</item>
+        <item name="android:fontFamily">@font/cairo_semibold</item>
+        <item name="fontFamily">@font/cairo_semibold</item>
         <item name="android:textSize">@dimen/type_size_title_large</item>
         <item name="android:letterSpacing">-0.01</item>
         <item name="android:lineSpacingMultiplier">1.25</item>
@@ -68,16 +68,16 @@
 
     <!-- Row headers: "Continue Watching", "Live Now". -->
     <style name="TextAppearance.Nashat.Title.Medium" parent="TextAppearance.Nashat">
-        <item name="android:fontFamily">@font/plex_arabic_semibold</item>
-        <item name="fontFamily">@font/plex_arabic_semibold</item>
+        <item name="android:fontFamily">@font/cairo_semibold</item>
+        <item name="fontFamily">@font/cairo_semibold</item>
         <item name="android:textSize">@dimen/type_size_title_medium</item>
         <item name="android:lineSpacingMultiplier">1.3</item>
     </style>
 
     <!-- Card titles: a channel name, a film title under its poster. -->
     <style name="TextAppearance.Nashat.Title.Small" parent="TextAppearance.Nashat">
-        <item name="android:fontFamily">@font/plex_arabic_semibold</item>
-        <item name="fontFamily">@font/plex_arabic_semibold</item>
+        <item name="android:fontFamily">@font/cairo_semibold</item>
+        <item name="fontFamily">@font/cairo_semibold</item>
         <item name="android:textSize">@dimen/type_size_title_small</item>
         <item name="android:lineSpacingMultiplier">1.3</item>
     </style>
@@ -86,8 +86,8 @@
 
     <!-- Long-form reading: synopsis, biography, about text. -->
     <style name="TextAppearance.Nashat.Body.Large" parent="TextAppearance.Nashat">
-        <item name="android:fontFamily">@font/plex_arabic_regular</item>
-        <item name="fontFamily">@font/plex_arabic_regular</item>
+        <item name="android:fontFamily">@font/cairo_regular</item>
+        <item name="fontFamily">@font/cairo_regular</item>
         <item name="android:textSize">@dimen/type_size_body_large</item>
         <item name="android:lineSpacingMultiplier">1.5</item>
         <item name="android:textColor">@color/content_secondary</item>
@@ -95,8 +95,8 @@
 
     <!-- Default body. Settings rows, list subtitles, dialog copy. -->
     <style name="TextAppearance.Nashat.Body.Medium" parent="TextAppearance.Nashat">
-        <item name="android:fontFamily">@font/plex_arabic_regular</item>
-        <item name="fontFamily">@font/plex_arabic_regular</item>
+        <item name="android:fontFamily">@font/cairo_regular</item>
+        <item name="fontFamily">@font/cairo_regular</item>
         <item name="android:textSize">@dimen/type_size_body_medium</item>
         <item name="android:lineSpacingMultiplier">1.45</item>
         <item name="android:textColor">@color/content_secondary</item>
@@ -104,8 +104,8 @@
 
     <!-- Dense supporting text under a card title. -->
     <style name="TextAppearance.Nashat.Body.Small" parent="TextAppearance.Nashat">
-        <item name="android:fontFamily">@font/plex_arabic_regular</item>
-        <item name="fontFamily">@font/plex_arabic_regular</item>
+        <item name="android:fontFamily">@font/cairo_regular</item>
+        <item name="fontFamily">@font/cairo_regular</item>
         <item name="android:textSize">@dimen/type_size_body_small</item>
         <item name="android:lineSpacingMultiplier">1.4</item>
         <item name="android:textColor">@color/content_tertiary</item>
@@ -116,8 +116,8 @@
 
     <!-- Buttons. -->
     <style name="TextAppearance.Nashat.Label.Large" parent="TextAppearance.Nashat">
-        <item name="android:fontFamily">@font/plex_arabic_semibold</item>
-        <item name="fontFamily">@font/plex_arabic_semibold</item>
+        <item name="android:fontFamily">@font/cairo_semibold</item>
+        <item name="fontFamily">@font/cairo_semibold</item>
         <item name="android:textSize">@dimen/type_size_label_large</item>
         <item name="android:letterSpacing">0.01</item>
         <item name="android:textAllCaps">false</item>
@@ -128,8 +128,8 @@
          old bottom nav ran at 10sp, below the legibility threshold at arm's
          length and far below it on a TV. -->
     <style name="TextAppearance.Nashat.Label.Medium" parent="TextAppearance.Nashat">
-        <item name="android:fontFamily">@font/plex_arabic_medium</item>
-        <item name="fontFamily">@font/plex_arabic_medium</item>
+        <item name="android:fontFamily">@font/cairo_medium</item>
+        <item name="fontFamily">@font/cairo_medium</item>
         <item name="android:textSize">@dimen/type_size_label_medium</item>
         <item name="android:letterSpacing">0.01</item>
         <item name="android:textAllCaps">false</item>
@@ -138,8 +138,8 @@
     <!-- Badges and inline metadata only — "HD", "2024", a duration.
          Anything a user must read as language belongs in Label.Medium. -->
     <style name="TextAppearance.Nashat.Label.Small" parent="TextAppearance.Nashat">
-        <item name="android:fontFamily">@font/plex_arabic_medium</item>
-        <item name="fontFamily">@font/plex_arabic_medium</item>
+        <item name="android:fontFamily">@font/cairo_medium</item>
+        <item name="fontFamily">@font/cairo_medium</item>
         <item name="android:textSize">@dimen/type_size_label_small</item>
         <item name="android:letterSpacing">0.02</item>
         <item name="android:textAllCaps">false</item>
@@ -152,17 +152,67 @@
          languages — the Kurdish and Arabic words for "live" differ in
          length, and tracking keeps the badge visually constant. -->
     <style name="TextAppearance.Nashat.Badge.Live" parent="TextAppearance.Nashat.Label.Small">
-        <item name="android:fontFamily">@font/plex_arabic_bold</item>
-        <item name="fontFamily">@font/plex_arabic_bold</item>
+        <item name="android:fontFamily">@font/cairo_bold</item>
+        <item name="fontFamily">@font/cairo_bold</item>
         <item name="android:letterSpacing">0.08</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
     <!-- Wordmark in the app bar. -->
     <style name="TextAppearance.Nashat.Wordmark" parent="TextAppearance.Nashat.Title.Large">
-        <item name="android:fontFamily">@font/plex_arabic_bold</item>
-        <item name="fontFamily">@font/plex_arabic_bold</item>
+        <item name="android:fontFamily">@font/cairo_bold</item>
+        <item name="fontFamily">@font/cairo_bold</item>
         <item name="android:letterSpacing">-0.005</item>
     </style>
 
+
+    <!-- ── Redesign additions ─────────────────────────────────────
+         Numbers are the infographic voice of the app: big, bold, tight. -->
+    <style name="TextAppearance.Nashat.Stat" parent="TextAppearance.Nashat">
+        <item name="android:fontFamily">@font/cairo_bold</item>
+        <item name="fontFamily">@font/cairo_bold</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/content_primary</item>
+    </style>
+
+    <style name="TextAppearance.Nashat.Stat.Large">
+        <item name="android:textSize">40sp</item>
+    </style>
+
+    <!-- Small label above a section or a number. Accent-coloured, never caps
+         (caps mean nothing in Arabic or Kurdish). -->
+    <style name="TextAppearance.Nashat.Eyebrow" parent="TextAppearance.Nashat.Label.Small">
+        <item name="android:fontFamily">@font/cairo_semibold</item>
+        <item name="fontFamily">@font/cairo_semibold</item>
+        <item name="android:textColor">@color/accent_text</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+
+    <style name="TextAppearance.Nashat.HeroTitle" parent="TextAppearance.Nashat">
+        <item name="android:fontFamily">@font/cairo_bold</item>
+        <item name="fontFamily">@font/cairo_bold</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:lineSpacingMultiplier">0.95</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.Nashat.Section" parent="TextAppearance.Nashat">
+        <item name="android:fontFamily">@font/cairo_bold</item>
+        <item name="fontFamily">@font/cairo_bold</item>
+        <item name="android:textSize">19sp</item>
+        <item name="android:textColor">@color/content_primary</item>
+    </style>
+
+    <!-- Top-10 rank numeral beside a poster. -->
+    <style name="TextAppearance.Nashat.Rank" parent="TextAppearance.Nashat">
+        <item name="android:fontFamily">@font/cairo_bold</item>
+        <item name="fontFamily">@font/cairo_bold</item>
+        <item name="android:textSize">88sp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:letterSpacing">-0.08</item>
+        <item name="android:textColor">@color/rank_numeral</item>
+    </style>
 </resources>

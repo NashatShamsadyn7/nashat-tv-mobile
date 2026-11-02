@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tinted per genre by GenreArt; the inner gradient adds depth to the flat colour. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_lg" />
+            <solid android:color="@color/white" />
+        </shape>
+    </item>
+</layer-list>

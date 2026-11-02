@@ -1,32 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ══════════════════════════════════════════════════════════════════════
-   LIVE TV — the launcher screen
-  ══════════════════════════════════════════════════════════════════════
+  LIVE TV
 
-   What changed and why:
-
-   · THE CATEGORY FILTER IS VISIBLE. The old file built the whole filter row
-     and then set visibility="gone" on it, so a fully working News/Sport/Kids
-     filter shipped switched off and 40 channels arrived as one flat grid.
-
-   · THE COUNT IS NOT A BADGE. "38 channels" sat in a loud filled pill in the
-     corner — the highest-contrast object on a screen whose actual subject is
-     the artwork below it. It is now a quiet line of metadata under the title,
-     where it informs without competing.
-
-   · THE SEARCH FIELD IS PART OF THE BAR. It was a floating white card with
-     its own elevation, which on the light surface read as a separate sheet
-     laid on the screen.
-
-   · EVERY SIZE COMES FROM A TOKEN. No inline sp or dp values, so the TV and
-     tablet builds rescale this screen with no second copy of the file.
-
-   · THE NAV BAR IS THE SHARED ONE. This screen kept its own hand-written
-     copy — 120 lines, its own ids (fabSettings for what is a nav item, not
-     a FAB), its own idea of which colours mark the active tab. It now
-     includes view_bottom_nav like every other screen, and the bar floats
-     over the channel grid as a glass layer rather than sitting under it.
+  The bar (title, search) slides away as the grid scrolls and comes back on
+  the first upward flick; the category chips stay pinned under it. The first
+  item of the grid is a stats card — how many channels, split by category as
+  a bar and legend — built by LiveTvActivity.HeaderAdapter.
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -39,11 +18,10 @@
 
   <!-- Everything the glass nav floats over. Must stay a SIBLING of the bar,
        never its parent — see BottomNav.bindBackdrop. -->
-  <LinearLayout
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
       android:id="@+id/contentBehindNav"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="vertical">
+      android:layout_height="match_parent">
 
     <!-- ══ APP BAR ══════════════════════════════════════════════════ -->
     <com.google.android.material.appbar.AppBarLayout
@@ -58,7 +36,8 @@
             android:orientation="vertical"
             android:paddingStart="@dimen/screen_gutter"
             android:paddingTop="@dimen/space_300"
-            android:paddingEnd="@dimen/screen_gutter">
+            android:paddingEnd="@dimen/screen_gutter"
+            app:layout_scrollFlags="scroll|enterAlways|snap">
 
             <!-- Wordmark + count -->
             <LinearLayout
@@ -71,21 +50,21 @@
                     android:layout_width="@dimen/icon_size_lg"
                     android:layout_height="@dimen/icon_size_lg"
                     android:contentDescription="@string/cd_app_logo"
-                    android:src="@drawable/nashat_logo" />
+                    android:src="@drawable/nashat_logo"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/space_300"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/app_name"
-                        android:textAppearance="@style/TextAppearance.Nashat.Wordmark"
-                        android:textColor="@color/content_primary" />
+                        android:text="@string/nav_live_tv"
+                        android:textAppearance="@style/TextAppearance.Nashat.Section"
+                        android:textSize="24sp" />
 
                     <!-- Region focus. Populated by updateSubtitle(). -->
                     <TextView
@@ -143,20 +122,13 @@
                 android:orientation="horizontal" />
         </HorizontalScrollView>
 
-        <!-- Rule under the bar. The app bar and the grid share a background,
-             so without it the chips and the first row of channels read as one
-             continuous block. -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/edge_width"
-            android:background="@color/edge" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- ══ CONTENT ══════════════════════════════════════════════════ -->
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefresh"
@@ -169,7 +141,7 @@
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:paddingStart="@dimen/space_300"
-                android:paddingTop="@dimen/space_300"
+                android:paddingTop="@dimen/space_100"
                 android:paddingEnd="@dimen/space_300"
                 android:paddingBottom="@dimen/bottom_nav_height"
                 android:scrollbars="none"
@@ -249,7 +221,7 @@
             android:indeterminate="true"
             android:visibility="gone" />
     </FrameLayout>
-  </LinearLayout>
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
   <!-- ══ BOTTOM NAVIGATION ════════════════════════════════════════
        The shared bar. BottomNav.bind() fills it, marks LIVE as the active

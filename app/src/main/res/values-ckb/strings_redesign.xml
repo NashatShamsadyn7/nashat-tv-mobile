@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Strings added with the 2026-11 redesign (home, charts, profile). -->
+<resources>
+    <string name="nav_profile">پرۆفایل</string>
+    <string name="category_general">گشتی</string>
+    <string name="home_tagline">فیلم و زنجیرە و پەخشی ڕاستەوخۆ لە یەک شوێن</string>
+    <string name="home_hero_film">فیلمی باوی ژمارە %1$d</string>
+    <string name="home_hero_series">زنجیرەی باوی ژمارە %1$d</string>
+    <string name="action_my_list">لیستەکەم</string>
+    <string name="home_on_air">ئێستا لەسەر شاشە</string>
+    <string name="home_channels_count">%1$d کەناڵ</string>
+    <string name="home_top10_films">10 باشترین فیلمی ئەم هەفتەیە</string>
+    <string name="home_top10_series">10 باشترین زنجیرەی ئەم هەفتەیە</string>
+    <string name="home_in_cinemas">ئێستا لە سینەما</string>
+    <string name="home_airing_today">ئەڵقەی نوێی ئەمڕۆ</string>
+    <string name="stats_your_week">هەفتەکەت</string>
+    <string name="stats_watch_time">کاتی سەیرکردن</string>
+    <string name="stats_daily_avg">تێکڕای ڕۆژانە</string>
+    <string name="stats_minutes">%1$d خ</string>
+    <string name="stats_hours">%1$d ک %2$d خ</string>
+    <string name="live_breakdown">کەناڵەکان بەپێی پۆل</string>
+    <string name="live_featured">کەناڵە دیارەکان</string>
+    <string name="live_all_channels">هەموو کەناڵەکان</string>
+    <string name="live_categories_count">%1$d پۆل</string>
+    <string name="catalog_genres">گەڕان بەپێی جۆر</string>
+    <string name="catalog_titles_count">%1$s ناونیشان</string>
+    <string name="details_by_numbers">بە ژمارە</string>
+    <string name="details_score">هەڵسەنگاندن</string>
+    <string name="details_votes">دەنگ</string>
+    <string name="details_runtime">ماوە</string>
+    <string name="details_budget">بودجە</string>
+    <string name="details_revenue">داهات</string>
+    <string name="details_popularity">ناوبانگ</string>
+    <string name="details_language">زمان</string>
+    <string name="details_status">دۆخ</string>
+    <string name="details_seasons_label">وەرزەکان</string>
+    <string name="details_episodes_label">ئەڵقەکان</string>
+    <string name="details_episodes_per_season">ئەڵقە لە هەر وەرزێک</string>
+    <string name="details_return">%1$s× بودجەکەی</string>
+    <string name="details_of_3h">لە فیلمێکی 3 کاتژمێری</string>
+    <string name="details_audience">هەڵسەنگاندنی بینەران</string>
+    <string name="profile_title">پرۆفایلەکەت</string>
+    <string name="profile_viewing">سەیرکردنەکانت</string>
+    <string name="profile_library">کتێبخانەکەت</string>
+    <string name="profile_split">کاتی سەیرکردن بەپێی پۆل</string>
+    <string name="profile_settings">ڕێکخستنەکان</string>
+    <string name="actor_credits">بەرهەمەکان</string>
+    <string name="actor_avg_score">تێکڕای هەڵسەنگاندن</string>
+    <string name="actor_years_active">ساڵانی چالاکی</string>
+    <string name="actor_known_for">بەناوبانگە بە</string>
+    <string name="live_chip_count" formatted="true">%1$s · %2$d</string>
+    <string name="details_votes_count">لە %1$s دەنگ</string>
+    <string name="details_no_votes">هێشتا هەڵنەسەنگێنراوە</string>
+    <string name="details_year">ساڵ</string>
+</resources>

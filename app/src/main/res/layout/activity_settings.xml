@@ -37,8 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:elevation="0dp"
-        app:navigationIcon="@drawable/ic_arrow_back_24"
-        app:title="@string/settings" />
+        app:title="@string/profile_title" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -52,9 +51,140 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- ═══════ PROFILE DASHBOARD ═══════
+                 The viewer's own numbers first: the week as a chart, where
+                 their time goes by category, and what is in their library.
+                 ProfileDashboard.bind() fills it on every resume. -->
+            <include
+                android:id="@+id/profileWeek"
+                layout="@layout/view_week_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:id="@+id/splitCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_400"
+                android:background="@drawable/bg_card_soft"
+                android:orientation="vertical"
+                android:padding="@dimen/space_500"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_split"
+                    android:textAppearance="@style/TextAppearance.Nashat.Eyebrow" />
+
+                <com.nashat.tv.ui.chart.SegmentBar
+                    android:id="@+id/splitBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="14dp"
+                    android:layout_marginTop="@dimen/space_300" />
+
+                <LinearLayout
+                    android:id="@+id/splitLegend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_300"
+                    android:orientation="vertical" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_400"
+                android:background="@drawable/bg_card_soft"
+                android:orientation="vertical"
+                android:padding="@dimen/space_500">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_library"
+                    android:textAppearance="@style/TextAppearance.Nashat.Eyebrow" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_200"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/libFavorites"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.Nashat.Stat" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/row_favorites"
+                            android:textAppearance="@style/TextAppearance.Nashat.Label.Small"
+                            android:textColor="@color/content_tertiary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/libWatchlist"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.Nashat.Stat" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/row_watchlist"
+                            android:textAppearance="@style/TextAppearance.Nashat.Label.Small"
+                            android:textColor="@color/content_tertiary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/libContinue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.Nashat.Stat" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/row_continue"
+                            android:textAppearance="@style/TextAppearance.Nashat.Label.Small"
+                            android:textColor="@color/content_tertiary" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_800"
+                android:layout_marginBottom="@dimen/space_300"
+                android:text="@string/profile_settings"
+                android:textAppearance="@style/TextAppearance.Nashat.Section" />
+
             <!-- ═══════ PLAYBACK ═══════ -->
             <TextView
-                style="@style/TextAppearance.Material3.LabelLarge"
+                style="@style/TextAppearance.Nashat.Eyebrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="4dp"
@@ -65,7 +195,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/radius_none"
+                app:cardCornerRadius="@dimen/radius_lg"
                 app:strokeWidth="@dimen/edge_width"
                 app:strokeColor="@color/edge"
                 app:cardBackgroundColor="@color/surface_raised"
@@ -245,7 +375,7 @@
 
             <!-- ═══════ APPEARANCE ═══════ -->
             <TextView
-                style="@style/TextAppearance.Material3.LabelLarge"
+                style="@style/TextAppearance.Nashat.Eyebrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="4dp"
@@ -257,7 +387,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/radius_none"
+                app:cardCornerRadius="@dimen/radius_lg"
                 app:strokeWidth="@dimen/edge_width"
                 app:strokeColor="@color/edge"
                 app:cardBackgroundColor="@color/surface_raised"
@@ -391,7 +521,7 @@
 
             <!-- ═══════ MY CONTENT ═══════ -->
             <TextView
-                style="@style/TextAppearance.Material3.LabelLarge"
+                style="@style/TextAppearance.Nashat.Eyebrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="4dp"
@@ -403,7 +533,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/radius_none"
+                app:cardCornerRadius="@dimen/radius_lg"
                 app:strokeWidth="@dimen/edge_width"
                 app:strokeColor="@color/edge"
                 app:cardBackgroundColor="@color/surface_raised"
@@ -523,7 +653,7 @@
 
             <!-- ═══════ STORAGE ═══════ -->
             <TextView
-                style="@style/TextAppearance.Material3.LabelLarge"
+                style="@style/TextAppearance.Nashat.Eyebrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="4dp"
@@ -535,7 +665,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/radius_none"
+                app:cardCornerRadius="@dimen/radius_lg"
                 app:strokeWidth="@dimen/edge_width"
                 app:strokeColor="@color/edge"
                 app:cardBackgroundColor="@color/surface_raised"
@@ -597,7 +727,7 @@
 
             <!-- ═══════ SUPPORT ═══════ -->
             <TextView
-                style="@style/TextAppearance.Material3.LabelLarge"
+                style="@style/TextAppearance.Nashat.Eyebrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="4dp"
@@ -609,7 +739,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/radius_none"
+                app:cardCornerRadius="@dimen/radius_lg"
                 app:strokeWidth="@dimen/edge_width"
                 app:strokeColor="@color/edge"
                 app:cardBackgroundColor="@color/surface_raised"

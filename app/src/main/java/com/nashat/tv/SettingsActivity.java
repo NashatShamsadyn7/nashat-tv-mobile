@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.nashat.tv.ui.BottomNav;
+import com.nashat.tv.ui.ProfileDashboard;
 
 import java.util.List;
 import java.util.Map;
@@ -43,6 +44,13 @@ public class SettingsActivity extends BaseActivity {
     private TextView tvRefreshValue;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        // Watching or saving something on another tab changes these numbers.
+        ProfileDashboard.bind(this);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
@@ -58,6 +66,7 @@ public class SettingsActivity extends BaseActivity {
         // this the Settings tab was the one place in the app you could arrive
         // at and find no way back except the system Back button.
         BottomNav.bind(this, BottomNav.Tab.SETTINGS);
+        ProfileDashboard.bind(this);
     }
 
     private void initializeViews() {
@@ -197,8 +206,8 @@ public class SettingsActivity extends BaseActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(R.string.settings);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setTitle(R.string.profile_title);
         }
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             toolbar.setElevation(0f);

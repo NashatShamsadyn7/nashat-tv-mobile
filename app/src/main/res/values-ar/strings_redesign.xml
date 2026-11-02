@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Strings added with the 2026-11 redesign (home, charts, profile). -->
+<resources>
+    <string name="nav_profile">الملف</string>
+    <string name="category_general">عام</string>
+    <string name="home_tagline">أفلام ومسلسلات وبث مباشر في مكان واحد</string>
+    <string name="home_hero_film">الفيلم الرائج رقم %1$d</string>
+    <string name="home_hero_series">المسلسل الرائج رقم %1$d</string>
+    <string name="action_my_list">قائمتي</string>
+    <string name="home_on_air">على الهواء الآن</string>
+    <string name="home_channels_count">%1$d قناة</string>
+    <string name="home_top10_films">أفضل 10 أفلام هذا الأسبوع</string>
+    <string name="home_top10_series">أفضل 10 مسلسلات هذا الأسبوع</string>
+    <string name="home_in_cinemas">في السينما الآن</string>
+    <string name="home_airing_today">حلقات جديدة اليوم</string>
+    <string name="stats_your_week">أسبوعك</string>
+    <string name="stats_watch_time">وقت المشاهدة</string>
+    <string name="stats_daily_avg">المعدل اليومي</string>
+    <string name="stats_minutes">%1$d د</string>
+    <string name="stats_hours">%1$d س %2$d د</string>
+    <string name="live_breakdown">القنوات حسب الفئة</string>
+    <string name="live_featured">قنوات مميزة</string>
+    <string name="live_all_channels">كل القنوات</string>
+    <string name="live_categories_count">%1$d فئات</string>
+    <string name="catalog_genres">تصفح حسب النوع</string>
+    <string name="catalog_titles_count">%1$s عنوان</string>
+    <string name="details_by_numbers">بالأرقام</string>
+    <string name="details_score">التقييم</string>
+    <string name="details_votes">الأصوات</string>
+    <string name="details_runtime">المدة</string>
+    <string name="details_budget">الميزانية</string>
+    <string name="details_revenue">الإيرادات</string>
+    <string name="details_popularity">الشعبية</string>
+    <string name="details_language">اللغة</string>
+    <string name="details_status">الحالة</string>
+    <string name="details_seasons_label">المواسم</string>
+    <string name="details_episodes_label">الحلقات</string>
+    <string name="details_episodes_per_season">الحلقات في كل موسم</string>
+    <string name="details_return">%1$s× من ميزانيته</string>
+    <string name="details_of_3h">من فيلم مدته 3 ساعات</string>
+    <string name="details_audience">تقييم الجمهور</string>
+    <string name="profile_title">ملفك</string>
+    <string name="profile_viewing">مشاهداتك</string>
+    <string name="profile_library">مكتبتك</string>
+    <string name="profile_split">وقت المشاهدة حسب الفئة</string>
+    <string name="profile_settings">الإعدادات</string>
+    <string name="actor_credits">الأعمال</string>
+    <string name="actor_avg_score">متوسط التقييم</string>
+    <string name="actor_years_active">سنوات النشاط</string>
+    <string name="actor_known_for">اشتهر بـ</string>
+    <string name="live_chip_count" formatted="true">%1$s · %2$d</string>
+    <string name="details_votes_count">من %1$s صوت</string>
+    <string name="details_no_votes">لم يُقيَّم بعد</string>
+    <string name="details_year">السنة</string>
+</resources>

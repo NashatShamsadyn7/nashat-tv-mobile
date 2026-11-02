@@ -65,8 +65,8 @@
              Bound to the Material text-appearance roles so that stock
              widgets (dialogs, snackbars, menus) pick up IBM Plex without
              each call site having to set fontFamily. -->
-        <item name="fontFamily">@font/plex_arabic</item>
-        <item name="android:fontFamily">@font/plex_arabic</item>
+        <item name="fontFamily">@font/cairo</item>
+        <item name="android:fontFamily">@font/cairo</item>
 
         <item name="textAppearanceHeadlineLarge">@style/TextAppearance.Nashat.Display</item>
         <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Nashat.Headline</item>
@@ -86,13 +86,13 @@
              stock widget the app has not restyled — a date picker, a menu,
              a tooltip — comes out square too, which is the only way a
              single rounded corner does not survive somewhere unnoticed. -->
-        <item name="shapeAppearanceCornerExtraSmall">@style/ShapeAppearance.Nashat.Square</item>
-        <item name="shapeAppearanceCornerSmall">@style/ShapeAppearance.Nashat.Square</item>
+        <item name="shapeAppearanceCornerExtraSmall">@style/ShapeAppearance.Nashat.Small</item>
+        <item name="shapeAppearanceCornerSmall">@style/ShapeAppearance.Nashat.Small</item>
         <item name="shapeAppearanceCornerMedium">@style/ShapeAppearance.Nashat.Square</item>
-        <item name="shapeAppearanceCornerLarge">@style/ShapeAppearance.Nashat.Square</item>
+        <item name="shapeAppearanceCornerLarge">@style/ShapeAppearance.Nashat.Large</item>
         <!-- ExtraLarge is the one dialogs and sheets resolve. Omitting it was
              how a fully square app kept two 28dp-rounded surfaces. -->
-        <item name="shapeAppearanceCornerExtraLarge">@style/ShapeAppearance.Nashat.Square</item>
+        <item name="shapeAppearanceCornerExtraLarge">@style/ShapeAppearance.Nashat.Large</item>
 
         <!-- ── Component defaults ───────────────────────────────────
              Set once here so a layout that drops in a plain MaterialButton
@@ -228,24 +228,31 @@
     </style>
 
     <!-- ══════════════════════════════════════════════════════════════
-         SHAPE ROLES
-
-         There is one shape. Small / Medium / Large / Pill / Circle are all
-         aliases of it, kept so that no style or layout has to be edited to
-         stop being rounded — including Circle, because a circular avatar
-         beside square everything else is the one exception that would make
-         the rule look accidental.
+         SHAPE ROLES — soft corners, matching Nashat TV Desktop and web.
+         Square keeps its name for the styles that reference it but is now
+         the medium radius; Pill and Circle are fully rounded.
          ══════════════════════════════════════════════════════════════ -->
     <style name="ShapeAppearance.Nashat.Square" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/radius_none</item>
+        <item name="cornerSize">@dimen/radius_md</item>
     </style>
 
-    <style name="ShapeAppearance.Nashat.Small" parent="ShapeAppearance.Nashat.Square" />
+    <style name="ShapeAppearance.Nashat.Small" parent="ShapeAppearance.Nashat.Square">
+        <item name="cornerSize">@dimen/radius_sm</item>
+    </style>
     <style name="ShapeAppearance.Nashat.Medium" parent="ShapeAppearance.Nashat.Square" />
-    <style name="ShapeAppearance.Nashat.Large" parent="ShapeAppearance.Nashat.Square" />
-    <style name="ShapeAppearance.Nashat.Pill" parent="ShapeAppearance.Nashat.Square" />
-    <style name="ShapeAppearance.Nashat.Circle" parent="ShapeAppearance.Nashat.Square" />
+    <style name="ShapeAppearance.Nashat.Large" parent="ShapeAppearance.Nashat.Square">
+        <item name="cornerSize">@dimen/radius_lg</item>
+    </style>
+    <style name="ShapeAppearance.Nashat.Hero" parent="ShapeAppearance.Nashat.Square">
+        <item name="cornerSize">@dimen/radius_xl</item>
+    </style>
+    <style name="ShapeAppearance.Nashat.Pill" parent="ShapeAppearance.Nashat.Square">
+        <item name="cornerSize">50%</item>
+    </style>
+    <style name="ShapeAppearance.Nashat.Circle" parent="ShapeAppearance.Nashat.Square">
+        <item name="cornerSize">50%</item>
+    </style>
 
 
     <!-- ══════════════════════════════════════════════════════════════

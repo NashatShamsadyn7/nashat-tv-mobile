@@ -1,38 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Bottom-nav tab background.
-
-  The active tab is a full-bleed lime block that fills its share of the bar,
-  edge to edge and top to bottom. The previous bar marked the active tab by
-  tinting its icon, which is a 24dp cue on a 64dp bar — findable, but only
-  if you go looking. A whole column of brand colour answers "where am I"
-  before the user has finished asking.
-
-  It is also the only element in the app allowed to be a solid lime plane
-  that large, which is what keeps it unambiguous: nothing else on screen can
-  be mistaken for it.
-
-  Nothing is drawn for the inactive or pressed states. The bar is a glass
-  layer; giving each tab its own resting fill would turn four transparent
-  slots into four visible rectangles and destroy the panel.
--->
+<!-- Bottom-nav item. The active tab is marked by its indicator pill and
+     accent icon (see item_bottom_nav), not by filling the whole cell, so the
+     bar stays quiet and the content above it stays the focus. -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:state_selected="true">
-        <shape android:shape="rectangle">
-            <solid android:color="@color/accent_fill" />
-        </shape>
-    </item>
-
-    <!-- D-pad focus on a TV, where there is no touch and no ripple. The
-         wash is enough to separate "the cursor is here" from "this is the
-         screen you are on", which the lime block already says. -->
     <item android:state_focused="true">
         <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_md" />
             <solid android:color="@color/focus_surface" />
         </shape>
     </item>
-
     <item android:drawable="@android:color/transparent" />
-
 </selector>

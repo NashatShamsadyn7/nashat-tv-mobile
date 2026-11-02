@@ -11,6 +11,6 @@
         android:type="linear" />
     
     <!-- Rounded corners to match card -->
-    <corners android:radius="@dimen/radius_none" />
+    <corners android:radius="@dimen/radius_lg" />
     
 </shape>

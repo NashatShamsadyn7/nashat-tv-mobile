@@ -133,7 +133,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/type_size_body_large"
         android:textStyle="bold"
-        app:cornerRadius="@dimen/radius_none"
+        app:cornerRadius="@dimen/radius_md"
         app:backgroundTint="@color/accent_primary"/>
 
 </LinearLayout>

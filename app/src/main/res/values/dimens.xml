@@ -63,12 +63,12 @@
          stop being rounded; they all resolve to the same value. Delete a
          name once nothing references it. -->
     <dimen name="radius_none">0dp</dimen>
-    <dimen name="radius_xs">0dp</dimen>
-    <dimen name="radius_sm">0dp</dimen>
-    <dimen name="radius_md">0dp</dimen>
-    <dimen name="radius_lg">0dp</dimen>
-    <dimen name="radius_xl">0dp</dimen>
-    <dimen name="radius_pill">0dp</dimen>
+    <dimen name="radius_xs">4dp</dimen>
+    <dimen name="radius_sm">8dp</dimen>
+    <dimen name="radius_md">12dp</dimen>
+    <dimen name="radius_lg">16dp</dimen>
+    <dimen name="radius_xl">24dp</dimen>
+    <dimen name="radius_pill">999dp</dimen>
 
     <!-- ══ EDGE & BLOCK ═════════════════════════════════════════════
          The two dimensions that carry the entire brutalist look.
@@ -82,10 +82,10 @@
          side of a raised element. 4dp is one grid step: large enough to
          read as depth at arm's length, small enough that a row of offset
          cards does not visibly lose 4dp of gutter between them. -->
-    <dimen name="edge_width">2dp</dimen>
-    <dimen name="edge_width_focus">3dp</dimen>
+    <dimen name="edge_width">1dp</dimen>
+    <dimen name="edge_width_focus">2dp</dimen>
     <dimen name="edge_width_inset">1dp</dimen>
-    <dimen name="block_offset">4dp</dimen>
+    <dimen name="block_offset">0dp</dimen>
 
     <!-- ══ GLASS ════════════════════════════════════════════════════
          Blur radius for floating layers, applied via RenderEffect on API
@@ -155,7 +155,9 @@
     <!-- Details hero. Shorter than 16:9 on a phone: a full-ratio backdrop
          pushes the title and the Play button below the fold, so the first
          thing the screen shows is a picture and nothing to do with it. -->
-    <dimen name="details_backdrop_height">220dp</dimen>
+    <dimen name="details_backdrop_height">300dp</dimen>
+    <dimen name="details_poster_width">112dp</dimen>
+    <dimen name="details_poster_height">168dp</dimen>
 
     <!-- Channel tile. Square, because broadcaster logos are square-ish and
          a 16:9 tile leaves two dead pillars of background on every card. -->
@@ -179,7 +181,7 @@
          ══════════════════════════════════════════════════════════════ -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="card_corner_radius">@dimen/radius_none</dimen>
+    <dimen name="card_corner_radius">@dimen/radius_lg</dimen>
     <dimen name="card_elevation">0dp</dimen>
     <dimen name="card_margin">8dp</dimen>
     <dimen name="card_padding">16dp</dimen>
@@ -203,16 +205,16 @@
     <dimen name="spacing_xxlarge">48dp</dimen>
     <dimen name="button_height">48dp</dimen>
     <dimen name="button_min_width">88dp</dimen>
-    <dimen name="button_corner_radius">@dimen/radius_none</dimen>
+    <dimen name="button_corner_radius">@dimen/radius_md</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="icon_size_small">16dp</dimen>
     <dimen name="icon_size_medium">24dp</dimen>
     <dimen name="icon_size_large">32dp</dimen>
     <dimen name="icon_size_xlarge">48dp</dimen>
     <dimen name="search_bar_height">48dp</dimen>
-    <dimen name="search_bar_corner_radius">@dimen/radius_none</dimen>
+    <dimen name="search_bar_corner_radius">@dimen/radius_md</dimen>
     <dimen name="search_bar_elevation">0dp</dimen>
-    <dimen name="chip_corner_radius">@dimen/radius_none</dimen>
+    <dimen name="chip_corner_radius">@dimen/radius_pill</dimen>
     <dimen name="chip_spacing">8dp</dimen>
     <dimen name="progress_bar_height">3dp</dimen>
     <dimen name="circular_progress_size">48dp</dimen>

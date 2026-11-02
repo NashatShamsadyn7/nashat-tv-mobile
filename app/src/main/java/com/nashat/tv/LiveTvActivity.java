@@ -46,7 +46,8 @@ public class LiveTvActivity extends BaseActivity {
 
     private static final String TAG = "LiveTvActivity";
 
-    private static final int GRID_COLUMNS = 4;
+    /** Narrowest a channel tile may get before the grid drops a column. */
+    private static final int MIN_TILE_DP = 108;
     private static final int PAGE_SIZE = 32;
 
     private final Handler searchHandler = new Handler(Looper.getMainLooper());
@@ -57,6 +58,7 @@ public class LiveTvActivity extends BaseActivity {
 
     private LiveTvChannelRepository repository;
     private LiveTvAdapter adapter;
+    private HeaderAdapter headerAdapter;
     private GridLayoutManager gridLayoutManager;
     private final ExecutorService backgroundExecutor = Executors.newSingleThreadExecutor();
 
@@ -134,11 +136,22 @@ public class LiveTvActivity extends BaseActivity {
         tvChannelCount = findViewById(R.id.tvChannelCount);
         editSearch = findViewById(R.id.editSearch);
 
-        gridLayoutManager = new GridLayoutManager(this, GRID_COLUMNS);
+        // As many columns as fit, never fewer than three: 3 on a phone, 4 on a
+        // large phone in landscape, 6–8 on a tablet.
+        float widthDp = getResources().getDisplayMetrics().widthPixels
+                / getResources().getDisplayMetrics().density;
+        final int columns = Math.max(3, (int) (widthDp / MIN_TILE_DP));
+        gridLayoutManager = new GridLayoutManager(this, columns);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return position < headerAdapter.getItemCount() ? columns : 1;
+            }
+        });
         recyclerChannels.setLayoutManager(gridLayoutManager);
-        recyclerChannels.setHasFixedSize(true);
         adapter = new LiveTvAdapter(this);
-        recyclerChannels.setAdapter(adapter);
+        headerAdapter = new HeaderAdapter();
+        recyclerChannels.setAdapter(new androidx.recyclerview.widget.ConcatAdapter(headerAdapter, adapter));
         recyclerChannels.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -486,7 +499,7 @@ public class LiveTvActivity extends BaseActivity {
             params.setMarginEnd(getResources().getDimensionPixelSize(R.dimen.space_200));
             chip.setLayoutParams(params);
 
-            chip.setText(categoryLabel(category));
+            chip.setText(getString(R.string.live_chip_count, categoryLabel(category), countIn(category)));
             chip.setCheckable(true);
             chip.setChecked(selected);
 
@@ -538,6 +551,70 @@ public class LiveTvActivity extends BaseActivity {
         return stripped.isEmpty() ? category : stripped;
     }
 
+    private int countIn(String category) {
+        if ("All".equalsIgnoreCase(category)) return allChannels.size();
+        int n = 0;
+        for (Channel c : allChannels) if (category.equalsIgnoreCase(c.getCategory())) n++;
+        return n;
+    }
+
+    /**
+     * The stats card at the top of the grid: total, category count, and the
+     * split by category. Hidden while searching or filtering, when the grid
+     * itself is the answer.
+     */
+    private final class HeaderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+        private boolean visible;
+
+        void setVisible(boolean show) {
+            if (show == visible) {
+                if (show) notifyItemChanged(0);
+                return;
+            }
+            visible = show;
+            if (show) notifyItemInserted(0);
+            else notifyItemRemoved(0);
+        }
+
+        @NonNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View v = android.view.LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.view_live_header, parent, false);
+            float widthDp = getResources().getDisplayMetrics().widthPixels
+                    / getResources().getDisplayMetrics().density;
+            ((android.widget.GridLayout) v.findViewById(R.id.headerLegend))
+                    .setColumnCount(widthDp >= 600 ? 4 : 2);
+            return new RecyclerView.ViewHolder(v) { };
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+            View v = holder.itemView;
+            List<String> cats = new ArrayList<>(categories);
+            cats.remove("All");
+            ((TextView) v.findViewById(R.id.headerCount)).setText(
+                    getString(R.string.home_channels_count, allChannels.size()));
+            ((TextView) v.findViewById(R.id.headerCategories)).setText(
+                    getString(R.string.live_categories_count, cats.size()));
+
+            List<com.nashat.tv.ui.chart.SegmentBar.Segment> segments = new ArrayList<>();
+            for (String c : cats) {
+                segments.add(new com.nashat.tv.ui.chart.SegmentBar.Segment(categoryLabel(c),
+                        countIn(c), com.nashat.tv.ui.CategoryColors.forCategory(LiveTvActivity.this, c)));
+            }
+            Collections.sort(segments, (a, b) -> Float.compare(b.value, a.value));
+            ((com.nashat.tv.ui.chart.SegmentBar) v.findViewById(R.id.headerBar)).setSegments(segments);
+            com.nashat.tv.ui.chart.SegmentBar.fillLegend(v.findViewById(R.id.headerLegend), segments,
+                    value -> String.valueOf(Math.round(value)));
+        }
+
+        @Override
+        public int getItemCount() {
+            return visible ? 1 : 0;
+        }
+    }
+
     private void applyFilters(boolean resetPaging) {
         filteredChannels.clear();
         for (Channel channel : allChannels) {
@@ -555,6 +632,8 @@ public class LiveTvActivity extends BaseActivity {
         }
 
         tvChannelCount.setText(getString(R.string.live_tv_count, filteredChannels.size()));
+        headerAdapter.setVisible(searchQuery.isEmpty() && "All".equalsIgnoreCase(selectedCategory)
+                && !allChannels.isEmpty());
         if (filteredChannels.isEmpty()) {
             showEmpty(getString(R.string.no_channels));
         } else {

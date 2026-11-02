@@ -4,5 +4,5 @@
     <solid android:color="@color/logo_inner_circle_bg" />
     <stroke
         android:width="@dimen/edge_width_inset"
-        android:color="#10C8F04C" />
+        android:color="#10E11D48" />
 </shape>

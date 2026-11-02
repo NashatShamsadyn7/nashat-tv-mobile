@@ -3,8 +3,12 @@ package com.nashat.tv;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -29,6 +33,10 @@ import com.nashat.tv.tmdb.TmdbModels.Video;
 import com.nashat.tv.ui.CastAdapter;
 import com.nashat.tv.ui.EpisodeAdapter;
 import com.nashat.tv.ui.PosterAdapter;
+import com.nashat.tv.ui.chart.BarChart;
+import com.nashat.tv.ui.chart.MeterBar;
+import com.nashat.tv.ui.chart.RatingRing;
+import com.nashat.tv.ui.chart.StepBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +64,11 @@ public class DetailsActivity extends BaseActivity {
     private View scroll, errorState, episodesSection, castSection, recommendationsSection;
     private ProgressBar loading, episodesLoading;
     private ImageView backdrop, poster;
-    private TextView title, meta, genres, overview;
+    private TextView title, meta, overview, tagline, kindBadge, scoreVotes;
+    private LinearLayout genres, statCharts;
+    private GridLayout statGrid;
+    private RatingRing scoreRing;
+    private StepBar scoreSteps;
     private MaterialButton btnPlay, btnTrailer, btnFavorite, btnWatchlist, btnSeason;
 
     private EpisodeAdapter episodeAdapter;
@@ -96,6 +108,17 @@ public class DetailsActivity extends BaseActivity {
         meta = findViewById(R.id.meta);
         genres = findViewById(R.id.genres);
         overview = findViewById(R.id.overview);
+        tagline = findViewById(R.id.tagline);
+        kindBadge = findViewById(R.id.kindBadge);
+        scoreRing = findViewById(R.id.scoreRing);
+        scoreVotes = findViewById(R.id.scoreVotes);
+        scoreSteps = findViewById(R.id.scoreSteps);
+        statGrid = findViewById(R.id.statGrid);
+        statCharts = findViewById(R.id.statCharts);
+        ((TextView) findViewById(R.id.castTitle).findViewById(R.id.sectionTitle)).setText(R.string.details_cast);
+        ((TextView) findViewById(R.id.recsTitle).findViewById(R.id.sectionTitle)).setText(R.string.details_also_like);
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        statGrid.setColumnCount(dm.widthPixels / dm.density >= 600 ? 6 : 3);
         btnPlay = findViewById(R.id.btnPlay);
         btnTrailer = findViewById(R.id.btnTrailer);
         btnFavorite = findViewById(R.id.btnFavorite);
@@ -171,9 +194,15 @@ public class DetailsActivity extends BaseActivity {
         overview.setText(details.overview == null || details.overview.isEmpty()
                 ? getString(R.string.details_no_overview) : details.overview);
 
-        String genreLine = buildGenres();
-        genres.setText(genreLine);
-        genres.setVisibility(genreLine.isEmpty() ? View.GONE : View.VISIBLE);
+        kindBadge.setText(kind == Kind.TV ? R.string.nav_series : R.string.nav_movies);
+        if (details.tagline != null && !details.tagline.trim().isEmpty()) {
+            tagline.setText(details.tagline.trim());
+            tagline.setVisibility(View.VISIBLE);
+        } else {
+            tagline.setVisibility(View.GONE);
+        }
+        bindGenrePills();
+        bindNumbers();
 
         Glide.with(this).load(Tmdb.backdropLarge(details.backdropPath))
                 .placeholder(R.color.surface_sunken).centerCrop().into(backdrop);
@@ -218,14 +247,152 @@ public class DetailsActivity extends BaseActivity {
         return getString(R.string.details_runtime_full, hours, rest);
     }
 
-    private String buildGenres() {
-        if (details.genres == null || details.genres.isEmpty()) return "";
-        List<String> names = new ArrayList<>();
+    private void bindGenrePills() {
+        genres.removeAllViews();
+        if (details.genres == null) return;
+        int gap = Math.round(8 * getResources().getDisplayMetrics().density);
         for (Genre g : details.genres) {
-            if (g != null && g.name != null) names.add(g.name);
-            if (names.size() == 3) break;
+            if (g == null || g.name == null) continue;
+            TextView pill = (TextView) getLayoutInflater().inflate(R.layout.item_pill, genres, false);
+            pill.setText(g.name);
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) pill.getLayoutParams();
+            lp.setMarginEnd(gap);
+            genres.addView(pill, lp);
         }
-        return android.text.TextUtils.join(" · ", names);
+    }
+
+    // ─── By the numbers ───────────────────────────────────────
+
+    /**
+     * The stats card: score ring and step bar, a grid of key figures, and
+     * one chart chosen by what the title has — runtime for a film, money
+     * when TMDB knows both budget and box office, episodes per season for a
+     * series.
+     */
+    private void bindNumbers() {
+        scoreRing.setScore(details.voteAverage);
+        scoreSteps.setScore(details.voteAverage);
+        scoreVotes.setText(details.voteCount > 0
+                ? getString(R.string.details_votes_count, compact(details.voteCount))
+                : getString(R.string.details_no_votes));
+
+        statGrid.removeAllViews();
+        String year = details.year();
+        if (year != null) addStat(year, getString(R.string.details_year));
+        if (kind == Kind.MOVIE) {
+            if (details.runtime != null && details.runtime > 0) {
+                addStat(formatRuntime(details.runtime), getString(R.string.details_runtime));
+            }
+        } else {
+            if (details.numberOfSeasons > 0) {
+                addStat(String.valueOf(details.numberOfSeasons), getString(R.string.details_seasons_label));
+            }
+            if (details.numberOfEpisodes > 0) {
+                addStat(String.valueOf(details.numberOfEpisodes), getString(R.string.details_episodes_label));
+            }
+        }
+        if (details.voteCount > 0) addStat(compact(details.voteCount), getString(R.string.details_votes));
+        if (details.originalLanguage != null && !details.originalLanguage.isEmpty()) {
+            String lang = new Locale(details.originalLanguage).getDisplayLanguage();
+            addStat(lang.isEmpty() ? details.originalLanguage.toUpperCase(Locale.US) : lang,
+                    getString(R.string.details_language));
+        }
+        if (details.popularity > 0) {
+            addStat(String.valueOf(Math.round(details.popularity)), getString(R.string.details_popularity));
+        }
+        if (details.status != null && !details.status.isEmpty() && statGrid.getChildCount() < 6) {
+            addStat(details.status, getString(R.string.details_status));
+        }
+
+        statCharts.removeAllViews();
+        if (kind == Kind.MOVIE) {
+            if (details.runtime != null && details.runtime > 0) {
+                addMeter(getString(R.string.details_runtime) + " · " + getString(R.string.details_of_3h),
+                        formatRuntime(details.runtime), details.runtime / 180f, 0);
+            }
+            if (details.budget > 0 && details.revenue > 0) {
+                long max = Math.max(details.budget, details.revenue);
+                addMeter(getString(R.string.details_budget), money(details.budget),
+                        (float) details.budget / max, ContextCompat.getColor(this, R.color.chart_bar));
+                addMeter(getString(R.string.details_revenue), money(details.revenue),
+                        (float) details.revenue / max, ContextCompat.getColor(this, R.color.score_high));
+                addNote(getString(R.string.details_return, String.format(Locale.getDefault(),
+                        "%.1f", (double) details.revenue / details.budget)));
+            }
+        } else {
+            addSeasonChart();
+        }
+    }
+
+    private void addStat(String value, String label) {
+        View tile = getLayoutInflater().inflate(R.layout.item_stat_tile, statGrid, false);
+        ((TextView) tile.findViewById(R.id.statValue)).setText(value);
+        ((TextView) tile.findViewById(R.id.statLabel)).setText(label);
+        GridLayout.LayoutParams lp = new GridLayout.LayoutParams(
+                GridLayout.spec(GridLayout.UNDEFINED),
+                GridLayout.spec(GridLayout.UNDEFINED, 1f));
+        lp.width = 0;
+        statGrid.addView(tile, lp);
+    }
+
+    private void addMeter(String label, String value, float fraction, int color) {
+        View meter = getLayoutInflater().inflate(R.layout.item_meter, statCharts, false);
+        ((TextView) meter.findViewById(R.id.meterLabel)).setText(label);
+        ((TextView) meter.findViewById(R.id.meterValue)).setText(value);
+        MeterBar bar = meter.findViewById(R.id.meterBar);
+        bar.setFraction(fraction);
+        if (color != 0) bar.setColor(color);
+        statCharts.addView(meter);
+    }
+
+    private void addNote(String text) {
+        TextView note = new TextView(this);
+        note.setTextAppearance(R.style.TextAppearance_Nashat_Label_Medium);
+        note.setTextColor(ContextCompat.getColor(this, R.color.content_secondary));
+        note.setPadding(0, Math.round(12 * getResources().getDisplayMetrics().density), 0, 0);
+        note.setText(text);
+        statCharts.addView(note);
+    }
+
+    private void addSeasonChart() {
+        if (details.seasons == null) return;
+        List<Float> values = new ArrayList<>();
+        List<String> labels = new ArrayList<>();
+        for (var s : details.seasons) {
+            if (s == null || s.seasonNumber < 1 || s.episodeCount <= 0) continue;
+            values.add((float) s.episodeCount);
+            labels.add("S" + s.seasonNumber);
+        }
+        if (values.size() < 2) return;
+        // Past a dozen seasons the bars get too thin to read; keep the latest.
+        int from = Math.max(0, values.size() - 12);
+        float[] v = new float[values.size() - from];
+        String[] l = new String[v.length];
+        String[] top = new String[v.length];
+        for (int i = 0; i < v.length; i++) {
+            v[i] = values.get(from + i);
+            l[i] = labels.get(from + i);
+            top[i] = String.valueOf(Math.round(v[i]));
+        }
+        addNote(getString(R.string.details_episodes_per_season));
+
+        BarChart chart = new BarChart(this);
+        chart.setData(v, l, top, -1);
+        statCharts.addView(chart, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                Math.round(130 * getResources().getDisplayMetrics().density)));
+    }
+
+    /** 1234 → "1.2K", 2_500_000 → "2.5M". */
+    private static String compact(long n) {
+        if (n >= 1_000_000) return String.format(Locale.getDefault(), "%.1fM", n / 1_000_000.0);
+        if (n >= 1_000) return String.format(Locale.getDefault(), "%.1fK", n / 1_000.0);
+        return String.valueOf(n);
+    }
+
+    private static String money(long dollars) {
+        if (dollars >= 1_000_000_000L) return String.format(Locale.US, "$%.2fB", dollars / 1e9);
+        if (dollars >= 1_000_000L) return String.format(Locale.US, "$%.0fM", dollars / 1e6);
+        return String.format(Locale.US, "$%,d", dollars);
     }
 
     // ─── Trailer ──────────────────────────────────────────────
@@ -311,7 +478,7 @@ public class DetailsActivity extends BaseActivity {
 
         boolean fav = favorites.isFavorite(m);
         btnFavorite.setIconTint(ContextCompat.getColorStateList(this,
-                fav ? R.color.status_live_fill : R.color.content_secondary));
+                fav ? R.color.status_live_fill : R.color.content_primary));
         btnFavorite.setContentDescription(getString(
                 fav ? R.string.action_remove_favorite : R.string.action_add_favorite));
 
@@ -319,7 +486,7 @@ public class DetailsActivity extends BaseActivity {
         btnWatchlist.setIcon(ContextCompat.getDrawable(this,
                 listed ? R.drawable.ic_playlist_add_check : R.drawable.ic_playlist_add));
         btnWatchlist.setIconTint(ContextCompat.getColorStateList(this,
-                listed ? R.color.accent_text : R.color.content_secondary));
+                listed ? R.color.accent_text : R.color.content_primary));
         btnWatchlist.setContentDescription(getString(
                 listed ? R.string.action_remove_watchlist : R.string.action_add_watchlist));
     }

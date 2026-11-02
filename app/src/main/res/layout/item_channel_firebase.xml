@@ -8,7 +8,7 @@
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground"
     android:stateListAnimator="@animator/focus_scale"
-    app:cardCornerRadius="@dimen/radius_none"
+    app:cardCornerRadius="@dimen/radius_lg"
     app:strokeWidth="0dp"
     app:cardBackgroundColor="#151515"
     app:cardElevation="0dp">

@@ -1,31 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ══════════════════════════════════════════════════════════════════════
-   NASHAT TV — COLOR SYSTEM · DARK MODE
+   NASHAT TV — COLOR SYSTEM · DARK MODE (the default)
   ══════════════════════════════════════════════════════════════════════
 
-   Overrides only the SEMANTIC layer from values/colors.xml. The brand
-   palette is deliberately identical in both modes — lime at #C8F04C clears
-   14.6:1 on this background and 5.8:1 as accent_text on the light one, so
-   the hero colour never has to shift and the app keeps one identity.
-
-   Every legacy-bridge entry that resolves to a semantic token inherits the
-   dark value automatically; only the handful holding literal ARGB (glass,
-   scrim overlays, logo plate) is repeated at the bottom.
-
-   The backgrounds are warm near-blacks, not neutral. #100F0C carries a few
-   points of red so lime and coral sit at the same temperature as the
-   surface; on a neutral #101010 both accents read faintly sour.
+   Overrides only the SEMANTIC layer from values/colors.xml, using the
+   desktop app's ink scale: #0A0A0B page, #111114 cards, a faint #22222A
+   hairline instead of an outline, white text, crimson accent.
 -->
 <resources>
 
     <!-- ── Surfaces ─────────────────────────────────────────────── -->
-    <color name="surface_base">#100F0C</color>       <!-- page background -->
-    <color name="surface_raised">#1A1815</color>     <!-- cards, sheets -->
-    <color name="surface_sunken">#0A0907</color>     <!-- wells, track fills -->
-    <color name="surface_input">#232019</color>      <!-- search field, chips -->
-    <color name="surface_overlay">#F5100F0C</color>  <!-- 96% base, over media -->
-    <color name="surface_inverse">#FBF8F1</color>    <!-- tooltips, snackbars -->
+    <color name="surface_base">@color/ink_900</color>       <!-- page background -->
+    <color name="surface_raised">@color/ink_800</color>     <!-- cards, sheets -->
+    <color name="surface_sunken">#050506</color>     <!-- wells, track fills -->
+    <color name="surface_input">@color/ink_700</color>      <!-- search field, chips -->
+    <color name="surface_overlay">#F50A0A0B</color>  <!-- 96% base, over media -->
+    <color name="surface_inverse">#F4F4F5</color>    <!-- tooltips, snackbars -->
 
     <!-- Scrims stay black in both modes: they darken artwork, and artwork
          has no mode. A beige scrim would tint every poster. -->
@@ -43,55 +34,55 @@
          shadow_block is NOT redefined in this file. It stays brand_lime,
          the same literal in both modes, so a raised element is raised by
          the same amount of the same colour whichever mode you are in. -->
-    <color name="edge">@color/content_primary</color>
-    <color name="edge_inset">#3B352C</color>
+    <color name="edge">@color/ink_600</color>
+    <color name="edge_inset">@color/ink_700</color>
 
     <!-- Glass. Same alphas as light (C7 / EB); only the base hue flips. -->
-    <color name="glass_fill">#C7100F0C</color>
-    <color name="glass_fill_strong">#EB100F0C</color>
-    <color name="glass_fill_opaque">#100F0C</color>
+    <color name="glass_fill">#CC0A0A0B</color>
+    <color name="glass_fill_strong">#EB111114</color>
+    <color name="glass_fill_opaque">@color/ink_900</color>
 
-    <color name="border_focus">@color/brand_lime</color>
+    <color name="border_focus">@color/brand_crimson</color>
 
     <color name="border_hairline">@color/edge_inset</color>
     <color name="border_default">@color/edge</color>
     <color name="border_strong">@color/edge</color>
 
     <!-- ── Content ──────────────────────────────────────────────── -->
-    <color name="content_primary">#F7F2E7</color>    <!-- 17.3:1 on base -->
-    <color name="content_secondary">#B8AF9D</color>  <!--  8.8:1 -->
-    <color name="content_tertiary">#837C6D</color>   <!--  4.6:1 -->
-    <color name="content_disabled">#565046</color>
-    <color name="content_inverse">#17150F</color>
+    <color name="content_primary">#FFFFFF</color>    <!-- 17.3:1 on base -->
+    <color name="content_secondary">@color/ink_200</color>  <!--  8.8:1 -->
+    <color name="content_tertiary">#70707E</color>   <!--  4.6:1 -->
+    <color name="content_disabled">@color/ink_400</color>
+    <color name="content_inverse">@color/ink_900</color>
 
     <!-- ── Accent ───────────────────────────────────────────────── -->
     <!-- Unlike light mode, lime IS legible as text here, so accent_text and
          accent_fill converge on the true brand value. -->
-    <color name="accent_text">@color/brand_lime</color>
-    <color name="accent_fill">@color/brand_lime</color>
-    <color name="accent_fill_pressed">@color/brand_lime_deep</color>
-    <color name="on_accent_fill">@color/brand_ink</color>
-    <color name="accent_wash">#29C8F04C</color>
+    <color name="accent_text">@color/brand_crimson_bright</color>
+    <color name="accent_fill">@color/brand_crimson</color>
+    <color name="accent_fill_pressed">@color/brand_crimson_deep</color>
+    <color name="on_accent_fill">#FFFFFF</color>
+    <color name="accent_wash">#26E11D48</color>
 
     <!-- ── Status ───────────────────────────────────────────────── -->
-    <color name="status_live">@color/brand_coral</color>
-    <color name="status_live_fill">@color/brand_coral</color>
-    <color name="on_status_live_fill">#2B0A04</color>
-    <color name="status_success">#8FD694</color>
-    <color name="status_warning">#E8A33D</color>
-    <color name="status_danger">@color/brand_coral</color>
+    <color name="status_live">@color/brand_crimson_bright</color>
+    <color name="status_live_fill">@color/brand_crimson</color>
+    <color name="on_status_live_fill">#FFFFFF</color>
+    <color name="status_success">#34D399</color>
+    <color name="status_warning">#FBBF24</color>
+    <color name="status_danger">@color/brand_crimson_bright</color>
 
     <!-- Brighter gold: the light-mode value is muddy against a dark surface. -->
-    <color name="rating_star">#FFC93C</color>
+    <color name="rating_star">#FBBF24</color>
     <color name="rating_chip_scrim">#B3000000</color>
 
-    <color name="server_ok">#8FD694</color>
-    <color name="server_fail">@color/brand_coral</color>
+    <color name="server_ok">#34D399</color>
+    <color name="server_fail">@color/brand_crimson_bright</color>
     <color name="server_checking">@color/content_tertiary</color>
 
     <!-- ── Focus ────────────────────────────────────────────────── -->
-    <color name="focus_ring">@color/brand_lime</color>
-    <color name="focus_surface">#33C8F04C</color>
+    <color name="focus_ring">@color/brand_crimson</color>
+    <color name="focus_surface">#33E11D48</color>
 
 
     <!-- ══════════════════════════════════════════════════════════
@@ -102,31 +93,47 @@
     <color name="glass_card_solid">@color/surface_raised</color>
     <color name="glass_card_focused_solid">@color/surface_raised</color>
     <color name="overlay_pill_solid">@color/glass_fill_strong</color>
-    <color name="movie_overlay_start">#F2100F0C</color>
-    <color name="movie_overlay_end">#00100F0C</color>
+    <color name="movie_overlay_start">#F20A0A0B</color>
+    <color name="movie_overlay_end">#000A0A0B</color>
 
-    <color name="kd_primary_container">#33450A</color>
-    <color name="kd_on_primary_container">#DFF9A6</color>
-    <color name="kd_tertiary_container">#5C1B0E</color>
-    <color name="kd_on_tertiary_container">#FFDAD3</color>
+    <color name="kd_primary_container">#4C0519</color>
+    <color name="kd_on_primary_container">#FFE4E6</color>
+    <color name="kd_tertiary_container">#4C0519</color>
+    <color name="kd_on_tertiary_container">#FFE4E6</color>
 
     <!-- Logo plate stays light in dark mode. Broadcaster PNGs are baked for
          a white background; inverting the plate would knock out every dark
          logo mark on it. It gains a warm tint instead of pure white so it
          does not glare against #100F0C. -->
-    <color name="logo_inner_circle_bg">#EFEADF</color>
-    <color name="logo_gradient_start">#F5F1E8</color>
-    <color name="logo_gradient_center">#EFEADF</color>
-    <color name="logo_gradient_end">#E3DCCD</color>
+    <color name="logo_inner_circle_bg">#F4F4F5</color>
+    <color name="logo_gradient_start">#FAFAFA</color>
+    <color name="logo_gradient_center">#F4F4F5</color>
+    <color name="logo_gradient_end">#E4E4E7</color>
 
     <!-- Category identity, lightened for dark surfaces. -->
-    <color name="category_news">#FF8E7E</color>
-    <color name="category_sports">#C8F04C</color>
-    <color name="category_entertainment">#E8A33D</color>
-    <color name="category_kids">#C79BF0</color>
-    <color name="category_documentary">#5FD4DE</color>
-    <color name="category_music">#F587B8</color>
-    <color name="category_movies">#93B0EF</color>
-    <color name="category_general">#A79B84</color>
+    <color name="category_news">#FB7185</color>
+    <color name="category_sports">#34D399</color>
+    <color name="category_entertainment">#FBBF24</color>
+    <color name="category_kids">#A78BFA</color>
+    <color name="category_documentary">#22D3EE</color>
+    <color name="category_music">#F472B6</color>
+    <color name="category_movies">#60A5FA</color>
+    <color name="category_general">#9A9AA8</color>
 
+
+    <!-- Charts & scores -->
+    <color name="chart_track">@color/ink_700</color>
+    <color name="chart_bar">@color/ink_500</color>
+    <color name="score_high">#34D399</color>
+    <color name="score_mid">#FBBF24</color>
+    <color name="score_low">@color/brand_crimson_bright</color>
+    <color name="rank_numeral">@color/ink_400</color>
+    <color name="series_2">#FBBF24</color>
+    <color name="series_3">#34D399</color>
+    <color name="series_4">#60A5FA</color>
+    <color name="series_5">#A78BFA</color>
+    <color name="series_6">#F472B6</color>
+    <color name="series_7">#2DD4BF</color>
+    <!-- Plate behind broadcaster logos. -->
+    <color name="logo_plate">#1C1C22</color>
 </resources>

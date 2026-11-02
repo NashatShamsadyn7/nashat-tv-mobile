@@ -43,7 +43,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                app:cardCornerRadius="@dimen/radius_none"
+                app:cardCornerRadius="@dimen/radius_lg"
                 app:cardElevation="8dp"
                 app:strokeWidth="@dimen/edge_width"
                 app:strokeColor="@color/accent_primary"
@@ -95,7 +95,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/radius_none"
+                app:cardCornerRadius="@dimen/radius_lg"
                 app:cardElevation="4dp"
                 app:strokeWidth="@dimen/edge_width"
                 app:strokeColor="@color/edge"
@@ -222,7 +222,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/radius_none"
+                app:cardCornerRadius="@dimen/radius_lg"
                 app:cardElevation="4dp"
                 app:strokeWidth="@dimen/edge_width"
                 app:strokeColor="@color/edge"
@@ -265,7 +265,7 @@
                 android:backgroundTint="@color/accent_success"
                 app:icon="@drawable/ic_rate_24"
                 app:iconTint="@color/accent_primary"
-                app:cornerRadius="@dimen/radius_none"
+                app:cornerRadius="@dimen/radius_md"
                 android:layout_marginBottom="32dp" />
 
         </LinearLayout>

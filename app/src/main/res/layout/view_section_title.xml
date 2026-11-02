@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Section heading with the accent tick, for sections that are not rows. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/screen_gutter"
+    android:paddingBottom="@dimen/space_300">
+
+    <View
+        android:layout_width="4dp"
+        android:layout_height="18dp"
+        android:background="@drawable/bg_accent_tick" />
+
+    <TextView
+        android:id="@+id/sectionTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_200"
+        android:layout_weight="1"
+        android:textAppearance="@style/TextAppearance.Nashat.Section" />
+</LinearLayout>

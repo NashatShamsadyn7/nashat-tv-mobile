@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fades the backdrop into the page so the poster card can overlap it. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient android:angle="270" android:startColor="#66000000" android:centerColor="#00000000" android:centerY="0.3" android:endColor="#00000000" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient android:angle="270" android:startColor="@color/transparent" android:centerColor="@color/movie_overlay_end" android:centerY="0.45" android:endColor="@color/surface_base" />
+        </shape>
+    </item>
+</layer-list>

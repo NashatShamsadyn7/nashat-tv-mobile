@@ -13,10 +13,10 @@ import com.bumptech.glide.Glide;
 import com.nashat.tv.R;
 import com.nashat.tv.tmdb.Tmdb;
 import com.nashat.tv.tmdb.TmdbModels.Title;
+import com.nashat.tv.ui.chart.RatingRing;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /** Renders a list of titles as poster cards, in a row or a grid. */
 public class PosterAdapter extends RecyclerView.Adapter<PosterAdapter.Holder> {
@@ -27,12 +27,22 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterAdapter.Holder> {
 
     private final List<Title> items = new ArrayList<>();
     private final OnTitleClick listener;
+    /** Card width in px, or 0 to keep the layout's row default. */
+    private int itemWidth;
 
     public PosterAdapter(OnTitleClick listener) {
         this.listener = listener;
         // Stable ids let RecyclerView keep bound views across a submit, so a
         // row that reloads does not flash every poster back to its placeholder.
         setHasStableIds(true);
+    }
+
+    /**
+     * Fixes the card width, for grids that divide the screen into columns.
+     * The poster keeps a 2:3 ratio at whatever width it is given.
+     */
+    public void setItemWidth(int px) {
+        itemWidth = px;
     }
 
     public void submit(List<Title> titles) {
@@ -69,6 +79,10 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterAdapter.Holder> {
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_poster, parent, false);
+        if (itemWidth > 0) {
+            v.getLayoutParams().width = itemWidth;
+            v.findViewById(R.id.posterFrame).getLayoutParams().height = itemWidth * 3 / 2;
+        }
         return new Holder(v);
     }
 
@@ -84,12 +98,9 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterAdapter.Holder> {
 
         // A score of 0 means "nobody has rated this", not "rated zero". Showing
         // 0.0 would read as an appalling film rather than an unknown one.
-        if (t.voteAverage > 0) {
-            h.ratingChip.setVisibility(View.VISIBLE);
-            h.rating.setText(String.format(Locale.getDefault(), "%.1f", t.voteAverage));
-        } else {
-            h.ratingChip.setVisibility(View.GONE);
-        }
+        h.rating.setVisibility(t.voteAverage > 0 ? View.VISIBLE : View.GONE);
+        h.rating.setFilled(true);
+        h.rating.setScore(t.voteAverage);
 
         String art = t.posterUrlOverride != null && !t.posterUrlOverride.isEmpty()
                 ? t.posterUrlOverride
@@ -123,16 +134,14 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterAdapter.Holder> {
         final ImageView poster;
         final TextView title;
         final TextView year;
-        final TextView rating;
-        final View ratingChip;
+        final RatingRing rating;
 
         Holder(@NonNull View v) {
             super(v);
             poster = v.findViewById(R.id.poster);
             title = v.findViewById(R.id.title);
             year = v.findViewById(R.id.year);
-            rating = v.findViewById(R.id.rating);
-            ratingChip = v.findViewById(R.id.ratingChip);
+            rating = v.findViewById(R.id.ratingRing);
         }
     }
 }

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Live TV stats card, the first item of the channel grid: the channel count
+  as the headline, the category count beside it, then the channels split by
+  category as one bar with a legend.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/space_100"
+    android:layout_marginBottom="@dimen/space_300"
+    android:background="@drawable/bg_card_soft"
+    android:orientation="vertical"
+    android:padding="@dimen/space_500">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.nashat.tv.ui.PulseDot
+                    android:layout_width="10dp"
+                    android:layout_height="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_150"
+                    android:text="@string/home_on_air"
+                    android:textAppearance="@style/TextAppearance.Nashat.Eyebrow" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/headerCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_100"
+                android:textAppearance="@style/TextAppearance.Nashat.Stat.Large" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/headerCategories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_100"
+            android:textAppearance="@style/TextAppearance.Nashat.Label.Medium"
+            android:textColor="@color/content_secondary" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_400"
+        android:text="@string/live_breakdown"
+        android:textAppearance="@style/TextAppearance.Nashat.Label.Medium"
+        android:textColor="@color/content_tertiary" />
+
+    <com.nashat.tv.ui.chart.SegmentBar
+        android:id="@+id/headerBar"
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+        android:layout_marginTop="@dimen/space_200" />
+
+    <GridLayout
+        android:id="@+id/headerLegend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_300"
+        android:columnCount="2"
+        android:useDefaultMargins="false" />
+
+</LinearLayout>

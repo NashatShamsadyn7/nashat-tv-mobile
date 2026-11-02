@@ -93,16 +93,20 @@ public class LiveTvAdapter extends RecyclerView.Adapter<LiveTvAdapter.ChannelVie
         // isn't one rather than leaving an empty row.
         if (holder.tvCategory != null) {
             String category = displayCategory(channel.getCategory());
-            holder.tvCategory.setText(category);
-            holder.tvCategory.setVisibility(category.isEmpty() ? View.GONE : View.VISIBLE);
+            holder.tvCategory.setText(category.isEmpty()
+                    ? context.getString(R.string.category_general) : category);
         }
 
         // The whole LIVE pill follows availability — previously only the dot
         // inside it did, leaving a badge reading "LIVE" on a dead channel.
+        // Every listed channel is live, so the badge would say nothing in the
+        // grid; it is kept for the home strip, where it labels the row.
         if (holder.liveIndicator != null) {
-            holder.liveIndicator.setVisibility(channel.isAlive() ? View.VISIBLE : View.GONE);
-        } else if (holder.liveDot != null) {
-            holder.liveDot.setVisibility(channel.isAlive() ? View.VISIBLE : View.GONE);
+            holder.liveIndicator.setVisibility(horizontal ? View.VISIBLE : View.GONE);
+        }
+        if (holder.liveDot != null) {
+            holder.liveDot.setBackgroundTintList(android.content.res.ColorStateList.valueOf(
+                    com.nashat.tv.ui.CategoryColors.forCategory(context, channel.getCategory())));
         }
 
         holder.itemView.setOnClickListener(v -> {

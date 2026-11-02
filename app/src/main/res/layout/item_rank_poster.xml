@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Top-10 card: a large rank numeral the poster overlaps, like a podium. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/space_200"
+    android:background="@drawable/bg_press_soft"
+    android:clickable="true"
+    android:focusable="true">
+
+    <TextView
+        android:id="@+id/rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:textAppearance="@style/TextAppearance.Nashat.Rank" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/poster"
+        android:layout_width="112dp"
+        android:layout_height="168dp"
+        android:layout_marginStart="44dp"
+        android:background="@color/surface_sunken"
+        android:importantForAccessibility="no"
+        android:scaleType="centerCrop"
+        app:shapeAppearance="@style/ShapeAppearance.Nashat.Square" />
+
+</FrameLayout>

@@ -16,6 +16,6 @@
         android:color="@color/gentle_gold" />
     
     <!-- Rounded corners -->
-    <corners android:radius="@dimen/radius_none" />
+    <corners android:radius="@dimen/radius_lg" />
     
 </shape>

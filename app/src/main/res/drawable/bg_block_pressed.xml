@@ -18,6 +18,7 @@
         android:bottom="@dimen/block_offset"
         android:end="@dimen/block_offset">
         <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_lg" />
             <solid android:color="@color/shadow_block" />
         </shape>
     </item>
@@ -26,6 +27,7 @@
         android:top="@dimen/block_offset"
         android:start="@dimen/block_offset">
         <shape android:shape="rectangle">
+            <corners android:radius="@dimen/radius_lg" />
             <solid android:color="@color/surface_raised" />
             <stroke
                 android:width="@dimen/edge_width"

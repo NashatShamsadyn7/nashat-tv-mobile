@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The standard card: raised surface, soft corners, a faint hairline ring. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <corners android:radius="@dimen/radius_lg" />
+    <solid android:color="@color/surface_raised" />
+    <stroke android:width="@dimen/edge_width" android:color="@color/edge" />
+</shape>

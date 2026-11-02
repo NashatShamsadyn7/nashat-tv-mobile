@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Home — the front door to all three things the app does.
+
+  Top to bottom: a swipeable hero of what is trending, the channels on air
+  right now, what the viewer was in the middle of, the week's Top 10s, and a
+  card that turns the viewer's own watching into a chart. Every section hides
+  itself when it has nothing to show, so a new install never opens on empty
+  frames.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/surface_base">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/contentBehindNav"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingBottom="@dimen/bottom_nav_height">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- ── Top bar ───────────────────────────────────── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/screen_gutter"
+                android:paddingTop="@dimen/space_300"
+                android:paddingBottom="@dimen/space_300">
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/nashat_logo" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_300"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/greeting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.Nashat.Label.Medium"
+                        android:textColor="@color/content_secondary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"
+                        android:textAppearance="@style/TextAppearance.Nashat.Section" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btnSearch"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_icon_button"
+                    android:contentDescription="@string/nav_search"
+                    android:src="@drawable/ic_search_24"
+                    app:tint="@color/content_primary" />
+            </LinearLayout>
+
+            <!-- ── Hero ──────────────────────────────────────── -->
+            <FrameLayout
+                android:id="@+id/heroSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/heroPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:paddingHorizontal="@dimen/screen_gutter"
+                    android:scrollbars="none" />
+
+                <LinearLayout
+                    android:id="@+id/heroDots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="@dimen/space_300"
+                    android:orientation="horizontal" />
+            </FrameLayout>
+
+            <!-- ── On air now ────────────────────────────────── -->
+            <LinearLayout
+                android:id="@+id/liveSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_600"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/screen_gutter"
+                    android:paddingBottom="@dimen/space_300">
+
+                    <com.nashat.tv.ui.PulseDot
+                        android:layout_width="12dp"
+                        android:layout_height="12dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space_200"
+                        android:text="@string/home_on_air"
+                        android:textAppearance="@style/TextAppearance.Nashat.Section" />
+
+                    <TextView
+                        android:id="@+id/liveCount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/space_200"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.Nashat.Label.Medium"
+                        android:textColor="@color/content_tertiary" />
+
+                    <TextView
+                        android:id="@+id/liveSeeAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_press_soft"
+                        android:paddingHorizontal="@dimen/space_200"
+                        android:paddingVertical="@dimen/space_100"
+                        android:text="@string/action_see_all"
+                        android:textAppearance="@style/TextAppearance.Nashat.Label.Medium"
+                        android:textColor="@color/accent_text" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/liveList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="@dimen/space_300"
+                    android:scrollbars="none" />
+            </LinearLayout>
+
+            <!-- Rows built in code: continue watching, top 10s, in cinemas. -->
+            <LinearLayout
+                android:id="@+id/rowsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_600"
+                android:orientation="vertical" />
+
+            <!-- ── Your week ─────────────────────────────────── -->
+            <include
+                android:id="@+id/weekCard"
+                layout="@layout/view_week_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/screen_gutter"
+                android:layout_marginBottom="@dimen/space_800" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include layout="@layout/view_bottom_nav" />
+
+</FrameLayout>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  One hero slide. Artwork fills the card; the lower half carries rank and
+  kind, the title, a score ring with year and genres, and two actions. Its
+  width and height are set by HomeActivity to suit the screen.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="440dp"
+    android:layout_marginHorizontal="@dimen/space_100">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/heroImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/surface_sunken"
+        android:importantForAccessibility="no"
+        android:scaleType="centerCrop"
+        app:shapeAppearance="@style/ShapeAppearance.Nashat.Hero" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_hero_scrim" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:padding="@dimen/space_500"
+        android:paddingBottom="@dimen/space_800">
+
+        <TextView
+            android:id="@+id/heroEyebrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_live_badge"
+            android:paddingHorizontal="@dimen/space_200"
+            android:paddingVertical="2dp"
+            android:textAppearance="@style/TextAppearance.Nashat.Label.Small"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/heroTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_200"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAppearance="@style/TextAppearance.Nashat.HeroTitle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_300"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.nashat.tv.ui.chart.RatingRing
+                android:id="@+id/heroRing"
+                android:layout_width="38dp"
+                android:layout_height="38dp" />
+
+            <TextView
+                android:id="@+id/heroMeta"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_300"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textAppearance="@style/TextAppearance.Nashat.Body.Small"
+                android:textColor="#D9FFFFFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_400"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/heroInfo"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_button_white"
+                android:drawablePadding="@dimen/space_200"
+                android:gravity="center"
+                android:text="@string/action_more_info"
+                android:textAppearance="@style/TextAppearance.Nashat.Label.Large"
+                android:textColor="@color/ink_900"
+                app:drawableStartCompat="@drawable/ic_info_24"
+                app:drawableTint="@color/ink_900" />
+
+            <TextView
+                android:id="@+id/heroList"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="@dimen/space_200"
+                android:layout_weight="1"
+                android:background="@drawable/bg_button_glass"
+                android:drawablePadding="@dimen/space_200"
+                android:gravity="center"
+                android:text="@string/action_my_list"
+                android:textAppearance="@style/TextAppearance.Nashat.Label.Large"
+                android:textColor="@color/white"
+                app:drawableStartCompat="@drawable/ic_playlist_add"
+                app:drawableTint="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

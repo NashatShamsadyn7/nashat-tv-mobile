@@ -77,9 +77,16 @@
             android:name=".FirebaseMainActivity"
             android:exported="false" />
 
-        <!-- Redesigned Live TV screen -->
+        <!-- Live TV tab -->
         <activity
             android:name=".LiveTvActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NashatTV"
+            android:configChanges="orientation|screenSize" />
+
+        <!-- Home: the launcher screen since the 2026-11 redesign -->
+        <activity
+            android:name=".HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.NashatTV"
             android:configChanges="orientation|screenSize">

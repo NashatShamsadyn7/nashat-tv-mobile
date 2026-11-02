@@ -52,4 +52,8 @@
     <dimen name="recommended_card_height">225dp</dimen>
     <dimen name="recommended_row_height">255dp</dimen>
 
+    <!-- Redesign: roomier details header and gutters on tablets. -->
+    <dimen name="details_backdrop_height">420dp</dimen>
+    <dimen name="details_poster_width">150dp</dimen>
+    <dimen name="details_poster_height">225dp</dimen>
 </resources>

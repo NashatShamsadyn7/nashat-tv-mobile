@@ -12,7 +12,7 @@
         android:right="2dp"
         android:top="2dp">
         <shape android:shape="oval">
-            <solid android:color="#FF6B57" />
+            <solid android:color="#E11D48" />
             <stroke android:width="@dimen/edge_width" android:color="#FFFFFF" />
         </shape>
     </item>

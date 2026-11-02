@@ -167,6 +167,7 @@ public class ActorDetailsActivity extends BaseActivity {
                 JSONObject jsonObj = new JSONObject(response.toString());
                 JSONArray results = jsonObj.getJSONArray("cast");
                 List<Movie> works = new ArrayList<>();
+                java.util.Map<Movie, Integer> votes = new java.util.HashMap<>();
 
                 for (int i = 0; i < results.length(); i++) {
                     JSONObject obj = results.getJSONObject(i);
@@ -192,18 +193,21 @@ public class ActorDetailsActivity extends BaseActivity {
                     // Note: constructor args are: name, poster, category, url/id, description, year, voteAverage
                     Movie m = new Movie(title, posterFull, category, id, obj.optString("overview", ""), year, voteAvg);
                     works.add(m);
+                    votes.put(m, obj.optInt("vote_count", 0));
                 }
 
                 // Sort by popularity or vote_count could be done here, we'll just take the top 20
-                works.sort((m1, m2) -> {
-                    // TMDB usually sorts combined_credits roughly by popularity, but let's take a simple approach
-                    return Double.compare(m2.getVoteAverage(), m1.getVoteAverage());
-                });
+                // Most-voted first: that is what an actor is known for. Sorting
+                // by score put obscure titles with a single 10/10 vote on top.
+                works.sort((m1, m2) -> Integer.compare(votes.get(m2), votes.get(m1)));
+                final List<Movie> all = new ArrayList<>(works);
+                final java.util.Map<Movie, Integer> allVotes = votes;
 
                 handler.post(() -> {
                     knownForList.addAll(works.subList(0, Math.min(20, works.size())));
                     knownForAdapter.notifyDataSetChanged();
                     progressKnownFor.setVisibility(View.GONE);
+                    bindCareer(all, allVotes);
                 });
 
             } catch (Exception e) {
@@ -211,5 +215,61 @@ public class ActorDetailsActivity extends BaseActivity {
                 handler.post(() -> progressKnownFor.setVisibility(View.GONE));
             }
         });
+    }
+
+    /**
+     * Career at a glance from the credit list: how many, how well received
+     * (average of titles with at least 20 votes, so festival shorts do not
+     * skew it), the span of years, and credits per decade.
+     */
+    private void bindCareer(List<Movie> works, java.util.Map<Movie, Integer> votes) {
+        if (works.isEmpty()) return;
+        int first = Integer.MAX_VALUE, last = 0;
+        double scoreSum = 0;
+        int scored = 0;
+        java.util.TreeMap<Integer, Integer> decades = new java.util.TreeMap<>();
+        for (Movie m : works) {
+            String y = m.getYear();
+            if (y != null && y.length() == 4) {
+                try {
+                    int year = Integer.parseInt(y);
+                    first = Math.min(first, year);
+                    last = Math.max(last, year);
+                    int decade = year / 10 * 10;
+                    Integer n = decades.get(decade);
+                    decades.put(decade, n == null ? 1 : n + 1);
+                } catch (NumberFormatException ignored) {
+                }
+            }
+            Integer v = votes.get(m);
+            if (v != null && v >= 20 && m.getVoteAverage() > 0) {
+                scoreSum += m.getVoteAverage();
+                scored++;
+            }
+        }
+        findViewById(R.id.careerCard).setVisibility(View.VISIBLE);
+        ((TextView) findViewById(R.id.careerCredits)).setText(String.valueOf(works.size()));
+        ((TextView) findViewById(R.id.careerScore)).setText(scored == 0 ? "–"
+                : String.format(java.util.Locale.getDefault(), "%.1f", scoreSum / scored));
+        ((TextView) findViewById(R.id.careerYears)).setText(first == Integer.MAX_VALUE ? "–"
+                : (first == last ? String.valueOf(first) : first + "–" + last));
+
+        com.nashat.tv.ui.chart.BarChart chart = findViewById(R.id.careerDecades);
+        if (decades.size() < 2) {
+            chart.setVisibility(View.GONE);
+            return;
+        }
+        float[] values = new float[decades.size()];
+        String[] labels = new String[decades.size()];
+        String[] tops = new String[decades.size()];
+        int i = 0, peak = 0;
+        for (java.util.Map.Entry<Integer, Integer> e : decades.entrySet()) {
+            values[i] = e.getValue();
+            labels[i] = (e.getKey() % 100 < 10 ? "0" : "") + (e.getKey() % 100) + "s";
+            tops[i] = String.valueOf(e.getValue());
+            if (values[i] > values[peak]) peak = i;
+            i++;
+        }
+        chart.setData(values, labels, tops, peak);
     }
 }

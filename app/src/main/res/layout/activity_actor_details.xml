@@ -58,7 +58,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Actor Name"
-                        android:textColor="@color/white"
+                        android:textColor="@color/content_primary"
                         android:textSize="@dimen/type_size_headline"
                         android:textStyle="bold"
                         android:layout_marginBottom="8dp"/>
@@ -86,11 +86,97 @@
 
             </LinearLayout>
 
+            <!-- Career at a glance: credits, average score, years active, and
+                 credits per decade as bars. Filled by bindCareer(). -->
+            <LinearLayout
+                android:id="@+id/careerCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_card_soft"
+                android:orientation="vertical"
+                android:padding="@dimen/space_500"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/careerCredits"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.Nashat.Stat" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/actor_credits"
+                            android:textAppearance="@style/TextAppearance.Nashat.Label.Small"
+                            android:textColor="@color/content_tertiary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/careerScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.Nashat.Stat" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/actor_avg_score"
+                            android:textAppearance="@style/TextAppearance.Nashat.Label.Small"
+                            android:textColor="@color/content_tertiary" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.2"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/careerYears"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.Nashat.Stat" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/actor_years_active"
+                            android:textAppearance="@style/TextAppearance.Nashat.Label.Small"
+                            android:textColor="@color/content_tertiary" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <com.nashat.tv.ui.chart.BarChart
+                    android:id="@+id/careerDecades"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="@dimen/space_400" />
+            </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/biography"
-                android:textColor="@color/white"
+                android:textColor="@color/content_primary"
                 android:textSize="@dimen/type_size_title_medium"
                 android:textStyle="bold"
                 android:layout_marginTop="24dp"
@@ -108,7 +194,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/known_for"
-                android:textColor="@color/white"
+                android:textColor="@color/content_primary"
                 android:textSize="@dimen/type_size_title_medium"
                 android:textStyle="bold"
                 android:layout_marginTop="32dp"

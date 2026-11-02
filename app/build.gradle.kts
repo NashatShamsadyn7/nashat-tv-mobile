@@ -45,8 +45,8 @@ android {
         // Support Android 6.0+ as requested
         minSdk = 23
         targetSdk = 35
-        versionCode = 7
-        versionName = "1.6"
+        versionCode = 9
+        versionName = "1.7.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true

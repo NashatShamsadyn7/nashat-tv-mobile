@@ -10,7 +10,7 @@
     android:stateListAnimator="@animator/focus_scale"
     android:background="@drawable/selector_glass_card"
     app:cardBackgroundColor="@color/transparent"
-    app:cardCornerRadius="@dimen/radius_none"
+    app:cardCornerRadius="@dimen/radius_lg"
     app:cardElevation="0dp"
     app:strokeWidth="@dimen/edge_width"
     app:strokeColor="@color/edge">

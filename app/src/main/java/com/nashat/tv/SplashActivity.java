@@ -91,7 +91,7 @@ public class SplashActivity extends AppCompatActivity {
             return;
         }
         hasNavigated = true;
-        Intent intent = new Intent(SplashActivity.this, LiveTvActivity.class);
+        Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
         startActivity(intent);
         finish(); // Close SplashActivity so user can't navigate back to it
     }

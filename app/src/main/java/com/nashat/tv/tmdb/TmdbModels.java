@@ -67,6 +67,13 @@ public final class TmdbModels {
          */
         @SerializedName("media_type")
         public String mediaType;
+        @SerializedName("vote_count")
+        public int voteCount;
+        public double popularity;
+        @SerializedName("genre_ids")
+        public List<Integer> genreIds;
+        @SerializedName("original_language")
+        public String originalLanguage;
 
         /**
          * A ready-made poster URL, used when a Title is built from a locally
@@ -206,6 +213,8 @@ public final class TmdbModels {
 
         /** Films only. Minutes. */
         public Integer runtime;
+        public long budget;
+        public long revenue;
 
         /** Series only. */
         @SerializedName("number_of_seasons")

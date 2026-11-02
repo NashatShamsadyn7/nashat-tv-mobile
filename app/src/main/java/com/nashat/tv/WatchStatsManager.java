@@ -104,8 +104,13 @@ public class WatchStatsManager {
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
 
+        long midnight = cal.getTimeInMillis();
+        long day = 1000L * 60 * 60 * 24;
         for (SessionEntry s : log) {
-            long daysDiff = (cal.getTimeInMillis() - s.timestamp) / (1000 * 60 * 60 * 24);
+            // Anything after today's midnight is today. Measuring every session
+            // from midnight backwards made today's sessions negative, so the
+            // current day always read zero.
+            long daysDiff = s.timestamp >= midnight ? 0 : (midnight - s.timestamp) / day + 1;
             if (daysDiff >= 0 && daysDiff < 7) {
                 weekly[(int) daysDiff] += s.minutes;
             }

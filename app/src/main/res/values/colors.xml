@@ -2,24 +2,21 @@
 <!--
   ══════════════════════════════════════════════════════════════════════
    NASHAT TV — COLOR SYSTEM
-   Identity: LIME · CORAL · BEIGE
+   Identity: CRIMSON on INK — the same palette as Nashat TV Desktop and
+   nashat-tv-watch.web.app (Tailwind brand-500 #E11D48, ink scale).
   ══════════════════════════════════════════════════════════════════════
 
    This file is the LIGHT mode. values-night/colors.xml overrides the
-   semantic layer for dark mode; the brand layer is identical in both.
-
-   Three layers, in dependency order. Only ever reference layer 2 from a
-   layout — layer 1 is raw paint, layer 3 exists solely so the pre-redesign
-   screens keep compiling and shrinks as each screen is rewritten.
+   semantic layer for dark mode (the default); the brand layer is
+   identical in both.
 
      1. BRAND     raw palette values. Mode-independent. Never used directly.
      2. SEMANTIC  what a colour is FOR (surface_base, content_primary…).
                   This is the only layer a layout may name.
-     3. LEGACY    old names → semantic tokens. Delete entries as screens move.
+     3. LEGACY    old names → semantic tokens.
 
-   Why beige-tinted neutrals rather than pure grey: lime and coral are both
-   warm, and a neutral grey next to them reads as dirty blue-green. Warming
-   the greys by a few points of red keeps the whole screen on one temperature.
+   Depth comes from soft surfaces and a faint hairline ring, not from hard
+   outlines or offset blocks.
 -->
 <resources>
 
@@ -27,27 +24,36 @@
          LAYER 1 — BRAND PALETTE (identical in light and dark)
          ══════════════════════════════════════════════════════════ -->
 
-    <!-- LIME — the hero. Energetic, unusual for a TV app, and bright
-         enough to sit on near-black at 14.6:1 without any glow tricks. -->
-    <color name="brand_lime">#C8F04C</color>
-    <color name="brand_lime_bright">#DBFF6E</color>
-    <color name="brand_lime_deep">#9BC02E</color>
-    <color name="brand_lime_shadow">#4F6B08</color>   <!-- readable on light bg -->
+    <!-- CRIMSON — the one accent. Play, selection, focus, live. -->
+    <color name="brand_crimson">#E11D48</color>
+    <color name="brand_crimson_bright">#FB7185</color>
+    <color name="brand_crimson_deep">#BE123C</color>
+    <color name="brand_crimson_dark">#9F1239</color>
 
-    <!-- CORAL — live, urgent, "on air". Never used for plain UI accent,
-         so that a coral element always means something is happening now. -->
-    <color name="brand_coral">#FF6B57</color>
-    <color name="brand_coral_bright">#FF8E7E</color>
-    <color name="brand_coral_deep">#C43A22</color>
+    <!-- INK — the neutral spine, the desktop's ink-900 … ink-100 scale. -->
+    <color name="ink_900">#0A0A0B</color>
+    <color name="ink_800">#111114</color>
+    <color name="ink_700">#1A1A1F</color>
+    <color name="ink_600">#22222A</color>
+    <color name="ink_500">#2D2D36</color>
+    <color name="ink_400">#3A3A45</color>
+    <color name="ink_300">#5A5A68</color>
+    <color name="ink_200">#9A9AA8</color>
+    <color name="ink_100">#D1D1D8</color>
 
-    <!-- BEIGE — the neutral spine. Every surface and text colour is a
-         desaturated step along this warm axis. -->
-    <color name="brand_beige">#E4D9C3</color>
-    <color name="brand_beige_pale">#F7F2E7</color>
-    <color name="brand_beige_deep">#A79B84</color>
-
-    <!-- INK — the darkest brand value; what sits ON lime. -->
-    <color name="brand_ink">#14170A</color>
+    <!-- Old brand names, kept so nothing that still names them breaks.
+         They resolve onto the crimson/ink palette. -->
+    <color name="brand_lime">@color/brand_crimson</color>
+    <color name="brand_lime_bright">@color/brand_crimson_bright</color>
+    <color name="brand_lime_deep">@color/brand_crimson_deep</color>
+    <color name="brand_lime_shadow">@color/brand_crimson_deep</color>
+    <color name="brand_coral">@color/brand_crimson</color>
+    <color name="brand_coral_bright">@color/brand_crimson_bright</color>
+    <color name="brand_coral_deep">@color/brand_crimson_deep</color>
+    <color name="brand_beige">@color/ink_100</color>
+    <color name="brand_beige_pale">#F4F4F5</color>
+    <color name="brand_beige_deep">@color/ink_200</color>
+    <color name="brand_ink">@color/ink_900</color>
 
     <!-- Absolutes -->
     <color name="white">#FFFFFFFF</color>
@@ -60,12 +66,12 @@
          ══════════════════════════════════════════════════════════ -->
 
     <!-- ── Surfaces ─────────────────────────────────────────────── -->
-    <color name="surface_base">#FBF8F1</color>       <!-- page background -->
+    <color name="surface_base">#FAFAFA</color>       <!-- page background -->
     <color name="surface_raised">#FFFFFF</color>     <!-- cards, sheets -->
-    <color name="surface_sunken">#F2EDE2</color>     <!-- wells, track fills -->
-    <color name="surface_input">#F2EDE2</color>      <!-- search field, chips -->
-    <color name="surface_overlay">#F5FBF8F1</color>  <!-- 96% base, over media -->
-    <color name="surface_inverse">#17150F</color>    <!-- tooltips, snackbars -->
+    <color name="surface_sunken">#F4F4F5</color>     <!-- wells, track fills -->
+    <color name="surface_input">#EFEFF2</color>      <!-- search field, chips -->
+    <color name="surface_overlay">#F5FAFAFA</color>  <!-- 96% base, over media -->
+    <color name="surface_inverse">#111114</color>    <!-- tooltips, snackbars -->
 
     <!-- Scrims. Media-forward screens need a gradient, not a flat wash,
          or the poster underneath turns to mud. -->
@@ -84,12 +90,12 @@
          own: it makes the border and the text on it the same value, which
          is the single rule that holds the whole brutalist look together and
          guarantees the outline carries the same weight in both modes. -->
-    <color name="edge">@color/content_primary</color>
+    <color name="edge">#E4E4E7</color>
 
     <!-- Dividers INSIDE a bordered container. The only softened line in the
          system: a full-strength ink rule between two settings rows turns a
          list into a ladder. -->
-    <color name="edge_inset">#D6CDB8</color>
+    <color name="edge_inset">#EDEDF0</color>
 
     <!-- ── Brutalist offset block ───────────────────────────────────
          Replaces elevation everywhere. Instead of a blurred shadow (which
@@ -100,9 +106,9 @@
          per-mode pair. Lime clears 14.6:1 on the dark base and reads as a
          solid block on the light one, so the depth cue is physically
          identical in light and dark rather than merely analogous. -->
-    <color name="shadow_block">@color/brand_lime</color>
+    <color name="shadow_block">@color/transparent</color>
     <!-- The block under a destructive or "live" element. -->
-    <color name="shadow_block_live">@color/brand_coral</color>
+    <color name="shadow_block_live">@color/transparent</color>
 
     <!-- ── Glass (floating layers only) ─────────────────────────────
          Bottom nav, player controls, sheets, sticky search. NEVER on a
@@ -112,13 +118,13 @@
          The alpha values below are identical to the dark-mode pair; only
          the base hue flips. That is what keeps a glass panel the same
          object in both modes instead of two different-feeling surfaces. -->
-    <color name="glass_fill">#C7FBF8F1</color>        <!-- 78% base -->
-    <color name="glass_fill_strong">#EBFBF8F1</color> <!-- 92%, sheets -->
+    <color name="glass_fill">#D9FFFFFF</color>        <!-- 78% base -->
+    <color name="glass_fill_strong">#F2FFFFFF</color> <!-- 92%, sheets -->
     <!-- Fallback fill for API < 31, where there is no real blur to sit on
          and a 78% panel would just look like a bug. -->
-    <color name="glass_fill_opaque">#FBF8F1</color>
+    <color name="glass_fill_opaque">#FFFFFF</color>
 
-    <color name="border_focus">@color/brand_lime_shadow</color>
+    <color name="border_focus">@color/brand_crimson</color>
 
     <!-- Remapped onto `edge`: every existing layout that names one of these
          picks up the brutalist outline without being touched. -->
@@ -127,48 +133,48 @@
     <color name="border_strong">@color/edge</color>
 
     <!-- ── Content (text + icons) ───────────────────────────────── -->
-    <color name="content_primary">#17150F</color>    <!-- 15.9:1 on base -->
-    <color name="content_secondary">#5A5445</color>  <!--  7.4:1 -->
-    <color name="content_tertiary">#8C8471</color>   <!--  3.9:1, large only -->
-    <color name="content_disabled">#B5AD9A</color>
-    <color name="content_inverse">#FBF8F1</color>    <!-- on surface_inverse -->
+    <color name="content_primary">#111114</color>    <!-- 15.9:1 on base -->
+    <color name="content_secondary">#52525B</color>  <!--  7.4:1 -->
+    <color name="content_tertiary">#8A8A96</color>   <!--  3.9:1, large only -->
+    <color name="content_disabled">#C4C4CC</color>
+    <color name="content_inverse">#FAFAFA</color>    <!-- on surface_inverse -->
 
     <!-- ── Accent ───────────────────────────────────────────────── -->
     <!-- Two accents by necessity: lime is a brilliant FILL but an illegible
          TEXT colour on a light page (1.4:1). accent_text is the darkened
          lime used for links and icons; accent_fill stays the true brand
          lime and always carries on_accent_fill as its foreground. -->
-    <color name="accent_text">@color/brand_lime_shadow</color>
-    <color name="accent_fill">@color/brand_lime</color>
-    <color name="accent_fill_pressed">@color/brand_lime_deep</color>
-    <color name="on_accent_fill">@color/brand_ink</color>
-    <color name="accent_wash">#1FC8F04C</color>      <!-- 12% lime, selected rows -->
+    <color name="accent_text">@color/brand_crimson_deep</color>
+    <color name="accent_fill">@color/brand_crimson</color>
+    <color name="accent_fill_pressed">@color/brand_crimson_deep</color>
+    <color name="on_accent_fill">#FFFFFF</color>
+    <color name="accent_wash">#1AE11D48</color>      <!-- 12% lime, selected rows -->
 
     <!-- ── Status ───────────────────────────────────────────────── -->
-    <color name="status_live">@color/brand_coral_deep</color>
-    <color name="status_live_fill">@color/brand_coral</color>
+    <color name="status_live">@color/brand_crimson_deep</color>
+    <color name="status_live_fill">@color/brand_crimson</color>
     <color name="on_status_live_fill">#FFFFFF</color>
-    <color name="status_success">#2E7D32</color>
-    <color name="status_warning">#B26A00</color>
-    <color name="status_danger">@color/brand_coral_deep</color>
+    <color name="status_success">#059669</color>
+    <color name="status_warning">#D97706</color>
+    <color name="status_danger">@color/brand_crimson_deep</color>
 
     <!-- Rating star. Deliberately NOT the brand lime: a lime star reads as a
          selection state, and the audience already knows what a gold star on a
          poster means. This is the one place a non-brand hue earns its place. -->
-    <color name="rating_star">#F2B705</color>
+    <color name="rating_star">#F59E0B</color>
     <!-- Scrim behind the rating chip, so it stays legible over any artwork. -->
     <color name="rating_chip_scrim">#B3000000</color>
 
     <!-- Server health, used by the source picker. -->
-    <color name="server_ok">#2E7D32</color>
-    <color name="server_fail">@color/brand_coral_deep</color>
+    <color name="server_ok">#059669</color>
+    <color name="server_fail">@color/brand_crimson_deep</color>
     <color name="server_checking">@color/content_tertiary</color>
 
     <!-- ── Focus (Android TV / D-pad) ───────────────────────────── -->
     <!-- On a TV the focused item is the ONLY affordance the user has.
          It gets the full-strength brand lime plus a ring, in both modes. -->
-    <color name="focus_ring">@color/brand_lime</color>
-    <color name="focus_surface">#29C8F04C</color>
+    <color name="focus_ring">@color/brand_crimson</color>
+    <color name="focus_surface">#1FE11D48</color>
 
 
     <!-- ══════════════════════════════════════════════════════════
@@ -244,8 +250,8 @@
     <color name="overlay_pill_stroke">@color/edge</color>
     <color name="exo_play_solid">@color/accent_fill</color>
     <color name="exo_play_stroke">@color/accent_fill_pressed</color>
-    <color name="movie_overlay_start">#F2FBF8F1</color>
-    <color name="movie_overlay_end">#00FBF8F1</color>
+    <color name="movie_overlay_start">#F2FAFAFA</color>
+    <color name="movie_overlay_end">#00FAFAFA</color>
     <color name="player_gradient_dark">@color/scrim_strong</color>
     <color name="player_gradient_clear">@color/scrim_none</color>
 
@@ -256,29 +262,29 @@
     <color name="kd_on_secondary_container">@color/content_primary</color>
     <color name="kd_tertiary">@color/status_live</color>
     <color name="kd_on_tertiary">#FFFFFF</color>
-    <color name="kd_tertiary_container">#FFE3DD</color>
-    <color name="kd_on_tertiary_container">#3D0E06</color>
-    <color name="kd_primary_container">#E8FBB8</color>
-    <color name="kd_on_primary_container">#2A3A02</color>
+    <color name="kd_tertiary_container">#FFE4E6</color>
+    <color name="kd_on_tertiary_container">#4C0519</color>
+    <color name="kd_primary_container">#FFE4E6</color>
+    <color name="kd_on_primary_container">#4C0519</color>
 
     <!-- Channel-logo plate. Broadcaster logos are supplied as PNGs baked for
          a white background, so the plate stays light-on-light and gains a
          warm tint in dark mode rather than inverting. -->
     <color name="logo_inner_circle_bg">#FFFFFF</color>
     <color name="logo_gradient_start">#FFFFFF</color>
-    <color name="logo_gradient_center">#FBF8F1</color>
-    <color name="logo_gradient_end">#F2EDE2</color>
+    <color name="logo_gradient_center">#FAFAFA</color>
+    <color name="logo_gradient_end">#F4F4F5</color>
 
     <!-- Category identity. Derived from the brand axis rather than a stock
          Material ramp, so a category chip never fights the lime. -->
-    <color name="category_news">#C43A22</color>
-    <color name="category_sports">#4F6B08</color>
-    <color name="category_entertainment">#B26A00</color>
-    <color name="category_kids">#8E4EC6</color>
-    <color name="category_documentary">#00707A</color>
-    <color name="category_music">#B02E6B</color>
-    <color name="category_movies">#3D5A99</color>
-    <color name="category_general">#6B6555</color>
+    <color name="category_news">#BE123C</color>
+    <color name="category_sports">#059669</color>
+    <color name="category_entertainment">#D97706</color>
+    <color name="category_kids">#7C3AED</color>
+    <color name="category_documentary">#0E7490</color>
+    <color name="category_music">#DB2777</color>
+    <color name="category_movies">#2563EB</color>
+    <color name="category_general">#52525B</color>
 
     <!-- Social brand marks — fixed by the platforms, not ours to restyle. -->
     <color name="instagram_pink">#E1306C</color>
@@ -289,12 +295,35 @@
     <!-- Stock Material names still referenced by styles.xml and a few
          drawables. Remapped so nothing renders purple any more. -->
     <color name="purple_100">@color/surface_sunken</color>
-    <color name="purple_200">@color/brand_lime</color>
-    <color name="purple_300">@color/brand_lime_deep</color>
+    <color name="purple_200">@color/brand_crimson_bright</color>
+    <color name="purple_300">@color/brand_crimson</color>
     <color name="purple_500">@color/accent_text</color>
     <color name="purple_600">@color/accent_text</color>
-    <color name="purple_700">@color/brand_lime_shadow</color>
-    <color name="teal_200">@color/brand_coral</color>
-    <color name="teal_700">@color/brand_coral_deep</color>
+    <color name="purple_700">@color/brand_crimson_deep</color>
+    <color name="teal_200">@color/brand_crimson_bright</color>
+    <color name="teal_700">@color/brand_crimson_deep</color>
 
+
+    <!-- ══════════════════════════════════════════════════════════
+         CHARTS & SCORES (ui/chart)
+         ══════════════════════════════════════════════════════════ -->
+    <color name="chart_track">#E4E4E7</color>
+    <color name="chart_bar">#D1D1D8</color>
+    <color name="rating_ring_fill">#E60A0A0B</color>
+    <color name="score_high">#059669</color>
+    <color name="score_mid">#D97706</color>
+    <color name="score_low">@color/brand_crimson_deep</color>
+    <!-- Rank numerals in Top 10 rows: outline only, so the poster stays the hero. -->
+    <color name="rank_numeral">#D1D1D8</color>
+    <!-- Category series for segment bars, in display order. -->
+    <color name="series_1">@color/brand_crimson</color>
+    <color name="series_2">#F59E0B</color>
+    <color name="series_3">#10B981</color>
+    <color name="series_4">#3B82F6</color>
+    <color name="series_5">#8B5CF6</color>
+    <color name="series_6">#EC4899</color>
+    <color name="series_7">#14B8A6</color>
+    <color name="series_8">#9A9AA8</color>
+    <!-- Plate behind broadcaster logos. -->
+    <color name="logo_plate">#F4F4F5</color>
 </resources>

@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
+import com.nashat.tv.HomeActivity;
 import com.nashat.tv.LiveTvActivity;
 import com.nashat.tv.MoviesActivity;
 import com.nashat.tv.R;
@@ -35,15 +36,16 @@ import com.nashat.tv.SettingsActivity;
 public final class BottomNav {
 
     public enum Tab {
-        LIVE, MOVIES, SERIES, SETTINGS
+        HOME, LIVE, MOVIES, SERIES, SETTINGS
     }
 
     /** One row per destination, in the order they appear in the bar. */
     private static final Destination[] TABS = {
-            new Destination(Tab.LIVE, R.drawable.ic_tv_series, R.string.nav_live, LiveTvActivity.class),
+            new Destination(Tab.HOME, R.drawable.ic_home_24, R.string.nav_home, HomeActivity.class),
+            new Destination(Tab.LIVE, R.drawable.ic_live_tv_24, R.string.nav_live, LiveTvActivity.class),
             new Destination(Tab.MOVIES, R.drawable.ic_movie_24, R.string.nav_movies, MoviesActivity.class),
-            new Destination(Tab.SERIES, R.drawable.ic_tv_series, R.string.nav_series, SeriesActivity.class),
-            new Destination(Tab.SETTINGS, R.drawable.ic_settings_24, R.string.nav_settings, SettingsActivity.class),
+            new Destination(Tab.SERIES, R.drawable.ic_series_24, R.string.nav_series, SeriesActivity.class),
+            new Destination(Tab.SETTINGS, R.drawable.ic_account_24, R.string.nav_profile, SettingsActivity.class),
     };
 
     /**
@@ -98,15 +100,15 @@ public final class BottomNav {
         label.setText(destination.label);
         item.setContentDescription(activity.getString(destination.label));
 
-        // The active tab is a solid lime block, so its content has to flip to
-        // the on-accent ink — content_secondary on lime is 1.9:1 and would be
-        // unreadable exactly where the user looks first.
-        int colour = ContextCompat.getColor(activity,
-                isActive ? R.color.on_accent_fill : R.color.content_secondary);
-        icon.setColorFilter(colour);
-        label.setTextColor(colour);
+        // Active: accent icon in a tinted pill, full-strength label. Inactive:
+        // both recede to secondary, so the eye finds the current tab at once.
+        icon.setColorFilter(ContextCompat.getColor(activity,
+                isActive ? R.color.accent_text : R.color.content_secondary));
+        label.setTextColor(ContextCompat.getColor(activity,
+                isActive ? R.color.content_primary : R.color.content_secondary));
+        item.findViewById(R.id.navItemPill).setBackgroundResource(
+                isActive ? R.drawable.bg_nav_indicator : 0);
 
-        item.setBackgroundResource(R.drawable.bg_nav_item);
         item.setSelected(isActive);
 
         if (isActive) {

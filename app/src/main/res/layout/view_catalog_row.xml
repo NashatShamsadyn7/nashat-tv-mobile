@@ -1,44 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    One titled row of posters.
-
-    The RecyclerView is edge-to-edge with the gutter applied as padding rather
-    than as a margin, so the first poster starts on the gutter but the row can
-    still be scrolled fully to the screen edge. A margin would leave a dead
-    strip the user's thumb cannot drag from.
+  A titled horizontal row. The heading carries a short accent tick and an
+  optional trailing action ("See all" or a count); rows are separated by space
+  rather than rules, so the artwork does the dividing.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/space_400">
+    android:paddingBottom="@dimen/space_600">
 
-    <TextView
-        android:id="@+id/rowTitle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingHorizontal="@dimen/screen_gutter"
-        android:paddingBottom="@dimen/space_200"
-        android:textAppearance="@style/TextAppearance.Nashat.Title.Large"
-        android:textColor="@color/content_primary" />
+        android:paddingBottom="@dimen/space_300">
 
-    <!--
-        Rule under the row heading. The rows used to be separated by 28dp of
-        nothing, which on a page of five of them left the reader deciding for
-        themselves where one section ended and the next began. A hard line
-        under the heading answers it, and it is the cheapest possible way to
-        say "this label owns everything below it until the next line".
+        <View
+            android:layout_width="4dp"
+            android:layout_height="18dp"
+            android:background="@drawable/bg_accent_tick" />
 
-        Full width to the gutter rather than the text width: a rule that
-        stops where the words stop reads as an underline on the words, not as
-        a division of the page.
-    -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/edge_width"
-        android:layout_marginHorizontal="@dimen/screen_gutter"
-        android:layout_marginBottom="@dimen/space_300"
-        android:background="@color/edge" />
+        <TextView
+            android:id="@+id/rowTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_200"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.Nashat.Section" />
+
+        <TextView
+            android:id="@+id/rowAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_press_soft"
+            android:paddingHorizontal="@dimen/space_200"
+            android:paddingVertical="@dimen/space_100"
+            android:textAppearance="@style/TextAppearance.Nashat.Label.Medium"
+            android:textColor="@color/accent_text"
+            android:visibility="gone" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rowList"
@@ -48,9 +53,6 @@
         android:paddingHorizontal="@dimen/screen_gutter"
         android:scrollbars="none" />
 
-    <!-- Placeholder shown while the row's request is in flight. Occupies the
-         same height as the loaded row so the page does not jump when it
-         resolves. -->
     <ProgressBar
         android:id="@+id/rowLoading"
         android:layout_width="28dp"

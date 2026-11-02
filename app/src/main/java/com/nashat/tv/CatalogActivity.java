@@ -40,7 +40,9 @@ import com.nashat.tv.tmdb.TmdbModels.Kind;
 import com.nashat.tv.tmdb.TmdbModels.Title;
 import com.nashat.tv.ui.BottomNav;
 import com.nashat.tv.ui.ContinueWatchingAdapter;
+import com.nashat.tv.ui.GenreArt;
 import com.nashat.tv.ui.PosterAdapter;
+import com.nashat.tv.ui.RankAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +69,9 @@ import java.util.Locale;
  * search or at the app".
  */
 public abstract class CatalogActivity extends BaseActivity {
+
+    /** Opens the screen with the search field focused and the keyboard up. */
+    public static final String EXTRA_FOCUS_SEARCH = "focus_search";
 
     /** One curated row: a heading and the request that fills it. */
     protected static final class Row {
@@ -178,6 +183,23 @@ public abstract class CatalogActivity extends BaseActivity {
         rebuild();
 
         BottomNav.bind(this, navTab());
+        handleFocusSearch(getIntent());
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleFocusSearch(intent);
+    }
+
+    private void handleFocusSearch(Intent intent) {
+        if (intent == null || !intent.getBooleanExtra(EXTRA_FOCUS_SEARCH, false)) return;
+        intent.removeExtra(EXTRA_FOCUS_SEARCH);
+        searchInput.requestFocus();
+        searchInput.post(() -> {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            if (imm != null) imm.showSoftInput(searchInput, InputMethodManager.SHOW_IMPLICIT);
+        });
     }
 
     /**
@@ -450,23 +472,39 @@ public abstract class CatalogActivity extends BaseActivity {
         }
 
         LayoutInflater inflater = LayoutInflater.from(this);
-        for (Row row : rows()) {
+        List<Row> rows = rows();
+        for (int index = 0; index < rows.size(); index++) {
+            Row row = rows.get(index);
+            // The first row is this week's trending list, shown as a ranked
+            // Top 10; the genre shortcuts follow it.
+            boolean ranked = index == 0;
             View view = inflater.inflate(R.layout.view_catalog_row, rowsContainer, false);
-            ((TextView) view.findViewById(R.id.rowTitle)).setText(row.titleRes);
+            ((TextView) view.findViewById(R.id.rowTitle)).setText(
+                    ranked ? top10TitleRes() : row.titleRes);
 
             RecyclerView list = view.findViewById(R.id.rowList);
             View loading = view.findViewById(R.id.rowLoading);
 
             list.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
             list.setHasFixedSize(true);
-            // One pool across every row: the cards are identical, so a view
-            // scrolled off one row is reused by another instead of re-inflated.
-            list.setRecycledViewPool(sharedPool);
 
-            PosterAdapter adapter = new PosterAdapter(this::openDetails);
-            list.setAdapter(adapter);
+            final PosterAdapter adapter;
+            final RankAdapter rankAdapter;
+            if (ranked) {
+                rankAdapter = new RankAdapter(this::openDetails);
+                adapter = null;
+                list.setAdapter(rankAdapter);
+            } else {
+                // One pool across every poster row: the cards are identical, so a
+                // view scrolled off one row is reused by another, not re-inflated.
+                list.setRecycledViewPool(sharedPool);
+                adapter = new PosterAdapter(this::openDetails);
+                rankAdapter = null;
+                list.setAdapter(adapter);
+            }
             list.setVisibility(View.GONE);
             rowsContainer.addView(view);
+            if (ranked) addGenreRow();
 
             row.loader.load(new TmdbClient.Callback<List<Title>>() {
                 @Override
@@ -479,7 +517,8 @@ public abstract class CatalogActivity extends BaseActivity {
                         view.setVisibility(View.GONE);   // an empty row is noise
                         return;
                     }
-                    adapter.submit(clean);
+                    if (rankAdapter != null) rankAdapter.submit(clean);
+                    else adapter.submit(clean);
                     list.setVisibility(View.VISIBLE);
                 }
 
@@ -492,6 +531,47 @@ public abstract class CatalogActivity extends BaseActivity {
                 }
             });
         }
+    }
+
+    @StringRes
+    private int top10TitleRes() {
+        return kind() == Kind.TV ? R.string.home_top10_series : R.string.home_top10_films;
+    }
+
+    /**
+     * "Browse by genre": one tap applies that genre as the filter. Filled when
+     * the genre list arrives, so it can appear a moment after the rows.
+     */
+    private void addGenreRow() {
+        View view = LayoutInflater.from(this).inflate(R.layout.view_genre_row, rowsContainer, false);
+        view.setTag("genres");
+        rowsContainer.addView(view);
+        fillGenreRow();
+    }
+
+    private void fillGenreRow() {
+        View view = rowsContainer.findViewWithTag("genres");
+        if (view == null) return;
+        LinearLayout strip = view.findViewById(R.id.genreStrip);
+        strip.removeAllViews();
+        int i = 0;
+        for (Genre g : genres) {
+            if (g == null || g.name == null) continue;
+            TextView tile = (TextView) LayoutInflater.from(this)
+                    .inflate(R.layout.item_genre_tile, strip, false);
+            tile.setText(g.name);
+            tile.setBackgroundTintList(android.content.res.ColorStateList.valueOf(
+                    GenreArt.color(this, i++)));
+            tile.setOnClickListener(v -> {
+                filter.genreId = g.id;
+                filter.genreName = g.name;
+                filter.save(this, kind());
+                updateFilterButton();
+                rebuild();
+            });
+            strip.addView(tile);
+        }
+        view.setVisibility(strip.getChildCount() == 0 ? View.GONE : View.VISIBLE);
     }
 
     /** Only surface an error when nothing at all loaded. */
@@ -510,11 +590,15 @@ public abstract class CatalogActivity extends BaseActivity {
     // wrap_content — same imprecise lint check as on buildCuratedRows().
     @android.annotation.SuppressLint("InvalidSetHasFixedSize")
     private void setUpResultsGrid() {
-        int columns = getResources().getInteger(R.integer.poster_grid_columns);
+        // Columns follow the screen: as many 110dp posters as fit, at least 3.
+        android.util.DisplayMetrics m = getResources().getDisplayMetrics();
+        int columns = Math.max(3, (int) (m.widthPixels / m.density / 110));
         GridLayoutManager manager = new GridLayoutManager(this, columns);
         resultsGrid.setLayoutManager(manager);
         resultsGrid.setHasFixedSize(true);
         resultsAdapter = new PosterAdapter(this::openDetails);
+        int inner = m.widthPixels - resultsGrid.getPaddingStart() - resultsGrid.getPaddingEnd();
+        resultsAdapter.setItemWidth(inner / columns - Math.round(8 * m.density));
         resultsGrid.setAdapter(resultsAdapter);
 
         resultsGrid.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -745,6 +829,7 @@ public abstract class CatalogActivity extends BaseActivity {
             public void onSuccess(List<Genre> data) {
                 genres.clear();
                 genres.addAll(data);
+                if (!isFinishing() && !isDestroyed()) fillGenreRow();
             }
 
             @Override

@@ -61,7 +61,7 @@
          file rather than styles. -->
     <style name="Widget.Nashat.Card" parent="Widget.Material3.CardView.Outlined">
         <item name="cardBackgroundColor">@color/surface_raised</item>
-        <item name="cardCornerRadius">@dimen/radius_none</item>
+        <item name="cardCornerRadius">@dimen/radius_lg</item>
         <item name="cardElevation">0dp</item>
         <item name="strokeColor">@color/edge</item>
         <item name="strokeWidth">@dimen/edge_width</item>
@@ -158,7 +158,7 @@
         <item name="iconPadding">@dimen/space_200</item>
         <item name="strokeColor">@color/edge</item>
         <item name="strokeWidth">@dimen/edge_width</item>
-        <item name="cornerRadius">@dimen/radius_none</item>
+        <item name="cornerRadius">@dimen/radius_md</item>
         <item name="android:minHeight">@dimen/touch_target_min</item>
         <item name="android:paddingStart">@dimen/space_600</item>
         <item name="android:paddingEnd">@dimen/space_600</item>
@@ -181,7 +181,7 @@
         <item name="iconPadding">@dimen/space_200</item>
         <item name="strokeColor">@color/edge</item>
         <item name="strokeWidth">@dimen/edge_width</item>
-        <item name="cornerRadius">@dimen/radius_none</item>
+        <item name="cornerRadius">@dimen/radius_md</item>
         <item name="android:minHeight">@dimen/touch_target_min</item>
         <item name="android:paddingStart">@dimen/space_600</item>
         <item name="android:paddingEnd">@dimen/space_600</item>
@@ -211,7 +211,7 @@
         <item name="android:textAppearance">@style/TextAppearance.Nashat.Label.Large</item>
         <item name="android:textColor">@color/accent_text</item>
         <item name="iconTint">@color/accent_text</item>
-        <item name="cornerRadius">@dimen/radius_none</item>
+        <item name="cornerRadius">@dimen/radius_md</item>
         <item name="android:minHeight">@dimen/touch_target_min</item>
         <item name="rippleColor">@color/accent_wash</item>
     </style>
@@ -231,7 +231,7 @@
         <item name="iconSize">@dimen/icon_size_md</item>
         <item name="iconGravity">textStart</item>
         <item name="iconPadding">0dp</item>
-        <item name="cornerRadius">@dimen/radius_none</item>
+        <item name="cornerRadius">@dimen/radius_md</item>
         <item name="rippleColor">@color/accent_wash</item>
     </style>
 
@@ -261,7 +261,7 @@
         <item name="chipBackgroundColor">@color/sel_chip_background</item>
         <item name="chipStrokeColor">@color/sel_chip_stroke</item>
         <item name="chipStrokeWidth">@dimen/edge_width</item>
-        <item name="chipCornerRadius">@dimen/radius_none</item>
+        <item name="chipCornerRadius">@dimen/radius_pill</item>
         <item name="chipMinHeight">@dimen/chip_height</item>
         <item name="chipMinTouchTargetSize">@dimen/touch_target_min</item>
         <item name="ensureMinTouchTargetSize">true</item>
@@ -318,10 +318,10 @@
          INPUTS
          ══════════════════════════════════════════════════════════════ -->
     <style name="Widget.Nashat.TextInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
-        <item name="boxCornerRadiusTopStart">@dimen/radius_none</item>
-        <item name="boxCornerRadiusTopEnd">@dimen/radius_none</item>
-        <item name="boxCornerRadiusBottomStart">@dimen/radius_none</item>
-        <item name="boxCornerRadiusBottomEnd">@dimen/radius_none</item>
+        <item name="boxCornerRadiusTopStart">@dimen/radius_md</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_md</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_md</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_md</item>
         <item name="boxStrokeColor">@color/sel_border_interactive</item>
         <item name="boxStrokeWidth">@dimen/edge_width</item>
         <item name="boxStrokeWidthFocused">@dimen/edge_width_focus</item>
@@ -380,7 +380,7 @@
         <item name="indicatorColor">@color/accent_fill</item>
         <item name="trackColor">@color/surface_input</item>
         <item name="trackThickness">@dimen/progress_track_height</item>
-        <item name="trackCornerRadius">@dimen/radius_none</item>
+        <item name="trackCornerRadius">@dimen/radius_pill</item>
     </style>
 
     <style name="Widget.Nashat.Progress.Circular" parent="Widget.Material3.CircularProgressIndicator">

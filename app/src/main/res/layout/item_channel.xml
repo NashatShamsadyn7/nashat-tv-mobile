@@ -9,7 +9,7 @@
     android:foreground="?attr/selectableItemBackground"
     android:stateListAnimator="@animator/focus_scale"
     app:cardUseCompatPadding="false"
-    app:cardCornerRadius="@dimen/radius_none"
+    app:cardCornerRadius="@dimen/radius_lg"
     app:strokeWidth="@dimen/edge_width"
     app:strokeColor="@color/edge"
     app:cardBackgroundColor="@color/transparent"
